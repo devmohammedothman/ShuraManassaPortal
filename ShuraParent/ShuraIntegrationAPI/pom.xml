@@ -23,6 +23,18 @@
 	</properties>
 
 	<dependencies>
+	<!-- Dependencies for Other Modules -->
+		<dependency>
+			<artifactId>ShuraCommonLib</artifactId>
+			<groupId>com.sbm.shura</groupId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<artifactId>ShuraService</artifactId>
+			<groupId>com.sbm.shura</groupId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+	<!-- ***************************************************************************************************** -->
 		<!-- Spring core & mvc -->
 		<dependency>
 			<groupId>org.springframework</groupId>
