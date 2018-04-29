@@ -1,4 +1,4 @@
-package org.ShuraIntegrationAPI.it;
+package com.sbm.shura.shuraIntegrationAPI.it;
 
 import static org.junit.Assert.*;
 

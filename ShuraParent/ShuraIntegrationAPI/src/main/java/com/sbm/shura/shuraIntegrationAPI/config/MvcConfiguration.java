@@ -1,4 +1,4 @@
-package org.ShuraIntegrationAPI.config;
+package com.sbm.shura.shuraIntegrationAPI.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -12,7 +12,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
-@ComponentScan(basePackages="org.ShuraIntegrationAPI")
+@ComponentScan(basePackages="com.sbm.shura.shuraIntegrationAPI.*")
 @EnableWebMvc
 public class MvcConfiguration extends WebMvcConfigurerAdapter{
 
