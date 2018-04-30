@@ -212,6 +212,26 @@
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+			  	<artifactId>maven-resources-plugin</artifactId>
+			  	<version>3.0.2</version>
+				<executions>
+					<execution>
+						<id>copy-resources</id>
+						<phase>validate</phase>
+						<goals><goal>copy-resources</goal></goals>
+						<configuration>
+							<outputDirectory>${basedir}/target/ShuraIntegrationAPI/resources/</outputDirectory >
+							<resources>
+								<resource>
+									<directory>../ShuraUIPresentation/dist</directory>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 </project>

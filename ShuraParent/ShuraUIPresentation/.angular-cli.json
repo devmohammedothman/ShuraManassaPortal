@@ -8,8 +8,8 @@
       "root": "src",
       "outDir": "dist",
       "assets": [
-        "assets",
-        "favicon.ico"
+        "./ShuraIntegrationAPI/resources/assets",
+        "./ShuraIntegrationAPI/resources/favicon.ico"
       ],
       "index": "index.html",
       "main": "main.ts",
