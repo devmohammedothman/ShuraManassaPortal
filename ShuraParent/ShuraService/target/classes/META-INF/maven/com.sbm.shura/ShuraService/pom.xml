@@ -62,4 +62,6 @@
       </plugins>
     </pluginManagement>
   </build>
+  <groupId>com.sbm.shura</groupId>
+  <version>1.0-SNAPSHOT</version>
 </project>
