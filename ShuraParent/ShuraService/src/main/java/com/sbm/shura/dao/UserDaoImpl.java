@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 
@@ -28,7 +29,15 @@ public class UserDaoImpl implements UserDao{
 
 	@Override
 	public User login(String email, String password) {
-		return em.createNamedQuery("User.findByEmailAndPassword", User.class).getSingleResult();
+		try {
+			Query q = em.createNamedQuery("User.findByEmailAndPassword", User.class);
+			q.setParameter("email", email);
+			q.setParameter("password", password);
+			return (User) q.getSingleResult();
+		} catch (Exception e) {
+			return new User(-1L);
+		}
+		
 	}
 	
 	
