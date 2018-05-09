@@ -7,28 +7,29 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import com.sbm.shura.entity.BaseEntity;
 
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 @NamedQueries({ @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u"),
 		@NamedQuery(name = "User.findByUserId", query = "SELECT u FROM User u WHERE u.userId = :userId"),
 		@NamedQuery(name = "User.findByEmailAndPassword", query = "SELECT u FROM User u WHERE u.email = :email AND u.password = :password") })
 public class User extends BaseEntity {
 
 	@Id
-	@Column(name = "user_id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "USER_ID")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "id_Sequence")
+	@SequenceGenerator(name = "id_Sequence", sequenceName = "user_seq")
 	private Long userId;
 
-	@Column(name = "username")
+	@Column(name = "USERNAME")
 	private String userName;
 
-	@Column(name = "email")
+	@Column(name = "EMAIL")
 	private String email;
 
-	@Column(name = "password")
+	@Column(name = "PASSWORD")
 	private String password;
 
 	public User() {
