@@ -1,68 +1,95 @@
 package com.sbm.shura.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.List;
 
+
+/**
+ * The persistent class for the "USER" database table.
+ * 
+ */
 @Entity
-@Table(name = "users")
-@NamedQueries({ @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u"),
-		@NamedQuery(name = "User.findByUserId", query = "SELECT u FROM User u WHERE u.userId = :userId"),
-		@NamedQuery(name = "User.findByEmailAndPassword", query = "SELECT u FROM User u WHERE u.email = :email AND u.password = :password") })
-public class User extends BaseEntity {
+@Table(name="\"USER\"")
+@NamedQueries({
+	@NamedQuery(name="User.findAll", query="SELECT u FROM User u"),
+	@NamedQuery(name = "User.findByUserId", query = "SELECT u FROM User u WHERE u.id = :userId"),
+	@NamedQuery(name = "User.findByEmailAndPassword", query = "SELECT u FROM User u WHERE u.email = :email AND u.password = :password") 
+})
+public class User extends BaseEntity implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name = "USER_ID")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "id_Sequence")
-	@SequenceGenerator(name = "id_Sequence", sequenceName = "user_seq")
-	private Long userId;
+	@SequenceGenerator(name="USER_ID_GENERATOR" , sequenceName = "user_seq" )
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="USER_ID_GENERATOR")
+	@Column(unique=true, nullable=false)
+	private long id;
 
-	@Column(name = "USERNAME")
-	private String userName;
-
-	@Column(name = "EMAIL")
+	@Column(length=20)
 	private String email;
 
-	@Column(name = "PASSWORD")
+	@Column(length=100)
 	private String password;
+
+	@Column(length=20)
+	private String username; 
+	
+	//bi-directional many-to-many association to Group
+	@ManyToMany
+	@JoinTable(
+		name="USER_GROUP"
+		, joinColumns={
+			@JoinColumn(name="USER_ID", nullable=false)
+			}
+		, inverseJoinColumns={
+			@JoinColumn(name="GROUP_ID", nullable=false)
+			}
+		)
+	private List<Group> groups;
+
+	//bi-directional many-to-many association to Menu
+	@ManyToMany
+	@JoinTable(
+		name="USER_MENU"
+		, joinColumns={
+			@JoinColumn(name="USER_ID", nullable=false)
+			}
+		, inverseJoinColumns={
+			@JoinColumn(name="MENU_ID", nullable=false)
+			}
+		)
+	private List<Menu> menus;
+
+	//bi-directional many-to-many association to Permission
+	@ManyToMany
+	@JoinTable(
+		name="USER_PERMISSION"
+		, joinColumns={
+			@JoinColumn(name="USER_ID", nullable=false)
+			}
+		, inverseJoinColumns={
+			@JoinColumn(name="PERMISSION_ID", nullable=false)
+			}
+		)
+	private List<Permission> permissions;
 
 	public User() {
 	}
-
+	
 	public User(Long userId) {
-		this.userId = userId;
+		this.id = userId;
 	}
 
-	public User(String userName, String email, String password) {
-		this.userName = userName;
-		this.email = email;
-		this.password = password;
+	public long getId() {
+		return this.id;
 	}
 
-	public Long getUserId() {
-		return userId;
-	}
-
-	public void setUserId(Long userId) {
-		this.userId = userId;
-	}
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public String getEmail() {
-		return email;
+		return this.email;
 	}
 
 	public void setEmail(String email) {
@@ -70,11 +97,43 @@ public class User extends BaseEntity {
 	}
 
 	public String getPassword() {
-		return password;
+		return this.password;
 	}
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getUsername() {
+		return this.username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public List<Group> getGroups() {
+		return this.groups;
+	}
+
+	public void setGroups(List<Group> groups) {
+		this.groups = groups;
+	}
+
+	public List<Menu> getMenus() {
+		return this.menus;
+	}
+
+	public void setMenus(List<Menu> menus) {
+		this.menus = menus;
+	}
+
+	public List<Permission> getPermissions() {
+		return this.permissions;
+	}
+
+	public void setPermissions(List<Permission> permissions) {
+		this.permissions = permissions;
 	}
 
 }

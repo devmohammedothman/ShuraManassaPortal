@@ -35,7 +35,8 @@ public class UserDaoImpl implements UserDao{
 			q.setParameter("password", password);
 			return (User) q.getSingleResult();
 		} catch (Exception e) {
-			return new User(-1L);
+			e.printStackTrace();
+			return null;
 		}
 		
 	}
