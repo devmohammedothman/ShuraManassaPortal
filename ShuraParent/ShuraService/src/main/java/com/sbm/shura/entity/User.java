@@ -2,6 +2,11 @@ package com.sbm.shura.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
 import java.util.List;
 
 
@@ -14,9 +19,10 @@ import java.util.List;
 @NamedQueries({
 	@NamedQuery(name="User.findAll", query="SELECT u FROM User u"),
 	@NamedQuery(name = "User.findByUserId", query = "SELECT u FROM User u WHERE u.id = :userId"),
+	@NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email"),
 	@NamedQuery(name = "User.findByEmailAndPassword", query = "SELECT u FROM User u WHERE u.email = :email AND u.password = :password") 
 })
-public class User extends BaseEntity implements Serializable {
+public class User extends BaseEntity implements  UserDetails,Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -135,5 +141,33 @@ public class User extends BaseEntity implements Serializable {
 	public void setPermissions(List<Permission> permissions) {
 		this.permissions = permissions;
 	}
+	
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
+	@Override
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

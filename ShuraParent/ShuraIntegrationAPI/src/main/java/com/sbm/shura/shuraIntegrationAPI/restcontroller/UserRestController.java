@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sbm.shura.entity.BaseEntity;
-import com.sbm.shura.entity.User;
+import com.sbm.shura.dto.BaseDTO;
+import com.sbm.shura.dto.UserDTO;
 import com.sbm.shura.service.UserService;
 import com.sbm.shura.shuraIntegrationAPI.restcontroller.RestProvider;
 
@@ -28,26 +28,27 @@ public class UserRestController {
 	@Resource
 	private UserService service;
 	
+	
 	@Resource
-	private RestProvider provider;
+	private RestDTOProvider dtoProvider;
 	
 	@RequestMapping(value = "/register", method = RequestMethod.POST, 
 			consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
-	public ResponseEntity<BaseEntity> register(@RequestBody User user){
-		return provider.addObj(service.add(user));
+	public ResponseEntity<BaseDTO> register(@RequestBody UserDTO userDto){
+		return dtoProvider.addObj(service.add(userDto));
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity<BaseEntity> login(@RequestBody Map<String, String> map) {
-		return provider.getObj((User) service.login(map.get("email"), map.get("password")));
+	public ResponseEntity<BaseDTO> login(@RequestBody Map<String, String> map) {
+		return dtoProvider.getObj((UserDTO) service.login(map.get("email"), map.get("password")));
 	}
 	
 	@RequestMapping(value = "/getusers", method = RequestMethod.GET,
 			consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
-	public ResponseEntity<List<User>> getAllUsers() {
-		return provider.getObjList((List) service.listUsers());
+	public ResponseEntity<List<UserDTO>> getAllUsers() {
+		return dtoProvider.getObjList((List) service.listUsers());
 	}
 }

@@ -2,12 +2,13 @@ package com.sbm.shura.service;
 
 import java.util.List;
 
-import com.sbm.shura.entity.User;
+import com.sbm.shura.dto.UserDTO;
 
 public interface UserService {
-	User add(User user);
+	
+	UserDTO add(UserDTO user);
 
-	List<User> listUsers();
+	List<UserDTO> listUsers();
 
-	User login(String email, String password);
+	UserDTO login(String email, String password);
 }

@@ -6,8 +6,9 @@ import com.sbm.shura.entity.Menu;
 
 public interface MenuDao extends GenericDao<Menu> {
 
+	Menu add(Menu item) throws Exception;
 	
 	List<Menu> getMenuList() throws Exception;
 	
-	List<Menu> getMenuListByUserName(String userName) throws Exception;
+	
 }

@@ -12,8 +12,8 @@ import java.util.List;
 @Entity
 @Table(name="MENU")
 @NamedQueries({
-	@NamedQuery(name="Menu.findAll", query="SELECT m FROM Menu m"),
-	@NamedQuery(name="Menu.findMenuListByUserName", query="SELECT m FROM Menu m")
+	@NamedQuery(name="Menu.findAll", query="SELECT m FROM Menu m")
+	
 })
 public class Menu implements Serializable {
 	private static final long serialVersionUID = 1L;

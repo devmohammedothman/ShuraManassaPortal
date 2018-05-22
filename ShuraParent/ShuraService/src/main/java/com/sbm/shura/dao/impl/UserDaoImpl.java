@@ -14,8 +14,7 @@ public class UserDaoImpl extends GenericDaoImpl<User>  implements UserDao{
 
 	@Override
 	public User add(User user) {
-		entityManager.persist(user);
-		return user;
+		return persist(user);
 	}
 
 	@Override
@@ -35,6 +34,18 @@ public class UserDaoImpl extends GenericDaoImpl<User>  implements UserDao{
 			return null;
 		}
 		
+	}
+	
+	@Override
+	public User findByEmail(String email) {
+		try {
+			Query q = entityManager.createNamedQuery("User.findByEmail", User.class);
+			q.setParameter("email", email);
+			return (User) q.getSingleResult();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 }

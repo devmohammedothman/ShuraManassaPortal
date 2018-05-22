@@ -15,11 +15,11 @@ public class MenuDaoImpl extends GenericDaoImpl<Menu> implements MenuDao {
 		return (List<Menu>)entityManager.createNamedQuery("Menu.findAll").getResultList();
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
-	public List<Menu> getMenuListByUserName(String userName) throws Exception
-	{
-		return (List<Menu>)entityManager.createNamedQuery("Menu.findMenuListByUserName").getResultList();
+	public Menu add(Menu item) throws Exception {
+		// TODO Auto-generated method stub
+		return persist(item);
 	}
+	
 
 }

@@ -11,5 +11,7 @@ public interface UserDao extends GenericDao<User> {
 	List<User> listUsers();
 	
 	User login(String email, String password);
+	
+	User findByEmail(String email);
 
 }

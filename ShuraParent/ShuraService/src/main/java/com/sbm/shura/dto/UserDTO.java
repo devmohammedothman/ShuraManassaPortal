@@ -7,6 +7,7 @@ public class UserDTO extends BaseDTO{
 	 */
 	private static final long serialVersionUID = 6104011990509049339L;
 
+	private long id;
 	private String email;
 	private String password;
 	private String username;
@@ -46,6 +47,14 @@ public class UserDTO extends BaseDTO{
 	}
 	public void setUsername(String username) {
 		this.username = username;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	protected void setId(long id) {
+		this.id = id;
 	} 
 	
 }
