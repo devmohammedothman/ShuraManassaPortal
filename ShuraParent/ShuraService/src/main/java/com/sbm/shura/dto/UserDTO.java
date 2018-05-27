@@ -1,5 +1,7 @@
 package com.sbm.shura.dto;
 
+import java.util.List;
+
 public class UserDTO extends BaseDTO{
 
 	/**
@@ -12,6 +14,9 @@ public class UserDTO extends BaseDTO{
 	private String password;
 	private String username;
 	
+	private List<GroupDTO> groups;
+	private List<MenuDTO> menus;
+	private List<PermissionDTO> permissions;
 	
 	public UserDTO() {}
 	
@@ -55,6 +60,30 @@ public class UserDTO extends BaseDTO{
 
 	protected void setId(long id) {
 		this.id = id;
+	}
+
+	public List<GroupDTO> getGroups() {
+		return groups;
+	}
+
+	public void setGroups(List<GroupDTO> groups) {
+		this.groups = groups;
+	}
+
+	public List<MenuDTO> getMenus() {
+		return menus;
+	}
+
+	public void setMenus(List<MenuDTO> menus) {
+		this.menus = menus;
+	}
+
+	public List<PermissionDTO> getPermissions() {
+		return permissions;
+	}
+
+	public void setPermissions(List<PermissionDTO> permissions) {
+		this.permissions = permissions;
 	} 
 	
 }

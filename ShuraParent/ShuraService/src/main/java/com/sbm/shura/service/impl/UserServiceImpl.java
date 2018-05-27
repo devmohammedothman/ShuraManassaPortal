@@ -52,7 +52,8 @@ public class UserServiceImpl extends BasicServiceImpl<UserDTO, User> implements 
 			return new UserDTO(-1L);
 		}
 		 UserDTO userDto = new UserDTO();
-		return convertToDTO(_user,userDto);
+		 userDto =  convertToDTO(_user,userDto);
+		 return userDto;
 	}
 	
 	@Override
