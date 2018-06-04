@@ -19,7 +19,8 @@ public class UserDaoImpl extends GenericDaoImpl<User>  implements UserDao{
 
 	@Override
 	public List<User> listUsers() {
-		return entityManager.createNamedQuery("User.findAll", User.class).getResultList();
+		List<User> users =  entityManager.createNamedQuery("User.findAll", User.class).getResultList();
+		return users;
 	}
 
 	@Override
@@ -41,7 +42,8 @@ public class UserDaoImpl extends GenericDaoImpl<User>  implements UserDao{
 		try {
 			Query q = entityManager.createNamedQuery("User.findByEmail", User.class);
 			q.setParameter("email", email);
-			return (User) q.getSingleResult();
+			User userObj = (User) q.getSingleResult();
+			return userObj;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;

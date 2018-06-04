@@ -37,9 +37,9 @@ public class UserServiceImpl extends BasicServiceImpl<UserDTO, User> implements 
 	@Transactional(readOnly = true)
 	public List<UserDTO> listUsers() {
 		List<User> userListResult =  userDao.listUsers();
-		userListResult.stream().
+		List<UserDTO> userDtoList =  userListResult.stream().
 				map(item -> convertToDTO(item, new UserDTO())).collect(Collectors.toList());
-		return null;
+		return userDtoList;
 		 
 	}
 
