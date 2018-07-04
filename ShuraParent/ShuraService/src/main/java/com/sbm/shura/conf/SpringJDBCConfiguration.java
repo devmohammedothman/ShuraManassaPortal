@@ -10,7 +10,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 @Configuration
-@PropertySource (value = {"classpath:db.properties"})
+//@PropertySource (value = {"classpath:db.properties"})
 public class SpringJDBCConfiguration 
 {
 //	@Autowired
@@ -31,7 +31,7 @@ public class SpringJDBCConfiguration
 	   public DataSource dataSource() {
 	       DriverManagerDataSource dataSource = new DriverManagerDataSource();
 	       dataSource.setDriverClassName("oracle.jdbc.OracleDriver");
-	       dataSource.setUrl("jdbc:oracle:thin:@localhost:1521:XE");//change url
+	       dataSource.setUrl("jdbc:oracle:thin:@localhost:1521:orcl");//change url
 	       dataSource.setUsername("shura");//change userid
 	       dataSource.setPassword("java");//change pwd
 	       

@@ -24,10 +24,10 @@ public class Menu implements Serializable {
 	@Column(unique=true, nullable=false)
 	private long id;
 
-	@Column(name="NAME_AR", length=50)
+	@Column(name="NAME_AR", length=100)
 	private String nameAr;
 
-	@Column(name="NAME_EN", length=50)
+	@Column(name="NAME_EN", length=100)
 	private String nameEn;
 
 	//bi-directional many-to-one association to Menu

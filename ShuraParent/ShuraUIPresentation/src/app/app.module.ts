@@ -1,48 +1,90 @@
+import { NgModule, Component } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { AppRoutingModule } from './app.routing.module';
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule, Routes } from '@angular/router';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import {
+    MatAutocompleteModule, MatBadgeModule, MatBottomSheetModule, MatButtonModule,
+    MatButtonToggleModule, MatCardModule, MatCheckboxModule, MatChipsModule, MatDatepickerModule,
+    MatDialogModule, MatDividerModule, MatExpansionModule, MatFormFieldModule, MatGridListModule,
+    MatIconModule, MatInputModule, MatListModule, MatMenuModule, MatPaginatorModule,
+    MatProgressBarModule, MatProgressSpinnerModule, MatRadioModule, MatRippleModule, MatSelectModule,
+    MatSidenavModule, MatSliderModule, MatSlideToggleModule, MatSnackBarModule, MatSortModule,
+    MatStepperModule, MatTableModule, MatTabsModule, MatToolbarModule, MatTooltipModule, MatTreeModule
+} from '@angular/material';
+import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { TranslateModule } from '@ngx-translate/core';
+import 'hammerjs';
 import { HttpModule } from '@angular/http';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { FuseModule } from '@fuse/fuse.module';
+import { FuseSharedModule } from '@fuse/shared.module';
+import { FuseSidebarModule, FuseThemeOptionsModule } from '@fuse/components';
 
-import { AppComponent } from './app.component';
-import { LoginComponent } from './modules/login/login.component';
-import { RegisterComponent } from './modules/register/register.component';
+import { fuseConfig } from 'app/fuse-config';
 
-// import ngx-translate and the http loader
-import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
-import {TranslateHttpLoader} from '@ngx-translate/http-loader';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
-import { HomeComponent } from './modules/home/home.component';
+//import { FakeDbService } from 'app/fake-db/fake-db.service';
+import { AppComponent } from 'app/app.component';
+//import { AppStoreModule } from 'app/store/store.module';
+import { LayoutModule } from 'app/layout/layout.module';
 import { LoginService } from './services/login.service';
+import { AppRoutingModule } from './app-routing.module';
+
+const materialModules = [
+   MatAutocompleteModule, MatBadgeModule, MatBottomSheetModule, MatButtonModule,
+    MatButtonToggleModule, MatCardModule, MatCheckboxModule, MatChipsModule, MatDatepickerModule,
+    MatDialogModule, MatDividerModule, MatExpansionModule, MatFormFieldModule, MatGridListModule,
+    MatIconModule, MatInputModule, MatListModule, MatMenuModule, MatPaginatorModule,
+    MatProgressBarModule, MatProgressSpinnerModule, MatRadioModule, MatRippleModule, MatSelectModule,
+    MatSidenavModule, MatSliderModule, MatSlideToggleModule, MatSnackBarModule, MatSortModule,
+    MatStepperModule, MatTableModule, MatTabsModule, MatToolbarModule, MatTooltipModule, MatTreeModule,
+        ReactiveFormsModule, FormsModule
+
+];
 
 
 @NgModule({
     declarations: [
-        AppComponent,
-        LoginComponent,
-        RegisterComponent,
-        HomeComponent
+        AppComponent
     ],
-    imports: [
+    imports     : [
         BrowserModule,
+        BrowserAnimationsModule,
         HttpClientModule,
-        FormsModule,
-        AppRoutingModule,
+        //RouterModule.forRoot(appRoutes),
         HttpModule,
-        TranslateModule.forRoot({
-            loader: {
-                provide: TranslateLoader,
-                useFactory: HttpLoaderFactory,
-                deps: [HttpClient]
-            }
-        })
+        AppRoutingModule,
+        TranslateModule.forRoot(),
+        /*InMemoryWebApiModule.forRoot(FakeDbService, {
+            delay             : 0,
+            passThruUnknownUrl: true
+        }),*/
+
+        // Material moment date module
+        MatMomentDateModule,
+
+        // Material
+        materialModules,
+        // Fuse modules
+        FuseModule.forRoot(fuseConfig),
+        FuseSharedModule,
+        FuseSidebarModule,
+        FuseThemeOptionsModule,
+
+        // App modules
+        LayoutModule
+        //AppStoreModule
     ],
-    providers: [LoginService],
-    bootstrap: [AppComponent]
+    exports: [materialModules,
+    BrowserModule,
+        BrowserAnimationsModule],
+	providers: [LoginService],
+    bootstrap   : [
+        AppComponent
+    ]
 })
-export class AppModule { }
-export function HttpLoaderFactory(http: HttpClient) {
-    //remove /resources/ if you will build in development without server
-    return new TranslateHttpLoader(http, './resources/assets/i18n/', '.json');
+export class AppModule
+{
 }

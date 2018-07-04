@@ -1,5 +1,8 @@
 package com.sbm.shura.shuraIntegrationAPI.config.server;
 
+import javax.sql.DataSource;
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -17,8 +20,6 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.provider.error.OAuth2AccessDeniedHandler;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
-
-import javax.sql.DataSource;
 
 @Configuration
 @EnableAuthorizationServer
@@ -40,6 +41,7 @@ public class AuthServerOAuth2Config extends AuthorizationServerConfigurerAdapter
     private PasswordEncoder oauthClientPasswordEncoder;
 
     @Bean
+    @Transactional
     public TokenStore tokenStore() {
         return new JdbcTokenStore(dataSource);
     }
@@ -61,6 +63,7 @@ public class AuthServerOAuth2Config extends AuthorizationServerConfigurerAdapter
 
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
-        endpoints.tokenStore(tokenStore()).authenticationManager(authenticationManager).userDetailsService(userDetailsService);
+        endpoints.tokenStore(tokenStore()).authenticationManager(authenticationManager).userDetailsService(userDetailsService)
+        .pathMapping("/oauth/token", "/api/oauth/token");
     }
 }
