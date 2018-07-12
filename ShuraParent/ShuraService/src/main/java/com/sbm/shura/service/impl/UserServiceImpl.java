@@ -26,9 +26,7 @@ public class UserServiceImpl extends BasicServiceImpl<UserDTO, User> implements 
 	@Autowired
 	private GroupDao groupDao;
 	
-	@Autowired
-	private GroupService groupService;
-	
+		
 	private User _user = new User();
 	
 		
