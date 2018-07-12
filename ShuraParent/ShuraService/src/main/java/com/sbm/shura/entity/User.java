@@ -51,7 +51,7 @@ public class User extends BaseEntity implements  UserDetails,Serializable {
 			@JoinColumn(name="GROUP_ID", nullable=false)
 			}
 		)
-	private List<Group> groups;
+	private List<Group> userGroups;
 
 	//bi-directional many-to-many association to Menu
 	@ManyToMany
@@ -119,11 +119,11 @@ public class User extends BaseEntity implements  UserDetails,Serializable {
 	}
 
 	public List<Group> getGroups() {
-		return this.groups;
+		return this.userGroups;
 	}
 
 	public void setGroups(List<Group> groups) {
-		this.groups = groups;
+		this.userGroups = groups;
 	}
 
 	public List<Menu> getMenus() {

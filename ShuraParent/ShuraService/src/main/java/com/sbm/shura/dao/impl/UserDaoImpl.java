@@ -55,4 +55,5 @@ public class UserDaoImpl extends GenericDaoImpl<User>  implements UserDao{
 		return update(user);
 	}
 
+
 }

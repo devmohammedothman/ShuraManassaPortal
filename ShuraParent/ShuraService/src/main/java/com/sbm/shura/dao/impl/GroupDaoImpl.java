@@ -31,5 +31,5 @@ public class GroupDaoImpl extends GenericDaoImpl<Group> implements GroupDao{
 			Group groupObj = (Group) q.getSingleResult();
 			return groupObj;
 	}
-
+	
 }

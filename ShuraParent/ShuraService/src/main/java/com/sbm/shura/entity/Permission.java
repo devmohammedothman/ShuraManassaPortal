@@ -47,7 +47,7 @@ public class Permission implements Serializable {
 			@JoinColumn(name="GROUP_ID", nullable=false)
 			}
 		)
-	private List<Group> groups;
+	private List<Group> groupPermissions;
 
 	//bi-directional many-to-many association to User
 	@ManyToMany(mappedBy="permissions")
@@ -97,11 +97,11 @@ public class Permission implements Serializable {
 	}
 
 	public List<Group> getGroups() {
-		return this.groups;
+		return this.groupPermissions;
 	}
 
 	public void setGroups(List<Group> groups) {
-		this.groups = groups;
+		this.groupPermissions = groups;
 	}
 
 	public List<User> getUsers() {

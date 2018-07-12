@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.sbm.shura.dao.GroupDao;
 import com.sbm.shura.dao.UserDao;
 import com.sbm.shura.dto.GroupDTO;
 import com.sbm.shura.dto.UserDTO;
+import com.sbm.shura.entity.Group;
 import com.sbm.shura.entity.User;
 import com.sbm.shura.service.GroupService;
 import com.sbm.shura.service.UserService;
@@ -22,9 +24,13 @@ public class UserServiceImpl extends BasicServiceImpl<UserDTO, User> implements 
 	private UserDao userDao;
 	
 	@Autowired
+	private GroupDao groupDao;
+	
+	@Autowired
 	private GroupService groupService;
 	
 	private User _user = new User();
+	
 		
 	public UserServiceImpl() {}
 
@@ -86,13 +92,22 @@ public class UserServiceImpl extends BasicServiceImpl<UserDTO, User> implements 
 	@Transactional
 	public UserDTO assignGroupToUser(String groupName, String email) throws Exception {
 		UserDTO userDto = findByEmail(email);
-		GroupDTO groupDto = groupService.getByEName(groupName);
-		userDto.getGroups().add(groupDto);
+		
+		//GroupDTO groupDto = groupService.getByEName(groupName);
+		
+		Group group = groupDao.getByEName(groupName);
+		
 		//groupDto.getUsers().add(userDto);
-        _user = convertToEntity(_user , userDto);
-        _user.setId(userDto.getId());
-		_user = userDao.update(_user);
-		return convertToDTO(_user,userDto);
+        
+        _user = userDao.findById(userDto.getId());
+        group = groupDao.findById(group.getId());
+           _user.getGroups().add(group); 
+           group.getUsers().add(_user);
+        
+        
+       // _user = userDao.update(_user);
+		
+		return convertToDTO(_user, userDto);
 	}
 
 }

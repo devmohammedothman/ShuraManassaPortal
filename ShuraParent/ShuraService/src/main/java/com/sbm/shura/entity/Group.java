@@ -29,7 +29,7 @@ public class Group implements Serializable {
 	private String description;
 
 	@Column(name="IS_ACTIVE", nullable=false, precision=1)
-	private BigDecimal isActive;
+	private boolean isActive ;
 
 	@Column(name="NAME_AR", length=50)
 	private String nameAr;
@@ -38,11 +38,11 @@ public class Group implements Serializable {
 	private String nameEn;
 
 	//bi-directional many-to-many association to User
-	@ManyToMany(mappedBy="groups")
+	@ManyToMany(mappedBy="userGroups")
 	private List<User> users;
 
 	//bi-directional many-to-many association to Permission
-	@ManyToMany(mappedBy="groups")
+	@ManyToMany(mappedBy="groupPermissions")
 	private List<Permission> permissions;
 
 	public Group() {
@@ -64,11 +64,11 @@ public class Group implements Serializable {
 		this.description = description;
 	}
 
-	public BigDecimal getIsActive() {
+	public boolean getIsActive() {
 		return this.isActive;
 	}
 
-	public void setIsActive(BigDecimal isActive) {
+	public void setIsActive(boolean isActive) {
 		this.isActive = isActive;
 	}
 
