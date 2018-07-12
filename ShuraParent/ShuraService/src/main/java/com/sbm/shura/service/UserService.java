@@ -11,4 +11,8 @@ public interface UserService {
 	List<UserDTO> listUsers();
 
 	UserDTO login(String email, String password);
+	
+	UserDTO findByEmail(String email);
+	
+	UserDTO assignGroupToUser(String groupName, String email) throws Exception;
 }

@@ -50,4 +50,9 @@ public class UserDaoImpl extends GenericDaoImpl<User>  implements UserDao{
 		}
 	}
 
+	@Override
+	public User updateUser(User user) {
+		return update(user);
+	}
+
 }

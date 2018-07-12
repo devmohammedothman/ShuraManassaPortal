@@ -14,4 +14,5 @@ public interface UserDao extends GenericDao<User> {
 	
 	User findByEmail(String email);
 
+	User updateUser(User user);
 }

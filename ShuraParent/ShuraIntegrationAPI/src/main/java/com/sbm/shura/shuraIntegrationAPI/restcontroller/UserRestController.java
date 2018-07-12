@@ -45,10 +45,16 @@ public class UserRestController {
 		return dtoProvider.getObj((UserDTO) service.login(map.get("email"), map.get("password")));
 	}
 	
-	@RequestMapping(value = "/secure/user/getusers", method = RequestMethod.GET,
+	@RequestMapping(value = "/user/getusers", method = RequestMethod.GET,
 			consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	public ResponseEntity<List<UserDTO>> getAllUsers() {
 		return dtoProvider.getObjList((List) service.listUsers());
+	}
+	
+	@RequestMapping(value = "/user/assigngroup", method = RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity<BaseDTO> assignGroupToUser(@RequestBody Map<String, String> map) throws Exception {
+		return dtoProvider.getObj((UserDTO) service.assignGroupToUser(map.get("groupname"), map.get("email")));
 	}
 }

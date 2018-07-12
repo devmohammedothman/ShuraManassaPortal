@@ -2,9 +2,12 @@ package com.sbm.shura.dao.impl;
 
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import com.sbm.shura.dao.MenuDao;
 import com.sbm.shura.entity.Menu;
 
+@Repository
 public class MenuDaoImpl extends GenericDaoImpl<Menu> implements MenuDao {
 
 	

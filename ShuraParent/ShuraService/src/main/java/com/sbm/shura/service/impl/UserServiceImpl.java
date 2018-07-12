@@ -3,14 +3,16 @@ package com.sbm.shura.service.impl;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.springframework.transaction.annotation.Transactional;
 import org.modelmapper.PropertyMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.sbm.shura.dao.UserDao;
+import com.sbm.shura.dto.GroupDTO;
 import com.sbm.shura.dto.UserDTO;
 import com.sbm.shura.entity.User;
+import com.sbm.shura.service.GroupService;
 import com.sbm.shura.service.UserService;
 
 @Service
@@ -18,6 +20,9 @@ public class UserServiceImpl extends BasicServiceImpl<UserDTO, User> implements 
 	
 	@Autowired
 	private UserDao userDao;
+	
+	@Autowired
+	private GroupService groupService;
 	
 	private User _user = new User();
 		
@@ -27,7 +32,6 @@ public class UserServiceImpl extends BasicServiceImpl<UserDTO, User> implements 
 	@Transactional
 	public UserDTO add(UserDTO userDto) 
 	{
-		
 		_user = convertToEntity(_user , userDto);
 		_user = userDao.add(_user);
 		return convertToDTO(_user,userDto);
@@ -64,6 +68,31 @@ public class UserServiceImpl extends BasicServiceImpl<UserDTO, User> implements 
 				map().setUsername(source.getUsername());
 				}
 		});
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public UserDTO findByEmail(String email) {
+		_user = userDao.findByEmail(email);
+		if (_user == null) {
+			return new UserDTO(-1L);
+		}
+		 UserDTO userDto = new UserDTO();
+		 userDto =  convertToDTO(_user,userDto);
+		 return userDto;
+	}
+
+	@Override
+	@Transactional
+	public UserDTO assignGroupToUser(String groupName, String email) throws Exception {
+		UserDTO userDto = findByEmail(email);
+		GroupDTO groupDto = groupService.getByEName(groupName);
+		userDto.getGroups().add(groupDto);
+		//groupDto.getUsers().add(userDto);
+        _user = convertToEntity(_user , userDto);
+        _user.setId(userDto.getId());
+		_user = userDao.update(_user);
+		return convertToDTO(_user,userDto);
 	}
 
 }
