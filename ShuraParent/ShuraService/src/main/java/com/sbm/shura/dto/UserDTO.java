@@ -20,7 +20,9 @@ public class UserDTO extends BaseDTO{
 	
 	public UserDTO() {}
 	
-	public UserDTO(long id) {}
+	public UserDTO(long id) {
+		this.id = id;
+	}
 	
 	public UserDTO(long id , String username ,String password) {
 		this.id = id;

@@ -18,59 +18,56 @@ import com.sbm.shura.service.GroupService;
 import com.sbm.shura.service.UserService;
 
 @Service
-public class UserServiceImpl extends BasicServiceImpl<UserDTO, User> implements UserService{
-	
+public class UserServiceImpl extends BasicServiceImpl<UserDTO, User> implements UserService {
+
 	@Autowired
 	private UserDao userDao;
-	
+
 	@Autowired
 	private GroupDao groupDao;
-	
-		
+
 	private User _user = new User();
-	
-		
-	public UserServiceImpl() {}
+
+	public UserServiceImpl() {
+	}
 
 	@Override
 	@Transactional
-	public UserDTO add(UserDTO userDto) 
-	{
-		_user = convertToEntity(_user , userDto);
+	public UserDTO add(UserDTO userDto) {
+		_user = convertToEntity(_user, userDto);
 		_user = userDao.add(_user);
-		return convertToDTO(_user,userDto);
+		return convertToDTO(_user, userDto);
 	}
 
 	@Override
 	@Transactional(readOnly = true)
 	public List<UserDTO> listUsers() {
-		List<User> userListResult =  userDao.listUsers();
-		List<UserDTO> userDtoList =  userListResult.stream().
-				map(item -> convertToDTO(item, new UserDTO())).collect(Collectors.toList());
+		List<User> userListResult = userDao.listUsers();
+		List<UserDTO> userDtoList = userListResult.stream().map(item -> convertToDTO(item, new UserDTO()))
+				.collect(Collectors.toList());
 		return userDtoList;
-		 
+
 	}
 
 	@Override
 	@Transactional(readOnly = true)
 	public UserDTO login(String email, String password) {
-		
+
 		_user = userDao.login(email, password);
 		if (_user == null) {
 			return new UserDTO(-1L);
 		}
-		 UserDTO userDto = new UserDTO();
-		 userDto =  convertToDTO(_user,userDto);
-		 return userDto;
+		UserDTO userDto = new UserDTO();
+		userDto = convertToDTO(_user, userDto);
+		return userDto;
 	}
-	
+
 	@Override
-	protected void configureMapperLocally()
-	{
+	protected void configureMapperLocally() {
 		modelMapper.addMappings(new PropertyMap<User, UserDTO>() {
 			protected void configure() {
 				map().setUsername(source.getUsername());
-				}
+			}
 		});
 	}
 
@@ -81,30 +78,29 @@ public class UserServiceImpl extends BasicServiceImpl<UserDTO, User> implements 
 		if (_user == null) {
 			return new UserDTO(-1L);
 		}
-		 UserDTO userDto = new UserDTO();
-		 userDto =  convertToDTO(_user,userDto);
-		 return userDto;
+		UserDTO userDto = new UserDTO();
+		userDto = convertToDTO(_user, userDto);
+		return userDto;
 	}
 
 	@Override
 	@Transactional
 	public UserDTO assignGroupToUser(String groupName, String email) throws Exception {
 		UserDTO userDto = findByEmail(email);
-		
-		//GroupDTO groupDto = groupService.getByEName(groupName);
-		
+
+		// GroupDTO groupDto = groupService.getByEName(groupName);
+
 		Group group = groupDao.getByEName(groupName);
-		
-		//groupDto.getUsers().add(userDto);
-        
-        _user = userDao.findById(userDto.getId());
-        group = groupDao.findById(group.getId());
-           _user.getGroups().add(group); 
-           group.getUsers().add(_user);
-        
-        
-       // _user = userDao.update(_user);
-		
+
+		// groupDto.getUsers().add(userDto);
+
+		_user = userDao.findById(userDto.getId());
+		group = groupDao.findById(group.getId());
+		_user.getGroups().add(group);
+		group.getUsers().add(_user);
+
+		// _user = userDao.update(_user);
+
 		return convertToDTO(_user, userDto);
 	}
 

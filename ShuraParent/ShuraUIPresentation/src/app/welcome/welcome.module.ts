@@ -5,6 +5,11 @@ import { WelcomeComponent } from './welcome.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
+import { FuseSharedModule } from '@fuse/shared.module';
+import { FuseWidgetModule } from '@fuse/components/widget/widget.module';
+import { AgmCoreModule } from '@agm/core';
+import { ChartsModule } from 'ng2-charts';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 import {
     MatAutocompleteModule, MatBadgeModule, MatBottomSheetModule, MatButtonModule,
@@ -23,8 +28,8 @@ const materialModules = [
     MatIconModule, MatInputModule, MatListModule, MatMenuModule, MatPaginatorModule,
     MatProgressBarModule, MatProgressSpinnerModule, MatRadioModule, MatRippleModule, MatSelectModule,
     MatSidenavModule, MatSliderModule, MatSlideToggleModule, MatSnackBarModule, MatSortModule,
-    MatStepperModule, MatTableModule, MatTabsModule, MatToolbarModule, MatTooltipModule, MatTreeModule
-
+    MatStepperModule, MatTableModule, MatTabsModule, MatToolbarModule, MatTooltipModule, MatTreeModule,
+FuseSharedModule, FuseWidgetModule, ChartsModule, NgxChartsModule
 ];
 
 const routes: Routes = [
@@ -41,6 +46,9 @@ const routes: Routes = [
     RouterModule.forChild(routes),
 ReactiveFormsModule,
     CommonModule,
+    AgmCoreModule.forRoot({
+            apiKey: 'AIzaSyD81ecsCj4yYpcXSLFcYU97PvRsE_X8Bx8'
+        }),
     materialModules
   ],
     exports: [

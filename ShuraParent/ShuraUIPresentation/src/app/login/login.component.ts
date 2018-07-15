@@ -8,18 +8,19 @@ import { FuseConfigService } from '@fuse/services/config.service';
 import { fuseAnimations } from '@fuse/animations';
 
 import { LoginService } from '../services/login.service';
+import { StorageService } from '../services/storage.service';
 import { User } from '../models/user.model';
+import { Group } from '../models/group.model';
 import { Auth } from '../models/auth.model';
 import { LoginParam } from '../models/login.model';
 
 @Component({
-    selector   : 'login',
+    selector: 'login',
     templateUrl: './login.component.html',
-    styleUrls  : ['./login.component.scss'],
-    animations : fuseAnimations
+    styleUrls: ['./login.component.scss'],
+    animations: fuseAnimations
 })
-export class LoginComponent implements OnInit, OnDestroy
-{
+export class LoginComponent implements OnInit, OnDestroy {
     loginForm: FormGroup;
     loginFormErrors: any;
 
@@ -32,30 +33,31 @@ export class LoginComponent implements OnInit, OnDestroy
      * @param {FuseConfigService} _fuseConfigService
      * @param {FormBuilder} _formBuilder
      */
-	    user: User[];
-        authList: Auth[];
-        errorMessage: string;
-        logParam = new LoginParam();
-        param = new User();
-        authParam = new Auth();
-        userId: string;
+    user: User[];
+    group: Group[];
+    authList: Auth[];
+    errorMessage: string;
+    logParam = new LoginParam();
+    //param = new User();
+    authParam = new Auth();
+    userId: string;
     constructor(
-	    private router: Router,
-		private loginService: LoginService,
+        private router: Router,
+        private loginService: LoginService,
+        private StorageService: StorageService,
         private _fuseConfigService: FuseConfigService,
         private _formBuilder: FormBuilder
-    )
-    {
+    ) {
         // Configure the layout
         this._fuseConfigService.config = {
             layout: {
-                navbar : {
+                navbar: {
                     hidden: true
                 },
                 toolbar: {
                     hidden: true
                 },
-                footer : {
+                footer: {
                     hidden: true
                 }
             }
@@ -63,7 +65,7 @@ export class LoginComponent implements OnInit, OnDestroy
 
         // Set the defaults
         this.loginFormErrors = {
-            email   : {},
+            email: {},
             password: {}
         };
 
@@ -78,10 +80,9 @@ export class LoginComponent implements OnInit, OnDestroy
     /**
      * On init
      */
-    ngOnInit(): void
-    {
+    ngOnInit(): void {
         this.loginForm = this._formBuilder.group({
-            email   : ['', [Validators.required, Validators.email]],
+            email: ['', [Validators.required, Validators.email]],
             password: ['', Validators.required]
         });
 
@@ -95,8 +96,7 @@ export class LoginComponent implements OnInit, OnDestroy
     /**
      * On destroy
      */
-    ngOnDestroy(): void
-    {
+    ngOnDestroy(): void {
         // Unsubscribe from all subscriptions
         this._unsubscribeAll.next();
         this._unsubscribeAll.complete();
@@ -109,12 +109,9 @@ export class LoginComponent implements OnInit, OnDestroy
     /**
      * On form values changed
      */
-    onLoginFormValuesChanged(): void
-    {
-        for ( const field in this.loginFormErrors )
-        {
-            if ( !this.loginFormErrors.hasOwnProperty(field) )
-            {
+    onLoginFormValuesChanged(): void {
+        for (const field in this.loginFormErrors) {
+            if (!this.loginFormErrors.hasOwnProperty(field)) {
                 continue;
             }
 
@@ -124,31 +121,41 @@ export class LoginComponent implements OnInit, OnDestroy
             // Get the control
             const control = this.loginForm.get(field);
 
-            if ( control && control.dirty && !control.valid )
-            {
+            if (control && control.dirty && !control.valid) {
                 this.loginFormErrors[field] = control.errors;
             }
         }
     }
-	
-	auth(): void {
+
+    auth(): void {
         this.authParam.username = this.logParam.email;
         this.authParam.password = this.logParam.password;
         this.authParam.client_id = 'spring-security-oauth2-read-write-client';
         this.authParam.grant_type = 'password';
         this.loginService.authorize(this.authParam)
             .subscribe(authList => {
-               this.login();
+                this.authParam = authList;
+                this.login();
             },
             error => this.errorMessage = <any>error);
     }
-	
-	login(): void {
+
+    login(): void {
         this.loginService.login(this.logParam)
             .subscribe(user => {
                 if (user.userId == "-1") {
                     alert("Email or password incorrect ");
                 } else {
+                    let other = []; // your other array...
+                    user.groups.map(item => {
+                        return {
+                            group: item.nameEn
+                        }
+                    }).forEach(item => other.push(item));
+                    console.log('b login key : ' + this.authParam.access_token);
+                    this.StorageService.saveInLocal('token', this.authParam.access_token);
+                    this.StorageService.saveInLocal('user', JSON.stringify(user));
+                    this.StorageService.saveInLocal('group', JSON.stringify(other));
                     this.router.navigate(['welcome']);
                 }
             },

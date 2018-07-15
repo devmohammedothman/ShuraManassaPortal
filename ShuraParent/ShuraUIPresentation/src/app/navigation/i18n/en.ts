@@ -4,6 +4,7 @@ export const locale = {
         'NAV': {
 			'PERMISSION'     : 'Permission',
             'WELCOME'     : 'Welcome',
+            'GroupUserAssign' : 'GroupUserAssign',
             'APPLICATIONS': 'Applications',
             'DASHBOARDS'  : 'Dashboards',
             'CALENDAR'    : 'Calendar',

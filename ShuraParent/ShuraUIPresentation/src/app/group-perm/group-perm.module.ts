@@ -1,52 +1,27 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { FuseSharedModule } from '@fuse/shared.module';
+ 
+import { MaterialModule } from '../main/angular-material-elements/material.module';
 import { GroupPermComponent } from './group-perm.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { RouterModule, Routes } from '@angular/router';
-
-import {
-    MatAutocompleteModule, MatBadgeModule, MatBottomSheetModule, MatButtonModule,
-    MatButtonToggleModule, MatCardModule, MatCheckboxModule, MatChipsModule, MatDatepickerModule,
-    MatDialogModule, MatDividerModule, MatExpansionModule, MatFormFieldModule, MatGridListModule,
-    MatIconModule, MatInputModule, MatListModule, MatMenuModule, MatPaginatorModule,
-    MatProgressBarModule, MatProgressSpinnerModule, MatRadioModule, MatRippleModule, MatSelectModule,
-    MatSidenavModule, MatSliderModule, MatSlideToggleModule, MatSnackBarModule, MatSortModule,
-    MatStepperModule, MatTableModule, MatTabsModule, MatToolbarModule, MatTooltipModule, MatTreeModule
-} from '@angular/material';
-
-const materialModules = [
-   MatAutocompleteModule, MatBadgeModule, MatBottomSheetModule, MatButtonModule,
-    MatButtonToggleModule, MatCardModule, MatCheckboxModule, MatChipsModule, MatDatepickerModule,
-    MatDialogModule, MatDividerModule, MatExpansionModule, MatFormFieldModule, MatGridListModule,
-    MatIconModule, MatInputModule, MatListModule, MatMenuModule, MatPaginatorModule,
-    MatProgressBarModule, MatProgressSpinnerModule, MatRadioModule, MatRippleModule, MatSelectModule,
-    MatSidenavModule, MatSliderModule, MatSlideToggleModule, MatSnackBarModule, MatSortModule,
-    MatStepperModule, MatTableModule, MatTabsModule, MatToolbarModule, MatTooltipModule, MatTreeModule
-
-];
-
-const routes: Routes = [
+/*const routes = [
   {
-      path     : 'perm',
-      component: GroupPermComponent
+      path        : 'auth/perm',
+      component   : GroupPermComponent
   }
-];
+];*/
 
 @NgModule({
+  declarations: [
+    GroupPermComponent
+  ],
   imports: [
-    RouterModule.forChild(routes),
-ReactiveFormsModule,
-    CommonModule,
-    materialModules,
-    FormsModule
-  ],
-    
-     exports: [
-    FormsModule,
-    ReactiveFormsModule,
-    materialModules
-  ],
-  declarations: [GroupPermComponent]
+    //RouterModule.forChild(routes),
+
+    MaterialModule,
+
+    FuseSharedModule
+  ]
 })
 export class GroupPermModule { }

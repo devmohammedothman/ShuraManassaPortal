@@ -9,15 +9,15 @@ import { FuseConfigService } from '@fuse/services/config.service';
 import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
 
 import { navigation } from 'app/navigation/navigation';
+import { StorageService } from 'app/services/storage.service';
 
 @Component({
-    selector   : 'toolbar',
+    selector: 'toolbar',
     templateUrl: './toolbar.component.html',
-    styleUrls  : ['./toolbar.component.scss']
+    styleUrls: ['./toolbar.component.scss']
 })
 
-export class ToolbarComponent implements OnInit, OnDestroy
-{
+export class ToolbarComponent implements OnInit, OnDestroy {
     horizontalNavbar: boolean;
     rightNavbar: boolean;
     hiddenNavbar: boolean;
@@ -42,48 +42,48 @@ export class ToolbarComponent implements OnInit, OnDestroy
         private _fuseConfigService: FuseConfigService,
         private _fuseSidebarService: FuseSidebarService,
         private _router: Router,
+        private StorageService: StorageService,
         private _translateService: TranslateService
-    )
-    {
+    ) {
         // Set the defaults
         this.userStatusOptions = [
             {
                 'title': 'Online',
-                'icon' : 'icon-checkbox-marked-circle',
+                'icon': 'icon-checkbox-marked-circle',
                 'color': '#4CAF50'
             },
             {
                 'title': 'Away',
-                'icon' : 'icon-clock',
+                'icon': 'icon-clock',
                 'color': '#FFC107'
             },
             {
                 'title': 'Do not Disturb',
-                'icon' : 'icon-minus-circle',
+                'icon': 'icon-minus-circle',
                 'color': '#F44336'
             },
             {
                 'title': 'Invisible',
-                'icon' : 'icon-checkbox-blank-circle-outline',
+                'icon': 'icon-checkbox-blank-circle-outline',
                 'color': '#BDBDBD'
             },
             {
                 'title': 'Offline',
-                'icon' : 'icon-checkbox-blank-circle-outline',
+                'icon': 'icon-checkbox-blank-circle-outline',
                 'color': '#616161'
             }
         ];
 
         this.languages = [
             {
-                id   : 'en',
+                id: 'en',
                 title: 'English',
-                flag : 'us'
+                flag: 'us'
             },
             {
-                id   : 'tr',
+                id: 'tr',
                 title: 'Turkish',
-                flag : 'tr'
+                flag: 'tr'
             }
         ];
 
@@ -100,13 +100,12 @@ export class ToolbarComponent implements OnInit, OnDestroy
     /**
      * On init
      */
-    ngOnInit(): void
-    {
+    ngOnInit(): void {
         // Subscribe to the router events to show/hide the loading bar
         this._router.events
             .pipe(
-                filter((event) => event instanceof NavigationStart),
-                takeUntil(this._unsubscribeAll)
+            filter((event) => event instanceof NavigationStart),
+            takeUntil(this._unsubscribeAll)
             )
             .subscribe((event) => {
                 this.showLoadingBar = true;
@@ -114,7 +113,7 @@ export class ToolbarComponent implements OnInit, OnDestroy
 
         this._router.events
             .pipe(
-                filter((event) => event instanceof NavigationEnd)
+            filter((event) => event instanceof NavigationEnd)
             )
             .subscribe((event) => {
                 this.showLoadingBar = false;
@@ -130,14 +129,13 @@ export class ToolbarComponent implements OnInit, OnDestroy
             });
 
         // Set the selected language from default languages
-        this.selectedLanguage = _.find(this.languages, {'id': this._translateService.currentLang});
+        this.selectedLanguage = _.find(this.languages, { 'id': this._translateService.currentLang });
     }
 
     /**
      * On destroy
      */
-    ngOnDestroy(): void
-    {
+    ngOnDestroy(): void {
         // Unsubscribe from all subscriptions
         this._unsubscribeAll.next();
         this._unsubscribeAll.complete();
@@ -152,8 +150,7 @@ export class ToolbarComponent implements OnInit, OnDestroy
      *
      * @param key
      */
-    toggleSidebarOpen(key): void
-    {
+    toggleSidebarOpen(key): void {
         this._fuseSidebarService.getSidebar(key).toggleOpen();
     }
 
@@ -162,8 +159,7 @@ export class ToolbarComponent implements OnInit, OnDestroy
      *
      * @param value
      */
-    search(value): void
-    {
+    search(value): void {
         // Do your search here...
         console.log(value);
     }
@@ -173,12 +169,17 @@ export class ToolbarComponent implements OnInit, OnDestroy
      *
      * @param langId
      */
-    setLanguage(langId): void
-    {
+    setLanguage(langId): void {
         // Set the selected language for toolbar
-        this.selectedLanguage = _.find(this.languages, {'id': langId});
+        this.selectedLanguage = _.find(this.languages, { 'id': langId });
 
         // Use the selected language for translations
         this._translateService.use(langId);
+    }
+
+    logout(): void {
+        this.StorageService.removeFromLocal('user');
+        this.StorageService.removeFromLocal('token');
+        this._router.navigate(['']);
     }
 }

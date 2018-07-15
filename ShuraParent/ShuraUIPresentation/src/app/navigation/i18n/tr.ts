@@ -2,6 +2,9 @@ export const locale = {
     lang: 'tr',
     data: {
         'NAV': {
+            'PERMISSION'     : 'صلاحيات',
+            'WELCOME'     : 'مرحبا',
+            'GroupUserAssign' : 'إضافة مستخدم ألى مجموعة',
             'APPLICATIONS': 'Programlar',
             'DASHBOARDS'  : 'Kontrol Paneli',
             'CALENDAR'    : 'Takvim',

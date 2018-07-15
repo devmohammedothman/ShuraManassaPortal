@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { GroupPermComponent } from './group-perm/group-perm.component';
+import { GroupUserAssignComponent } from './group-user-assign/group-user-assign.component';
 
 const appRoutes: Routes = [
     {
@@ -15,8 +16,12 @@ const appRoutes: Routes = [
         component   : GroupPermComponent
     },
     {
-        path        : '**',
+        path        : '',
         component   : LoginComponent
+    },
+    {
+        path        : 'gua',
+        component   : GroupUserAssignComponent
     }
     // {
     //     path      : '**',

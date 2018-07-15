@@ -1,7 +1,7 @@
-import { NgModule, Component } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import {
@@ -30,6 +30,9 @@ import { AppComponent } from 'app/app.component';
 //import { AppStoreModule } from 'app/store/store.module';
 import { LayoutModule } from 'app/layout/layout.module';
 import { LoginService } from './services/login.service';
+import { StorageServiceModule } from 'angular-webstorage-service';
+import { StorageService } from './services/storage.service';PermissionService
+import { PermissionService } from './services/permission.service';
 import { AppRoutingModule } from './app-routing.module';
 
 const materialModules = [
@@ -52,7 +55,9 @@ const materialModules = [
     imports     : [
         BrowserModule,
         BrowserAnimationsModule,
+        NoopAnimationsModule,
         HttpClientModule,
+        StorageServiceModule,
         //RouterModule.forRoot(appRoutes),
         HttpModule,
         AppRoutingModule,
@@ -79,8 +84,9 @@ const materialModules = [
     ],
     exports: [materialModules,
     BrowserModule,
-        BrowserAnimationsModule],
-	providers: [LoginService],
+        BrowserAnimationsModule,
+        NoopAnimationsModule],
+	providers: [LoginService, StorageService,PermissionService],
     bootstrap   : [
         AppComponent
     ]

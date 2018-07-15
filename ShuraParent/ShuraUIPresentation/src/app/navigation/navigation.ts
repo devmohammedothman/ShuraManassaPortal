@@ -24,6 +24,14 @@ export const navigation: FuseNavigation[] = [
                 icon     : 'flag',
                 url      : '/perm'
             },
+            {
+                id       : 'GroupUserAssign',
+                title    : 'GroupUserAssign',
+                translate: 'NAV.GroupUserAssign',
+                type     : 'item',
+                icon     : 'flag',
+                url      : '/gua'
+            },
         ]
     }
 

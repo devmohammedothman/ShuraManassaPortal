@@ -10,18 +10,24 @@ import { FuseSplashScreenService } from '@fuse/services/splash-screen.service';
 import { FuseTranslationLoaderService } from '@fuse/services/translation-loader.service';
 
 import { navigation } from 'app/navigation/navigation';
+import { userNavigation } from 'app/navigation/user-navigation';
 import { locale as navigationEnglish } from 'app/navigation/i18n/en';
 import { locale as navigationTurkish } from 'app/navigation/i18n/tr';
+import { StorageService } from 'app/services/storage.service';
+import { User } from 'app/models/user.model';
+import { Group } from 'app/models/group.model';
 
 @Component({
-    selector   : 'app',
+    selector: 'app',
     templateUrl: './app.component.html',
-    styleUrls  : ['./app.component.scss']
+    styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit, OnDestroy
-{
+export class AppComponent implements OnInit, OnDestroy {
     navigation: any;
     fuseConfig: any;
+    user: User;
+    group: any;
+    // groups : Group[]; 
 
     // Private
     private _unsubscribeAll: Subject<any>;
@@ -42,11 +48,31 @@ export class AppComponent implements OnInit, OnDestroy
         private _fuseSidebarService: FuseSidebarService,
         private _fuseSplashScreenService: FuseSplashScreenService,
         private _fuseTranslationLoaderService: FuseTranslationLoaderService,
-        private _translateService: TranslateService
-    )
-    {
+        private _translateService: TranslateService,
+        private storageService: StorageService
+    ) {
         // Get default navigation
-        this.navigation = navigation;
+        this.user = JSON.parse(this.storageService.getFromLocal('user'));
+        this.group = JSON.parse(this.storageService.getFromLocal('group'));
+        // Set the defaults
+        if (this.group) {
+            for (let obj of this.group) {
+                console.log("group:", obj);
+                for (let key in obj) {
+                    //console.log('1name in first check: '+this.group);
+                    if (obj[key] === 'ADMIN' || obj[key] === 'ADMIN1') {
+                        console.log('app com group admin : ' + obj[key]);
+                        this.navigation = navigation;
+                    } else {
+                        console.log('app com group user : ' + obj[key]);
+                        this.navigation = userNavigation;
+                    }
+                }
+            }
+        } else {
+            console.log('4name in first check: ' + this.group.group);
+            this.navigation = navigation;
+        }
 
         // Register the navigation to the service
         this._fuseNavigationService.register('main', this.navigation);
@@ -77,8 +103,7 @@ export class AppComponent implements OnInit, OnDestroy
     /**
      * On init
      */
-    ngOnInit(): void
-    {
+    ngOnInit(): void {
         // Subscribe to config changes
         this._fuseConfigService.config
             .pipe(takeUntil(this._unsubscribeAll))
@@ -90,8 +115,7 @@ export class AppComponent implements OnInit, OnDestroy
     /**
      * On destroy
      */
-    ngOnDestroy(): void
-    {
+    ngOnDestroy(): void {
         // Unsubscribe from all subscriptions
         this._unsubscribeAll.next();
         this._unsubscribeAll.complete();
@@ -106,8 +130,7 @@ export class AppComponent implements OnInit, OnDestroy
      *
      * @param key
      */
-    toggleSidebarOpen(key): void
-    {
+    toggleSidebarOpen(key): void {
         this._fuseSidebarService.getSidebar(key).toggleOpen();
     }
 }
