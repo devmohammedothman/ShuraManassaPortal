@@ -45,7 +45,7 @@ export class AppComponent implements OnInit, OnDestroy
         private _fuseSplashScreenService: FuseSplashScreenService,
         private _fuseTranslationLoaderService: FuseTranslationLoaderService,
         private _translateService: TranslateService,
-        private loginService:LoginService 
+        public loginService:LoginService 
     )
     {
         // Get default navigation
