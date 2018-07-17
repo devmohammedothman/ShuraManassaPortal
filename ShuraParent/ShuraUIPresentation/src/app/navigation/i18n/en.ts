@@ -24,5 +24,6 @@ export const locale = {
             'TODO'        : 'To-Do',
             'SCRUMBOARD'  : 'Scrumboard'
         }
+    
     }
 };

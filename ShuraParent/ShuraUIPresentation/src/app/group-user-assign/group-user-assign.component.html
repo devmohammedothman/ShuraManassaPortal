@@ -3,30 +3,30 @@
     <div class="p-24">
         <form class="mat-white-bg mat-elevation-z4 p-24 mb-24" fxLayout="column" fxLayoutAlign="start" name="groupUserAssignForm">
 
-			<div flex fxLayout="row">
-				<div fxFlex="25">
-					<mat-form-field>
-						<mat-select (selectionChange)="onGroupSelect($event)" [(ngModel)]="assignParam.groupname" name="group" placeholder="Choose a Group!" required>
-							<mat-option *ngFor="let p of groups" [value]="p.nameEn">
-								{{p.nameEn}}
-							</mat-option>
-						</mat-select>
-					</mat-form-field>
-				</div>
-
-				<div fxFlex="25">
-					<mat-form-field>
-						<mat-select (selectionChange)="onUserSelect($event)" [(ngModel)]="assignParam.email" name="user" placeholder="Choose a User!" required>
-							<mat-option *ngFor="let u of users" [value]="u.email">
-								{{u.username}}
-							</mat-option>
-						</mat-select>
-					</mat-form-field>
-				</div>
-				<div fxFlex="100" class="my-24">
-					<button mat-raised-button color="accent" class="submit-button" aria-label="Submit" (click)="assignUserToGroup()">Submit</button>
+            <div flex fxLayout="row">
+                <div fxFlex="25">
+                    <mat-form-field>
+                        <mat-select (selectionChange)="onGroupSelect($event)" [(ngModel)]="assignParam.groupname" name="group" placeholder="Choose a Group!" required>
+                            <mat-option *ngFor="let p of groups" [value]="p.nameEn">
+                                {{p.nameEn}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
                 </div>
-			</div>
+
+                <div fxFlex="25">
+                    <mat-form-field>
+                        <mat-select (selectionChange)="onUserSelect($event)" [(ngModel)]="assignParam.email" name="user" placeholder="Choose a User!" required>
+                            <mat-option *ngFor="let u of users" [value]="u.email">
+                                {{u.username}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div fxFlex="100" class="my-24">
+                    <button mat-raised-button color="accent" class="submit-button" aria-label="Submit" (click)="assignUserToGroup()">Submit</button>
+                </div>
+            </div>
         </form>
     </div>
 

@@ -5,27 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FuseSharedModule } from '@fuse/shared.module';
 
 import { LoginComponent } from './login.component';
-
-import {
-    MatAutocompleteModule, MatBadgeModule, MatBottomSheetModule, MatButtonModule,
-    MatButtonToggleModule, MatCardModule, MatCheckboxModule, MatChipsModule, MatDatepickerModule,
-    MatDialogModule, MatDividerModule, MatExpansionModule, MatFormFieldModule, MatGridListModule,
-    MatIconModule, MatInputModule, MatListModule, MatMenuModule, MatPaginatorModule,
-    MatProgressBarModule, MatProgressSpinnerModule, MatRadioModule, MatRippleModule, MatSelectModule,
-    MatSidenavModule, MatSliderModule, MatSlideToggleModule, MatSnackBarModule, MatSortModule,
-    MatStepperModule, MatTableModule, MatTabsModule, MatToolbarModule, MatTooltipModule, MatTreeModule
-} from '@angular/material';
-
-const materialModules = [
-   MatAutocompleteModule, MatBadgeModule, MatBottomSheetModule, MatButtonModule,
-    MatButtonToggleModule, MatCardModule, MatCheckboxModule, MatChipsModule, MatDatepickerModule,
-    MatDialogModule, MatDividerModule, MatExpansionModule, MatFormFieldModule, MatGridListModule,
-    MatIconModule, MatInputModule, MatListModule, MatMenuModule, MatPaginatorModule,
-    MatProgressBarModule, MatProgressSpinnerModule, MatRadioModule, MatRippleModule, MatSelectModule,
-    MatSidenavModule, MatSliderModule, MatSlideToggleModule, MatSnackBarModule, MatSortModule,
-    MatStepperModule, MatTableModule, MatTabsModule, MatToolbarModule, MatTooltipModule, MatTreeModule
-
-];
+import { MaterialModule }  from '../main/angular-material-elements/material.module';
 
 const routes = [
     {
@@ -43,12 +23,12 @@ const routes = [
         ReactiveFormsModule,
 
         FuseSharedModule,
-        materialModules
+        MaterialModule
     ],
      exports: [
     FormsModule,
     ReactiveFormsModule,
-    materialModules
+    MaterialModule
   ]
 })
 export class LoginModule

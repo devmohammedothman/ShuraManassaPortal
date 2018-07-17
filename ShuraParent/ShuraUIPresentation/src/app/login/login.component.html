@@ -5,7 +5,7 @@
         <div id="login-form" [@animate]="{value:'*',params:{duration:'300ms',y:'100px'}}">
 
             <div class="logo">
-                <img src="resources/assets/images/logos/shura.svg">
+                <img src="assets/images/logos/shura.svg">
             </div>
 
             <div class="title">LOGIN TO YOUR ACCOUNT</div>
@@ -29,8 +29,7 @@
                     </mat-error>
                 </mat-form-field>
 
-                <div class="remember-forgot-password" fxLayout="row" fxLayout.xs="column"
-                     fxLayoutAlign="space-between center">
+                <div class="remember-forgot-password" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center">
                     <mat-checkbox class="remember-me" aria-label="Remember Me">
                         Remember Me
                     </mat-checkbox>
@@ -40,29 +39,16 @@
                     </a>
                 </div>
 
-                <button mat-raised-button color="accent" class="submit-button" aria-label="LOG IN"
-                        [disabled]="loginForm.invalid" (click)="auth()">
+                <button mat-raised-button color="accent" class="submit-button" aria-label="LOG IN" [disabled]="loginForm.invalid" (click)="auth()">
                     LOGIN
                 </button>
 
             </form>
 
-            <div class="separator">
-                <span class="text">OR</span>
-            </div>
-
-            <button mat-raised-button class="google">
-                Log in with Google
-            </button>
-
-            <button mat-raised-button class="facebook">
-                Log in with Facebook
-            </button>
-
-            <div class="register" fxLayout="column" fxLayoutAlign="center center">
+            <!-- <div class="register" fxLayout="column" fxLayoutAlign="center center">
                 <span class="text">Don't have an account?</span>
                 <a class="link" [routerLink]="'/pages/auth/register'">Create an account</a>
-            </div>
+            </div> -->
 
         </div>
 

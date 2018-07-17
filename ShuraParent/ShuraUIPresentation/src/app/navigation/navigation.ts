@@ -7,6 +7,7 @@ export const navigation: FuseNavigation[] = [
         translate: 'NAV.WELCOME',
         type     : 'group',
         icon     : 'apps',
+        
         children : [
             {
                 id       : 'welcome',
@@ -14,7 +15,7 @@ export const navigation: FuseNavigation[] = [
                 translate: 'NAV.WELCOME',
                 type     : 'item',
                 icon     : 'face',
-                url      : '/welcome'
+                url      : '/'
             },
 			{
                 id       : 'Permission',

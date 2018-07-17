@@ -5,47 +5,47 @@
         <div fxLayout="column" fxLayoutAlign="start start" fxLayout.gt-md="row">
 
             <form name="groupPerm" fxLayout="column" fxLayoutAlign="start" fxFlex="1 0 auto">
-				<mat-card>
-					<mat-card-header class="mb-24">
-						<h3 class="h3" fxLayoutAlign="flex-start" fxFlex="1 1 50%">Group Permissions</h3>
-						<div fxLayoutAlign="flex-end" fxFlex="1 1 50%">
-							<mat-checkbox [(ngModel)]="checked" [ngModelOptions]="{standalone: true}">Check all!</mat-checkbox>
-						</div>
-					</mat-card-header>
+                <mat-card>
+                    <mat-card-header class="mb-24">
+                        <h3 class="h3" fxLayoutAlign="flex-start" fxFlex="1 1 50%">Group Permissions</h3>
+                        <div fxLayoutAlign="flex-end" fxFlex="1 1 50%">
+                            <mat-checkbox [(ngModel)]="checked" [ngModelOptions]="{standalone: true}">Check all!</mat-checkbox>
+                        </div>
+                    </mat-card-header>
 
-					<mat-card-content>
-						<div fxLayout="row" fxLayoutAlign="start center" class="mb-24">
-						<mat-form-field>
-							<mat-select placeholder="Choose a group!">
-								<mat-option [value]="'group1'">
-									Group 1
-								</mat-option>
-								<mat-option [value]="'group2'">
-									Group 2
-								</mat-option>
-								<mat-option [value]="'group3'">
-									Group 3
-								</mat-option>
-								<mat-option [value]="'group4'">
-									Group 4
-								</mat-option>
-								<mat-option [value]="'group5'">
-									Group 5
-								</mat-option>
-								<mat-option [value]="'group6'">
-									Group 6
-								</mat-option>
-							</mat-select>
-						</mat-form-field>
-						</div>
-						<div fxLayout="row" fxLayoutAlign="start center">
-							<mat-checkbox [checked]="checked"> Permission 1</mat-checkbox>							
-							<mat-checkbox [checked]="checked"> Permission</mat-checkbox>							
-							<mat-checkbox [checked]="checked"> Permission</mat-checkbox>							
-							<mat-checkbox [checked]="checked"> Permission</mat-checkbox>
-						</div>
-					</mat-card-content>
-				</mat-card>
+                    <mat-card-content>
+                        <div fxLayout="row" fxLayoutAlign="start center" class="mb-24">
+                            <mat-form-field>
+                                <mat-select placeholder="Choose a group!">
+                                    <mat-option [value]="'group1'">
+                                        Group 1
+                                    </mat-option>
+                                    <mat-option [value]="'group2'">
+                                        Group 2
+                                    </mat-option>
+                                    <mat-option [value]="'group3'">
+                                        Group 3
+                                    </mat-option>
+                                    <mat-option [value]="'group4'">
+                                        Group 4
+                                    </mat-option>
+                                    <mat-option [value]="'group5'">
+                                        Group 5
+                                    </mat-option>
+                                    <mat-option [value]="'group6'">
+                                        Group 6
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="start center">
+                            <mat-checkbox [checked]="checked"> Permission 1</mat-checkbox>
+                            <mat-checkbox [checked]="checked"> Permission</mat-checkbox>
+                            <mat-checkbox [checked]="checked"> Permission</mat-checkbox>
+                            <mat-checkbox [checked]="checked"> Permission</mat-checkbox>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
             </form>
         </div>
     </div>

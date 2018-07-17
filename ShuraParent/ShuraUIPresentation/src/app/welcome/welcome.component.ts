@@ -19,7 +19,8 @@ export class WelcomeComponent implements OnInit {
     group: any;
     groupstr; string;
     userStr: string;
-    constructor(private storageService: StorageService) {
+    constructor() {
+      //private storageService: StorageService
         /*this.token = this.StorageService.getStorageListValue('token');
         console.log('key:' + this.token );
         alert('key:' + this.token);*/
@@ -27,15 +28,15 @@ export class WelcomeComponent implements OnInit {
 
     ngOnInit() {
         //debugger;
-        this.token = this.storageService.getFromLocal('token');
-        this.user = JSON.parse(this.storageService.getFromLocal('user'));
-        this.group = JSON.parse(this.storageService.getFromLocal('group'));
-        this.userStr = this.storageService.getFromLocal('user');
-        this.groupstr = this.storageService.getFromLocal('group');
-        console.log('key:' + this.token);
-        console.log('user:' + this.userStr);
-        console.log('group:' + this.groupstr);
-        console.log('username:' + this.user.username);
+        // this.token = this.storageService.getFromLocal('token');
+        // this.user = JSON.parse(this.storageService.getFromLocal('user'));
+        // this.group = JSON.parse(this.storageService.getFromLocal('group'));
+        // this.userStr = this.storageService.getFromLocal('user');
+        // this.groupstr = this.storageService.getFromLocal('group');
+        // console.log('key:' + this.token);
+        // console.log('user:' + this.userStr);
+        // console.log('group:' + this.groupstr);
+        // console.log('username:' + this.user.username);
     }
 
 }

@@ -10,21 +10,24 @@ import 'rxjs/add/operator/toPromise';
 import { User } from '../models/user.model';
 import { Auth } from '../models/auth.model';
 import { LoginParam } from '../models/login.model';
+import { StorageService } from './storage.service';
 
 @Injectable()
 export class LoginService {
 
-    constructor(private http: Http) { }
+    constructor(private http: Http,
+        private storageService: StorageService) { }
 
     private baseUrl = 'http://localhost:8080/ShuraIntegrationAPI/api/user/';
     private authUrl = 'http://localhost:8080/ShuraIntegrationAPI/api/oauth/token';
-
+    authValue;
+    loginValue ;
 
     authorize(param: Auth): Observable<Auth> {
         // let authData = Base64.encode('spring-security-oauth2-read-write-client' + ':' + 'spring-security-oauth2-read-write-client-password1234');
         let headers = new Headers({
             'Content-Type': 'application/x-www-form-urlencoded',
-			'Access-Control':'Allow-Origin',
+            'Access-Control':'Allow-Origin',
             'Authorization': 'Basic ' + 'c3ByaW5nLXNlY3VyaXR5LW9hdXRoMi1yZWFkLXdyaXRlLWNsaWVudDpzcHJpbmctc2VjdXJpdHktb2F1dGgyLXJlYWQtd3JpdGUtY2xpZW50LXBhc3N3b3JkMTIzNA=='
         });
         let options = new RequestOptions({ headers: headers });
@@ -33,19 +36,26 @@ export class LoginService {
         params.set('password', param.password);
         params.set('grant_type', param.grant_type);
         params.set('client_id', param.client_id);
-        return this.http.post(this.authUrl, params, options)
-            .map(this.extractData)
-            .catch(this.handleErrorObservable);
+        this.authValue = this.http.post(this.authUrl, params, options)
+        .map(this.extractData)
+        .catch(this.handleErrorObservable);
+        return this.authValue;
     }
 
     login(param: LoginParam): Observable<User> {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
-        return this.http.post(this.baseUrl + 'login', param, options)
-            .map(this.extractData)
-            .catch(this.handleErrorObservable);
+        this.loginValue = this.http.post(this.baseUrl + 'login', param, options)
+        .map(this.extractData)
+        .catch(this.handleErrorObservable);
+        return this.loginValue;
     }
 
+    isLoggedIn()
+    {
+        console.log("logged in value "+ this.storageService.getFromLocal('user') != null);
+        return this.storageService.getFromLocal('user')!= null;
+    }
     register(param: User): Observable<User> {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });

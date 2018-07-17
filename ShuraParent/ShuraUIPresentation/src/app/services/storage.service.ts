@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
-import { LocalStorage } from '@ngx-pwa/local-storage'
-import { User } from '../models/user.model';;
+import { LocalStorage } from '@ngx-pwa/local-storage';
+import { User } from '../models/user.model';
 import { StorageServiceModule, LOCAL_STORAGE, WebStorageService} from 'angular-webstorage-service';
 
 @Injectable({

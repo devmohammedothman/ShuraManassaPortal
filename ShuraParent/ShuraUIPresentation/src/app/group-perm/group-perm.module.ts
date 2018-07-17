@@ -1,27 +1,37 @@
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { FuseSharedModule } from '@fuse/shared.module';
- 
-import { MaterialModule } from '../main/angular-material-elements/material.module';
+import { CommonModule } from '@angular/common';
 import { GroupPermComponent } from './group-perm.component';
+import { RouterModule, Routes } from '@angular/router';
 
-/*const routes = [
+import { MaterialModule } from '../main/angular-material-elements/material.module';
+import { FuseModule } from '@fuse/fuse.module';
+import { FuseSharedModule } from '@fuse/shared.module';
+import { FuseSidebarModule, FuseThemeOptionsModule } from '@fuse/components';
+import { fuseConfig } from 'app/fuse-config';
+import { AuthGuard } from '../auth.guard';
+
+const routes : Routes = [
   {
-      path        : 'auth/perm',
+      path        : 'perm',
+      canActivate: [AuthGuard],
       component   : GroupPermComponent
   }
-];*/
+]
 
 @NgModule({
-  declarations: [
-    GroupPermComponent
-  ],
   imports: [
-    //RouterModule.forChild(routes),
+    CommonModule,
+    RouterModule.forRoot(routes),
 
-    MaterialModule,
+  // Fuse modules
+    FuseModule.forRoot(fuseConfig),
+    FuseSharedModule,
+    FuseSidebarModule,
+    FuseThemeOptionsModule,
 
-    FuseSharedModule
-  ]
+    //material
+      MaterialModule
+  ],
+  declarations: [GroupPermComponent]
 })
 export class GroupPermModule { }

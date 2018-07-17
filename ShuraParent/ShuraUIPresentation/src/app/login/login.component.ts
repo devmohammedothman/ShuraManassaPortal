@@ -137,15 +137,13 @@ export class LoginComponent implements OnInit, OnDestroy {
                 this.authParam = authList;
                 this.login();
             },
-            error => this.errorMessage = <any>error);
+            // error => this.errorMessage = <any>error);
+            error => alert("Email or password incorrect "));
     }
 
     login(): void {
         this.loginService.login(this.logParam)
             .subscribe(user => {
-                if (user.userId == "-1") {
-                    alert("Email or password incorrect ");
-                } else {
                     let other = []; // your other array...
                     user.groups.map(item => {
                         return {
@@ -157,7 +155,7 @@ export class LoginComponent implements OnInit, OnDestroy {
                     this.StorageService.saveInLocal('user', JSON.stringify(user));
                     this.StorageService.saveInLocal('group', JSON.stringify(other));
                     this.router.navigate(['welcome']);
-                }
+                
             },
             error => this.errorMessage = <any>error);
     }
