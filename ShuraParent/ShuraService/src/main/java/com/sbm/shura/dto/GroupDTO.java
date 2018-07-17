@@ -1,5 +1,7 @@
 package com.sbm.shura.dto;
 
+import java.util.List;
+
 public class GroupDTO extends BaseDTO {
 	
 	/**
@@ -12,6 +14,7 @@ public class GroupDTO extends BaseDTO {
 	private boolean isActive;
 	private String nameAr;
 	private String nameEn;
+	private List<PermissionDTO> permissions;
 	
 	
 	public String getDescription() {
@@ -38,5 +41,13 @@ public class GroupDTO extends BaseDTO {
 	public void setNameEn(String nameEn) {
 		this.nameEn = nameEn;
 	}
+	public List<PermissionDTO> getPermissions() {
+		return permissions;
+	}
+	public void setPermissions(List<PermissionDTO> permission) {
+		this.permissions = permission;
+	}
+	
+	
 
 }

@@ -41,7 +41,7 @@ public class ServerSecurityConfig extends WebSecurityConfigurerAdapter {
     	// TODO Auto-generated method stub
     	 http.
          authorizeRequests()
-             .antMatchers("/","/api/user/login/", "/resources/**")
+             .antMatchers("/","/api/user/login/", "/resources/**", "/assets/**")
                  .permitAll()
              .and()
              .formLogin()
