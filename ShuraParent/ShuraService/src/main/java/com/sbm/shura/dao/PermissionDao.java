@@ -9,4 +9,6 @@ public interface PermissionDao extends GenericDao<Permission>{
 	Permission add(Permission perm) throws Exception;
 
 	List<Permission> getPermList() throws Exception;
+	
+	List<Permission> getPermListByMenu(long menuId) throws Exception;
 }

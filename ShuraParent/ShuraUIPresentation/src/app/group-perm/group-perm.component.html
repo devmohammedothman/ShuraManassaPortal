@@ -16,33 +16,22 @@
                     <mat-card-content>
                         <div fxLayout="row" fxLayoutAlign="start center" class="mb-24">
                             <mat-form-field>
-                                <mat-select placeholder="Choose a group!">
-                                    <mat-option [value]="'group1'">
-                                        Group 1
-                                    </mat-option>
-                                    <mat-option [value]="'group2'">
-                                        Group 2
-                                    </mat-option>
-                                    <mat-option [value]="'group3'">
-                                        Group 3
-                                    </mat-option>
-                                    <mat-option [value]="'group4'">
-                                        Group 4
-                                    </mat-option>
-                                    <mat-option [value]="'group5'">
-                                        Group 5
-                                    </mat-option>
-                                    <mat-option [value]="'group6'">
-                                        Group 6
+                                <mat-select (selectionChange)="onGroupSelect($event)" [(ngModel)]="groupname" name="group" placeholder="Choose a Group!"
+                                    required>
+                                    <mat-option *ngFor="let p of groups" [value]="p.nameEn">
+                                        {{p.nameEn}}
                                     </mat-option>
                                 </mat-select>
                             </mat-form-field>
                         </div>
                         <div fxLayout="row" fxLayoutAlign="start center">
-                            <mat-checkbox [checked]="checked"> Permission 1</mat-checkbox>
-                            <mat-checkbox [checked]="checked"> Permission</mat-checkbox>
-                            <mat-checkbox [checked]="checked"> Permission</mat-checkbox>
-                            <mat-checkbox [checked]="checked"> Permission</mat-checkbox>
+                            <!-- <div *ngFor="let c of permissions">
+                                <input type=”checkbox” [checked]="checked" [value]="c.nameEn"/> {{c.nameEn}}
+                            </div> -->
+
+                             <mat-checkbox (change)="onCheckSelect($event)" [(ngModel)]="selectedPerm" name="perm" [checked]="checked" [value]="2"> Read</mat-checkbox>
+                            <mat-checkbox (change)="onCheckSelect($event)" [(ngModel)]="selectedPerm" name="perm" [checked]="checked" [value]="3"> Write</mat-checkbox>
+                            <!--<mat-checkbox [checked]="checked"> Permission</mat-checkbox> -->
                         </div>
                     </mat-card-content>
                 </mat-card>

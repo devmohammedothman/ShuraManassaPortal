@@ -3,6 +3,7 @@ import { PermissionService } from '../services/permission.service';
 import { Group } from '../models/group.model';
 import { User } from '../models/user.model';
 import { AssignParam } from '../models/assign-user-group-param.model';
+import { StorageService } from '../services/storage.service';
 
 @Component({
     selector: 'app-group-user-assign',
@@ -19,12 +20,19 @@ export class GroupUserAssignComponent implements OnInit {
     selectedGroup: any;
     selectedUser: any;
     errorMessage: string;
+    localGroup: string;
+    show: boolean;
 
-    constructor(private permissionService: PermissionService) { }
+    constructor(private permissionService: PermissionService,
+        private storageService: StorageService,) { }
 
     ngOnInit(): void {
         this.getGroups();
         this.getUsers();
+        this.localGroup = this.storageService.getFromLocal('currentGroup');
+        this.show = (this.localGroup == 'ADMIN');
+        console.log('current group obj: '+ this.localGroup);
+        console.log('show '+ this.show);
     }
 
 

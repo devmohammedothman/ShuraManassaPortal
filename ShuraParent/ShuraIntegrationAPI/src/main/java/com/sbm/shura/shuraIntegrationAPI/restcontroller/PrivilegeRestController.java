@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -80,5 +81,11 @@ public class PrivilegeRestController {
 		return dtoProvider.getObjList((List) groupService.getgroupList());
 	}
 	
+	@RequestMapping(value = "/perm/getpermissionsbymenu/{id}", method = RequestMethod.GET,
+			consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	public ResponseEntity<List<PermissionDTO>> getPermissionByMenu(@PathVariable("id") long menuId) throws Exception {
+		return dtoProvider.getObjList((List) service.getPermListByMenu(menuId));
+	}
 	
 }

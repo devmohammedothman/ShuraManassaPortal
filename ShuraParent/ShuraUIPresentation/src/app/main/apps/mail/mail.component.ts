@@ -44,7 +44,7 @@ export class MailComponent implements OnInit, OnDestroy
     )
     {
         // Load the translations
-        this._fuseTranslationLoaderService.loadTranslations(english, turkish);
+        this._fuseTranslationLoaderService.loadTranslations(turkish, english);
 
         // Set the defaults
         this.searchInput = new FormControl('');

@@ -9,5 +9,7 @@ public interface PermissionService {
 	PermissionDTO addPermission(PermissionDTO perm) throws Exception;
 
 	List<PermissionDTO> getPermList() throws Exception;
+	
+	List<PermissionDTO> getPermListByMenu(long menuId) throws Exception;
 
 }

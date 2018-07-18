@@ -25,6 +25,13 @@ export class PermissionService {
         return this.http.get(this.baseUrl+'perm/getgroups',options)
             .map(data => data.json());
     }
+
+    getPermissionsByMenu(menuId: string): Observable<any> {
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+       return this.http.get(this.baseUrl+'perm/getpermissionsbymenu/'+menuId,options)
+           .map(data => data.json());
+   }
     
     getUsers(): Observable<any> {
          let headers = new Headers({ 'Content-Type': 'application/json' });

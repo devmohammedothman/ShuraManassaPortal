@@ -4,7 +4,7 @@ export const locale = {
         'NAV': {
             'PERMISSION'     : 'صلاحيات',
             'WELCOME'     : 'مرحبا',
-            'GroupUserAssign' : 'إضافة مستخدم ألى مجموعة',
+            'GroupUserAssign' : 'إضافة مستخدم إلى مجموعة',
             'APPLICATIONS': 'Programlar',
             'DASHBOARDS'  : 'Kontrol Paneli',
             'CALENDAR'    : 'Takvim',
