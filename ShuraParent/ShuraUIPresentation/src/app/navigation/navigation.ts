@@ -33,6 +33,22 @@ export const navigation: FuseNavigation[] = [
                 icon     : 'flag',
                 url      : '/gua'
             },
+            {
+                id       : 'ManageUser',
+                title    : 'Manage User',
+                translate: 'NAV.MANAGEUSER',
+                type     : 'item',
+                icon     : 'flag',
+                url      : '/manage-users'
+            },
+            {
+                id       : 'ManageCommittee',
+                title    : 'Manage Committee',
+                translate: 'NAV.MANAGECOMMITTEE',
+                type     : 'item',
+                icon     : 'flag',
+                url      : '/manage-committee'
+            },
         ]
     }
 

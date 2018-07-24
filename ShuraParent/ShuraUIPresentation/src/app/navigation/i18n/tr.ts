@@ -5,6 +5,8 @@ export const locale = {
             'PERMISSION'     : 'صلاحيات',
             'WELCOME'     : 'مرحبا',
             'GroupUserAssign' : 'إضافة مستخدم إلى مجموعة',
+            'MANAGEUSER' : 'التحكم في المستخدمين',
+            'MANAGECOMMITTEE' : 'شئون اللجان',
             'APPLICATIONS': 'Programlar',
             'DASHBOARDS'  : 'Kontrol Paneli',
             'CALENDAR'    : 'Takvim',

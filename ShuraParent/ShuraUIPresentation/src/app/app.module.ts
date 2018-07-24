@@ -30,6 +30,9 @@ import { AuthGuard } from './auth.guard';
 import { StorageService } from './services/storage.service';
 import { PermissionService } from './services/permission.service';
 import { StorageServiceModule } from '../../node_modules/angular-webstorage-service';
+import { ManageUsersModule } from './manage-users/manage-users.module';
+import { ManageCommitteeModule } from './manage-committee/manage-committee.module';
+
 
 const appRoutes: Routes = [
     {
@@ -97,6 +100,8 @@ const appRoutes: Routes = [
         GroupPermModule,
         GroupUserAssignModule,
         LoginModule,
+        ManageUsersModule,
+        ManageCommitteeModule,
 
         StorageServiceModule
     ],
