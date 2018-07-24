@@ -1,5 +1,6 @@
 package com.sbm.shura.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,9 +34,16 @@ public class UserServiceImpl extends BasicServiceImpl<UserDTO, User> implements 
 
 	@Override
 	@Transactional
-	public UserDTO add(UserDTO userDto) {
+	public UserDTO add(UserDTO userDto, String groupName) {
 		_user = convertToEntity(_user, userDto);
 		_user = userDao.add(_user);
+		if (!stringIsBlank(groupName)) {
+			try {
+				assignGroupToUser(groupName, _user.getEmail());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		return convertToDTO(_user, userDto);
 	}
 
@@ -96,7 +104,12 @@ public class UserServiceImpl extends BasicServiceImpl<UserDTO, User> implements 
 
 		_user = userDao.findById(userDto.getId());
 		group = groupDao.findById(group.getId());
-		_user.getGroups().add(group);
+		if (_user.getGroups() == null) {
+			_user.setGroups(new ArrayList<Group>());
+			_user.getGroups().add(group);
+		} else {
+		    _user.getGroups().add(group);
+		}
 		group.getUsers().add(_user);
 
 		// _user = userDao.update(_user);

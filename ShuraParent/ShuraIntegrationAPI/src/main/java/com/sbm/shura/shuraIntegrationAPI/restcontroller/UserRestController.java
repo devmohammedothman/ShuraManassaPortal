@@ -5,10 +5,10 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,9 +16,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sbm.shura.dto.BaseDTO;
+import com.sbm.shura.dto.GroupDTO;
+import com.sbm.shura.dto.MenuDTO;
+import com.sbm.shura.dto.PermissionDTO;
 import com.sbm.shura.dto.UserDTO;
-import com.sbm.shura.service.UserService;
-import com.sbm.shura.shuraIntegrationAPI.restcontroller.RestProvider;
+import com.sbm.shura.management.UserManagement;
 
 @RestController
 @RequestMapping("/api")
@@ -26,7 +28,7 @@ import com.sbm.shura.shuraIntegrationAPI.restcontroller.RestProvider;
 public class UserRestController {
 
 	@Resource
-	private UserService service;
+	private UserManagement manage;
 	
 	
 	@Resource
@@ -35,26 +37,76 @@ public class UserRestController {
 	@RequestMapping(value = "/user/register", method = RequestMethod.POST, 
 			consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
-	public ResponseEntity<BaseDTO> register(@RequestBody UserDTO userDto){
-		return dtoProvider.addObj(service.add(userDto));
+	public ResponseEntity<BaseDTO> register(@RequestBody Map<String, String> map){
+		UserDTO dto = new UserDTO(0, map.get("email"), map.get("password"), map.get("username"));
+		return dtoProvider.addObj(manage.createUser(dto, map.get("groupName")));
 	}
 	
 	@RequestMapping(value = "/user/login", method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity<BaseDTO> login(@RequestBody Map<String, String> map) {
-		return dtoProvider.getObj((UserDTO) service.login(map.get("email"), map.get("password")));
+		return dtoProvider.getObj((UserDTO) manage.login(map.get("email"), map.get("password")));
 	}
 	
 	@RequestMapping(value = "/user/getusers", method = RequestMethod.GET,
 			consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	public ResponseEntity<List<UserDTO>> getAllUsers() {
-		return dtoProvider.getObjList((List) service.listUsers());
+		return dtoProvider.getObjList((List) manage.listUsers());
 	}
 	
 	@RequestMapping(value = "/user/assigngroup", method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity<BaseDTO> assignGroupToUser(@RequestBody Map<String, String> map) throws Exception {
-		return dtoProvider.getObj((UserDTO) service.assignGroupToUser(map.get("groupname"), map.get("email")));
+		return dtoProvider.getObj((UserDTO) manage.assignGroupToUser(map.get("groupname"), map.get("email")));
+	}
+	
+	@RequestMapping(value = "/user/addpermission", method = RequestMethod.POST, 
+			consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	public ResponseEntity<BaseDTO> addPermissio(@RequestBody PermissionDTO permDto) throws Exception{
+		return dtoProvider.addObj(manage.addPermission(permDto));
+	}
+	
+	@RequestMapping(value = "/user/getpermissions", method = RequestMethod.GET,
+			consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	public ResponseEntity<List<PermissionDTO>> getAllPermission() throws Exception {
+		return dtoProvider.getObjList((List) manage.getPermList());
+	}
+	
+	@RequestMapping(value = "/user/addmenu", method = RequestMethod.POST, 
+			consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	public ResponseEntity<BaseDTO> addMenu(@RequestBody MenuDTO menuDto) throws Exception{
+		return dtoProvider.addObj(manage.addMenu(menuDto));
+	}
+	
+	@RequestMapping(value = "/user/getmenus", method = RequestMethod.GET,
+			consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	public ResponseEntity<List<MenuDTO>> getAllMenus() throws Exception {
+		return dtoProvider.getObjList((List) manage.getMenuList());
+	}
+	
+	@RequestMapping(value = "/user/addgroup", method = RequestMethod.POST, 
+			consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	public ResponseEntity<BaseDTO> addGroup(@RequestBody GroupDTO menuDto) throws Exception{
+		return dtoProvider.addObj(manage.add(menuDto));
+	}
+	
+	@RequestMapping(value = "/user/getgroups", method = RequestMethod.GET,
+			consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	public ResponseEntity<List<GroupDTO>> getAllGroups() throws Exception {
+		return dtoProvider.getObjList((List) manage.getGroupList());
+	}
+	
+	@RequestMapping(value = "/user/getpermissionsbymenu/{id}", method = RequestMethod.GET,
+			consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	public ResponseEntity<List<PermissionDTO>> getPermissionByMenu(@PathVariable("id") long menuId) throws Exception {
+		return dtoProvider.getObjList((List) manage.getPermListByMenu(menuId));
 	}
 }

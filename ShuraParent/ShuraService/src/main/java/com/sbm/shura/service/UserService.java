@@ -6,7 +6,7 @@ import com.sbm.shura.dto.UserDTO;
 
 public interface UserService {
 	
-	UserDTO add(UserDTO user);
+	UserDTO add(UserDTO user, String groupName);
 
 	List<UserDTO> listUsers();
 
