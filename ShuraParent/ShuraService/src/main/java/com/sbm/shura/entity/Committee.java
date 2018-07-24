@@ -7,7 +7,8 @@ import javax.persistence.*;
 @Table(name="COMMITTEE")
 @Entity
 @NamedQueries(value={
-		@NamedQuery(name="comm.findAll", query="select c from Committee c")
+		@NamedQuery(name="comm.findAll", query="select c from Committee c"),
+		@NamedQuery(name="comm.findById", query="select c from Committee c where c.id = :committeeId"),
 
 })
 public class Committee implements java.io.Serializable

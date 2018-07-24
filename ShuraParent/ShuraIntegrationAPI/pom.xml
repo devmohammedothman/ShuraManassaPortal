@@ -219,7 +219,7 @@
 				<artifactId>maven-resources-plugin</artifactId>
 				<version>3.0.2</version>
 				<executions>
-					<!-- <execution>
+					<execution>
 						<id>copy-resources</id>
 						<phase>validate</phase>
 						<goals>
@@ -231,13 +231,13 @@
 								<resource>
 									<directory>../ShuraUIPresentation/dist</directory>
 									<excludes>
-										<exclude>../ShuraUIPresentation/dist/assets</exclude>
+										<exclude>../ShuraUIPresentation/dist/assets/*</exclude>
 									</excludes>
 								</resource>
 							</resources>
 						</configuration>
-					</execution> -->
-					<!-- <execution>
+					</execution>
+					<execution>
 						<id>copy-resources2</id>
 						<phase>validate</phase>
 						<goals>
@@ -250,12 +250,12 @@
 								<resource>
 									<directory>../ShuraUIPresentation/dist</directory>
 									<excludes>
-										<exclude>../ShuraUIPresentation/dist/assets</exclude>
+										<exclude>../ShuraUIPresentation/dist/assets/*</exclude>
 									</excludes>
 								</resource>
 							</resources>
 						</configuration>
-					</execution> -->
+					</execution>
 				</executions>
 			</plugin>
 		</plugins>
