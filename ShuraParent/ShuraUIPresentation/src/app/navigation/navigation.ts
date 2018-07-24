@@ -27,7 +27,7 @@ export const navigation: FuseNavigation[] = [
             },
             {
                 id       : 'GroupUserAssign',
-                title    : 'GroupUserAssign',
+                title    : 'Assign User To Group',
                 translate: 'NAV.GroupUserAssign',
                 type     : 'item',
                 icon     : 'flag',

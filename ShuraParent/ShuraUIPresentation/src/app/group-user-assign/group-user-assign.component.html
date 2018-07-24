@@ -23,7 +23,7 @@
                         </mat-select>
                     </mat-form-field>
                 </div>
-                <div fxFlex="100" class="my-24">
+                <div *ngIf="show" fxFlex="100" class="my-24">
                     <button mat-raised-button color="accent" class="submit-button" aria-label="Submit" (click)="assignUserToGroup()">Submit</button>
                 </div>
             </div>

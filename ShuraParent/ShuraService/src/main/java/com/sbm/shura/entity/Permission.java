@@ -12,7 +12,10 @@ import java.util.List;
  */
 @Entity
 @Table(name="PERMISSION")
-@NamedQuery(name="Permission.findAll", query="SELECT p FROM Permission p")
+@NamedQueries({
+	@NamedQuery(name="Permission.findAll", query="SELECT p FROM Permission p"),
+	@NamedQuery(name = "Permission.findByMenu", query = "SELECT p FROM Permission p WHERE p.menu.id = :menuId") 
+})
 public class Permission implements Serializable {
 	private static final long serialVersionUID = 1L;
 

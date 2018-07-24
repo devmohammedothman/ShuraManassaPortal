@@ -53,7 +53,7 @@ export class MailNgrxComponent implements OnInit, OnDestroy
     {
         // Set the defaults
         this.searchInput = new FormControl('');
-        this._fuseTranslationLoaderService.loadTranslations(english, turkish);
+        this._fuseTranslationLoaderService.loadTranslations(turkish, english);
         this.currentMail$ = this._store.select(fromStore.getCurrentMail);
         this.mails$ = this._store.select(fromStore.getMailsArr);
         this.folders$ = this._store.select(fromStore.getFoldersArr);

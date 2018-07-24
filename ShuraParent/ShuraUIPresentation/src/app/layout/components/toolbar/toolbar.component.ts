@@ -10,6 +10,7 @@ import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
 
 import { navigation } from 'app/navigation/navigation';
 import { StorageService } from 'app/services/storage.service';
+import { User } from '../../../models/user.model';
 
 @Component({
     selector   : 'toolbar',
@@ -27,6 +28,7 @@ export class ToolbarComponent implements OnInit, OnDestroy
     selectedLanguage: any;
     showLoadingBar: boolean;
     userStatusOptions: any[];
+    user: User;
 
     // Private
     private _unsubscribeAll: Subject<any>;
@@ -104,6 +106,7 @@ export class ToolbarComponent implements OnInit, OnDestroy
      */
     ngOnInit(): void
     {
+        this.user = JSON.parse(this.StorageService.getFromLocal("user"));
         // Subscribe to the router events to show/hide the loading bar
         this._router.events
             .pipe(

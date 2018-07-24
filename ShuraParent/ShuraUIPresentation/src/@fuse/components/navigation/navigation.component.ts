@@ -63,10 +63,12 @@ export class FuseNavigationComponent implements OnInit
                      //console.log('1name in first check: '+this.group);
                      if (obj[key] === 'ADMIN' || obj[key] === 'ADMIN1') {
                          console.log('navigation com group admin : ' + obj[key]);
+                         this.storageService.saveInLocal('currentGroup', obj[key]);
                          this.navigation = navigation;
                      } else {
                          console.log('navigation com group key : ' + key);
                          console.log('navigation com group user : ' + obj[key]);
+                         this.storageService.saveInLocal('currentGroup', obj[key]);
                          this.navigation = userNavigation;
                      }
                  }

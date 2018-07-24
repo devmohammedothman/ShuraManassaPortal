@@ -34,4 +34,12 @@ public class PermissionServiceImpl extends BasicServiceImpl<PermissionDTO, Permi
 				map(item -> convertToDTO(item, new PermissionDTO())).collect(Collectors.toList());
 		return permDtoList;
 	}
+
+	@Override
+	public List<PermissionDTO> getPermListByMenu(long menuId) throws Exception {
+		List<Permission> permListResult =  permDao.getPermListByMenu(menuId);
+		List<PermissionDTO> permDtoList =  permListResult.stream().
+				map(item -> convertToDTO(item, new PermissionDTO())).collect(Collectors.toList());
+		return permDtoList;
+	}
 }
