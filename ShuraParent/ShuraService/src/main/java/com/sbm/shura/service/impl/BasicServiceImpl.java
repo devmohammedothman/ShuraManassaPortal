@@ -38,4 +38,11 @@ public class BasicServiceImpl<D,E> {
 	{
 		
 	}
+	
+	protected boolean stringIsBlank(String str) {
+		if (str == null || "".equals(str)) {
+			return true;
+		}
+		return false;
+	}
 }
