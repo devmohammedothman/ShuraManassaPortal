@@ -7,3 +7,4 @@ ShuraParent/ShuraCommonLib/target/classes/META-INF/maven/com.sbm.shura/ShuraComm
 ShuraParent/ShuraService/src/main/java/com/sbm/shura/conf/SpringJDBCConfiguration.java
 ShuraParent/ShuraService/target/classes/META-INF/MANIFEST.MF
 ShuraParent/ShuraService/target/classes/META-INF/maven/com.sbm.shura/ShuraService/pom.properties
+ShuraParent/ShuraService/target/classes/META-INF/MANIFEST.MF
