@@ -1,0 +1,41 @@
+<div id="forms" class="page-layout simple fullwidth" fxLayout="column">
+
+    <div class="content p-24">
+
+        <div fxLayout="column" fxLayoutAlign="start start" fxLayout.gt-md="row">
+
+            <form name="groupPerm" fxLayout="column" fxLayoutAlign="start" fxFlex="1 0 auto">
+                <mat-card>
+                    <mat-card-header class="mb-24">
+                        <h3 class="h3" fxLayoutAlign="flex-start" fxFlex="1 1 50%">Group Permissions</h3>
+                        <div fxLayoutAlign="flex-end" fxFlex="1 1 50%">
+                            <mat-checkbox [(ngModel)]="checked" [ngModelOptions]="{standalone: true}">Check all!</mat-checkbox>
+                        </div>
+                    </mat-card-header>
+
+                    <mat-card-content>
+                        <div fxLayout="row" fxLayoutAlign="start center" class="mb-24">
+                            <mat-form-field>
+                                <mat-select (selectionChange)="onGroupSelect($event)" [(ngModel)]="groupname" name="group" placeholder="Choose a Group!"
+                                    required>
+                                    <mat-option *ngFor="let p of groups" [value]="p.nameEn">
+                                        {{p.nameEn}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="start center">
+                            <!-- <div *ngFor="let c of permissions">
+                                <input type=”checkbox” [checked]="checked" [value]="c.nameEn"/> {{c.nameEn}}
+                            </div> -->
+
+                             <mat-checkbox (change)="onCheckSelect($event)" [(ngModel)]="selectedPerm" name="perm" [checked]="checked" [value]="2"> Read</mat-checkbox>
+                            <mat-checkbox (change)="onCheckSelect($event)" [(ngModel)]="selectedPerm" name="perm" [checked]="checked" [value]="3"> Write</mat-checkbox>
+                            <!--<mat-checkbox [checked]="checked"> Permission</mat-checkbox> -->
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </form>
+        </div>
+    </div>
+</div>

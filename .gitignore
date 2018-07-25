@@ -1,3 +1,10 @@
 /target
 */target/*
 */target/**
+ShuraParent/ShuraIntegrationAPI/src/main/webapp/resources/*
+ShuraParent/ShuraIntegrationAPI/src/main/webapp/assets/*
+ShuraParent/ShuraCommonLib/target/classes/META-INF/maven/com.sbm.shura/ShuraCommonLib/pom.properties
+ShuraParent/ShuraService/src/main/java/com/sbm/shura/conf/SpringJDBCConfiguration.java
+ShuraParent/ShuraService/target/classes/META-INF/MANIFEST.MF
+ShuraParent/ShuraService/target/classes/META-INF/maven/com.sbm.shura/ShuraService/pom.properties
+ShuraParent/ShuraService/target/classes/META-INF/MANIFEST.MF

@@ -1,0 +1,28 @@
+package com.sbm.shura.dao.impl;
+
+import java.util.List;
+
+import org.springframework.stereotype.Repository;
+
+import com.sbm.shura.dao.MenuDao;
+import com.sbm.shura.entity.Menu;
+
+@Repository
+public class MenuDaoImpl extends GenericDaoImpl<Menu> implements MenuDao {
+
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Menu> getMenuList() throws Exception {
+		// TODO Auto-generated method stub
+		return (List<Menu>)entityManager.createNamedQuery("Menu.findAll").getResultList();
+	}
+	
+	@Override
+	public Menu add(Menu item) throws Exception {
+		// TODO Auto-generated method stub
+		return persist(item);
+	}
+	
+
+}
