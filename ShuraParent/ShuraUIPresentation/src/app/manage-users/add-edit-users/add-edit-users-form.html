@@ -1,5 +1,22 @@
-<h1 mat-dialog-title>Dialog with elements</h1>
-<div mat-dialog-content>This dialog showcases the title, close, content and actions elements.</div>
-<div mat-dialog-actions>
-  <button mat-button mat-dialog-close>Close</button>
-</div>
+<form class="example-form">
+  <mat-form-field appearance="legacy" [ngClass]="'w-100-p'">
+      <input matInput placeholder="Whatever!" value="">
+      <mat-hint>Do this and don't do that</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field  appearance="legacy" [ngClass]="'w-100-p'">
+      <input matInput placeholder="Whatever!" value="">
+      <mat-hint>Do this and don't do that</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field  appearance="legacy" [ngClass]="'w-50-p'">
+      <mat-select placeholder="Favorite food">
+          <mat-option *ngFor="let food of foods" [value]="food.value">
+              {{ food.viewValue }}
+          </mat-option>
+      </mat-select>
+      <mat-hint>Do this and don't do that</mat-hint>
+  </mat-form-field>
+
+  <button mat-button [ngClass]="'mx-24'">Submit!</button>
+</form>

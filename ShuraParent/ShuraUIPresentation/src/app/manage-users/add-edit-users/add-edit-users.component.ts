@@ -24,4 +24,10 @@ export class AddEditUsersComponent implements OnInit {
   selector: 'add-edit-users-form',
   templateUrl: 'add-edit-users-form.html',
 })
-export class addEditUsersForm { }
+export class addEditUsersForm { 
+  foods = [
+    {value: 'steak-0', viewValue: 'Steak'},
+    {value: 'pizza-1', viewValue: 'Pizza'},
+    {value: 'tacos-2', viewValue: 'Tacos'}
+  ];
+}
