@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PermissionService } from '../services/permission.service';
+import { UserService } from '../services/user.service';
 import { Group } from '../models/group.model';
 import { User } from '../models/user.model';
 import { AssignParam } from '../models/assign-user-group-param.model';
@@ -23,7 +23,7 @@ export class GroupUserAssignComponent implements OnInit {
     localGroup: string;
     show: boolean;
 
-    constructor(private permissionService: PermissionService,
+    constructor(private userService: UserService,
         private storageService: StorageService,) { }
 
     ngOnInit(): void {
@@ -37,7 +37,7 @@ export class GroupUserAssignComponent implements OnInit {
 
 
     getGroups(): void {
-        this.permissionService.getGroups()
+        this.userService.getGroups()
             .subscribe(group => {
                 this.groups = group;
                 console.log(JSON.stringify(this.groups));
@@ -47,7 +47,7 @@ export class GroupUserAssignComponent implements OnInit {
     }
 
     getUsers(): void {
-        this.permissionService.getUsers()
+        this.userService.getUsers()
             .subscribe(user => {
                 this.users = user;
                 console.log(JSON.stringify(this.users));
@@ -69,7 +69,7 @@ export class GroupUserAssignComponent implements OnInit {
     }
     
     assignUserToGroup(): void {
-        this.permissionService.assignUserToGroup(this.assignParam)
+        this.userService.assignUserToGroup(this.assignParam)
             .subscribe(user => {
                 if (user.userId == "-1") {
                     alert("Error");

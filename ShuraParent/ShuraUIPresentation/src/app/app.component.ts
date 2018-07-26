@@ -12,7 +12,7 @@ import { FuseTranslationLoaderService } from '@fuse/services/translation-loader.
 import { navigation } from 'app/navigation/navigation';
 import { locale as navigationEnglish } from 'app/navigation/i18n/en';
 import { locale as navigationTurkish } from 'app/navigation/i18n/tr';
-import { LoginService } from './services/login.service';
+import { UserService } from './services/user.service';
 
 
 @Component({
@@ -45,7 +45,7 @@ export class AppComponent implements OnInit, OnDestroy
         private _fuseSplashScreenService: FuseSplashScreenService,
         private _fuseTranslationLoaderService: FuseTranslationLoaderService,
         private _translateService: TranslateService,
-        public loginService:LoginService 
+        public userService:UserService 
     )
     {
         // Get default navigation

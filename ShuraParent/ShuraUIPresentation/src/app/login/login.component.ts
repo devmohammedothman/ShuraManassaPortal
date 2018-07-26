@@ -7,7 +7,7 @@ import { takeUntil } from 'rxjs/operators';
 import { FuseConfigService } from '@fuse/services/config.service';
 import { fuseAnimations } from '@fuse/animations';
 
-import { LoginService } from '../services/login.service';
+import { UserService } from '../services/user.service';
 import { StorageService } from '../services/storage.service';
 import { User } from '../models/user.model';
 import { Group } from '../models/group.model';
@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     userId: string;
     constructor(
         private router: Router,
-        private loginService: LoginService,
+        private userService: UserService,
         private StorageService: StorageService,
         private _fuseConfigService: FuseConfigService,
         private _formBuilder: FormBuilder
@@ -132,7 +132,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.authParam.password = this.logParam.password;
         this.authParam.client_id = 'spring-security-oauth2-read-write-client';
         this.authParam.grant_type = 'password';
-        this.loginService.authorize(this.authParam)
+        this.userService.authorize(this.authParam)
             .subscribe(authList => {
                 this.authParam = authList;
                 this.login();
@@ -142,7 +142,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
 
     login(): void {
-        this.loginService.login(this.logParam)
+        this.userService.login(this.logParam)
             .subscribe(user => {
                     let other = []; // your other array...
                     user.groups.map(item => {

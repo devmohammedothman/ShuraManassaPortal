@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Group } from '../models/group.model';
 import { Permission } from '../models/permission.model';
-import { PermissionService } from '../services/permission.service';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-group-perm',
@@ -18,7 +18,7 @@ export class GroupPermComponent implements OnInit {
     errorMessage: string;
     groupname: string;
     selectedPerm: string;
-  constructor(private permissionService: PermissionService) { }
+  constructor(private userService: UserService) { }
 
   ngOnInit() {
     this.getGroups();
@@ -37,7 +37,7 @@ onCheckSelect(changeEvent) {
   }
 }
   getGroups(): void {
-    this.permissionService.getGroups()
+    this.userService.getGroups()
         .subscribe(group => {
             this.groups = group;
             console.log(JSON.stringify(this.groups));
@@ -47,7 +47,7 @@ onCheckSelect(changeEvent) {
 }
 
 getPermissionsByMenu(): void {
-  this.permissionService.getPermissionsByMenu('5')
+  this.userService.getPermissionsByMenu('5')
         .subscribe(permession => {
             this.permessions = permession;
             console.log(JSON.stringify(this.permessions));

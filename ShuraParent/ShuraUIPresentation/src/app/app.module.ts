@@ -25,13 +25,12 @@ import { GroupPermModule } from './group-perm/group-perm.module';
 import { MaterialModule } from './main/angular-material-elements/material.module';
 import { GroupUserAssignModule } from './group-user-assign/group-user-assign.module';
 import { LoginModule } from './login/login.module';
-import { LoginService } from './services/login.service';
 import { AuthGuard } from './auth.guard';
 import { StorageService } from './services/storage.service';
-import { PermissionService } from './services/permission.service';
 import { StorageServiceModule } from '../../node_modules/angular-webstorage-service';
 import { ManageUsersModule } from './manage-users/manage-users.module';
 import { ManageCommitteeModule } from './manage-committee/manage-committee.module';
+import { UserService } from './services/user.service';
 
 
 const appRoutes: Routes = [
@@ -108,7 +107,7 @@ const appRoutes: Routes = [
     bootstrap   : [
         AppComponent
     ],
-    providers : [LoginService,StorageService,PermissionService]
+    providers : [UserService,StorageService]
 })
 export class AppModule
 {
