@@ -9,6 +9,7 @@ import { FuseSharedModule } from '@fuse/shared.module';
 import { FuseSidebarModule, FuseThemeOptionsModule } from '@fuse/components';
 import { fuseConfig } from 'app/fuse-config';
 import { AuthGuard } from '../auth.guard';
+import { AddEditCommitteeComponent } from './add-edit-committee/add-edit-committee.component';
 
 const routes : Routes= [
   {
@@ -32,6 +33,8 @@ const routes : Routes= [
      //material
        MaterialModule
   ],
-  declarations: [ManageCommitteeComponent]
+  declarations: [ManageCommitteeComponent, AddEditCommitteeComponent],
+  providers:[AddEditCommitteeComponent],
+  entryComponents : [AddEditCommitteeComponent]
 })
 export class ManageCommitteeModule { }

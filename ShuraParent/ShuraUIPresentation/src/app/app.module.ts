@@ -31,6 +31,7 @@ import { StorageServiceModule } from '../../node_modules/angular-webstorage-serv
 import { ManageUsersModule } from './manage-users/manage-users.module';
 import { ManageCommitteeModule } from './manage-committee/manage-committee.module';
 import { UserService } from './services/user.service';
+import { CommitteeService } from './services/committee.service';
 
 
 const appRoutes: Routes = [
@@ -107,7 +108,7 @@ const appRoutes: Routes = [
     bootstrap   : [
         AppComponent
     ],
-    providers : [UserService,StorageService]
+    providers : [UserService,StorageService,CommitteeService]
 })
 export class AppModule
 {
