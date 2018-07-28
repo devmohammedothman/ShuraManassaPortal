@@ -1,0 +1,23 @@
+<form class="example-form">
+    <mat-form-field appearance="legacy" [ngClass]="'w-100-p'">
+        <input matInput placeholder="Username" [(ngModel)]="registerParam.username" name="username" type="text">
+    </mat-form-field>
+  
+    <mat-form-field  appearance="legacy" [ngClass]="'w-100-p'">
+        <input matInput placeholder="Email" [(ngModel)]="registerParam.email" name="email" type="email">
+    </mat-form-field>
+
+    <mat-form-field  appearance="legacy" [ngClass]="'w-100-p'">
+        <input matInput placeholder="Password" [(ngModel)]="registerParam.password" name="password" type="password">
+    </mat-form-field>
+  
+    <mat-form-field>
+      <mat-select (selectionChange)="onGroupSelect($event)" [(ngModel)]="groupname" name="group" placeholder="Choose a Group!">
+          <mat-option *ngFor="let p of groups" [value]="p.nameEn">
+              {{p.nameEn}}
+          </mat-option>
+      </mat-select>
+  </mat-form-field>
+  
+    <button mat-button color="accent" class="submit-button" [ngClass]="'mx-24'" (click)="register()">Submit!</button>
+  </form>

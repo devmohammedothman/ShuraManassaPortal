@@ -13,6 +13,7 @@ import { Auth } from '../models/auth.model';
 import { LoginParam } from '../models/login.model';
 import { StorageService } from './storage.service';
 import { ServiceUtils } from './serviceUtils';
+import { RegisterParam } from '../models/register.model';
 
 @Injectable()
 export class UserService {
@@ -59,7 +60,7 @@ export class UserService {
         console.log("logged in value " + this.storageService.getFromLocal('user') != null);
         return this.storageService.getFromLocal('user') != null;
     }
-    register(param: User): Observable<User> {
+    register(param: RegisterParam): Observable<User> {
         let headers = new Headers({ 'Content-Type': 'application/json',
         'authorization': this.token,
         'Access-Control': 'Allow-Origin' });

@@ -13,7 +13,6 @@ export class ManageUsersComponent implements OnInit {
 
   displayedColumns = ['username', 'email', 'password', 'edit'];
   dataSource: MatTableDataSource<User>;
-
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 

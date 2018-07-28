@@ -8,6 +8,8 @@ import { FuseSharedModule } from '@fuse/shared.module';
 
 import { ManageUsersComponent } from './manage-users.component';
 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { AddEditUsersComponent, addEditUsersForm } from './add-edit-users/add-edit-users.component';
 
 
@@ -43,7 +45,11 @@ const routes = [
     AddEditUsersComponent,
     addEditUsersForm
   ],
+  exports: [
+    FormsModule,
+    ReactiveFormsModule
+  ],
   providers: [AddEditUsersComponent],
-  entryComponents: [addEditUsersForm]
+  entryComponents: [AddEditUsersComponent]
 })
 export class ManageUsersModule { }

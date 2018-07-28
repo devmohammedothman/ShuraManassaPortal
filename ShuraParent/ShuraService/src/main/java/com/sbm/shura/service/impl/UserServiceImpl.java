@@ -35,6 +35,7 @@ public class UserServiceImpl extends BasicServiceImpl<UserDTO, User> implements 
 	@Override
 	@Transactional
 	public UserDTO add(UserDTO userDto, String groupName) {
+		_user = new User();
 		_user = convertToEntity(_user, userDto);
 		_user = userDao.add(_user);
 		if (!stringIsBlank(groupName)) {
