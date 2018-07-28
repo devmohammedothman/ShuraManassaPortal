@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { NgForm } from '@angular/forms';
+import { Committee } from '../../models/committee.model';
+import { CommitteeService } from '../../services/committee.service';
+
 
 @Component({
   selector: 'app-add-edit-committee',
@@ -8,7 +12,10 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class AddEditCommitteeComponent implements OnInit {
 
-  constructor(public dialog: MatDialog) { }
+commObject:Committee = new Committee();
+
+
+  constructor(public dialog: MatDialog, private commService : CommitteeService) { }
 
   ngOnInit() {
   }
@@ -16,6 +23,16 @@ export class AddEditCommitteeComponent implements OnInit {
   public openDialog():void
   {
     this.dialog.open(AddEditCommitteeComponent);
+  }
+
+  OnSubmit(form? :NgForm){
+    this.commService.addCommittee(form.value).subscribe((data:any) => {
+      console.log(data);
+      // if (data != null) {}
+        
+    });
+
+      this.dialog.closeAll();
   }
 
 }

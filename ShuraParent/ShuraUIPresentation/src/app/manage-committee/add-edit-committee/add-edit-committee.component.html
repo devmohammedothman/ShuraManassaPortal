@@ -1,22 +1,22 @@
-<form class="example-form">
+<form class="example-form" #addCommitteeForm="ngForm" (ngSubmit)="OnSubmit(addCommitteeForm)">
     <mat-form-field appearance="legacy" [ngClass]="'w-100-p'">
-        <input matInput placeholder="Whatever!" value="">
-        <mat-hint>Do this and don't do that</mat-hint>
+        <input matInput placeholder="Committee Name AR" name="nameAr" #nameAr="ngModel" [(ngModel)]="commObject.nameAr" required>
+        <mat-hint>Add Committee Name in Arabic</mat-hint>
     </mat-form-field>
 
     <mat-form-field appearance="legacy" [ngClass]="'w-100-p'">
-        <input matInput placeholder="Whatever!" value="">
-        <mat-hint>Do this and don't do that</mat-hint>
+        <input matInput placeholder="Committee Name EN" name="nameEn" #nameEn="ngModel" [(ngModel)]="commObject.nameEn" required>
+        <mat-hint>Add Committe Name in English</mat-hint>
     </mat-form-field>
 
-    <mat-form-field appearance="legacy" [ngClass]="'w-50-p'">
+    <!-- <mat-form-field appearance="legacy" [ngClass]="'w-50-p'">
         <mat-select placeholder="Favorite food">
             <mat-option *ngFor="let food of foods" [value]="food.value">
                 {{ food.viewValue }}
             </mat-option>
         </mat-select>
         <mat-hint>Do this and don't do that</mat-hint>
-    </mat-form-field>
+    </mat-form-field> -->
 
-    <button mat-button [ngClass]="'mx-24'">Submit!</button>
+    <button mat-button [ngClass]="'mx-24'" [disabled]="!addCommitteeForm.valid" type="submit">Submit!</button>
 </form>

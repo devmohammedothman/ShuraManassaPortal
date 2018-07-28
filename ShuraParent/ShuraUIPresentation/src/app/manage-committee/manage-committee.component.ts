@@ -24,6 +24,7 @@ export class ManageCommitteeComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log('init committee list component');
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
@@ -45,11 +46,8 @@ export class ManageCommitteeComponent implements OnInit {
 
       // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource(this.committeeList);
+    
     }
 
-    openDialog() :void
-    {
-      console.log('Button clicked');
-    }
 }
 

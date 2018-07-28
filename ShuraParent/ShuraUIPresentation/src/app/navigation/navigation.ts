@@ -47,7 +47,7 @@ export const navigation: FuseNavigation[] = [
                 translate: 'NAV.MANAGECOMMITTEE',
                 type     : 'item',
                 icon     : 'flag',
-                url      : '/manage-committee'
+                url      : '/manage-committee/list'
             },
         ]
     }

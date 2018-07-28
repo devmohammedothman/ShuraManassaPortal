@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ManageCommitteeComponent } from './manage-committee.component';
 import { RouterModule, Routes } from '@angular/router';
+import { FormsModule} from '@angular/forms';
 
 import { MaterialModule } from '../main/angular-material-elements/material.module';
 import { FuseModule } from '@fuse/fuse.module';
@@ -13,7 +14,7 @@ import { AddEditCommitteeComponent } from './add-edit-committee/add-edit-committ
 
 const routes : Routes= [
   {
-      path     : 'manage-committee',
+      path     : 'manage-committee/list',
       canActivate : [AuthGuard],
       component: ManageCommitteeComponent
   }
@@ -31,7 +32,8 @@ const routes : Routes= [
      FuseThemeOptionsModule,
  
      //material
-       MaterialModule
+       MaterialModule,
+       FormsModule
   ],
   declarations: [ManageCommitteeComponent, AddEditCommitteeComponent],
   providers:[AddEditCommitteeComponent],
