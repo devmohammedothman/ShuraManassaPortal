@@ -38,7 +38,7 @@ public class Committee implements java.io.Serializable
     
 
     
-    public void setId(java.lang.Integer id) {
+    protected void setId(java.lang.Integer id) {
         this.id = id;
     }
     

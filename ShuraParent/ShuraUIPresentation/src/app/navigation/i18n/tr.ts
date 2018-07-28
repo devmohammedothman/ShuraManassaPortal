@@ -7,6 +7,7 @@ export const locale = {
             'GroupUserAssign' : 'إضافة مستخدم إلى مجموعة',
             'MANAGEUSER' : 'التحكم في المستخدمين',
             'MANAGECOMMITTEE' : 'شئون اللجان',
+            'COMMNAME' : 'اسم اللجنة', 
             'APPLICATIONS': 'Programlar',
             'DASHBOARDS'  : 'Kontrol Paneli',
             'CALENDAR'    : 'Takvim',

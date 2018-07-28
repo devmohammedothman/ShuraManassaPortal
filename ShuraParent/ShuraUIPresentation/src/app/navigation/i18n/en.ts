@@ -25,6 +25,7 @@ export const locale = {
             'SCRUMBOARD'  : 'Scrumboard',
             'MANAGEUSER' : 'Manage User', 
             'MANAGECOMMITTEE' : 'Manage Committee', 
+            'COMMNAME' : 'Committee Name', 
         }
     
     }
