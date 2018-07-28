@@ -18,7 +18,7 @@ import com.sbm.shura.dto.CommitteeDTO;
 import com.sbm.shura.management.CommitteeManager;
 
 @RestController
-@RequestMapping("/secure/api/comm/")
+@RequestMapping("/api/comm/")
 @CrossOrigin("*")
 public class CommitteeController {
 	

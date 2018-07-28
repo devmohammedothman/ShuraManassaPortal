@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,12 +20,22 @@ public class CommitteeServiceImpl extends BasicServiceImpl<CommitteeDTO, Committ
 	
 	private Committee _committee;
 	
+//	@Override
+//	protected void configureMapperLocally() {
+//		modelMapper.addMappings(new PropertyMap<Committee, CommitteeDTO>() {
+//			protected void configure() {
+//				map().setCommManager(null);
+//				//map().setNameAr(source.getNameAr());
+//			}
+//		});
+//	}
+	
 	
 	@Override
 	@Transactional
 	public CommitteeDTO addCommittee(CommitteeDTO obj) throws Exception {
 		// TODO Auto-generated method stub
-		
+		_committee  = new Committee();
 		_committee = convertToEntity(_committee, obj);
 		_committee =  committeeDao.addCommittee(_committee);
 		return convertToDTO(_committee, obj);
