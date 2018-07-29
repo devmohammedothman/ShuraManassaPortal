@@ -2,7 +2,8 @@ export const locale = {
     lang: 'en',
     data: {
         'NAV': {
-			'PERMISSION'     : 'Permission',
+            'PERMISSION'     : 'Permission',
+            'DASHBOARD' : 'Dashboard',
             'WELCOME'     : 'Welcome',
             'SETTING': 'Settings',
             'MEMNOMINATION': 'Nomination Program',

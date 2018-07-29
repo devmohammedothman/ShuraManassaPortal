@@ -3,6 +3,7 @@ export const locale = {
     data: {
         'NAV': {
             'PERMISSION'     : 'صلاحيات',
+            'DASHBOARD' : 'اللوحة الرئيسية',
             'WELCOME'     : 'مرحبا',
             'SETTING': 'إعدادات النظام',
             'GroupUserAssign' : 'إضافة مستخدم إلى مجموعة',
