@@ -1,6 +1,6 @@
 import { Component, OnInit, Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { Group } from '../../models/group.model';
 
@@ -24,6 +24,13 @@ export class AddEditUsersComponent implements OnInit {
   userFormErrors: any;
   registerParam = new RegisterParam();
 
+  addUser: FormGroup;
+  email = new FormControl('', [Validators.required, Validators.email]);
+  username = new FormControl('', [Validators.required]);
+  password = new FormControl('', [Validators.required]);
+  groupselect = new FormControl('', [Validators.required]);
+  hide = true;
+
   constructor(public dialog: MatDialog,
     private userService: UserService,
     private _formBuilder: FormBuilder) {
@@ -45,17 +52,13 @@ export class AddEditUsersComponent implements OnInit {
 
   ngOnInit() {
     this.getGroups();
-    this.userForm = this._formBuilder.group({
+
+    this.addUser = this._formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
-      username: ['', Validators.required]
-    });
-
-    this.userForm.valueChanges
-      .pipe(takeUntil(this._unsubscribeAll))
-      .subscribe(() => {
-        this.onUserFormValuesChanged();
-      });
+      username: ['', Validators.required],
+      groupselect: ['', Validators.required]
+  });
   }
 
   onUserFormValuesChanged(): void {
@@ -107,6 +110,14 @@ export class AddEditUsersComponent implements OnInit {
         },
         error => this.errorMessage = <any>error);
 }
+getErrorMessage() {
+    return  this.email.hasError('required') ? 'You must enter a value' :
+            this.email.hasError('email') ? 'Not a valid email' :
+            this.username.hasError('required') ? 'You must enter a value' :
+            this.password.hasError('required') ? 'You must enter a value' :
+            this.groupselect.hasError('required') ? 'You must enter a value' :
+            '';
+  }
 
 }
 
