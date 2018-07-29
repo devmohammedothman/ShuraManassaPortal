@@ -4,10 +4,13 @@ export const locale = {
         'NAV': {
             'PERMISSION'     : 'صلاحيات',
             'WELCOME'     : 'مرحبا',
+            'SETTING': 'إعدادات النظام',
             'GroupUserAssign' : 'إضافة مستخدم إلى مجموعة',
             'MANAGEUSER' : 'التحكم في المستخدمين',
             'MANAGECOMMITTEE' : 'شئون اللجان',
+            'MEMNOMINATION': 'برنامج ترشيح الأعضاء للجان المتخصصة',
             'COMMNAME' : 'اسم اللجنة', 
+            'ADDWISHES' : 'إضافة الرغبات',
             'APPLICATIONS': 'Programlar',
             'DASHBOARDS'  : 'Kontrol Paneli',
             'CALENDAR'    : 'Takvim',
