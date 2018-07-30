@@ -32,6 +32,7 @@ import { ManageUsersModule } from './manage-users/manage-users.module';
 import { ManageCommitteeModule } from './manage-committee/manage-committee.module';
 import { UserService } from './services/user.service';
 import { CommitteeService } from './services/committee.service';
+import { MemberWishesModule } from './member-wishes/member-wishes.module';
 
 
 const appRoutes: Routes = [
@@ -57,6 +58,7 @@ const appRoutes: Routes = [
     },
     {
         path      : '**',
+        canActivate: [AuthGuard],
         redirectTo: 'apps/dashboards/analytics'
     }
 ];
@@ -103,7 +105,9 @@ const appRoutes: Routes = [
         ManageUsersModule,
         ManageCommitteeModule,
 
-        StorageServiceModule
+        StorageServiceModule,
+
+        MemberWishesModule
     ],
     bootstrap   : [
         AppComponent

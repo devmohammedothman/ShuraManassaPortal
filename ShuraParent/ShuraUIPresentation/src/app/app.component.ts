@@ -61,13 +61,13 @@ export class AppComponent implements OnInit, OnDestroy
         this._translateService.addLangs(['en', 'tr']);
 
         // Set the default language
-        this._translateService.setDefaultLang('en');
+        this._translateService.setDefaultLang('tr');
 
         // Set the navigation translations
         this._fuseTranslationLoaderService.loadTranslations(navigationEnglish, navigationTurkish);
 
         // Use a language
-        this._translateService.use('en');
+        this._translateService.use('tr');
 
         // Set the private defaults
         this._unsubscribeAll = new Subject();

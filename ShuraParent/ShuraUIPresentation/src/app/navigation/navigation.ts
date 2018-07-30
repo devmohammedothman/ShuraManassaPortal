@@ -22,7 +22,7 @@ export const navigation: FuseNavigation[] = [
                 title    : 'Settings',
                 translate: 'NAV.SETTING',
                 type     : 'collapsable',                
-                icon     : '',
+                icon     : 'settings',
                 children : [
                     {
                         id       : 'Permission',

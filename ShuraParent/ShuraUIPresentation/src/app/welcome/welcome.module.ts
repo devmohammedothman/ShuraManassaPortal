@@ -4,10 +4,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { WelcomeComponent } from './welcome.component';
 import { MaterialModule } from '../main/angular-material-elements/material.module';
 import { AuthGuard } from '../auth.guard';
+import { TranslateModule } from '@ngx-translate/core';
 
 const routes = [
   {
-      path     : '',
+      path     : 'welcome',
       canActivate: [AuthGuard],
       component: WelcomeComponent
   }
@@ -18,7 +19,9 @@ const routes = [
     CommonModule,
     RouterModule.forRoot(routes),
 //material
-    MaterialModule
+    MaterialModule,
+
+    TranslateModule
   ],
   declarations: [WelcomeComponent]
 })

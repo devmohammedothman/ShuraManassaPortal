@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { LocalStorage } from '@ngx-pwa/local-storage';
-import { StorageService } from '../services/storage.service';
+import { FuseTranslationLoaderService } from '@fuse/services/translation-loader.service';
 import { fuseAnimations } from '@fuse/animations';
 import { User } from '../models/user.model';
+
+import { locale as english } from 'app/main/apps/mail-ngrx/i18n/en';
+import { locale as turkish } from 'app/main/apps/mail-ngrx/i18n/tr';
 
 @Component({
     selector: 'welcome',
@@ -19,7 +21,8 @@ export class WelcomeComponent implements OnInit {
     group: any;
     groupstr; string;
     userStr: string;
-    constructor() {
+    constructor(private _fuseTranslationLoaderService: FuseTranslationLoaderService) {
+        this._fuseTranslationLoaderService.loadTranslations(turkish, english);
       //private storageService: StorageService
         /*this.token = this.StorageService.getStorageListValue('token');
         console.log('key:' + this.token );
