@@ -19,7 +19,7 @@ public class Committee implements java.io.Serializable
     @Column(insertable = true, nullable = false, unique = true, updatable = false)
     @SequenceGenerator(name = "committ_ID_Generator", sequenceName = "com_seq")
     @GeneratedValue(generator = "committ_ID_Generator", strategy = GenerationType.SEQUENCE)
-    private Integer id;
+    private Long id;
     
     @Column(name = "Name_AR", insertable = true, length = 50, nullable = false, unique = false, updatable = true)
     private String nameAr;
@@ -30,7 +30,7 @@ public class Committee implements java.io.Serializable
     
     
    
-    @OneToOne ( cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne (fetch = FetchType.EAGER)
     @JoinColumn(name = "COMMANAGERID")
     private User comManager;
     
@@ -38,11 +38,11 @@ public class Committee implements java.io.Serializable
     
 
     
-    protected void setId(java.lang.Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
     
-    public java.lang.Integer getId() {
+    public Long getId() {
         return this.id;
     }
  

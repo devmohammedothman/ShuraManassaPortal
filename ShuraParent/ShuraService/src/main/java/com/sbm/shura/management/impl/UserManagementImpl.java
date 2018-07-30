@@ -95,4 +95,10 @@ public class UserManagementImpl implements UserManagement {
 		return userService.assignGroupToUser(groupName, email);
 	}
 
+	@Override
+	public UserDTO findById(long userId) {
+		// TODO Auto-generated method stub
+		return userService.findById(userId);
+	}
+
 }

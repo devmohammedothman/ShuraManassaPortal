@@ -25,14 +25,4 @@ public class CommitteeDaoImpl extends GenericDaoImpl<Committee> implements Commi
 		return comList;
 	}
 
-//	@Override
-//	public Committee findById(int id) {
-//		// TODO Auto-generated method stub
-//		Query q = entityManager.createNamedQuery("comm.findById", Committee.class);
-//		q.setParameter("id", id);
-//		Committee comObj = (Committee) q.getSingleResult();
-//		
-//		return comObj;
-//	}
-
 }

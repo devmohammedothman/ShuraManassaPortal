@@ -15,4 +15,6 @@ public interface UserService {
 	UserDTO findByEmail(String email);
 	
 	UserDTO assignGroupToUser(String groupName, String email) throws Exception;
+	
+	UserDTO findById(long userId);
 }

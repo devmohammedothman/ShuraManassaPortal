@@ -2,26 +2,33 @@ package com.sbm.shura.dto;
 
 import com.sbm.shura.entity.User;
 
-public class CommitteeDTO extends BaseDTO{
-	
+public class CommitteeDTO extends BaseDTO {
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private Integer id;
-	
-	private String nameAr;
-	
-	private String nameEn;
-	
-	private User commManager;
+	private Long id;
 
-	public Integer getId() {
+	private String nameAr;
+
+	private String nameEn;
+
+	private UserDTO commManager;
+
+	public CommitteeDTO(Long id) {
+		this.id = id;
+	}
+	
+	public CommitteeDTO() {
+	}
+
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -41,11 +48,11 @@ public class CommitteeDTO extends BaseDTO{
 		this.nameEn = nameEn;
 	}
 
-	public User getCommManager() {
+	public UserDTO getCommManager() {
 		return commManager;
 	}
 
-	public void setCommManager(User commManager) {
+	public void setCommManager(UserDTO commManager) {
 		this.commManager = commManager;
 	}
 

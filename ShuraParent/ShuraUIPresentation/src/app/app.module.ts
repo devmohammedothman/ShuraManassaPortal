@@ -34,6 +34,7 @@ import { UserService } from './services/user.service';
 import { CommitteeService } from './services/committee.service';
 import { MemberWishesModule } from './member-wishes/member-wishes.module';
 import { AdminAssignedWishesModule } from './admin-assigned-wishes/admin-assigned-wishes.module';
+import { NominationService } from 'app/services/nomination.service';
 
 
 const appRoutes: Routes = [
@@ -114,7 +115,7 @@ const appRoutes: Routes = [
     bootstrap   : [
         AppComponent
     ],
-    providers : [UserService,StorageService,CommitteeService]
+    providers : [UserService,StorageService,CommitteeService,NominationService]
 })
 export class AppModule
 {

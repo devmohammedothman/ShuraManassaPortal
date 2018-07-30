@@ -15,5 +15,7 @@ public interface CommitteeService {
 	CommitteeDTO updateCommittee(CommitteeDTO obj) throws Exception;
 	
 	void deleteCommittee(int id) throws Exception;
+	
+	CommitteeDTO findById(long committeeId);
 
 }

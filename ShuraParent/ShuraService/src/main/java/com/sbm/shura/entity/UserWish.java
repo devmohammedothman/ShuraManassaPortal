@@ -11,18 +11,18 @@ public class UserWish {
 	
 	@Id
 	@Column (insertable = true, nullable = false, unique = true, updatable = false)
-	@SequenceGenerator(name = "userwish_ID_Generator", sequenceName = "usrwish_seq")
+	@SequenceGenerator(name = "userwish_ID_Generator", sequenceName = "usrwish_seq",initialValue = 1)
     @GeneratedValue(generator = "userwish_ID_Generator", strategy = GenerationType.SEQUENCE)
-	private Integer Id;
+	private Long Id;
 	
-	@ManyToOne (cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	@ManyToOne (fetch = FetchType.EAGER)
 	@JoinColumn (name = "COMMITTEEID" , nullable = false)
 	private Committee wishedCommitee;
 
 	@Column (name = "WISHORDER" , nullable = false)
 	private int wishOrder;
 	
-	@ManyToOne (cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne (fetch = FetchType.EAGER)
 	@JoinColumn (name = "NOMINATEDUSERID")
 	private User nominatedUser;
 
@@ -53,6 +53,16 @@ public class UserWish {
 
 	public void setNominatedUser(User nominatedUser) {
 		this.nominatedUser = nominatedUser;
+	}
+
+
+	public Long getId() {
+		return Id;
+	}
+
+
+	protected void setId(Long id) {
+		Id = id;
 	}
 
 }

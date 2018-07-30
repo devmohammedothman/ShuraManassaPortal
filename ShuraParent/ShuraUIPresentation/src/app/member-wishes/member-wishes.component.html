@@ -1,3 +1,37 @@
-<p>
-  member-wishes works!
-</p>
+<div class="page-layout simple fullwidth angular-material-elements">
+    <!-- CONTENT -->
+    <div class="content p-24">
+        <div class="page-layout blank p-24" fusePerfectScrollbar>
+            <form [formGroup]="memberAssignWishesForm">
+                <mat-form-field appearance="legacy" [ngClass]="'w-50-p mb-24 pr-12'">
+                    <mat-select placeholder="First wish:" [formControl]="wish1" required>
+                        <mat-option *ngFor="let wish of wishes" [value]="wish.id">
+                            {{ wish.nameEn }}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="wish1.invalid">{{getErrorMessage()}}</mat-error>
+                    <mat-hint>Do this and don't do that</mat-hint>
+                </mat-form-field>
+                <mat-form-field appearance="legacy" [ngClass]="'w-50-p mb-24 pl-12'">
+                    <mat-select placeholder="Second wish:" [formControl]="wish2" required [disabled]="!wish1.valid">
+                        <mat-option *ngFor="let wish of wishes" [value]="wish.id">
+                            {{ wish.nameEn }}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="wish2.invalid">{{getErrorMessage()}}</mat-error>
+                    <mat-hint>Do this and don't do that</mat-hint>
+                </mat-form-field>
+                <mat-form-field appearance="legacy" [ngClass]="'w-50-p mb-24 pr-12'">
+                    <mat-select placeholder="Third wish:" [formControl]="wish3" required [disabled]="!wish2.valid">
+                        <mat-option *ngFor="let wish of wishes" [value]="wish.id">
+                            {{ wish.nameEn }}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="wish3.invalid">{{getErrorMessage()}}</mat-error>
+                    <mat-hint>Do this and don't do that</mat-hint>
+                </mat-form-field>
+                <button mat-button [ngClass]="'my-24'" type="button" (click)="assignUserWishes()">Submit!</button>
+            </form>
+        </div>
+    </div>
+</div>

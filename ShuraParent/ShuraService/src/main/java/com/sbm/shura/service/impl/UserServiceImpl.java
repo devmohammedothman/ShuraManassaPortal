@@ -118,4 +118,15 @@ public class UserServiceImpl extends BasicServiceImpl<UserDTO, User> implements 
 		return convertToDTO(_user, userDto);
 	}
 
+	@Override
+	@Transactional
+	public UserDTO findById(long userId) {
+				
+		_user = userDao.findById(userId);
+		
+		UserDTO userDto = new UserDTO();
+		userDto = convertToDTO(_user, userDto);
+		return userDto;
+	}
+
 }

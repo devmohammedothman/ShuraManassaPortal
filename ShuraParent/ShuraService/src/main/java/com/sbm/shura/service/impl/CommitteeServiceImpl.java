@@ -82,4 +82,15 @@ public class CommitteeServiceImpl extends BasicServiceImpl<CommitteeDTO, Committ
 		
 	}
 
+	@Override
+	@Transactional
+	public CommitteeDTO findById(long committeeId) {
+		// TODO Auto-generated method stub
+		_committee = committeeDao.findById(committeeId);
+		
+		CommitteeDTO result = new CommitteeDTO();
+	
+		return convertToDTO(_committee, result);
+	}
+
 }
