@@ -1,29 +1,31 @@
 <form name="addUser" [formGroup]="addUser" novalidate>
     <mat-form-field appearance="legacy" [ngClass]="'w-100-p'">
-        <input matInput placeholder="Username" [formControl]="username" required [(ngModel)]="registerParam.username" name="username" type="text">
+        <input matInput placeholder="Username" [formControl]="username" required [(ngModel)]="registerParam.username" name="username"
+            type="text">
         <mat-error *ngIf="username.invalid">{{getErrorMessage()}}</mat-error>
         <mat-hint>Example: your_name.0</mat-hint>
     </mat-form-field>
-  
-    <mat-form-field  appearance="legacy" [ngClass]="'w-100-p'">
+
+    <mat-form-field appearance="legacy" [ngClass]="'w-100-p'">
         <input matInput placeholder="Email" [formControl]="email" required [(ngModel)]="registerParam.email" name="email" type="email">
         <mat-error *ngIf="email.invalid">{{(getErrorMessage())}}</mat-error>
         <mat-hint>Example: your_name@domain.com</mat-hint>
     </mat-form-field>
 
-    <mat-form-field  appearance="legacy" [ngClass]="'w-100-p'">
-        <input matInput placeholder="Password" [formControl]="password" [(ngModel)]="registerParam.password" name="password" [type]="hide ? 'password' : 'text'" required>
+    <mat-form-field appearance="legacy" [ngClass]="'w-100-p'">
+        <input matInput placeholder="Password" [formControl]="password" [(ngModel)]="registerParam.password" name="password" [type]="hide ? 'password' : 'text'"
+            required>
         <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
         <mat-error *ngIf="password.invalid">{{getErrorMessage()}}</mat-error>
     </mat-form-field>
-  
+
     <mat-form-field>
-      <mat-select (selectionChange)="onGroupSelect($event)" [formControl]="groupselect" [(ngModel)]="groupname" name="group" placeholder="Choose a Group!">
-          <mat-option *ngFor="let p of groups" [value]="p.nameEn">
-              {{p.nameEn}}
-          </mat-option>
-      </mat-select>
-  </mat-form-field>
-  
+        <mat-select (selectionChange)="onGroupSelect($event)" [formControl]="groupselect" [(ngModel)]="groupname" name="group" placeholder="Choose a Group!">
+            <mat-option *ngFor="let p of groups" [value]="p.nameEn">
+                {{p.nameEn}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
     <button mat-button type="submit" [ngClass]="'mx-24'" (click)="register()">Submit!</button>
-  </form>
+</form>

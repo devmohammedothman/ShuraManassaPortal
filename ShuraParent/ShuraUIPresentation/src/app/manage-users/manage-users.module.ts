@@ -10,7 +10,7 @@ import { ManageUsersComponent } from './manage-users.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { AddEditUsersComponent, addEditUsersForm } from './add-edit-users/add-edit-users.component';
+import { AddEditUsersComponent, addEditUsersFormComponent } from './add-edit-users/add-edit-users.component';
 
 
 
@@ -43,7 +43,7 @@ const routes = [
   declarations: [
     ManageUsersComponent ,
     AddEditUsersComponent,
-    addEditUsersForm
+    addEditUsersFormComponent
   ],
   exports: [
     FormsModule,

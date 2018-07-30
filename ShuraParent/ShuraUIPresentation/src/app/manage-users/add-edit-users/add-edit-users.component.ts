@@ -50,7 +50,7 @@ export class AddEditUsersComponent implements OnInit {
     this.dialog.open(AddEditUsersComponent);
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.getGroups();
 
     this.addUser = this._formBuilder.group({
@@ -79,7 +79,7 @@ export class AddEditUsersComponent implements OnInit {
     }
   }
 
-  onGroupSelect(changeEvent) {
+  onGroupSelect(changeEvent): void {
     if (changeEvent) {
       console.log('Group Selected is: ' + this.groupname);
       this.registerParam.groupName = this.groupname;
@@ -91,7 +91,7 @@ export class AddEditUsersComponent implements OnInit {
       .subscribe(group => {
         this.groups = group;
         console.log(JSON.stringify(this.groups));
-        //this.StorageService.saveInLocal('group', JSON.stringify(this.groups));
+        // this.StorageService.saveInLocal('group', JSON.stringify(this.groups));
       },
         error => this.errorMessage = <any>error);
   }
@@ -99,18 +99,18 @@ export class AddEditUsersComponent implements OnInit {
   register(): void {
     this.userService.register(this.registerParam)
         .subscribe(user => {
-                let other = []; // your other array...
+                const other = []; // your other array...
                 user.groups.map(item => {
                     return {
                         group: item.nameEn
-                    }
+                    };
                 }).forEach(item => other.push(item));
                 this.dialog.closeAll();
                 alert('Done!!');
         },
         error => this.errorMessage = <any>error);
 }
-getErrorMessage() {
+getErrorMessage(): string {
     return  this.email.hasError('required') ? 'You must enter a value' :
             this.email.hasError('email') ? 'Not a valid email' :
             this.username.hasError('required') ? 'You must enter a value' :
@@ -126,7 +126,7 @@ getErrorMessage() {
   selector: 'add-edit-users-form',
   templateUrl: 'add-edit-users-form.html',
 })
-export class addEditUsersForm {
+export class addEditUsersFormComponent {
   foods = [
     { value: 'steak-0', viewValue: 'Steak' },
     { value: 'pizza-1', viewValue: 'Pizza' },
