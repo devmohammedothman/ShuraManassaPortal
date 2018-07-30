@@ -33,6 +33,7 @@ import { ManageCommitteeModule } from './manage-committee/manage-committee.modul
 import { UserService } from './services/user.service';
 import { CommitteeService } from './services/committee.service';
 import { MemberWishesModule } from './member-wishes/member-wishes.module';
+import { AdminAssignedWishesModule } from './admin-assigned-wishes/admin-assigned-wishes.module';
 
 
 const appRoutes: Routes = [
@@ -107,7 +108,8 @@ const appRoutes: Routes = [
 
         StorageServiceModule,
 
-        MemberWishesModule
+        MemberWishesModule,
+        AdminAssignedWishesModule
     ],
     bootstrap   : [
         AppComponent
