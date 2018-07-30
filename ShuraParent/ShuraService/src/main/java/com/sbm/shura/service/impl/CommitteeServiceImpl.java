@@ -56,6 +56,7 @@ public class CommitteeServiceImpl extends BasicServiceImpl<CommitteeDTO, Committ
 	@Transactional
 	public CommitteeDTO getCommitteeById(int id) throws Exception {
 		// TODO Auto-generated method stub
+		_committee  = new Committee();
 		_committee = committeeDao.findById(id);
 		CommitteeDTO commDtoObj = new CommitteeDTO();
 		commDtoObj = convertToDTO(_committee, commDtoObj);

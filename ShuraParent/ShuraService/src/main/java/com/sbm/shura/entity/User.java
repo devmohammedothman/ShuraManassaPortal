@@ -31,13 +31,13 @@ public class User extends BaseEntity implements  UserDetails,Serializable {
 	@Column(unique=true, nullable=false)
 	private long id;
 
-	@Column(length=20)
+	@Column(length=100)
 	private String email;
 
 	@Column(length=100)
 	private String password;
 
-	@Column(length=20)
+	@Column(length=100)
 	private String username; 
 	
 	//bi-directional many-to-many association to Group
