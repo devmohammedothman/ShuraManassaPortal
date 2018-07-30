@@ -4,7 +4,7 @@ import { fuseAnimations } from '@fuse/animations';
 import { User } from '../models/user.model';
 
 import { locale as english } from 'app/main/apps/mail-ngrx/i18n/en';
-import { locale as turkish } from 'app/main/apps/mail-ngrx/i18n/tr';
+import { locale as arabic } from 'app/main/apps/mail-ngrx/i18n/ar';
 
 @Component({
     selector: 'welcome',
@@ -22,7 +22,7 @@ export class WelcomeComponent implements OnInit {
     groupstr; string;
     userStr: string;
     constructor(private _fuseTranslationLoaderService: FuseTranslationLoaderService) {
-        this._fuseTranslationLoaderService.loadTranslations(turkish, english);
+        this._fuseTranslationLoaderService.loadTranslations(arabic, english);
       //private storageService: StorageService
         /*this.token = this.StorageService.getStorageListValue('token');
         console.log('key:' + this.token );

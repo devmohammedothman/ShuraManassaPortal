@@ -1,5 +1,5 @@
 export const locale = {
-    lang: 'tr',
+    lang: 'ar',
     data: {
         'MAIL': {
             'COMPOSE'                 : 'YENİ E-POSTA',

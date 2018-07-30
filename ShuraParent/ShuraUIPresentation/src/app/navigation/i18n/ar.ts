@@ -1,5 +1,5 @@
 export const locale = {
-    lang: 'tr',
+    lang: 'ar',
     data: {
         'NAV': {
             'PERMISSION'     : 'صلاحيات',
