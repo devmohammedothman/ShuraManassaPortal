@@ -12,7 +12,7 @@ import { MailNgrxService } from 'app/main/apps/mail-ngrx/mail.service';
 import * as fromStore from 'app/main/apps/mail-ngrx/store';
 
 import { locale as english } from 'app/main/apps/mail-ngrx/i18n/en';
-import { locale as turkish } from 'app/main/apps/mail-ngrx/i18n/tr';
+import { locale as turkish } from 'app/main/apps/mail-ngrx/i18n/ar';
 
 @Component({
     selector       : 'mail-ngrx',

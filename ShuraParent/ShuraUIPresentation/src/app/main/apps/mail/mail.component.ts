@@ -10,7 +10,7 @@ import { Mail } from 'app/main/apps/mail/mail.model';
 import { MailService } from 'app/main/apps/mail/mail.service';
 
 import { locale as english } from 'app/main/apps/mail//i18n/en';
-import { locale as turkish } from 'app/main/apps/mail//i18n/tr';
+import { locale as turkish } from 'app/main/apps/mail//i18n/ar';
 
 @Component({
     selector   : 'mail',
