@@ -45,7 +45,7 @@ export class AppComponent implements OnInit, OnDestroy
         private _fuseSplashScreenService: FuseSplashScreenService,
         private _fuseTranslationLoaderService: FuseTranslationLoaderService,
         private _translateService: TranslateService,
-        public userService:UserService 
+        public userService: UserService 
     )
     {
         // Get default navigation
@@ -58,16 +58,16 @@ export class AppComponent implements OnInit, OnDestroy
         this._fuseNavigationService.setCurrentNavigation('main');
 
         // Add languages
-        this._translateService.addLangs(['en', 'tr']);
+        this._translateService.addLangs(['en', 'ar']);
 
         // Set the default language
-        this._translateService.setDefaultLang('tr');
+        this._translateService.setDefaultLang('ar');
 
         // Set the navigation translations
         this._fuseTranslationLoaderService.loadTranslations(navigationEnglish, navigationTurkish);
 
         // Use a language
-        this._translateService.use('tr');
+        this._translateService.use('ar');
 
         // Set the private defaults
         this._unsubscribeAll = new Subject();

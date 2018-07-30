@@ -85,9 +85,9 @@ export class ToolbarComponent implements OnInit, OnDestroy
                 flag : 'us'
             },
             {
-                id   : 'tr',
-                title: 'Turkish',
-                flag : 'tr'
+                id   : 'ar',
+                title: 'Arabic',
+                flag : 'ar'
             }
         ];
 
@@ -106,7 +106,7 @@ export class ToolbarComponent implements OnInit, OnDestroy
      */
     ngOnInit(): void
     {
-        this.user = JSON.parse(this.StorageService.getFromLocal("user"));
+        this.user = JSON.parse(this.StorageService.getFromLocal('user'));
         // Subscribe to the router events to show/hide the loading bar
         this._router.events
             .pipe(
