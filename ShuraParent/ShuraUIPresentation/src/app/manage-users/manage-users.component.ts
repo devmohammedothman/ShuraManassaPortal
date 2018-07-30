@@ -21,6 +21,12 @@ export class ManageUsersComponent implements OnInit {
 
   constructor(private addEditUsersComponent: AddEditUsersComponent,
   private userService: UserService) { 
+    addEditUsersComponent.dialog.afterAllClosed
+    .subscribe(() => {
+    // update a variable or call a function when the dialog closes
+      this.getUsers();
+    }
+  );
     this.getUsers();
     // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource(this.users);
