@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule} from '@angular/forms';
 import { MemberWishesComponent } from './member-wishes.component';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from '../auth.guard';
@@ -10,6 +9,7 @@ import { FuseModule } from '@fuse/fuse.module';
 import { FuseSharedModule } from '@fuse/shared.module';
 import { FuseSidebarModule, FuseThemeOptionsModule } from '@fuse/components';
 import { fuseConfig } from 'app/fuse-config';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 const routes : Routes= [
@@ -34,7 +34,8 @@ const routes : Routes= [
 
     //material
       MaterialModule,
-      FormsModule
+
+      ReactiveFormsModule 
   ],
   declarations: [MemberWishesComponent]
 })

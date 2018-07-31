@@ -1,9 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Committee } from '../models/committee.model';
-import { CommitteeService } from '../services/committee.service';
-import { NominationService } from '../services/nomination.service';
-import { MemberAssignedWishes } from 'app/models/member-assigned-wishes';
+import { FormGroup,FormControl, Validators } from '@angular/forms';
 
 
 @Component({
@@ -13,41 +9,52 @@ import { MemberAssignedWishes } from 'app/models/member-assigned-wishes';
 })
 export class MemberWishesComponent implements OnInit {
 
-  memberAssignWishesForm = FormGroup;
-  username: FormControl = new FormControl('', [Validators.required]);
-  wish1: FormControl = new FormControl('', [Validators.required]);
-  wish2: FormControl = new FormControl('', [Validators.required]);
-  wish3: FormControl = new FormControl('', [Validators.required]);
+ memberWishFormGroup : FormGroup ;
+ firstWish : FormControl;
+ secondWish : FormControl;
+ thirdWish : FormControl;
+
+  wishes = [
+    {value: 'health-0', viewValue: 'Health'},
+    {value: 'security-1', viewValue: 'Security'},
+    {value: 'defense-2', viewValue: 'Defense'}
+  ];
   
-  memberWish:MemberAssignedWishes = new MemberAssignedWishes();
-  wishes : Committee [];
-  
-  constructor(private commService:CommitteeService, private nominateService:NominationService) { }
+  constructor() { }
+
+  createFormControls()
+  {
+    this.firstWish = new FormControl("",Validators.required);
+    this.secondWish = new FormControl("",Validators.required);
+    this.thirdWish = new FormControl("",Validators.required);
+  }
+
+  createFrom()
+  {
+    this.memberWishFormGroup = new FormGroup(
+        {
+              firstWish : this.firstWish ,
+              secondWish : this.secondWish,
+              thirdWish : this.thirdWish
+          });
+  }
+
 
   ngOnInit() {
-   this.populateWishesList();
+    this.createFormControls();
+    this.createFrom();
   }
 
-  populateWishesList() 
-  {
-      this.commService.getAllCommitteeList().subscribe(committeeItem => {
-        this.wishes = committeeItem;
-      });
-    }
 
   getErrorMessage() {
-    return  this.wish1.hasError('required') ? 'You must enter a value' :
-            this.wish2.hasError('required') ? 'You must enter a value' :
-            this.wish3.hasError('required') ? 'You must enter a value' :
+    return  this.firstWish.hasError('required') ? 'You must enter a value' :
+            this.secondWish.hasError('required') ? 'You must enter a value' :
+            this.secondWish.hasError('required') ? 'You must enter a value' :
             '';
   }
-  assignUserWishes()
-  {
-    console.log('button click assign user wishes');
-    // this.memberWish.userid = 52;
-    // this.memberWish.committeeid = this.wish1.value;
-    // this.memberWish.wishOrder = 1;
-    this.nominateService.assignUserWishesService();
-  }
+
+  //Form Submit Function
+  onFormSubmit()
+{}
 
 }
