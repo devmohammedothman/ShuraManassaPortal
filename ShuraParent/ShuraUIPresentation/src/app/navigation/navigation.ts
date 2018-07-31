@@ -74,6 +74,14 @@ export const navigation: FuseNavigation[] = [
                         icon     : 'flag',
                         url      : '/nomination/addmemberwish'
                     },
+                    {
+                        id       : 'ManagerWishes',
+                        title : 'Manager wishes',
+                        translate: 'NAV.ADDWISHES',
+                        type     : 'item',
+                        icon     : 'flag',
+                        url      : '/maw'
+                    },
                 ]
             },
         ]

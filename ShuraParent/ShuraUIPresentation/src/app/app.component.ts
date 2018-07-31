@@ -13,7 +13,10 @@ import { navigation } from 'app/navigation/navigation';
 import { locale as navigationEnglish } from 'app/navigation/i18n/en';
 import { locale as navigationTurkish } from 'app/navigation/i18n/ar';
 import { UserService } from './services/user.service';
-
+import { Group } from './models/group.model';
+import { User } from './models/user.model';
+import { StorageService } from './services/storage.service';
+import { CommitteeService } from './services/committee.service';
 
 @Component({
     selector   : 'app',
@@ -24,6 +27,10 @@ export class AppComponent implements OnInit, OnDestroy
 {
     navigation: any;
     fuseConfig: any;
+    users: any;
+    groups: any;
+    committes: any;
+    errorMessage: string;
 
     // Private
     private _unsubscribeAll: Subject<any>;
@@ -45,7 +52,9 @@ export class AppComponent implements OnInit, OnDestroy
         private _fuseSplashScreenService: FuseSplashScreenService,
         private _fuseTranslationLoaderService: FuseTranslationLoaderService,
         private _translateService: TranslateService,
-        public userService: UserService 
+        public userService: UserService,
+        private committeeService: CommitteeService,
+        private storageService: StorageService
     )
     {
         // Get default navigation
@@ -88,6 +97,9 @@ export class AppComponent implements OnInit, OnDestroy
             .subscribe((config) => {
                 this.fuseConfig = config;
             });
+            this.getGroups();
+            this.getUsers();
+            this.getCommittes();
     }
 
     /**
@@ -112,5 +124,35 @@ export class AppComponent implements OnInit, OnDestroy
     toggleSidebarOpen(key): void
     {
         this._fuseSidebarService.getSidebar(key).toggleOpen();
+    }
+
+    //Load data
+    getGroups(): void {
+        this.userService.getGroups()
+            .subscribe(group => {
+                this.groups = group;
+                console.log(JSON.stringify(this.groups));
+                this.storageService.saveInLocal('groupsList', JSON.stringify(this.groups));
+            },
+            error => this.errorMessage = <any>error);
+    }
+
+    getUsers(): void {
+        this.userService.getUsers()
+            .subscribe(user => {
+                this.users = user;
+                console.log(JSON.stringify(this.users));
+                this.storageService.saveInLocal('usersList', JSON.stringify(this.users));
+            },
+            error => this.errorMessage = <any>error);
+    }
+
+    getCommittes(): void {
+        this.committeeService.getAllCommitteeList()
+            .subscribe(comm => {
+                this.committes = comm;
+                this.storageService.saveInLocal('committesList', JSON.stringify(this.committes));
+            },
+            error => this.errorMessage = <any>error);
     }
 }

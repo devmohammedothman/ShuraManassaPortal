@@ -6,7 +6,7 @@ export class Committee
      id : number;
      nameAr : string;
      nameEn : string;
-     commManager : User
+     commManager : User;
     constructor(){}
     
     // constructor(id : number , nameAr : string , nameEn : string , commManager : User)

@@ -37,23 +37,26 @@ export class GroupUserAssignComponent implements OnInit {
 
 
     getGroups(): void {
-        this.userService.getGroups()
-            .subscribe(group => {
-                this.groups = group;
-                console.log(JSON.stringify(this.groups));
-                //this.StorageService.saveInLocal('group', JSON.stringify(this.groups));
-            },
-            error => this.errorMessage = <any>error);
+        // this.userService.getGroups()
+        //     .subscribe(group => {
+        //         this.groups = group;
+        //         console.log(JSON.stringify(this.groups));
+        //         this.storageService.saveInLocal('groupsList', JSON.stringify(this.groups));
+        //     },
+        //     error => this.errorMessage = <any>error);
+        this.groups = JSON.parse(this.storageService.getFromLocal('groupsList')); 
+        //console.log('group list---- '+ groups);
     }
 
     getUsers(): void {
-        this.userService.getUsers()
-            .subscribe(user => {
-                this.users = user;
-                console.log(JSON.stringify(this.users));
-                //this.StorageService.saveInLocal('group', JSON.stringify(this.groups));
-            },
-            error => this.errorMessage = <any>error);
+        // this.userService.getUsers()
+        //     .subscribe(user => {
+        //         this.users = user;
+        //         console.log(JSON.stringify(this.users));
+        //         this.storageService.saveInLocal('usersList', JSON.stringify(this.groups));
+        //     },
+        //     error => this.errorMessage = <any>error);
+        this.users = JSON.parse(this.storageService.getFromLocal('usersList')); 
     }
 
     onGroupSelect(changeEvent) {

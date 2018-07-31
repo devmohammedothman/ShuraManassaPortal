@@ -32,7 +32,7 @@ export const locale = {
             'SCRUMBOARD'  : 'Scrumboard'
         },
         'CONT': {
-            'FORMS' {
+            'FORMS': {
                 'SUBMIT': 'إرسال!',               
                 'RESET': 'إخلاء القيم!',
                 'SUBMIT-SUCCESS': 'تم الإرسال بنجاح',
