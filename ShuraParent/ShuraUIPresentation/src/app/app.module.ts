@@ -4,7 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
-import { MatButtonModule, MatIconModule } from '@angular/material';
+import { MatButtonModule, MatIconModule, MatTabsModule, MatDividerModule } from '@angular/material';
 
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { TranslateModule } from '@ngx-translate/core';
@@ -73,7 +73,7 @@ const appRoutes: Routes = [
         BrowserModule,
         BrowserAnimationsModule,
         HttpClientModule,
-        //, {enableTracing:true}
+        // { enableTracing:true }
         RouterModule.forRoot(appRoutes ),
 
         TranslateModule.forRoot(),
@@ -89,6 +89,8 @@ const appRoutes: Routes = [
         MatButtonModule,
         MatIconModule,
         MaterialModule,
+        MatTabsModule,
+        MatDividerModule,
 
         // Fuse modules
         FuseModule.forRoot(fuseConfig),

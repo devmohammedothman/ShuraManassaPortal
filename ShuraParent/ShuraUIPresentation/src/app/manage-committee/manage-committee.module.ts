@@ -2,7 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ManageCommitteeComponent } from './manage-committee.component';
 import { RouterModule, Routes } from '@angular/router';
-import { FormsModule} from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserModule } from '@angular/platform-browser';
+import { ReactiveFormsModule} from '@angular/forms';
 
 import { MaterialModule } from '../main/angular-material-elements/material.module';
 import { FuseModule } from '@fuse/fuse.module';
@@ -25,15 +27,18 @@ const routes : Routes= [
     CommonModule,
     RouterModule.forRoot(routes),
 
+    BrowserModule,
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
+
      // Fuse modules
      FuseModule.forRoot(fuseConfig),
      FuseSharedModule,
      FuseSidebarModule,
      FuseThemeOptionsModule,
  
-     //material
+     // material
        MaterialModule,
-       FormsModule
   ],
   declarations: [ManageCommitteeComponent, AddEditCommitteeComponent],
   providers:[AddEditCommitteeComponent],

@@ -1,51 +1,81 @@
-<div class="page-layout simple fullwidth angular-material-elements">
-    <!-- CONTENT -->
-    <div class="content p-24">
-        <div class="page-layout blank p-24" fusePerfectScrollbar>
-            <form name="adminAssignWishesForm" [formGroup]="adminAssignWishesForm">
-                <mat-form-field appearance="legacy" [ngClass]="'w-100-p mb-24'">
-                    <input type="text" placeholder="Choose a user!" aria-label="Username" matInput [formControl]="username" [matAutocomplete]="auto">
-                    <mat-autocomplete #auto="matAutocomplete">
-                        <mat-option *ngFor="let user of filteredUsers | async" [value]="user">
-                            {{ user }}
-                        </mat-option>
-                    </mat-autocomplete>
-                </mat-form-field>
+<div class="page-layout carded fullwidth">
 
-                <mat-form-field appearance="legacy" [ngClass]="'w-50-p mb-24 pr-12'">
-                    <mat-select placeholder="First wish:" [formControl]="wish1" required>
-                        <mat-option *ngFor="let wish of wishes" [value]="wish.value">
-                            {{ wish.viewValue }}
-                        </mat-option>
-                    </mat-select>
-                    <mat-error *ngIf="wish1.invalid">{{getErrorMessage()}}</mat-error>
-                    <mat-hint>Do this and don't do that</mat-hint>
-                </mat-form-field>
-                <mat-form-field appearance="legacy" [ngClass]="'w-50-p mb-24 pl-12'">
-                    <mat-select placeholder="Second wish:" [formControl]="wish2" required [disabled]="!wish1.valid">
-                        <mat-option *ngFor="let wish of wishes" [value]="wish.value">
-                            {{ wish.viewValue }}
-                        </mat-option>
-                    </mat-select>
-                    <mat-error *ngIf="wish2.invalid">{{getErrorMessage()}}</mat-error>
-                    <mat-hint>Do this and don't do that</mat-hint>
-                </mat-form-field>
-                <mat-form-field appearance="legacy" [ngClass]="'w-50-p mb-24 pr-12'">
-                    <mat-select placeholder="Third wish:" [formControl]="wish3" required [disabled]="!wish2.valid">
-                        <mat-option *ngFor="let wish of wishes" [value]="wish.value">
-                            {{ wish.viewValue }}
-                        </mat-option>
-                    </mat-select>
-                    <mat-error *ngIf="wish3.invalid">{{getErrorMessage()}}</mat-error>
-                    <mat-hint>Do this and don't do that</mat-hint>
-                </mat-form-field>
-
-                <mat-form-field appearance="legacy" [ngClass]="'w-50-p mb-24 pl-12'">
-                  <textarea matInput placeholder="Notes"></textarea>
-                </mat-form-field>
-
-                <button mat-button type="submit" [ngClass]="'my-24'">Submit!</button>
-            </form>
+        <!-- TOP BACKGROUND -->
+        <div class="top-bg mat-accent-bg"></div>
+        <!-- / TOP BACKGROUND -->
+    
+        <!-- CENTER -->
+        <div class="center">
+    
+            <!-- CONTENT HEADER -->
+            <div class="header mat-accent-bg p-24" fxLayout="row" fxLayoutAlign="start center">
+                <h2 class="m-0">{{'CONT.WISHES.TITLE' | translate }}</h2>
+            </div>
+            <!-- / CONTENT HEADER -->
+    
+            <!-- CONTENT CARD -->
+            <div class="content-card mat-white-bg">
+    
+                <!-- CONTENT TOOLBAR -->
+                <div class="toolbar px-24 py-8">
+                    <span>{{'CONT.WISHES.SUBTITLE-ADMIN' | translate }}</span>
+                </div>
+                <!-- / CONTENT TOOLBAR -->
+    
+                <!-- CONTENT -->
+                <div class="content p-24">
+                    <form [formGroup]="adminAssignWishesForm" (ngSubmit)="onFormSubmit()">
+    
+                            <mat-form-field appearance="legacy" [ngClass]="'w-100-p mb-24'">
+                                    <input type="text" placeholder="{{'CONT.WISHES.USERNAME' | translate }}" aria-label="Username" matInput [formControl]="username"
+                                        [matAutocomplete]="auto">
+                                    <mat-autocomplete #auto="matAutocomplete">
+                                        <mat-option *ngFor="let user of filteredUsers | async" [value]="user">
+                                            {{ user }}
+                                        </mat-option>
+                                    </mat-autocomplete>
+                                </mat-form-field>
+                                
+                        <mat-form-field appearance="legacy" [ngClass]="'w-50-p mb-24 pr-12'">
+                            <mat-select placeholder="First wish:" [formControl]="firstWish" required>
+                                <mat-option *ngFor="let wish of wishes" [value]="wish.value">
+                                    {{ wish.viewValue }}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="firstWish.invalid">{{getErrorMessage()}}</mat-error>
+                            <mat-hint>Do this and don't do that</mat-hint>
+                        </mat-form-field>
+                        <mat-form-field appearance="legacy" [ngClass]="'w-50-p mb-24 pl-12'">
+                            <mat-select placeholder="Second wish:" [formControl]="secondWish" required [disabled]='!firstWish.valid'>
+                                <mat-option *ngFor="let wish of wishes" [value]="wish.value">
+                                    {{ wish.viewValue }}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="secondWish.invalid">{{getErrorMessage()}}</mat-error>
+                            <mat-hint>Do this and don't do that</mat-hint>
+                        </mat-form-field>
+                        <mat-form-field appearance="legacy" [ngClass]="'w-50-p mb-24 pr-12'">
+                            <mat-select placeholder="Third wish:" [formControl]="thirdWish" required [disabled]='!secondWish.valid'>
+                                <mat-option *ngFor="let wish of wishes" [value]="wish.value">
+                                    {{ wish.viewValue }}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="thirdWish.invalid">Please Choose Wish</mat-error>
+                            <mat-hint>Do this and don't do that</mat-hint>
+                        </mat-form-field>
+                        <mat-divider></mat-divider>
+                        <button mat-button type="submit" [ngClass]="'my-24'"
+                            [disabled]='!adminAssignWishesForm.valid'
+                            (click)="openSnackBar('Submitted succefully!', 'Close')">{{'CONT.FORMS.SUBMIT' | translate }}</button>
+                        <button mat-button type="reset" [ngClass]="'my-24'">{{'CONT.FORMS.RESET' | translate }}</button>
+                    </form>
+                </div>
+                <!-- / CONTENT -->
+    
+            </div>
+            <!-- / CONTENT CARD -->
+    
         </div>
+        <!-- / CENTER -->
+    
     </div>
-</div>

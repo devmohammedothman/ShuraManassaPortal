@@ -1,15 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { AdminAssignedWishesComponent } from './admin-assigned-wishes.component';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatInputModule, MatButtonModule, MatAutocompleteModule, MatSelectModule } from '@angular/material';
+import { TranslateModule } from '@ngx-translate/core';
+import { Routes, RouterModule } from '@angular/router';
+import { AuthGuard } from '../auth.guard';
 
-const routes = [
+import { MaterialModule } from '../main/angular-material-elements/material.module';
+import { FuseModule } from '@fuse/fuse.module';
+import { FuseSharedModule } from '@fuse/shared.module';
+import { FuseSidebarModule, FuseThemeOptionsModule } from '@fuse/components';
+import { fuseConfig } from 'app/fuse-config';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatSnackBarModule } from '../../../node_modules/@angular/material';
+import { AdminAssignedWishesComponent } from './admin-assigned-wishes.component';
+
+const routes: Routes = [
   {
-      path     : 'aaw',
+      path: 'aaw',
+      canActivate: [AuthGuard],
       component: AdminAssignedWishesComponent
   }
 ];
@@ -17,19 +24,22 @@ const routes = [
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forChild(routes),
+    RouterModule.forRoot(routes),
+    TranslateModule,
 
-    BrowserModule,
-    BrowserAnimationsModule,
 
-    FormsModule,
-    ReactiveFormsModule,
+    // Fuse modules
+    FuseModule.forRoot(fuseConfig),
+    FuseSharedModule,
+    FuseSidebarModule,
+    FuseThemeOptionsModule,
 
-    MatInputModule,
-    MatAutocompleteModule,
-    MatButtonModule,
-    MatSelectModule
+    // material
+      MaterialModule,
+      MatSnackBarModule,
+
+      ReactiveFormsModule 
   ],
   declarations: [AdminAssignedWishesComponent]
 })
-export class AdminAssignedWishesModule { }
+export class AdminAssignedWishesModule  { }

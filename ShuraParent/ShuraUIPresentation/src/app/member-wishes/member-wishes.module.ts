@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 import { MemberWishesComponent } from './member-wishes.component';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from '../auth.guard';
@@ -10,12 +11,12 @@ import { FuseSharedModule } from '@fuse/shared.module';
 import { FuseSidebarModule, FuseThemeOptionsModule } from '@fuse/components';
 import { fuseConfig } from 'app/fuse-config';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatSnackBarModule } from '../../../node_modules/@angular/material';
 
-
-const routes : Routes= [
+const routes: Routes = [
   {
-      path     : 'nomination/addmemberwish',
-      canActivate : [AuthGuard],
+      path: 'nomination/addmemberwish',
+      canActivate: [AuthGuard],
       component: MemberWishesComponent
   }
 ];
@@ -24,6 +25,7 @@ const routes : Routes= [
   imports: [
     CommonModule,
     RouterModule.forRoot(routes),
+    TranslateModule,
 
 
     // Fuse modules
@@ -32,8 +34,9 @@ const routes : Routes= [
     FuseSidebarModule,
     FuseThemeOptionsModule,
 
-    //material
+    // material
       MaterialModule,
+      MatSnackBarModule,
 
       ReactiveFormsModule 
   ],

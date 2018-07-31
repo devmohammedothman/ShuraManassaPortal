@@ -31,6 +31,20 @@ export const locale = {
             'MANAGECOMMITTEE' : 'Manage Committee', 
             'COMMNAME' : 'Committee Name', 
             
+        },
+        'CONT': {                         
+            'SUBMIT': 'Submit!',               
+            'RESET': 'Reset!',
+            'WISHES': {
+                'TITLE': 'Wishes Assigning',
+                'SUBTITLE-ADMIN': 'Admin view',
+                'SUBTITLE-USER': 'User view',
+                'USERNAME': 'Username',               
+                'WISH1': 'First Wish',               
+                'WISH2': 'Second Wish',               
+                'WISH3': 'Third Wish',               
+                'NOTES': 'Notes',               
+            }
         }
     
     }

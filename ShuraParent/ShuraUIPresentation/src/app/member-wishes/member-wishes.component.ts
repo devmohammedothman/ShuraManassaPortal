@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup,FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material';
 
 
 @Component({
@@ -9,10 +10,10 @@ import { FormGroup,FormControl, Validators } from '@angular/forms';
 })
 export class MemberWishesComponent implements OnInit {
 
- memberWishFormGroup : FormGroup ;
- firstWish : FormControl;
- secondWish : FormControl;
- thirdWish : FormControl;
+ memberWishFormGroup: FormGroup;
+ firstWish: FormControl;
+ secondWish: FormControl;
+ thirdWish: FormControl;
 
   wishes = [
     {value: 'health-0', viewValue: 'Health'},
@@ -20,41 +21,42 @@ export class MemberWishesComponent implements OnInit {
     {value: 'defense-2', viewValue: 'Defense'}
   ];
   
-  constructor() { }
+  constructor(public snackBar: MatSnackBar) { }
 
-  createFormControls()
-  {
-    this.firstWish = new FormControl("",Validators.required);
-    this.secondWish = new FormControl("",Validators.required);
-    this.thirdWish = new FormControl("",Validators.required);
+  createFormControls(): void {
+    this.firstWish = new FormControl('', Validators.required);
+    this.secondWish = new FormControl('', Validators.required);
+    this.thirdWish = new FormControl('', Validators.required);
   }
-
-  createFrom()
-  {
-    this.memberWishFormGroup = new FormGroup(
-        {
-              firstWish : this.firstWish ,
-              secondWish : this.secondWish,
-              thirdWish : this.thirdWish
-          });
+  createFrom(): void {
+    this.memberWishFormGroup = new FormGroup({
+        firstWish: this.firstWish,
+        secondWish: this.secondWish,
+        thirdWish: this.thirdWish
+    });
   }
-
-
-  ngOnInit() {
-    this.createFormControls();
-    this.createFrom();
-  }
-
-
-  getErrorMessage() {
+  getErrorMessage(): string {
     return  this.firstWish.hasError('required') ? 'You must enter a value' :
             this.secondWish.hasError('required') ? 'You must enter a value' :
             this.secondWish.hasError('required') ? 'You must enter a value' :
             '';
   }
 
-  //Form Submit Function
-  onFormSubmit()
-{}
 
+  ngOnInit(): void {
+    this.createFormControls();
+    this.createFrom();
+  }
+
+  // Form Submit Function
+  onFormSubmit(): void {
+  }
+
+  openSnackBar(message: string, action: string): any {
+    this.snackBar.open(message, action, {
+      duration: 5000,
+      horizontalPosition: 'center',
+      verticalPosition: 'top'
+    });
+  }
 }
