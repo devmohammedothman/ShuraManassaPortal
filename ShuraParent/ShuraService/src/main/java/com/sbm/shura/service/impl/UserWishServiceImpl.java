@@ -12,11 +12,13 @@ import com.sbm.shura.dao.UserWishDao;
 import com.sbm.shura.dto.CommitteeDTO;
 import com.sbm.shura.dto.UserDTO;
 import com.sbm.shura.dto.UserWishDTO;
+import com.sbm.shura.dto.WishDTO;
+import com.sbm.shura.entity.Committee;
 import com.sbm.shura.entity.UserWish;
 import com.sbm.shura.service.UserWishService;
 
 @Service
-@Transactional
+
 public class UserWishServiceImpl extends BasicServiceImpl<UserWishDTO, UserWish> implements UserWishService{
 
 	@Autowired
@@ -26,17 +28,33 @@ public class UserWishServiceImpl extends BasicServiceImpl<UserWishDTO, UserWish>
 	
 	
 	@Override
+	@Transactional
 	public UserWishDTO addUserWish(UserWishDTO uwdto) {
 
-		_userWishObj = new UserWish();
 		
-		_userWishObj = convertToEntity(_userWishObj, uwdto);
 		
-		return convertToDTO(_userWishDao.addUserWish(_userWishObj), uwdto) ;
+		for(WishDTO item : uwdto.getWishesList())
+		{
+			uwdto.setWishedCommitee(item.getWishedCommitee());
+			uwdto.setWishOrder(item.getWishOrder());
+			
+			_userWishObj = new UserWish();
+			
+			_userWishObj = convertToEntity(_userWishObj, uwdto);
+			
+			Committee commObj = new Committee();
+			commObj.setId(item.getWishedCommitee().getId());
+			_userWishObj.setWishedCommitee(commObj);
+			_userWishObj.setWishOrder(item.getWishOrder());
+			_userWishDao.addUserWish(_userWishObj);
+		}
+		
+		return uwdto;
 		
 	}
 
 	@Override
+	@Transactional
 	public List<UserWishDTO> getUserWishList() {
 		List<UserWish> userWishList = _userWishDao.listUserWish();
 		List<UserWishDTO> userWishDtoList = userWishList.stream().

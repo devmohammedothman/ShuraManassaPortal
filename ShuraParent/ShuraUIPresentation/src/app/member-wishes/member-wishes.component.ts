@@ -72,7 +72,7 @@ export class MemberWishesComponent implements OnInit {
   // Form Submit Function
   onFormSubmit(): void {
 
-    debugger;
+    //debugger;
     this.userWishesObject.nominatedUser = JSON.parse(this.storageService.getFromLocal('user'));
     
    this.nominateServiceObj.assignUserWishesService(this.userWishesObject).subscribe((data:any) => { 
@@ -111,7 +111,7 @@ export class MemberWishesComponent implements OnInit {
 
       const secondwishSentObj = new Wish();
       secondwishSentObj.wishedCommitee = this.wish2;
-      secondwishSentObj.wishOrder = 1;
+      secondwishSentObj.wishOrder = 2;
       this.userWishesObject.wishesList.push(secondwishSentObj);
 
     }
@@ -121,7 +121,7 @@ export class MemberWishesComponent implements OnInit {
     if (changeEvent) {
       const thirdwishSentObj = new Wish();
       thirdwishSentObj.wishedCommitee = this.wish3;
-      thirdwishSentObj.wishOrder = 1;
+      thirdwishSentObj.wishOrder = 3;
       this.userWishesObject.wishesList.push(thirdwishSentObj);
     }
   }

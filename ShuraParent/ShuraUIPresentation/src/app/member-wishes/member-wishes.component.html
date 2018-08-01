@@ -32,7 +32,7 @@
                                 {{ wish.nameEn }}
                             </mat-option>
                         </mat-select>
-                        <mat-error *ngIf="firstWish.invalid">{{getErrorMessage()}}</mat-error>
+                        <mat-error *ngIf="firstWish.invalid">Please Choose Wish</mat-error>
                         <mat-hint>Do this and don't do that</mat-hint>
                     </mat-form-field>
                     <mat-form-field appearance="legacy" [ngClass]="'w-50-p mb-24 pl-12'">
@@ -41,7 +41,7 @@
                                 {{ wish.nameEn }}
                             </mat-option>
                         </mat-select>
-                        <mat-error *ngIf="secondWish.invalid">{{getErrorMessage()}}</mat-error>
+                        <mat-error *ngIf="secondWish.invalid">Please Choose Wish</mat-error>
                         <mat-hint>Do this and don't do that</mat-hint>
                     </mat-form-field>
                     <mat-form-field appearance="legacy" [ngClass]="'w-50-p mb-24 pr-12'">

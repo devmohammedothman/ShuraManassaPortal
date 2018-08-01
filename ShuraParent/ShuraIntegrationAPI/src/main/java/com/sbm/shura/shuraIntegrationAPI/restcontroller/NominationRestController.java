@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sbm.shura.dto.BaseDTO;
+import com.sbm.shura.dto.UserWishDTO;
 import com.sbm.shura.management.NominationManage;
 
 @RestController
@@ -30,9 +31,9 @@ public class NominationRestController {
 	@RequestMapping (value = "addwish", method = RequestMethod.POST,
 			consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
-	public ResponseEntity<BaseDTO> addUserWish(@RequestBody Map<String, Long> map) throws Exception
+	public ResponseEntity<BaseDTO> addUserWish(@RequestBody UserWishDTO userWishDto) throws Exception
 	{
-		return dtoProvider.addObj(manage.addUserWish(map.get("userid"),map.get("committeeid"), map.get("wishOrder")));
+		return dtoProvider.addObj(manage.addUserWish(userWishDto));
 	}
 	
 	

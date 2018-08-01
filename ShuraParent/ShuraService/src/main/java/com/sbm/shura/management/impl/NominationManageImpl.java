@@ -27,18 +27,16 @@ public class NominationManageImpl implements NominationManage {
 	private CommitteeService _committeeService;
 
 	@Override
-	public UserWishDTO addUserWish(long userId, long committeId,long wishOrder) {
+	public UserWishDTO addUserWish(UserWishDTO userWishDto) {
 		
 		//validate User Object is in member Group
-		UserWishDTO uwdto = new UserWishDTO();
-		uwdto.setNominatedUser(_userService.findById(userId));
-		uwdto.setWishedCommitee(_committeeService.findById(committeId));
-		uwdto.setWishOrder(toIntExact(wishOrder));
+		
+		
 		/*GroupDTO groupDto =  uwdto.getNominatedUser().getGroups().stream().
 				filter( item -> item.getNameEn().equals("ADMIN")).findFirst().get();
 		if(groupDto != null)*/
-			return _userWishService.addUserWish(uwdto);
-		/*else return null; */
+			return _userWishService.addUserWish(userWishDto);
+//		 return null; 
 	}
 
 	@Override

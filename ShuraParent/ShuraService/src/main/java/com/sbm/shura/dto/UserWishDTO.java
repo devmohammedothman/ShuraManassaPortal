@@ -1,8 +1,5 @@
 package com.sbm.shura.dto;
 
-import com.sbm.shura.entity.Committee;
-import com.sbm.shura.entity.User;
-
 public class UserWishDTO extends BaseDTO {
 
 	/**
@@ -13,6 +10,8 @@ public class UserWishDTO extends BaseDTO {
 	private Integer Id;
 	
 	private UserDTO nominatedUser;
+	
+	private WishDTO [] wishesList;
 	
 	private CommitteeDTO wishedCommitee;
 	
@@ -33,6 +32,14 @@ public class UserWishDTO extends BaseDTO {
 
 	public void setNominatedUser(UserDTO nominatedUser) {
 		this.nominatedUser = nominatedUser;
+	}
+
+	public WishDTO [] getWishesList() {
+		return wishesList;
+	}
+
+	public void setWishesList(WishDTO [] wishesList) {
+		this.wishesList = wishesList;
 	}
 
 	public CommitteeDTO getWishedCommitee() {
