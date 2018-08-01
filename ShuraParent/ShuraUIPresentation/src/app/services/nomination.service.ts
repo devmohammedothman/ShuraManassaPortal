@@ -4,7 +4,7 @@ import { ServiceUtils } from "./serviceUtils";
 import { StorageService } from './storage.service';
 import { Injectable } from '@angular/core';
 import { MemberAssignedWishes } from "app/models/member-assigned-wishes";
-import { HttpParams } from "../../../node_modules/@angular/common/http";
+import { HttpParams } from "@angular/common/http";
 
 @Injectable()
 export class NominationService {
@@ -14,23 +14,18 @@ export class NominationService {
   private baseUrl = ServiceUtils.baseUrl+'nomination/';
   private token = 'bearer '+this.storageService.getFromLocal('token');
 
-  assignUserWishesService()
+  assignUserWishesService(userWishesObject : MemberAssignedWishes)
   {
 
-    const params = new HttpParams();
-    params.set('userid','52');
-    params.set('committeeid','3');
-    params.set('wishOrder','1');
+    let headers = new Headers({ 'Content-Type': 'application/json',
+    'authorization': this.token,
+    'Access-Control': 'Allow-Origin' });
 
-    // let headers = new Headers({ 'Content-Type': 'application/json',
-    // 'authorization': this.token,
-    // 'Access-Control': 'Allow-Origin' });
+    let options = new RequestOptions({ headers: headers });
 
-    // let options = new RequestOptions({ headers: headers });
-
-    console.log('call service'+this.baseUrl+'addwish');
-
-     this.http.post(this.baseUrl + 'addwish',params);
+    return this.http.post(this.baseUrl + 'addwish', userWishesObject, options)
+    .map(this.extractData)
+    .catch(this.handleErrorObservable);
   }
 
   private extractData(res: Response) {

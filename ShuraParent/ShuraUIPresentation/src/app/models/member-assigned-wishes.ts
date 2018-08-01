@@ -1,7 +1,9 @@
+import { User } from "./user.model";
+import { Wish } from "app/models/wish.model";
+
 export class MemberAssignedWishes {
-    userid:number;
-    committeeid :number;
-    wishOrder: number
+    nominatedUser:User;
+    wishesList :Wish [] = [];
 
 }
 
