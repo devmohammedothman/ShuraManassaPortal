@@ -1,6 +1,7 @@
 html {
     font-size: 62.5%;
-    font-family: 'Cairo', 'Helvetica Neue', 'Arial', sans-serif !important;
+    // font-family: 'Cairo', 'Helvetica Neue', 'Arial', sans-serif !important;
+    font-family: 'DroidArabicKufiRegular', sans-serif !important;
     line-height: 1.4 !important;
     letter-spacing: -0.1px !important;
 }
@@ -389,4 +390,20 @@ strong {
         border-left-color: #03A9F4;
         color: rgba(0, 0, 0, 0.87);
     }
+}
+
+// Mat Form
+button,
+input[type=email],
+input[type=tel],
+input[type=text],
+input[type=password],
+input[type=image],
+input[type=submit],
+input[type=button],
+input[type=search],
+textarea,
+.mat-form-field-infix,
+.mat-form-field-label {
+    font-family: 'DroidArabicKufiRegular', sans-serif !important;
 }

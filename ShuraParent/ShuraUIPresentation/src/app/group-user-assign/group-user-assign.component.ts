@@ -4,6 +4,7 @@ import { Group } from '../models/group.model';
 import { User } from '../models/user.model';
 import { AssignParam } from '../models/assign-user-group-param.model';
 import { StorageService } from '../services/storage.service';
+import { FormGroup } from '../../../node_modules/@angular/forms';
 
 @Component({
     selector: 'app-group-user-assign',
@@ -11,6 +12,8 @@ import { StorageService } from '../services/storage.service';
     styleUrls: ['./group-user-assign.component.scss']
 })
 export class GroupUserAssignComponent implements OnInit {
+
+    // guaForm: FormGroup;
 
     group: Group[];
     user: User[];
