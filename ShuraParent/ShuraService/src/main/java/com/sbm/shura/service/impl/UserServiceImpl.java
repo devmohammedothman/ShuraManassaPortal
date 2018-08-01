@@ -103,7 +103,7 @@ public class UserServiceImpl extends BasicServiceImpl<UserDTO, User> implements 
 
 		// groupDto.getUsers().add(userDto);
 
-		_user = userDao.findById(userDto.getId());
+		_user = userDao.findById(userDto.getUserId());
 		group = groupDao.findById(group.getId());
 		if (_user.getGroups() == null) {
 			_user.setGroups(new ArrayList<Group>());

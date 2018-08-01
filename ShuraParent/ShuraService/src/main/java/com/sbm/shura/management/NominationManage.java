@@ -10,4 +10,7 @@ public interface NominationManage {
 	
 	List<UserWishDTO> getUserWishList();
 	
+	public UserWishDTO getUserWishesByUserIdAndCommitte(long userId);
+	
+	String managerAssignUserWish(List<UserWishDTO> list);
 }
