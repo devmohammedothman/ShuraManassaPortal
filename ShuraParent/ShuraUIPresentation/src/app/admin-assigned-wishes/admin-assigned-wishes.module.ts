@@ -16,7 +16,7 @@ import { AdminAssignedWishesComponent } from './admin-assigned-wishes.component'
 const routes: Routes = [
   {
       path: 'aaw',
-      canActivate: [AuthGuard],
+      // canActivate: [AuthGuard],
       component: AdminAssignedWishesComponent
   }
 ];

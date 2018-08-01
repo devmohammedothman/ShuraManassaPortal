@@ -1,33 +1,57 @@
-<div id="forms" class="page-layout simple fullwidth" fxLayout="column">
+<div class="page-layout carded fullwidth">
 
-    <div class="p-24">
-        <form class="mat-white-bg mat-elevation-z4 p-24 mb-24" fxLayout="column" fxLayoutAlign="start" name="groupUserAssignForm">
+        <!-- TOP BACKGROUND -->
+        <div class="top-bg mat-accent-bg"></div>
+        <!-- / TOP BACKGROUND -->
+    
+        <!-- CENTER -->
+        <div class="center">
+    
+            <!-- CONTENT HEADER -->
+            <div class="header mat-accent-bg p-24" fxLayout="row" fxLayoutAlign="start center">
+                <h2 class="m-0">{{ 'CONT.GPERM.TITLE' | translate }}</h2>
+            </div>
+            <!-- / CONTENT HEADER -->
+    
+            <!-- CONTENT CARD -->
+            <div class="content-card mat-white-bg">
+    
+                <!-- CONTENT TOOLBAR -->
+                <div class="toolbar px-24 py-8">
+                    <span>{{ 'CONT.GPERM.SUBTITLE-GU' | translate }}</span>
+                </div>
+                <!-- / CONTENT TOOLBAR -->
+    
+                <!-- CONTENT -->
+                <div class="content p-24">
+                <form (ngSubmit)="onFormSubmit()"> <!-- [formGroup]="guaForm"  -->
 
-            <div flex fxLayout="row">
-                <div fxFlex="25">
-                    <mat-form-field>
-                        <mat-select (selectionChange)="onGroupSelect($event)" [(ngModel)]="assignParam.groupname" name="group" placeholder="Choose a Group!" required>
+                    <mat-form-field [ngClass]="'w-50-p mb-24 pr-12'">
+                        <mat-select (selectionChange)="onGroupSelect($event)" [(ngModel)]="assignParam.groupname" name="group" placeholder="{{ 'CONT.GPERM.GNAME' | translate }}"
+                            required>
                             <mat-option *ngFor="let p of groups" [value]="p.nameEn">
                                 {{p.nameEn}}
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
-                </div>
 
-                <div fxFlex="25">
-                    <mat-form-field>
-                        <mat-select (selectionChange)="onUserSelect($event)" [(ngModel)]="assignParam.email" name="user" placeholder="Choose a User!" required>
+                    <mat-form-field [ngClass]="'w-50-p mb-24 pr-12'">
+                        <mat-select (selectionChange)="onUserSelect($event)" [(ngModel)]="assignParam.email" name="user" placeholder="{{ 'CONT.GPERM.UNAME' | translate }}"
+                            required>
                             <mat-option *ngFor="let u of users" [value]="u.email">
                                 {{u.username}}
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
-                </div>
-                <div *ngIf="show" fxFlex="100" class="my-24">
-                    <button mat-raised-button color="accent" class="submit-button" aria-label="Submit" (click)="assignUserToGroup()">Submit</button>
-                </div>
+                    <button mat-button aria-label="Submit" (click)="assignUserToGroup()">{{ 'CONT.FORMS.SUBMIT' | translate }}</button>
+                </form>
             </div>
-        </form>
+            <!-- / CONTENT -->
+
+        </div>
+        <!-- / CONTENT CARD -->
+
     </div>
+    <!-- / CENTER -->
 
 </div>

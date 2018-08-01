@@ -27,31 +27,28 @@
                 <form [formGroup]="memberWishFormGroup" (ngSubmit)="onFormSubmit()">
 
                     <mat-form-field appearance="legacy" [ngClass]="'w-50-p mb-24 pr-12'">
-                        <mat-select placeholder="First wish:" [formControl]="firstWish" required>
+                        <mat-select placeholder="{{'CONT.WISHES.WISH1' | translate }}" [formControl]="firstWish" required>
                             <mat-option *ngFor="let wish of wishes" [value]="wish.value">
                                 {{ wish.viewValue }}
                             </mat-option>
                         </mat-select>
-                        <mat-error *ngIf="firstWish.invalid">{{getErrorMessage()}}</mat-error>
-                        <mat-hint>Do this and don't do that</mat-hint>
+                        <mat-error *ngIf="firstWish.invalid">{{'CONT.FORMS.REQERR' | translate }}</mat-error>
                     </mat-form-field>
                     <mat-form-field appearance="legacy" [ngClass]="'w-50-p mb-24 pl-12'">
-                        <mat-select placeholder="Second wish:" [formControl]="secondWish" required [disabled]='!firstWish.valid'>
+                        <mat-select placeholder="{{'CONT.WISHES.WISH2' | translate }}" [formControl]="secondWish" required [disabled]='!firstWish.valid'>
                             <mat-option *ngFor="let wish of wishes" [value]="wish.value">
                                 {{ wish.viewValue }}
                             </mat-option>
                         </mat-select>
-                        <mat-error *ngIf="secondWish.invalid">{{getErrorMessage()}}</mat-error>
-                        <mat-hint>Do this and don't do that</mat-hint>
+                        <mat-error *ngIf="secondWish.invalid">{{'CONT.FORMS.REQERR' | translate }}</mat-error>
                     </mat-form-field>
                     <mat-form-field appearance="legacy" [ngClass]="'w-50-p mb-24 pr-12'">
-                        <mat-select placeholder="Third wish:" [formControl]="thirdWish" required [disabled]='!secondWish.valid'>
+                        <mat-select placeholder="{{'CONT.WISHES.WISH3' | translate }}" [formControl]="thirdWish" required [disabled]='!secondWish.valid'>
                             <mat-option *ngFor="let wish of wishes" [value]="wish.value">
                                 {{ wish.viewValue }}
                             </mat-option>
                         </mat-select>
-                        <mat-error *ngIf="thirdWish.invalid">Please Choose Wish</mat-error>
-                        <mat-hint>Do this and don't do that</mat-hint>
+                        <mat-error *ngIf="thirdWish.invalid">{{'CONT.FORMS.REQERR' | translate }}</mat-error>
                     </mat-form-field>
                     <mat-divider></mat-divider>
                     <button mat-button type="submit" [ngClass]="'my-24'"

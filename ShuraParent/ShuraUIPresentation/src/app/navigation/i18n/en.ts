@@ -41,7 +41,10 @@ export const locale = {
                 'REQERR': 'You must enter a value.',
                 'VALIDERR': 'The value you\'ve entered isn\'t valid.',
                 'CHKALL': 'Check All!',
-
+                'ADD': 'Add!',
+                'ID': 'ID',
+                'NAME': 'Name',
+                'FILTER': 'Filter',
             },
             'WISHES': {
                 'TITLE': 'Wishes Assigning',
@@ -56,11 +59,16 @@ export const locale = {
             'GPERM': {
                 'TITLE': 'Group Permissions',
                 'SUBTITLE': 'Permission Assigning',
-                'GNAME': 'Group Name',
+                'SUBTITLE-GU': 'Assigning users to groups',
+                'GNAME': 'Choose group name!',
+                'UNAME': 'Choose user name!',
                 'READ': 'Read',
                 'WRITE': 'Write'
+            },
+            'COMMITTE': {
+                'TITLE': 'اللجان',
+                'SUBTITLE': 'إدارة اللجان',
             }
         }
-    
     }
 };

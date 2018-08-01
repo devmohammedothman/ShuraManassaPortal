@@ -1,81 +1,80 @@
 <div class="page-layout carded fullwidth">
 
-  <!-- TOP BACKGROUND -->
-  <div class="top-bg mat-accent-bg"></div>
-  <!-- / TOP BACKGROUND -->
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg mat-accent-bg"></div>
+    <!-- / TOP BACKGROUND -->
 
-  <!-- CENTER -->
-  <div class="center">
+    <!-- CENTER -->
+    <div class="center">
 
-      <!-- CONTENT HEADER -->
-      <div class="header mat-accent-bg p-24" fxLayout="row" fxLayoutAlign="start center">
-          <h2 class="m-0">{{'CONT.WISHES.TITLE' | translate }}</h2>
-      </div>
-      <!-- / CONTENT HEADER -->
+        <!-- CONTENT HEADER -->
+        <div class="header mat-accent-bg p-24" fxLayout="row" fxLayoutAlign="start center">
+            <h2 class="m-0">{{ 'CONT.WISHES.TITLE' | translate }}</h2>
+        </div>
+        <!-- / CONTENT HEADER -->
 
-      <!-- CONTENT CARD -->
-      <div class="content-card mat-white-bg">
+        <!-- CONTENT CARD -->
+        <div class="content-card mat-white-bg">
 
-          <!-- CONTENT TOOLBAR -->
-          <div class="toolbar px-24 py-8">
-              <span>{{'CONT.WISHES.SUBTITLE-ADMIN' | translate }}</span>
-          </div>
-          <!-- / CONTENT TOOLBAR -->
+            <!-- CONTENT TOOLBAR -->
+            <div class="toolbar px-24 py-8">
+                <span>{{ 'CONT.WISHES.SUBTITLE-ADMIN' | translate }}</span>
+            </div>
+            <!-- / CONTENT TOOLBAR -->
 
-          <!-- CONTENT -->
-          <div class="content p-24">
-              <form [formGroup]="adminAssignWishesForm" (ngSubmit)="onFormSubmit()">
+            <!-- CONTENT -->
+            <div class="content p-24">
+                <form [formGroup]="adminAssignWishesForm" (ngSubmit)="onFormSubmit()">
 
-                      <mat-form-field appearance="legacy" [ngClass]="'w-100-p mb-24'">
-                              <input type="text" placeholder="{{'CONT.WISHES.USERNAME' | translate }}" aria-label="Username" matInput [formControl]="username"
-                                  [matAutocomplete]="auto">
-                              <mat-autocomplete #auto="matAutocomplete">
-                                  <mat-option *ngFor="let user of filteredUsers | async" [value]="user">
-                                      {{ user }}
-                                  </mat-option>
-                              </mat-autocomplete>
-                          </mat-form-field>
-                          
-                  <mat-form-field appearance="legacy" [ngClass]="'w-50-p mb-24 pr-12'">
-                      <mat-select (selectionChange)="onWishOne($event)" placeholder="First wish:" [formControl]="firstWish" [(ngModel)]="wish1" required>
-                          <mat-option *ngFor="let wish of wishes" [value]="wish">
-                              {{ wish.nameEn }}
-                          </mat-option>
-                      </mat-select>
-                      <mat-error *ngIf="firstWish.invalid">{{getErrorMessage()}}</mat-error>
-                      <mat-hint>Do this and don't do that</mat-hint>
-                  </mat-form-field>
-                  <mat-form-field appearance="legacy" [ngClass]="'w-50-p mb-24 pl-12'">
-                      <mat-select (selectionChange)="onWishTwo($event)" placeholder="Second wish:" [formControl]="secondWish" [(ngModel)]="wish2" required [disabled]='!firstWish.valid'>
-                          <mat-option *ngFor="let wish of wishes2" [value]="wish">
-                              {{ wish.nameEn }}
-                          </mat-option>
-                      </mat-select>
-                      <mat-error *ngIf="secondWish.invalid">{{getErrorMessage()}}</mat-error>
-                      <mat-hint>Do this and don't do that</mat-hint>
-                  </mat-form-field>
-                  <mat-form-field appearance="legacy" [ngClass]="'w-50-p mb-24 pr-12'">
-                      <mat-select (selectionChange)="onWishThree($event)" placeholder="Third wish:" [formControl]="thirdWish" [(ngModel)]="wish3"  required [disabled]='!secondWish.valid'>
-                          <mat-option *ngFor="let wish of wishes3" [value]="wish">
-                              {{ wish.nameEn }}
-                          </mat-option>
-                      </mat-select>
-                      <mat-error *ngIf="thirdWish.invalid">Please Choose Wish</mat-error>
-                      <mat-hint>Do this and don't do that</mat-hint>
-                  </mat-form-field>
-                  <mat-divider></mat-divider>
-                  <button mat-button type="submit" [ngClass]="'my-24'"
-                      [disabled]='!adminAssignWishesForm.valid'
-                      (click)="openSnackBar('Submitted succefully!', 'Close')">{{'CONT.FORMS.SUBMIT' | translate }}</button>
-                  <button (click)="populateCommittes()" mat-button type="reset" [ngClass]="'my-24'">{{'CONT.FORMS.RESET' | translate }}</button>
-              </form>
-          </div>
-          <!-- / CONTENT -->
+                    <mat-form-field appearance="legacy" [ngClass]="'w-100-p mb-24'">
+                        <input type="text" placeholder="{{ 'CONT.WISHES.USERNAME' | translate }}" aria-label="Username" matInput [formControl]="username"
+                            [matAutocomplete]="auto">
+                        <mat-autocomplete #auto="matAutocomplete">
+                            <mat-option *ngFor="let user of filteredUsers | async" [value]="user">
+                                {{ user }}
+                            </mat-option>
+                        </mat-autocomplete>
+                        <mat-error *ngIf="firstWish.invalid">{{ 'CONT.FORMS.REQERR' | translate }}</mat-error>
+                    </mat-form-field>
 
-      </div>
-      <!-- / CONTENT CARD -->
+                    <mat-form-field appearance="legacy" [ngClass]="'w-50-p mb-24 pr-12'">
+                        <mat-select (selectionChange)="onWishOne($event)" placeholder="{{ 'CONT.WISHES.WISH3' | translate }}" [formControl]="firstWish" [(ngModel)]="wish1"
+                            required>
+                            <mat-option *ngFor="let wish of wishes" [value]="wish">
+                                {{ wish.nameEn }}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="firstWish.invalid">{{ 'CONT.FORMS.REQERR' | translate }}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="legacy" [ngClass]="'w-50-p mb-24 pl-12'">
+                        <mat-select (selectionChange)="onWishTwo($event)" placeholder="{{ 'CONT.WISHES.WISH3' | translate }}" [formControl]="secondWish" [(ngModel)]="wish2"
+                            required [disabled]='!firstWish.valid'>
+                            <mat-option *ngFor="let wish of wishes2" [value]="wish">
+                                {{ wish.nameEn }}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="secondWish.invalid">{{ 'CONT.FORMS.REQERR' | translate }}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="legacy" [ngClass]="'w-50-p mb-24 pr-12'">
+                        <mat-select (selectionChange)="onWishThree($event)" placeholder="{{ 'CONT.WISHES.WISH3' | translate }}" [formControl]="thirdWish" [(ngModel)]="wish3"
+                            required [disabled]='!secondWish.valid'>
+                            <mat-option *ngFor="let wish of wishes3" [value]="wish">
+                                {{ wish.nameEn }}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="thirdWish.invalid">Please Choose Wish</mat-error>
+                    </mat-form-field>
+                    <mat-divider></mat-divider>
+                    <button mat-button type="submit" [ngClass]="'my-24'" [disabled]='!adminAssignWishesForm.valid' (click)="openSnackBar('Submitted succefully!', 'Close')">{{ 'CONT.FORMS.SUBMIT' | translate }}</button>
+                    <button (click)="populateCommittes()" mat-button type="reset" [ngClass]="'my-24'">{{ 'CONT.FORMS.RESET' | translate }}</button>
+                </form>
+            </div>
+            <!-- / CONTENT -->
 
-  </div>
-  <!-- / CENTER -->
+        </div>
+        <!-- / CONTENT CARD -->
+
+    </div>
+    <!-- / CENTER -->
 
 </div>

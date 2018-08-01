@@ -35,13 +35,6 @@ export class MemberWishesComponent implements OnInit {
         thirdWish: this.thirdWish
     });
   }
-  getErrorMessage(): string {
-    return  this.firstWish.hasError('required') ? 'You must enter a value' :
-            this.secondWish.hasError('required') ? 'You must enter a value' :
-            this.secondWish.hasError('required') ? 'You must enter a value' :
-            '';
-  }
-
 
   ngOnInit(): void {
     this.createFormControls();

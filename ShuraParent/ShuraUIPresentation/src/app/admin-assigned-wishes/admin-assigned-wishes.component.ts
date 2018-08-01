@@ -14,9 +14,9 @@ export class AdminAssignedWishesComponent  implements OnInit {
 
   adminAssignWishesForm: FormGroup;
   username: FormControl;
- firstWish: FormControl;
- secondWish: FormControl;
- thirdWish: FormControl;
+  firstWish: FormControl;
+  secondWish: FormControl;
+  thirdWish: FormControl;
 
  filteredUsers: Observable<string[]>;
 
@@ -49,19 +49,10 @@ export class AdminAssignedWishesComponent  implements OnInit {
     this.adminAssignWishesForm = new FormGroup({
       username: this.username,
       firstWish: this.firstWish,
-        secondWish: this.secondWish,
-        thirdWish: this.thirdWish
+      secondWish: this.secondWish,
+      thirdWish: this.thirdWish
     });
   }
-  getErrorMessage(): string {
-    return  this.username.hasError('required') ? 'You must enter a value' :
-    this.firstWish.hasError('required') ? 'You must enter a value' :
-            this.secondWish.hasError('required') ? 'You must enter a value' :
-            this.secondWish.hasError('required') ? 'You must enter a value' :
-            '';
-  }
-
-
   
   ngOnInit(): void {
     this.createFormControls();
