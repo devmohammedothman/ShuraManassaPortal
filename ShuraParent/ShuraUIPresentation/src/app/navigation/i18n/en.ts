@@ -32,9 +32,17 @@ export const locale = {
             'COMMNAME' : 'Committee Name', 
             
         },
-        'CONT': {                         
-            'SUBMIT': 'Submit!',               
-            'RESET': 'Reset!',
+        'CONT': {
+            'FORMS': {
+                'SUBMIT': 'Submit!',               
+                'RESET': 'Reset!',
+                'SUBMIT-SUCCESS': 'Successfully submitted',
+                'CLOSE': 'Close!',
+                'REQERR': 'You must enter a value.',
+                'VALIDERR': 'The value you\'ve entered isn\'t valid.',
+                'CHKALL': 'Check All!',
+
+            },
             'WISHES': {
                 'TITLE': 'Wishes Assigning',
                 'SUBTITLE-ADMIN': 'Admin view',
@@ -44,6 +52,13 @@ export const locale = {
                 'WISH2': 'Second Wish',               
                 'WISH3': 'Third Wish',               
                 'NOTES': 'Notes',               
+            },
+            'GPERM': {
+                'TITLE': 'Group Permissions',
+                'SUBTITLE': 'Permission Assigning',
+                'GNAME': 'Group Name',
+                'READ': 'Read',
+                'WRITE': 'Write'
             }
         }
     
