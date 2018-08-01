@@ -5,6 +5,9 @@ import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import { StorageService } from '../services/storage.service';
 import { Committee } from '../models/committee.model';
+import { NominationService } from '../services/nomination.service';
+import { UserWish } from '../models/user-wish.model';
+import { User } from '../models/user.model';
 
 @Component({
   selector: 'app-manager-assidned-wishes',
@@ -45,16 +48,26 @@ export class ManagerAssidnedWishesComponent implements OnInit {
   wish1: Committee;
   wish2: Committee;
   wish3: Committee;
+  userList: User[];
+  user: User;
+  selectedUsername: string;
   constructor(public snackBar: MatSnackBar,
-    private storageService: StorageService) {
+    private storageService: StorageService,
+    private nominationService: NominationService) {
     this.populateUserArray();
     this.populateCommittes();
   }
 
   populateUserArray(): void {
-    for (let results of JSON.parse(this.storageService.getFromLocal('usersList'))) {
+    this.userList = JSON.parse(this.storageService.getFromLocal('usersList'));
+    for (let results of this.userList) {
       this.users.push(results.username);
     }
+  }
+
+  getSelectedUsername(username: string) {
+    this.selectedUsername = username;
+    console.log(username);
   }
 
   populateCommittes(): void {
@@ -116,6 +129,7 @@ export class ManagerAssidnedWishesComponent implements OnInit {
       horizontalPosition: 'center',
       verticalPosition: 'top'
     });
+    this.assignWishes();
   }
 
   onWishOne(changeEvent) {
@@ -137,6 +151,22 @@ export class ManagerAssidnedWishesComponent implements OnInit {
     if (changeEvent) {
       console.log('Group Selected is: ' + this.wish3.nameEn);
     }
+  }
+
+  assignWishes(): void {
+    let userWishes: UserWish[] = [];
+    let itemIndex = this.userList.findIndex(item => item.username == this.selectedUsername);
+    this.user = this.userList[itemIndex];
+    console.log('fetchedUser : '+ this.user.username)
+    userWishes.push(new UserWish(this.user, this.wish1, 1));
+    userWishes.push(new UserWish(this.user, this.wish2, 2));
+    userWishes.push(new UserWish(this.user, this.wish3, 3));
+    this.nominationService.managerAssignWish(userWishes)
+      .subscribe(result => {
+        alert(result);
+      },
+        // error => this.errorMessage = <any>error);
+        error => alert("There is an error "));
   }
 
 }

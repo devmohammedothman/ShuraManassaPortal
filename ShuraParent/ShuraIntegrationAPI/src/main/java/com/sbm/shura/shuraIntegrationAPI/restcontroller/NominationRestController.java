@@ -1,9 +1,11 @@
 package com.sbm.shura.shuraIntegrationAPI.restcontroller;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sbm.shura.dto.BaseDTO;
+import com.sbm.shura.dto.UserWishDTO;
 import com.sbm.shura.management.NominationManage;
 
 @RestController
@@ -36,4 +39,21 @@ public class NominationRestController {
 	}
 	
 	
+	@RequestMapping (value = "managerassignwish", method = RequestMethod.POST,
+			consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	public ResponseEntity<String> managerAssignWish(@RequestBody List<UserWishDTO> list) throws Exception
+	{
+		try {
+			String msg = manage.managerAssignUserWish(list);
+			if (msg != null) {
+				return new ResponseEntity<String>(msg, HttpStatus.OK);
+			} else {
+				return new ResponseEntity<String>(HttpStatus.NOT_FOUND);
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return new ResponseEntity<String>(HttpStatus.NOT_FOUND);
+		}
+	}
 }

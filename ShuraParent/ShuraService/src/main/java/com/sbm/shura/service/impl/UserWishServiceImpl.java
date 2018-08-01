@@ -10,8 +10,11 @@ import org.springframework.stereotype.Service;
 
 import com.sbm.shura.dao.UserWishDao;
 import com.sbm.shura.dto.CommitteeDTO;
+import com.sbm.shura.dto.MenuDTO;
 import com.sbm.shura.dto.UserDTO;
 import com.sbm.shura.dto.UserWishDTO;
+import com.sbm.shura.entity.Committee;
+import com.sbm.shura.entity.User;
 import com.sbm.shura.entity.UserWish;
 import com.sbm.shura.service.UserWishService;
 
@@ -46,14 +49,19 @@ public class UserWishServiceImpl extends BasicServiceImpl<UserWishDTO, UserWish>
 	}
 
 	@Override
-	public List<CommitteeDTO> getUserWishesByUserId(long userId) {
-		return null;
+	public UserWishDTO getUserWishesByUserIdAndCommitte(long userId) {
+		return convertToDTO(_userWishDao.getUserWishesByUserIdAndCommitte(userId), new UserWishDTO());
 	}
 
 	@Override
 	public List<UserDTO> getCommitteeUserWishes(long committeeId) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void deleteWish(long userId) {
+		_userWishDao.deleteWish(userId);
 	}
 
 }

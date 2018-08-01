@@ -10,7 +10,7 @@ public class UserWishDTO extends BaseDTO {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private Integer Id;
+	private Long Id;
 	
 	private UserDTO nominatedUser;
 	
@@ -19,11 +19,11 @@ public class UserWishDTO extends BaseDTO {
 	private int wishOrder;
 	
 
-	public Integer getId() {
+	public Long getId() {
 		return Id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		Id = id;
 	}
 

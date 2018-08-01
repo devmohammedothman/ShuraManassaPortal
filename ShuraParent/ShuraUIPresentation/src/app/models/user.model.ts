@@ -2,7 +2,7 @@ import { Menu } from './menu.model';
 import { Permission } from './permission.model';
 import { Group } from './group.model';
 export class User {
-    userId: string;
+    userId: number;
     username: string;
     email: string;
     password: string;
@@ -10,7 +10,7 @@ export class User {
     menus: Menu[];
     permissions: Permission[];
 
-    constructor(userId: string, username: string, email: string, password: string,
+    constructor(userId: number, username: string, email: string, password: string,
     groups: Group[], menus: Menu[], permissions: Permission[]) {
         this.userId = userId;
         this.username = username;
