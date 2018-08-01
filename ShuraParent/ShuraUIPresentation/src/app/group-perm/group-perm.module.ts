@@ -9,19 +9,22 @@ import { FuseSharedModule } from '@fuse/shared.module';
 import { FuseSidebarModule, FuseThemeOptionsModule } from '@fuse/components';
 import { fuseConfig } from 'app/fuse-config';
 import { AuthGuard } from '../auth.guard';
+import { TranslateModule } from '@ngx-translate/core';
+import { ReactiveFormsModule } from '@angular/forms';
 
-const routes : Routes = [
+const routes: Routes = [
   {
       path        : 'perm',
-      canActivate: [AuthGuard],
+      // canActivate: [AuthGuard],
       component   : GroupPermComponent
   }
-]
+];
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule.forRoot(routes),
+    TranslateModule,
 
   // Fuse modules
     FuseModule.forRoot(fuseConfig),
@@ -29,8 +32,10 @@ const routes : Routes = [
     FuseSidebarModule,
     FuseThemeOptionsModule,
 
-    //material
-      MaterialModule
+    ReactiveFormsModule,
+
+    // material
+    MaterialModule
   ],
   declarations: [GroupPermComponent]
 })

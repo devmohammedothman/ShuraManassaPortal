@@ -1,41 +1,55 @@
-<div id="forms" class="page-layout simple fullwidth" fxLayout="column">
+<div class="page-layout carded fullwidth">
 
-    <div class="content p-24">
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg mat-accent-bg"></div>
+    <!-- / TOP BACKGROUND -->
 
-        <div fxLayout="column" fxLayoutAlign="start start" fxLayout.gt-md="row">
+    <!-- CENTER -->
+    <div class="center">
 
-            <form name="groupPerm" fxLayout="column" fxLayoutAlign="start" fxFlex="1 0 auto">
-                <mat-card>
-                    <mat-card-header class="mb-24">
-                        <h3 class="h3" fxLayoutAlign="flex-start" fxFlex="1 1 50%">Group Permissions</h3>
-                        <div fxLayoutAlign="flex-end" fxFlex="1 1 50%">
-                            <mat-checkbox [(ngModel)]="checked" [ngModelOptions]="{standalone: true}">Check all!</mat-checkbox>
-                        </div>
-                    </mat-card-header>
+        <!-- CONTENT HEADER -->
+        <div class="header mat-accent-bg p-24" fxLayout="row" fxLayoutAlign="start center">
+            <h2 class="m-0">{{ 'CONT.GPERM.TITLE' | translate }}</h2>
+        </div>
+        <!-- / CONTENT HEADER -->
 
-                    <mat-card-content>
-                        <div fxLayout="row" fxLayoutAlign="start center" class="mb-24">
-                            <mat-form-field>
-                                <mat-select (selectionChange)="onGroupSelect($event)" [(ngModel)]="groupname" name="group" placeholder="Choose a Group!"
-                                    required>
-                                    <mat-option *ngFor="let p of groups" [value]="p.nameEn">
-                                        {{p.nameEn}}
-                                    </mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                        </div>
-                        <div fxLayout="row" fxLayoutAlign="start center">
-                            <!-- <div *ngFor="let c of permissions">
+        <!-- CONTENT CARD -->
+        <div class="content-card mat-white-bg">
+
+            <!-- CONTENT TOOLBAR -->
+            <div class="toolbar px-24 py-8">
+                <span class="mr-24">{{ 'CONT.GPERM.SUBTITLE' | translate }}</span>
+                <mat-checkbox [(ngModel)]="checked" [ngModelOptions]="{standalone: true}">{{ 'CONT.FORMS.CHKALL' | translate }}</mat-checkbox>
+            </div>
+            <!-- / CONTENT TOOLBAR -->
+
+            <!-- CONTENT -->
+            <div class="content p-24">
+                <form name="groupPerm">
+
+                    <mat-form-field>
+                        <mat-select (selectionChange)="onGroupSelect($event)" [(ngModel)]="groupname" name="group" placeholder="{{ 'CONT.GPERM.GNAME' | translate }}"
+                            required>
+                            <mat-option *ngFor="let p of groups" [value]="p.nameEn">
+                                {{p.nameEn}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <!-- <div *ngFor="let c of permissions">
                                 <input type=”checkbox” [checked]="checked" [value]="c.nameEn"/> {{c.nameEn}}
                             </div> -->
 
-                             <mat-checkbox (change)="onCheckSelect($event)" [(ngModel)]="selectedPerm" name="perm" [checked]="checked" [value]="2"> Read</mat-checkbox>
-                            <mat-checkbox (change)="onCheckSelect($event)" [(ngModel)]="selectedPerm" name="perm" [checked]="checked" [value]="3"> Write</mat-checkbox>
-                            <!--<mat-checkbox [checked]="checked"> Permission</mat-checkbox> -->
-                        </div>
-                    </mat-card-content>
-                </mat-card>
-            </form>
+                    <mat-checkbox (change)="onCheckSelect($event)" [(ngModel)]="selectedPerm" name="perm" [checked]="checked" [value]="2"> {{ 'CONT.GPERM.READ' | translate }}</mat-checkbox>
+                    <mat-checkbox (change)="onCheckSelect($event)" [(ngModel)]="selectedPerm" name="perm" [checked]="checked" [value]="3"> {{ 'CONT.GPERM.WRITE' | translate }}</mat-checkbox>
+                    <!--<mat-checkbox [checked]="checked"> Permission</mat-checkbox> -->
+                </form>
+            </div>
+            <!-- / CONTENT -->
+
         </div>
+        <!-- / CONTENT CARD -->
+
     </div>
+    <!-- / CENTER -->
+
 </div>

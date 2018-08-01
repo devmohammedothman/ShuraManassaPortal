@@ -9,25 +9,33 @@ import { FuseSharedModule } from '@fuse/shared.module';
 import { FuseSidebarModule, FuseThemeOptionsModule } from '@fuse/components';
 import { fuseConfig } from 'app/fuse-config';
 import { AuthGuard } from '../auth.guard';
+import { TranslateModule } from '../../../node_modules/@ngx-translate/core';
+import { ReactiveFormsModule } from '../../../node_modules/@angular/forms';
  
-const routes :Routes = [
+const routes: Routes = [
   {
       path        : 'gua',
-      canActivate: [AuthGuard],
+      // canActivate: [AuthGuard],
       component   : GroupUserAssignComponent
   }
-]
+];
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule.forRoot(routes),
-// Fuse modules
-  FuseModule.forRoot(fuseConfig),
-  FuseSharedModule,
-  FuseSidebarModule,
-  FuseThemeOptionsModule,
-    //material
+
+    TranslateModule,
+
+    ReactiveFormsModule,
+
+    // Fuse modules
+    FuseModule.forRoot(fuseConfig),
+    FuseSharedModule,
+    FuseSidebarModule,
+    FuseThemeOptionsModule,
+
+    // material
     MaterialModule
   ],
   declarations: [GroupUserAssignComponent]

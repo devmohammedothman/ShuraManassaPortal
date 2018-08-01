@@ -13,11 +13,12 @@ import { FuseSidebarModule, FuseThemeOptionsModule } from '@fuse/components';
 import { fuseConfig } from 'app/fuse-config';
 import { AuthGuard } from '../auth.guard';
 import { AddEditCommitteeComponent } from './add-edit-committee/add-edit-committee.component';
+import { TranslateModule } from '../../../node_modules/@ngx-translate/core';
 
-const routes : Routes= [
+const routes: Routes = [
   {
       path     : 'manage-committee/list',
-      canActivate : [AuthGuard],
+      // canActivate : [AuthGuard],
       component: ManageCommitteeComponent
   }
 ];
@@ -27,18 +28,20 @@ const routes : Routes= [
     CommonModule,
     RouterModule.forRoot(routes),
 
+    TranslateModule,
+
     BrowserModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
 
-     // Fuse modules
-     FuseModule.forRoot(fuseConfig),
-     FuseSharedModule,
-     FuseSidebarModule,
-     FuseThemeOptionsModule,
- 
-     // material
-       MaterialModule,
+    // Fuse modules
+    FuseModule.forRoot(fuseConfig),
+    FuseSharedModule,
+    FuseSidebarModule,
+    FuseThemeOptionsModule,
+
+    // material
+    MaterialModule,
   ],
   declarations: [ManageCommitteeComponent, AddEditCommitteeComponent],
   providers:[AddEditCommitteeComponent],
