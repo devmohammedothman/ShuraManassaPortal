@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, NavigationStart, Router } from '@angular/router';
-import { Subject } from 'rxjs';
+import { Subject, config } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
 import * as _ from 'lodash';
@@ -11,6 +11,7 @@ import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
 import { navigation } from 'app/navigation/navigation';
 import { StorageService } from 'app/services/storage.service';
 import { User } from '../../../models/user.model';
+import { lang } from '../../../../../node_modules/moment';
 
 @Component({
     selector   : 'toolbar',

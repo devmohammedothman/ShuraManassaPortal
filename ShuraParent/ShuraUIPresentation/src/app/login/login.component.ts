@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     authList: Auth[];
     errorMessage: string;
     logParam = new LoginParam();
-    //param = new User();
+    // param = new User();
     authParam = new Auth();
     userId: string;
     constructor(
@@ -138,24 +138,24 @@ export class LoginComponent implements OnInit, OnDestroy {
                 this.login();
             },
             // error => this.errorMessage = <any>error);
-            error => alert("Email or password incorrect "));
+            error => alert('Email or password incorrect'));
     }
 
     login(): void {
         this.userService.login(this.logParam)
             .subscribe(user => {
-                    let other = []; // your other array...
-                    user.groups.map(item => {
-                        return {
-                            group: item.nameEn
-                        }
-                    }).forEach(item => other.push(item));
-                    console.log('b login key : ' + this.authParam.access_token);
-                    this.StorageService.saveInLocal('token', this.authParam.access_token);
-                    this.StorageService.saveInLocal('user', JSON.stringify(user));
-                    this.StorageService.saveInLocal('group', JSON.stringify(other));
-                    this.router.navigate(['welcome']);
-                
+                const other = []; // your other array...
+                user.groups.map(item => {
+                    return {
+                        group: item.nameEn
+                    };
+                }).forEach(item => other.push(item));
+                user.avatarUrl = '';
+                console.log('b login key : ' + this.authParam.access_token);
+                this.StorageService.saveInLocal('token', this.authParam.access_token);
+                this.StorageService.saveInLocal('user', JSON.stringify(user));
+                this.StorageService.saveInLocal('group', JSON.stringify(other));
+                this.router.navigate(['welcome']);
             },
             error => this.errorMessage = <any>error);
     }

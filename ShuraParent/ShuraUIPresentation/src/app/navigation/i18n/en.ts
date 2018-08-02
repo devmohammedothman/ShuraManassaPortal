@@ -1,6 +1,12 @@
 export const locale = {
     lang: 'en',
     data: {
+        'SITE': {
+            'TITLE': 'The e-platform for Saudi shura council',
+            'PROJ': {
+                'TITLE': 'Al-Manassa'
+            },
+        },
         'NAV': {
             'PERMISSION'     : 'Permission',
             'DASHBOARD' : 'Dashboard',
@@ -30,7 +36,6 @@ export const locale = {
             'MANAGEUSER' : 'Manage User', 
             'MANAGECOMMITTEE' : 'Manage Committee', 
             'COMMNAME' : 'Committee Name', 
-            
         },
         'CONT': {
             'FORMS': {

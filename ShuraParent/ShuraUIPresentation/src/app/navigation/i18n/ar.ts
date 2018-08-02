@@ -1,6 +1,12 @@
 export const locale = {
     lang: 'ar',
     data: {
+        'SITE': {
+            'TITLE': 'المنصة الإلكترونية لمجلس الشوري السعودي',
+            'PROJ': {
+                'TITLE': 'المنصة'
+            },
+        },
         'NAV': {
             'PERMISSION'     : 'صلاحيات',
             'DASHBOARD' : 'اللوحة الرئيسية',

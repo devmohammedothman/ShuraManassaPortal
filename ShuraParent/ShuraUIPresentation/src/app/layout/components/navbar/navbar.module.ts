@@ -5,6 +5,7 @@ import { FuseNavigationModule } from '@fuse/components';
 import { FuseSharedModule } from '@fuse/shared.module';
 
 import { NavbarComponent } from 'app/layout/components/navbar/navbar.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
     declarations: [
@@ -15,7 +16,9 @@ import { NavbarComponent } from 'app/layout/components/navbar/navbar.component';
         MatIconModule,
 
         FuseSharedModule,
-        FuseNavigationModule
+        FuseNavigationModule,
+
+        TranslateModule
     ],
     exports     : [
         NavbarComponent

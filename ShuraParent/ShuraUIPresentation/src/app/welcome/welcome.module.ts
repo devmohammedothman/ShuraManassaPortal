@@ -9,7 +9,7 @@ import { TranslateModule } from '@ngx-translate/core';
 const routes = [
   {
       path     : 'welcome',
-      canActivate: [AuthGuard],
+      // canActivate: [AuthGuard],
       component: WelcomeComponent
   }
 ];
