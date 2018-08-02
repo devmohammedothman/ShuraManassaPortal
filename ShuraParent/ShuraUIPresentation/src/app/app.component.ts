@@ -27,8 +27,8 @@ export class AppComponent implements OnInit, OnDestroy
 {
     navigation: any;
     fuseConfig: any;
-    users: any;
-    groups: any;
+    users: User[];
+    groups: Group[];
     committes: any;
     errorMessage: string;
 

@@ -77,7 +77,7 @@ export class GroupUserAssignComponent implements OnInit {
     assignUserToGroup(): void {
         this.userService.assignUserToGroup(this.assignParam)
             .subscribe(user => {
-                if (user.userId == "-1") {
+                if (user.userId == -1) {
                     alert("Error");
                 } else {
                     alert("Done!!!");

@@ -18,7 +18,7 @@ import java.util.List;
 @Table(name="\"USER\"")
 @NamedQueries({
 	@NamedQuery(name="User.findAll", query="SELECT u FROM User u"),
-	@NamedQuery(name = "User.findByUserId", query = "SELECT u FROM User u WHERE u.id = :userId"),
+	@NamedQuery(name = "User.findByUserId", query = "SELECT u FROM User u WHERE u.userId = :userId"),
 	@NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email"),
 	@NamedQuery(name = "User.findByEmailAndPassword", query = "SELECT u FROM User u WHERE u.email = :email AND u.password = :password") 
 })
@@ -28,8 +28,8 @@ public class User extends BaseEntity implements  UserDetails,Serializable {
 	@Id
 	@SequenceGenerator(name="USER_ID_GENERATOR" , sequenceName = "user_seq" )
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="USER_ID_GENERATOR")
-	@Column(unique=true, nullable=false)
-	private long id;
+	@Column(name="id",unique=true, nullable=false)
+	private long userId;
 
 	@Column(length=100)
 	private String email;
@@ -83,15 +83,15 @@ public class User extends BaseEntity implements  UserDetails,Serializable {
 	}
 	
 	public User(Long userId) {
-		this.id = userId;
+		this.userId = userId;
 	}
 
 	public long getId() {
-		return this.id;
+		return this.userId;
 	}
 
 	public void setId(long id) {
-		this.id = id;
+		this.userId = id;
 	}
 
 	public String getEmail() {
