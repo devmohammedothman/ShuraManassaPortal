@@ -14,7 +14,7 @@ export const fuseConfig: FuseConfig = {
         width         : 'fullwidth',
         navbar        : {
             hidden    : false,
-            position  : 'right',
+            position  : 'left',
             folded    : false,
             background: 'mat-fuse-dark-700-bg'
         },

@@ -1,0 +1,49 @@
+html:lang(ar) {
+    body {
+        direction: rtl;
+        .material-icons {
+            direction: rtl;
+        }
+        navbar {
+            .navbar-vertical {
+                .navbar-header {
+                    .logo {
+                        .logo-text {
+                            margin-left: 0;
+                            margin-right: 8px;
+                        }
+                    }
+                }
+            }
+        }
+
+        .nav {
+            .nav-group {
+                > .group-title {
+                    padding-left: 0;
+                    padding-right: 24px;
+                }
+            }
+            .nav-item {
+                .nav-link {
+                    .nav-link-icon {
+                        margin-right: 0;
+                        margin-left: 16px;
+                    }
+                    .collapsable-arrow {
+                        transform: rotate(180deg);
+                    }
+                }
+                &.open {
+
+                    > .nav-link {
+            
+                        .collapsable-arrow {
+                            transform: rotate(90deg);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
