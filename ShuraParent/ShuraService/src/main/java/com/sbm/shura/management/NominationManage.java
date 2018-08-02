@@ -6,7 +6,7 @@ import com.sbm.shura.dto.UserWishDTO;
 
 public interface NominationManage {
 	
-	UserWishDTO addUserWish(UserWishDTO userWishDto);
+	String addUserWish(List<UserWishDTO> list);
 	
 	List<UserWishDTO> getUserWishList();
 	

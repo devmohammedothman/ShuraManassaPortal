@@ -5,57 +5,33 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.sbm.shura.dto.CommitteeDTO;
-import com.sbm.shura.dto.UserDTO;
 import com.sbm.shura.dto.UserWishDTO;
 import com.sbm.shura.management.NominationManage;
-import com.sbm.shura.service.CommitteeService;
-import com.sbm.shura.service.UserService;
 import com.sbm.shura.service.UserWishService;
-import static java.lang.Math.toIntExact;
 
 @Component
 public class NominationManageImpl implements NominationManage {
 
 	@Autowired
 	private UserWishService _userWishService;
-
-	@Autowired
-	private UserService _userService;
-
-	@Autowired
-	private CommitteeService _committeeService;
-
+		
 	@Override
-<<<<<<< HEAD
-	public UserWishDTO addUserWish(UserWishDTO userWishDto) {
-		
-		//validate User Object is in member Group
-		
-		
-		/*GroupDTO groupDto =  uwdto.getNominatedUser().getGroups().stream().
-				filter( item -> item.getNameEn().equals("ADMIN")).findFirst().get();
-		if(groupDto != null)*/
-			return _userWishService.addUserWish(userWishDto);
-//		 return null; 
-=======
-	public UserWishDTO addUserWish(long userId, long committeId, long wishOrder) {
-
-		// validate User Object is in member Group
-		UserWishDTO uwdto = new UserWishDTO();
-		uwdto.setNominatedUser(_userService.findById(userId));
-		uwdto.setWishedCommitee(_committeeService.findById(committeId));
-		uwdto.setWishOrder(toIntExact(wishOrder));
-		/*
-		 * GroupDTO groupDto = uwdto.getNominatedUser().getGroups().stream(). filter(
-		 * item -> item.getNameEn().equals("ADMIN")).findFirst().get(); if(groupDto !=
-		 * null)
-		 */
-		return _userWishService.addUserWish(uwdto);
-		/* else return null; */
->>>>>>> branch 'ftb-basestarterfeatures' of https://github.com/sbm-mohammedothman/ShuraManassaPortal.git
+	public String addUserWish(List<UserWishDTO> list) {
+		UserWishDTO wishObj = getUserWishesByUserIdAndCommitte(list.get(0).getNominatedUser().getUserId());
+		if (wishObj.getId().equals(-1L)) {
+			for (int i = 0; i < list.size(); i++) {
+				_userWishService.addUserWish(list.get(i));
+			}
+			return "Done Added New";
+		} else {
+			_userWishService.deleteWish(list.get(0).getNominatedUser().getUserId());
+			for (int i = 0; i < list.size(); i++) {
+				_userWishService.addUserWish(list.get(i));
+			}
+			return "Done Updated";
+		}
 	}
-
+	
 	@Override
 	public List<UserWishDTO> getUserWishList() {
 		// TODO Auto-generated method stub

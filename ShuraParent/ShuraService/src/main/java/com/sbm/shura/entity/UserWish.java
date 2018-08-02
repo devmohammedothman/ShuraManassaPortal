@@ -61,7 +61,7 @@ public class UserWish {
 		return Id;
 	}
 
-	protected void setId(Long id) {
+	public void setId(Long id) {
 		Id = id;
 	}
 

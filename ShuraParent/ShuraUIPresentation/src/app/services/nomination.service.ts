@@ -15,20 +15,33 @@ export class NominationService {
   private baseUrl = ServiceUtils.baseUrl + 'nomination/';
   private token = 'bearer ' + this.storageService.getFromLocal('token');
 
-  assignUserWishesService(userWishesObject: MemberAssignedWishes) {
+  // assignUserWishesService(userWishesObject: MemberAssignedWishes) {
 
+  //   let headers = new Headers({
+  //     'Content-Type': 'application/json',
+  //     'authorization': this.token,
+  //     'Access-Control': 'Allow-Origin'
+  //   });
+
+  //   let options = new RequestOptions({ headers: headers });
+
+  //   return this.http.post(this.baseUrl + 'addwish', userWishesObject, options)
+  //     .map(this.extractData)
+  //     .catch(this.handleErrorObservable);
+  // }
+
+  assignUserWishesService(userWishList: UserWish[]): Observable<string> {
     let headers = new Headers({
       'Content-Type': 'application/json',
       'authorization': this.token,
       'Access-Control': 'Allow-Origin'
     });
-
     let options = new RequestOptions({ headers: headers });
-
-    return this.http.post(this.baseUrl + 'addwish', userWishesObject, options)
+    return this.http.post(this.baseUrl + 'addwish', userWishList, options)
       .map(this.extractData)
       .catch(this.handleErrorObservable);
   }
+  
   managerAssignWish(userWishList: UserWish[]): Observable<string> {
     let headers = new Headers({
       'Content-Type': 'application/json',

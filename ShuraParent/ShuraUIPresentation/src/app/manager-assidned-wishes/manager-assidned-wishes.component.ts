@@ -156,6 +156,7 @@ export class ManagerAssidnedWishesComponent implements OnInit {
   assignWishes(): void {
     let userWishes: UserWish[] = [];
     let itemIndex = this.userList.findIndex(item => item.username == this.selectedUsername);
+    debugger;
     this.user = this.userList[itemIndex];
     console.log('fetchedUser : '+ this.user.username)
     userWishes.push(new UserWish(this.user, this.wish1, 1));

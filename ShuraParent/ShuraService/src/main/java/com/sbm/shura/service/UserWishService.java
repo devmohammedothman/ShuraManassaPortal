@@ -8,7 +8,7 @@ import com.sbm.shura.dto.UserWishDTO;
 public interface UserWishService {
 	
 	UserWishDTO addUserWish(UserWishDTO uwdto);
-	
+		
 	List<UserWishDTO> getUserWishList();
 	
 	UserWishDTO getUserWishesByUserIdAndCommitte(long userId);

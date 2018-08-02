@@ -7,6 +7,8 @@ import { NominationService } from '../services/nomination.service';
 import { CommitteeService } from '../services/committee.service';
 import { MemberAssignedWishes } from 'app/models/member-assigned-wishes';
 import { Wish } from '../models/wish.model';
+import { UserWish } from 'app/models/user-wish.model';
+import { User } from 'app/models/user.model';
 
 
 @Component({
@@ -28,16 +30,12 @@ export class MemberWishesComponent implements OnInit {
   wish1: Committee;
   wish2: Committee;
   wish3: Committee;
-  
-  userWishesObject:MemberAssignedWishes;
-
-  
+  user: User;
+    
   constructor(public snackBar: MatSnackBar,private commServiceObj:CommitteeService,private nominateServiceObj:NominationService,
      private storageService: StorageService) {
 
     this.populateCommittes();    
-
-    this.userWishesObject = new MemberAssignedWishes();
    }
 
    populateCommittes(): void {
@@ -72,14 +70,21 @@ export class MemberWishesComponent implements OnInit {
   // Form Submit Function
   onFormSubmit(): void {
 
-    //debugger;
-    this.userWishesObject.nominatedUser = JSON.parse(this.storageService.getFromLocal('user'));
+    debugger;
+    this.user = JSON.parse(this.storageService.getFromLocal('user'));
     
-   this.nominateServiceObj.assignUserWishesService(this.userWishesObject).subscribe((data:any) => { 
+
+    let userWishes: UserWish[] = [];
+    userWishes.push(new UserWish(this.user, this.wish1, 1));
+    userWishes.push(new UserWish(this.user, this.wish2, 2));
+    userWishes.push(new UserWish(this.user, this.wish3, 3));
+    
+   this.nominateServiceObj.assignUserWishesService(userWishes).subscribe((data:any) => { 
      this.openSnackBar('Added Successfully','Close');
    },
    error => this.openSnackBar('Error Happened while Adding','Close')
     );
+    this.memberWishFormGroup.reset;
   }
 
   openSnackBar(message: string, action: string): any {
@@ -96,10 +101,10 @@ export class MemberWishesComponent implements OnInit {
       this.wishes2 = this.wishes2.filter(wish => wish.id !== this.wish1.id);
       this.wishes3 = this.wishes3.filter(wish => wish.id !== this.wish1.id);
       //debugger;
-       const firstwishSentObj = new Wish();
-      firstwishSentObj.wishedCommitee = this.wish1;
-      firstwishSentObj.wishOrder = 1;
-      this.userWishesObject.wishesList.push(firstwishSentObj);
+      //  const firstwishSentObj = new Wish();
+      // firstwishSentObj.wishedCommitee = this.wish1;
+      // firstwishSentObj.wishOrder = 1;
+      // this.userWishesObject.wishesList.push(firstwishSentObj);
             
     }
   }
@@ -109,20 +114,20 @@ export class MemberWishesComponent implements OnInit {
       this.wishes3 = this.wishes3.filter(wish => wish.id !== this.wish2.id);
       
 
-      const secondwishSentObj = new Wish();
-      secondwishSentObj.wishedCommitee = this.wish2;
-      secondwishSentObj.wishOrder = 2;
-      this.userWishesObject.wishesList.push(secondwishSentObj);
+      // const secondwishSentObj = new Wish();
+      // secondwishSentObj.wishedCommitee = this.wish2;
+      // secondwishSentObj.wishOrder = 2;
+      // this.userWishesObject.wishesList.push(secondwishSentObj);
 
     }
   }
 
   onWishThree(changeEvent) {
-    if (changeEvent) {
-      const thirdwishSentObj = new Wish();
-      thirdwishSentObj.wishedCommitee = this.wish3;
-      thirdwishSentObj.wishOrder = 3;
-      this.userWishesObject.wishesList.push(thirdwishSentObj);
-    }
+    // if (changeEvent) {
+    //   const thirdwishSentObj = new Wish();
+    //   thirdwishSentObj.wishedCommitee = this.wish3;
+    //   thirdwishSentObj.wishOrder = 3;
+    //   this.userWishesObject.wishesList.push(thirdwishSentObj);
+    // }
   }
 }
