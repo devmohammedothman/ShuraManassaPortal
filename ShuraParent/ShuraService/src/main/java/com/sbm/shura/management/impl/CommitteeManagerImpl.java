@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.sbm.shura.dto.CommitteeDTO;
+import com.sbm.shura.dto.ResponseDTO;
 import com.sbm.shura.management.CommitteeManager;
 import com.sbm.shura.service.CommitteeService;
 
@@ -16,62 +17,72 @@ public class CommitteeManagerImpl implements CommitteeManager {
 	private CommitteeService commService; 
 
 	@Override
-	public CommitteeDTO addCommittee(CommitteeDTO obj)  {
-		// TODO Auto-generated method stub
+	public ResponseDTO addCommittee(CommitteeDTO obj)  {
+		ResponseDTO responseDTO = null;
 		try {
-			return commService.addCommittee(obj);
+			CommitteeDTO committeeDTO = commService.addCommittee(obj);
+			responseDTO =  new ResponseDTO("Shura.business.code.1000", "Commitee has been added successfully", "Commitee has been added successfully",
+					committeeDTO);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return responseDTO;
+	}
+
+	@Override
+	public ResponseDTO getCommitteeList()  {
+		ResponseDTO responseDTO = null;
+		try {
+			List<CommitteeDTO> committeeDTOs = commService.getCommitteeList();
+			 responseDTO = new ResponseDTO("Shura.business.code.1000", "Commitees has been retrieved successfully", "Commitees has been retrieved successfully",
+						committeeDTOs);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
+		return responseDTO;
 	}
 
 	@Override
-	public List<CommitteeDTO> getCommitteeList()  {
-		// TODO Auto-generated method stub
+	public ResponseDTO getCommitteeById(int id)  {
+		ResponseDTO responseDTO = null;
 		try {
-			return commService.getCommitteeList();
+			CommitteeDTO committeeDTO = commService.getCommitteeById(id);
+			 responseDTO = new ResponseDTO("Shura.business.code.1000", "Commitee has been retrieved successfully", "Commitee has been retrieved successfully",
+						committeeDTO);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
+		return responseDTO;
 	}
 
 	@Override
-	public CommitteeDTO getCommitteeById(int id)  {
-		// TODO Auto-generated method stub
+	public ResponseDTO updateCommittee(CommitteeDTO obj)  {
+		ResponseDTO responseDTO = null;
 		try {
-			return commService.getCommitteeById(id);
+			CommitteeDTO committeeDTO = commService.updateCommittee(obj);
+			responseDTO = new ResponseDTO("Shura.business.code.1000", "Commitee has been retrieved successfully", "Commitee has been retrieved successfully",
+					committeeDTO);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
+		return responseDTO;
 	}
 
 	@Override
-	public CommitteeDTO updateCommittee(CommitteeDTO obj)  {
-		// TODO Auto-generated method stub
-		try {
-			return commService.updateCommittee(obj);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	@Override
-	public void deleteCommittee(int id)  {
-		// TODO Auto-generated method stub
+	public ResponseDTO deleteCommittee(int id)  {
+		ResponseDTO responseDTO = null;
 		try {
 			commService.deleteCommittee(id);
+			responseDTO = new ResponseDTO("Shura.business.code.1000", "Commitee has been deleted successfully", "Commitee has been deleted successfully",
+					null);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return responseDTO;
 	}
 
 }
