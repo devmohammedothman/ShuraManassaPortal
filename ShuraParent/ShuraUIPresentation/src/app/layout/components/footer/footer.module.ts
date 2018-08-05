@@ -5,6 +5,7 @@ import { MatButtonModule, MatIconModule, MatToolbarModule } from '@angular/mater
 import { FuseSharedModule } from '@fuse/shared.module';
 
 import { FooterComponent } from 'app/layout/components/footer/footer.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
     declarations: [
@@ -12,6 +13,8 @@ import { FooterComponent } from 'app/layout/components/footer/footer.component';
     ],
     imports     : [
         RouterModule,
+
+        TranslateModule,
 
         MatButtonModule,
         MatIconModule,

@@ -186,6 +186,7 @@ export class ToolbarComponent implements OnInit, OnDestroy
 
         // Use the selected language for translations
         this._translateService.use(langId);
+        document.getElementById('generalHTML').lang = langId;
     }
 
     logout(): void {

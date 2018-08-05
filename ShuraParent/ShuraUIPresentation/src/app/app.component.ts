@@ -71,6 +71,8 @@ export class AppComponent implements OnInit, OnDestroy
 
         // Set the default language
         this._translateService.setDefaultLang('ar');
+        document.getElementById('generalHTML').lang = 'ar';
+        
 
         // Set the navigation translations
         this._fuseTranslationLoaderService.loadTranslations(navigationEnglish, navigationArabic);
