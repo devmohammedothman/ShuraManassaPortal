@@ -3,17 +3,18 @@ package com.sbm.shura.management;
 import java.util.List;
 
 import com.sbm.shura.dto.CommitteeDTO;
+import com.sbm.shura.dto.ResponseDTO;
 
 public interface CommitteeManager {
 	
-	CommitteeDTO addCommittee(CommitteeDTO obj) ;
+	ResponseDTO addCommittee(CommitteeDTO obj) ;
 	
-	List<CommitteeDTO> getCommitteeList() ;
+	ResponseDTO getCommitteeList() ;
 	
-	CommitteeDTO getCommitteeById(int id) ;
+	ResponseDTO getCommitteeById(int id) ;
 	
-	CommitteeDTO updateCommittee(CommitteeDTO obj) ;
+	ResponseDTO updateCommittee(CommitteeDTO obj) ;
 	
-	void deleteCommittee(int id) throws Exception;
+	ResponseDTO deleteCommittee(int id) throws Exception;
 
 }

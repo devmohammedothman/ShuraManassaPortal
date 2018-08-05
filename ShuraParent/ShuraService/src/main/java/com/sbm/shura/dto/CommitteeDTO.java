@@ -15,7 +15,7 @@ public class CommitteeDTO extends BaseDTO {
 
 	private String nameEn;
 
-	private UserDTO commManager;
+	private UserDTO comManager;
 
 	public CommitteeDTO(Long id) {
 		this.id = id;
@@ -48,12 +48,12 @@ public class CommitteeDTO extends BaseDTO {
 		this.nameEn = nameEn;
 	}
 
-	public UserDTO getCommManager() {
-		return commManager;
+	public UserDTO getComManager() {
+		return comManager;
 	}
 
-	public void setCommManager(UserDTO commManager) {
-		this.commManager = commManager;
+	public void setComManager(UserDTO comManager) {
+		this.comManager = comManager;
 	}
 
 }
