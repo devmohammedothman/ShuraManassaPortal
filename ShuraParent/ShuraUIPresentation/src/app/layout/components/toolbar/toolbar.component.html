@@ -29,7 +29,7 @@
             <button mat-button [matMenuTriggerFor]="userMenu" class="user-button">
                 <div fxLayout="row" fxLayoutAlign="center center">
                     <img class="avatar" src="assets/images/avatars/profile.jpg"> <!-- src="{{user.avatarUrl}}" -->
-                    <span *ngIf="user != null" class="username mr-12" fxHide fxShow.gt-sm>{{user.username}}</span>
+                    <span *ngIf="user != null" class="username mr-12 ml-0" fxHide fxShow.gt-sm>{{user.username}}</span>
                     <mat-icon class="s-16" fxHide.xs>keyboard_arrow_down</mat-icon>
                 </div>
             </button>
@@ -61,7 +61,7 @@
 
             <button mat-button fxHide fxShow.gt-xs class="language-button" [matMenuTriggerFor]="languageMenu">
                 <div fxLayout="row" fxLayoutAlign="center center">
-                    <img class="flag mr-8" [src]="'assets/images/flags/'+selectedLanguage.flag+'.png'">
+                    <img class="flag mr-8 ml-0" [src]="'assets/images/flags/'+selectedLanguage.flag+'.png'">
                     <span class="iso text-uppercase">{{selectedLanguage.id}}</span>
                 </div>
             </button>
@@ -70,7 +70,7 @@
 
                 <button mat-menu-item *ngFor="let lang of languages" (click)="setLanguage(lang.id)">
                     <span fxLayout="row" fxLayoutAlign="start center">
-                        <img class="flag mr-16" [src]="'assets/images/flags/'+lang.flag+'.png'">
+                        <img class="flag mr-16 ml-0" [src]="'assets/images/flags/'+lang.flag+'.png'">
                         <span class="iso">{{lang.title}}</span>
                     </span>
                 </button>

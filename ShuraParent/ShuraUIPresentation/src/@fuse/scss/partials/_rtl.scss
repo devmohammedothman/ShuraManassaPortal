@@ -1,4 +1,53 @@
 html:lang(ar) {
+    // ######################
+    // SPACING HELPERS
+    // ######################
+    @each $breakpoint in map-keys($grid-breakpoints) {
+        @include media-breakpoint-up($breakpoint) {
+            $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+            @each $prop,
+            $abbrev in (margin: m, padding: p) {
+                @for $index from 0 through 64 {
+                    $size: $index * 4;
+                    $length: #{$size}px;
+                    .#{$abbrev}r#{$infix}-#{$size} {
+                        #{$prop}-left: $length !important;
+                    }
+                    .#{$abbrev}l#{$infix}-#{$size} {
+                        #{$prop}-right: $length !important;
+                    }
+                }
+                @if ($abbrev==m) {
+                    // Some special margin utils for flex alignments
+                    .mr#{$infix}-auto {
+                        margin-left: auto !important;
+                    }
+                    .ml#{$infix}-auto {
+                        margin-right: auto !important;
+                    }
+                    .mx#{$infix}-auto {
+                        margin-left: auto !important;
+                        margin-right: auto !important;
+                    }
+                }
+            }
+        }
+    } // ######################
+    // BORDER HELPERS
+    // ######################
+    .border-right,
+    .br {
+        border-left: $border-style;
+    }
+    .border-left,
+    .bl {
+        border-right: $border-style;
+    }
+    .border-horizontal,
+    .b-x {
+        border-right: $border-style;
+        border-left: $border-style;
+    }
     body {
         direction: rtl;
         .material-icons {
@@ -16,10 +65,9 @@ html:lang(ar) {
                 }
             }
         }
-
         .nav {
             .nav-group {
-                > .group-title {
+                >.group-title {
                     padding-left: 0;
                     padding-right: 24px;
                 }
@@ -35,15 +83,30 @@ html:lang(ar) {
                     }
                 }
                 &.open {
-
-                    > .nav-link {
-            
+                    >.nav-link {
                         .collapsable-arrow {
                             transform: rotate(90deg);
                         }
                     }
                 }
             }
+        }
+        .mat-menu-panel {
+            .mat-menu-item {
+                [fxlayout="row"] {
+                    flex-direction: row-reverse !important;
+                }
+            }
+        }
+        .mat-form-field-label {
+            text-align: right;
+        }
+        mat-paginator {
+            direction: ltr;
+            // .mat-paginator-range-actions,
+            // .mat-paginator-container {
+            //     flex-direction: row-reverse;
+            // }
         }
     }
 }
