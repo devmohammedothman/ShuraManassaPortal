@@ -10,8 +10,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sbm.shura.commonlib.dtoresponsehandler.ResponseDTO;
+import com.sbm.shura.commonlib.exceptions.types.ControllerException;
 import com.sbm.shura.dto.CommitteeDTO;
-import com.sbm.shura.dto.ResponseDTO;
 import com.sbm.shura.management.CommitteeManager;
 
 @RestController
@@ -28,7 +29,7 @@ public class CommitteeController {
 	@RequestMapping(value = "/getcommlist", method = RequestMethod.GET,
 			consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
-	public ResponseDTO getAllCommittees()
+	public ResponseDTO getAllCommittees() throws ControllerException
 	{
 		return commManager.getCommitteeList();
 	}
@@ -36,7 +37,7 @@ public class CommitteeController {
 	@RequestMapping (value = "/addcomm", method = RequestMethod.POST,
 			consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
-	public ResponseDTO addCommittee(@RequestBody CommitteeDTO commDtoObj) throws Exception
+	public ResponseDTO addCommittee(@RequestBody CommitteeDTO commDtoObj) throws ControllerException
 	{
 		return commManager.addCommittee(commDtoObj);
 	}

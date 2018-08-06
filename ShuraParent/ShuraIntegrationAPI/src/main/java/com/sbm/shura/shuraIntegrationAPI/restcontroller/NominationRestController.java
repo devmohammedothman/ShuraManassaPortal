@@ -1,10 +1,10 @@
 package com.sbm.shura.shuraIntegrationAPI.restcontroller;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sbm.shura.commonlib.dtoresponsehandler.ResponseDTO;
+import com.sbm.shura.commonlib.exceptions.types.ControllerException;
 import com.sbm.shura.dto.UserWishDTO;
 import com.sbm.shura.management.NominationManage;
 
@@ -30,38 +32,18 @@ public class NominationRestController {
 	@RequestMapping (value = "addwish", method = RequestMethod.POST,
 			consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
-	public ResponseEntity<String> addUserWish(@RequestBody List<UserWishDTO> userWishDtoList) throws Exception
+	public ResponseDTO addUserWish(@RequestBody List<UserWishDTO> userWishDtoList) throws ControllerException
 	{
-		try {
-			String msg = manage.addUserWish(userWishDtoList);
-			if (msg != null) {
-				return new ResponseEntity<String>(msg, HttpStatus.OK);
-			} else {
-				return new ResponseEntity<String>(HttpStatus.NOT_FOUND);
-			}
-		} catch (Exception ex) {
-			ex.printStackTrace();
-			return new ResponseEntity<String>(HttpStatus.NOT_FOUND);
-		}
+			return manage.addUserWish(userWishDtoList);
 	}
 	
 	
 	@RequestMapping (value = "managerassignwish", method = RequestMethod.POST,
 			consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
-	public ResponseEntity<String> managerAssignWish(@RequestBody List<UserWishDTO> list) throws Exception
+	public ResponseDTO managerAssignWish(@RequestBody List<UserWishDTO> list) throws ControllerException
 	{
-		try {
-			String msg = manage.managerAssignUserWish(list);
-			if (msg != null) {
-				return new ResponseEntity<String>(msg, HttpStatus.OK);
-			} else {
-				return new ResponseEntity<String>(HttpStatus.NOT_FOUND);
-			}
-		} catch (Exception ex) {
-			ex.printStackTrace();
-			return new ResponseEntity<String>(HttpStatus.NOT_FOUND);
-		}
+			return manage.managerAssignUserWish(list);
 	}
 	
 }

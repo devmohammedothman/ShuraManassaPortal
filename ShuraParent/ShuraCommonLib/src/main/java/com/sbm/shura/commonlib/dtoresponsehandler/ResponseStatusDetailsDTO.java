@@ -1,4 +1,4 @@
-package com.sbm.shura.dto;
+package com.sbm.shura.commonlib.dtoresponsehandler;
 
 
 import java.io.Serializable;

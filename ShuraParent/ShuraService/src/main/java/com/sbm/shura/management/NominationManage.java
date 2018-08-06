@@ -2,15 +2,17 @@ package com.sbm.shura.management;
 
 import java.util.List;
 
+import com.sbm.shura.commonlib.dtoresponsehandler.ResponseDTO;
+import com.sbm.shura.commonlib.exceptions.types.ControllerException;
 import com.sbm.shura.dto.UserWishDTO;
 
 public interface NominationManage {
 	
-	String addUserWish(List<UserWishDTO> list);
+	ResponseDTO addUserWish(List<UserWishDTO> list)  throws ControllerException;
 	
-	List<UserWishDTO> getUserWishList();
+	ResponseDTO getUserWishList()  throws ControllerException;
 	
-	public UserWishDTO getUserWishesByUserIdAndCommitte(long userId);
+	public ResponseDTO getUserWishesByUserIdAndCommitte(long userId)  throws ControllerException;
 	
-	String managerAssignUserWish(List<UserWishDTO> list);
+	ResponseDTO managerAssignUserWish(List<UserWishDTO> list)  throws ControllerException;
 }

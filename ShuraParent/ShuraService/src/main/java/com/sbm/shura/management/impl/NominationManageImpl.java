@@ -5,6 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.sbm.shura.commonlib.dtoresponsehandler.ResponseDTO;
+import com.sbm.shura.commonlib.exceptions.enums.ExceptionEnums.ExceptionEnums;
+import com.sbm.shura.commonlib.exceptions.types.BusinessException;
+import com.sbm.shura.commonlib.exceptions.types.ControllerException;
 import com.sbm.shura.dto.UserWishDTO;
 import com.sbm.shura.management.NominationManage;
 import com.sbm.shura.service.UserWishService;
@@ -16,48 +20,101 @@ public class NominationManageImpl implements NominationManage {
 	private UserWishService _userWishService;
 		
 	@Override
-	public String addUserWish(List<UserWishDTO> list) {
-		UserWishDTO wishObj = getUserWishesByUserIdAndCommitte(list.get(0).getNominatedUser().getUserId());
+	public ResponseDTO addUserWish(List<UserWishDTO> list) throws ControllerException {
+		ResponseDTO responseDTO = null;
+		String result = "";
+		try {
+		UserWishDTO wishObj = _userWishService.getUserWishesByUserIdAndCommitte(list.get(0).getNominatedUser().getUserId());
 		if (wishObj.getId().equals(-1L)) {
 			for (int i = 0; i < list.size(); i++) {
 				_userWishService.addUserWish(list.get(i));
 			}
-			return "Done Added New";
+			result = "Done Added New";
 		} else {
 			_userWishService.deleteWish(list.get(0).getNominatedUser().getUserId());
 			for (int i = 0; i < list.size(); i++) {
 				_userWishService.addUserWish(list.get(i));
 			}
-			return "Done Updated";
+			result = "Done Updated";
 		}
+		responseDTO =  new ResponseDTO("Shura.business.code.1000", "successfully", "successfully",
+				result);
+		}catch(BusinessException e) {
+			 e.printStackTrace();
+			 throw new ControllerException(ExceptionEnums.BUSINESS_ERROR);
+			}
+		 catch(Exception e1) {
+			 e1.printStackTrace();
+			 throw new ControllerException(ExceptionEnums.INVALID_OPERATION,e1);
+		 }
+		return responseDTO;
 	}
 	
 	@Override
-	public List<UserWishDTO> getUserWishList() {
-		// TODO Auto-generated method stub
-		return null;
+	public ResponseDTO getUserWishList() {
+		ResponseDTO responseDTO = null;
+//		try {
+//			responseDTO =  new ResponseDTO("Shura.business.code.1000", "successfully", "successfully",
+//					null);
+//		}catch(BusinessException e) {
+//			 e.printStackTrace();
+//			 throw new ControllerException(ExceptionEnums.BUSINESS_ERROR);
+//			}
+//		 catch(Exception e1) {
+//			 e1.printStackTrace();
+//			 throw new ControllerException(ExceptionEnums.INVALID_OPERATION,e1);
+//		 }
+		return responseDTO;
 	}
 
 	@Override
-	public UserWishDTO getUserWishesByUserIdAndCommitte(long userId) {
-		return _userWishService.getUserWishesByUserIdAndCommitte(userId);
+	public ResponseDTO getUserWishesByUserIdAndCommitte(long userId) throws ControllerException {
+		
+		ResponseDTO responseDTO = null;
+		try {
+			UserWishDTO userWishDTO = _userWishService.getUserWishesByUserIdAndCommitte(userId);
+			responseDTO =  new ResponseDTO("Shura.business.code.1000", "successfully", "successfully",
+					userWishDTO);
+		}catch(BusinessException e) {
+			 e.printStackTrace();
+			 throw new ControllerException(ExceptionEnums.BUSINESS_ERROR);
+			}
+		 catch(Exception e1) {
+			 e1.printStackTrace();
+			 throw new ControllerException(ExceptionEnums.INVALID_OPERATION,e1);
+		 }
+		return responseDTO;
 	}
 
 	@Override
-	public String managerAssignUserWish(List<UserWishDTO> list) {
-		UserWishDTO wishObj = getUserWishesByUserIdAndCommitte(list.get(0).getNominatedUser().getUserId());
+	public ResponseDTO managerAssignUserWish(List<UserWishDTO> list) throws ControllerException {
+		ResponseDTO responseDTO = null;
+		String result = "";
+		try {
+		UserWishDTO wishObj = _userWishService.getUserWishesByUserIdAndCommitte(list.get(0).getNominatedUser().getUserId());
 		if (wishObj.getId().equals(-1L)) {
 			for (int i = 0; i < list.size(); i++) {
 				_userWishService.addUserWish(list.get(i));
 			}
-			return "Done Added New";
+			result = "Done Added New";
 		} else {
 			_userWishService.deleteWish(list.get(0).getNominatedUser().getUserId());
 			for (int i = 0; i < list.size(); i++) {
 				_userWishService.addUserWish(list.get(i));
 			}
-			return "Done Updated";
+			result = "Done Updated";
 		}
+		responseDTO =  new ResponseDTO("Shura.business.code.1000", "successfully", "successfully",
+				result);
+		}catch(BusinessException e) {
+			 e.printStackTrace();
+			 throw new ControllerException(ExceptionEnums.BUSINESS_ERROR);
+			}
+		 catch(Exception e1) {
+			 e1.printStackTrace();
+			 throw new ControllerException(ExceptionEnums.INVALID_OPERATION,e1);
+		 }
+		return responseDTO;
 	}
 
 }

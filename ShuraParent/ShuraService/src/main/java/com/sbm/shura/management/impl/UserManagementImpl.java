@@ -5,6 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.sbm.shura.commonlib.dtoresponsehandler.ResponseDTO;
+import com.sbm.shura.commonlib.exceptions.enums.ExceptionEnums.ExceptionEnums;
+import com.sbm.shura.commonlib.exceptions.types.BusinessException;
+import com.sbm.shura.commonlib.exceptions.types.ControllerException;
 import com.sbm.shura.dto.GroupDTO;
 import com.sbm.shura.dto.MenuDTO;
 import com.sbm.shura.dto.PermissionDTO;
@@ -31,74 +35,257 @@ public class UserManagementImpl implements UserManagement {
 	private MenuService menuService;
 
 	@Override
-	public UserDTO createUser(UserDTO user, String groupName) {
-		return userService.add(user, groupName);
+	public ResponseDTO createUser(UserDTO user, String groupName) {
+		ResponseDTO responseDTO = null;
+		try {
+			UserDTO userDTO = userService.add(user, groupName);
+			responseDTO =  new ResponseDTO("Shura.business.code.1000", "successfully", "successfully",
+					userDTO);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return responseDTO;
 	}
 
 	@Override
-	public GroupDTO add(GroupDTO group) throws Exception {
-		return groupService.add(group);
+	public ResponseDTO add(GroupDTO group) throws ControllerException{
+		ResponseDTO responseDTO = null;
+		try {
+			GroupDTO groupDTO = groupService.add(group);
+			responseDTO =  new ResponseDTO("Shura.business.code.1000", "successfully", "successfully",
+					groupDTO);
+		} catch(BusinessException e) {
+			 e.printStackTrace();
+			 throw new ControllerException(ExceptionEnums.BUSINESS_ERROR);
+			}
+		 catch(Exception e1) {
+			 e1.printStackTrace();
+			 throw new ControllerException(ExceptionEnums.INVALID_OPERATION,e1);
+		 }
+		return responseDTO;
 	}
 
 	@Override
-	public GroupDTO getByEName(String name) throws Exception {
-		return groupService.getByEName(name);
+	public ResponseDTO getByEName(String name) throws ControllerException {
+
+		ResponseDTO responseDTO = null;
+		try {
+			GroupDTO groupDTO = groupService.getByEName(name);
+			responseDTO =  new ResponseDTO("Shura.business.code.1000", "successfully", "successfully",
+					groupDTO);
+		}catch(BusinessException e) {
+			 e.printStackTrace();
+			 throw new ControllerException(ExceptionEnums.BUSINESS_ERROR);
+			}
+		 catch(Exception e1) {
+			 e1.printStackTrace();
+			 throw new ControllerException(ExceptionEnums.INVALID_OPERATION,e1);
+		 }
+		return responseDTO;
 	}
 
 	@Override
-	public List<GroupDTO> getGroupList() throws Exception {
-		return groupService.getgroupList();
+	public ResponseDTO getGroupList() throws ControllerException {
+		ResponseDTO responseDTO = null;
+		try {
+			List<GroupDTO> groupDTOs = groupService.getgroupList();
+			responseDTO =  new ResponseDTO("Shura.business.code.1000", "successfully", "successfully",
+					groupDTOs);
+		}catch(BusinessException e) {
+			 e.printStackTrace();
+			 throw new ControllerException(ExceptionEnums.BUSINESS_ERROR);
+			}
+		 catch(Exception e1) {
+			 e1.printStackTrace();
+			 throw new ControllerException(ExceptionEnums.INVALID_OPERATION,e1);
+		 }
+		return responseDTO;
 	}
 
 	@Override
-	public MenuDTO addMenu(MenuDTO item) throws Exception {
-		return menuService.addMenu(item);
+	public ResponseDTO addMenu(MenuDTO item) throws ControllerException{
+		ResponseDTO responseDTO = null;
+		try {
+			MenuDTO menuDTO = menuService.addMenu(item);
+			responseDTO =  new ResponseDTO("Shura.business.code.1000", "successfully", "successfully",
+					menuDTO);
+		}catch(BusinessException e) {
+			 e.printStackTrace();
+			 throw new ControllerException(ExceptionEnums.BUSINESS_ERROR);
+			}
+		 catch(Exception e1) {
+			 e1.printStackTrace();
+			 throw new ControllerException(ExceptionEnums.INVALID_OPERATION,e1);
+		 }
+		return responseDTO;
 	}
 
 	@Override
-	public List<MenuDTO> getMenuList() throws Exception {
-		return menuService.getMenuList();
+	public ResponseDTO getMenuList() throws ControllerException{
+		
+		ResponseDTO responseDTO = null;
+		try {
+			 List<MenuDTO> menuDTO = menuService.getMenuList();
+			responseDTO =  new ResponseDTO("Shura.business.code.1000", "successfully", "successfully",
+					menuDTO);
+		}catch(BusinessException e) {
+			 e.printStackTrace();
+			 throw new ControllerException(ExceptionEnums.BUSINESS_ERROR);
+			}
+		 catch(Exception e1) {
+			 e1.printStackTrace();
+			 throw new ControllerException(ExceptionEnums.INVALID_OPERATION,e1);
+		 }
+		return responseDTO;
 	}
 
 	@Override
-	public PermissionDTO addPermission(PermissionDTO perm) throws Exception {
-		return permSerivce.addPermission(perm);
+	public ResponseDTO addPermission(PermissionDTO perm) throws ControllerException{
+		ResponseDTO responseDTO = null;
+		try {
+			PermissionDTO permissionDTO = permSerivce.addPermission(perm);
+			responseDTO =  new ResponseDTO("Shura.business.code.1000", "successfully", "successfully",
+					permissionDTO);
+		}catch(BusinessException e) {
+			 e.printStackTrace();
+			 throw new ControllerException(ExceptionEnums.BUSINESS_ERROR);
+			}
+		 catch(Exception e1) {
+			 e1.printStackTrace();
+			 throw new ControllerException(ExceptionEnums.INVALID_OPERATION,e1);
+		 }
+		return responseDTO;
 	}
 
 	@Override
-	public List<PermissionDTO> getPermList() throws Exception {
-		return permSerivce.getPermList();
+	public ResponseDTO getPermList() throws ControllerException {
+		ResponseDTO responseDTO = null;
+		try {
+			 List<PermissionDTO> permissionDTO = permSerivce.getPermList();
+			responseDTO =  new ResponseDTO("Shura.business.code.1000", "successfully", "successfully",
+					permissionDTO);
+		}catch(BusinessException e) {
+			 e.printStackTrace();
+			 throw new ControllerException(ExceptionEnums.BUSINESS_ERROR);
+			}
+		 catch(Exception e1) {
+			 e1.printStackTrace();
+			 throw new ControllerException(ExceptionEnums.INVALID_OPERATION,e1);
+		 }
+		return responseDTO;
 	}
 
 	@Override
-	public List<PermissionDTO> getPermListByMenu(long menuId) throws Exception {
-		return permSerivce.getPermListByMenu(menuId);
+	public ResponseDTO getPermListByMenu(long menuId) throws ControllerException {
+		
+		ResponseDTO responseDTO = null;
+		try {
+			List<PermissionDTO> permissionDTOs = permSerivce.getPermListByMenu(menuId);
+			responseDTO =  new ResponseDTO("Shura.business.code.1000", "successfully", "successfully",
+					permissionDTOs);
+		}catch(BusinessException e) {
+			 e.printStackTrace();
+			 throw new ControllerException(ExceptionEnums.BUSINESS_ERROR);
+			}
+		 catch(Exception e1) {
+			 e1.printStackTrace();
+			 throw new ControllerException(ExceptionEnums.INVALID_OPERATION,e1);
+		 }
+		return responseDTO;
 	}
 
 	@Override
-	public List<UserDTO> listUsers() {
-		return userService.listUsers();
+	public ResponseDTO listUsers() throws ControllerException {
+		
+		ResponseDTO responseDTO = null;
+		try {
+			List<UserDTO> userDTOs = userService.listUsers();
+			responseDTO =  new ResponseDTO("Shura.business.code.1000", "successfully", "successfully",
+					userDTOs);
+		}catch(BusinessException e) {
+			 e.printStackTrace();
+			 throw new ControllerException(ExceptionEnums.BUSINESS_ERROR);
+			}
+		 catch(Exception e1) {
+			 e1.printStackTrace();
+			 throw new ControllerException(ExceptionEnums.INVALID_OPERATION,e1);
+		 }
+		return responseDTO;
 	}
 
 	@Override
-	public UserDTO login(String email, String password) {
-		return userService.login(email, password);
+	public ResponseDTO login(String email, String password) throws ControllerException {
+		
+		ResponseDTO responseDTO = null;
+		try {
+			UserDTO userDTO = userService.login(email, password);
+			responseDTO =  new ResponseDTO("Shura.business.code.1000", "successfully", "successfully",
+					userDTO);
+		}catch(BusinessException e) {
+			 e.printStackTrace();
+			 throw new ControllerException(ExceptionEnums.BUSINESS_ERROR);
+			}
+		 catch(Exception e1) {
+			 e1.printStackTrace();
+			 throw new ControllerException(ExceptionEnums.INVALID_OPERATION,e1);
+		 }
+		return responseDTO;
 	}
 
 	@Override
-	public UserDTO findByEmail(String email) {
-		return userService.findByEmail(email);
+	public ResponseDTO findByEmail(String email) throws ControllerException {
+		
+		ResponseDTO responseDTO = null;
+		try {
+			UserDTO userDTO = userService.findByEmail(email);
+			responseDTO =  new ResponseDTO("Shura.business.code.1000", "successfully", "successfully",
+					userDTO);
+		}catch(BusinessException e) {
+			 e.printStackTrace();
+			 throw new ControllerException(ExceptionEnums.BUSINESS_ERROR);
+			}
+		 catch(Exception e1) {
+			 e1.printStackTrace();
+			 throw new ControllerException(ExceptionEnums.INVALID_OPERATION,e1);
+		 }
+		return responseDTO;
 	}
 
 	@Override
-	public UserDTO assignGroupToUser(String groupName, String email) throws Exception {
-		return userService.assignGroupToUser(groupName, email);
+	public ResponseDTO assignGroupToUser(String groupName, String email) throws ControllerException{
+		ResponseDTO responseDTO = null;
+		try {
+			UserDTO userDTO = userService.assignGroupToUser(groupName, email);
+			responseDTO =  new ResponseDTO("Shura.business.code.1000", "successfully", "successfully",
+					userDTO);
+		}catch(BusinessException e) {
+			 e.printStackTrace();
+			 throw new ControllerException(ExceptionEnums.BUSINESS_ERROR);
+			}
+		 catch(Exception e1) {
+			 e1.printStackTrace();
+			 throw new ControllerException(ExceptionEnums.INVALID_OPERATION,e1);
+		 }
+		return responseDTO;
 	}
 
 	@Override
-	public UserDTO findById(long userId) {
-		// TODO Auto-generated method stub
-		return userService.findById(userId);
+	public ResponseDTO findById(long userId) throws ControllerException {
+		
+		ResponseDTO responseDTO = null;
+		try {
+			UserDTO userDTO = userService.findById(userId);
+			responseDTO =  new ResponseDTO("Shura.business.code.1000", "successfully", "successfully",
+					userDTO);
+		}catch(BusinessException e) {
+			 e.printStackTrace();
+			 throw new ControllerException(ExceptionEnums.BUSINESS_ERROR);
+			}
+		 catch(Exception e1) {
+			 e1.printStackTrace();
+			 throw new ControllerException(ExceptionEnums.INVALID_OPERATION,e1);
+		 }
+		return responseDTO;
 	}
 
 }

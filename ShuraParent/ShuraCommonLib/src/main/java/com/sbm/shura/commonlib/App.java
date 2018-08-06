@@ -1,4 +1,4 @@
-package com.sbm.shura;
+package com.sbm.shura.commonlib;
 
 /**
  * Hello world!

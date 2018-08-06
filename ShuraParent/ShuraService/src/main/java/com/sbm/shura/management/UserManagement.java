@@ -1,7 +1,8 @@
 package com.sbm.shura.management;
 
-import java.util.List;
 
+import com.sbm.shura.commonlib.dtoresponsehandler.ResponseDTO;
+import com.sbm.shura.commonlib.exceptions.types.ControllerException;
 import com.sbm.shura.dto.GroupDTO;
 import com.sbm.shura.dto.MenuDTO;
 import com.sbm.shura.dto.PermissionDTO;
@@ -9,32 +10,32 @@ import com.sbm.shura.dto.UserDTO;
 
 public interface UserManagement {
 
-	UserDTO createUser(UserDTO user, String groupName);
+	ResponseDTO createUser(UserDTO user, String groupName)  throws ControllerException;
 
-	List<GroupDTO> getGroupList() throws Exception;
+	ResponseDTO getGroupList()  throws ControllerException;
 
-	GroupDTO add(GroupDTO group) throws Exception;
+	ResponseDTO add(GroupDTO group)  throws ControllerException;
 
-	GroupDTO getByEName(String name) throws Exception;
+	ResponseDTO getByEName(String name)  throws ControllerException;
 
-	MenuDTO addMenu(MenuDTO item) throws Exception;
+	ResponseDTO addMenu(MenuDTO item)  throws ControllerException;
 
-	List<MenuDTO> getMenuList() throws Exception;
+	ResponseDTO getMenuList()  throws ControllerException;
 
-	PermissionDTO addPermission(PermissionDTO perm) throws Exception;
+	ResponseDTO addPermission(PermissionDTO perm)  throws ControllerException;
 
-	List<PermissionDTO> getPermList() throws Exception;
+	ResponseDTO getPermList()  throws ControllerException;
 
-	List<PermissionDTO> getPermListByMenu(long menuId) throws Exception;
+	ResponseDTO getPermListByMenu(long menuId)  throws ControllerException;
 
-	List<UserDTO> listUsers();
+	ResponseDTO listUsers()  throws ControllerException;
 
-	UserDTO login(String email, String password);
+	ResponseDTO login(String email, String password)  throws ControllerException;
 
-	UserDTO findByEmail(String email);
+	ResponseDTO findByEmail(String email)  throws ControllerException;
 
-	UserDTO assignGroupToUser(String groupName, String email) throws Exception;
+	ResponseDTO assignGroupToUser(String groupName, String email)  throws ControllerException;
 	
-	UserDTO findById(long userId);
+	ResponseDTO findById(long userId)  throws ControllerException;
 
 }

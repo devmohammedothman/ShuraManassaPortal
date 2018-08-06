@@ -8,9 +8,11 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sbm.shura.commonlib.exceptions.enums.ExceptionEnums.ExceptionEnums;
+import com.sbm.shura.commonlib.exceptions.types.BusinessException;
+import com.sbm.shura.commonlib.exceptions.types.RespositoryException;
 import com.sbm.shura.dao.GroupDao;
 import com.sbm.shura.dto.GroupDTO;
-import com.sbm.shura.dto.UserDTO;
 import com.sbm.shura.entity.Group;
 import com.sbm.shura.service.GroupService;
 
@@ -24,26 +26,56 @@ public class GroupServiceImpl extends BasicServiceImpl<GroupDTO, Group> implemen
 	private Group _group = new Group();
 
 	@Override
-	public GroupDTO add(GroupDTO group) throws Exception {
+	public GroupDTO add(GroupDTO group) throws BusinessException{
+		GroupDTO result = null;
+		try {
 		_group = convertToEntity(_group, group);
 		_group = dao.add(_group);
-		return convertToDTO(_group, group);
+		result = convertToDTO(_group, group);
+		}catch (RespositoryException e) {
+			e.printStackTrace();
+			throw new BusinessException(ExceptionEnums.REPOSITORY_ERROR);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+			throw new BusinessException(ExceptionEnums.BUSINESS_ERROR);
+		}
+		return result;
 	}
 
 	@Override
-	public List<GroupDTO> getgroupList() throws Exception {
+	public List<GroupDTO> getgroupList() throws BusinessException{
+		List<GroupDTO> result;
+		try {
 		List<Group> groupListResult = dao.getgroupList();
 		List<GroupDTO> groupDtoList = groupListResult.stream().map(item -> convertToDTO(item, new GroupDTO()))
 				.collect(Collectors.toList());
-		return groupDtoList;
+		result = groupDtoList;
+		}catch (RespositoryException e) {
+			e.printStackTrace();
+			throw new BusinessException(ExceptionEnums.REPOSITORY_ERROR);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+			throw new BusinessException(ExceptionEnums.BUSINESS_ERROR);
+		}
+		return result;
 	}
 
 	@Override
-	public GroupDTO getByEName(String name) throws Exception {
+	public GroupDTO getByEName(String name) throws BusinessException{
+		GroupDTO result;
+		try {
 		_group = dao.getByEName(name);
 		GroupDTO groupDto = new GroupDTO();
 		groupDto = convertToDTO(_group, groupDto);
-		return groupDto;
+		result = groupDto;
+		}catch (RespositoryException e) {
+			e.printStackTrace();
+			throw new BusinessException(ExceptionEnums.REPOSITORY_ERROR);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+			throw new BusinessException(ExceptionEnums.BUSINESS_ERROR);
+		}
+		return result;
 	}
 
 }

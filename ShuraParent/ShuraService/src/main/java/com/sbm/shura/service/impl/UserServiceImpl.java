@@ -9,13 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.sbm.shura.commonlib.exceptions.enums.ExceptionEnums.ExceptionEnums;
+import com.sbm.shura.commonlib.exceptions.types.BusinessException;
+import com.sbm.shura.commonlib.exceptions.types.RespositoryException;
 import com.sbm.shura.dao.GroupDao;
 import com.sbm.shura.dao.UserDao;
-import com.sbm.shura.dto.GroupDTO;
 import com.sbm.shura.dto.UserDTO;
 import com.sbm.shura.entity.Group;
 import com.sbm.shura.entity.User;
-import com.sbm.shura.service.GroupService;
 import com.sbm.shura.service.UserService;
 
 @Service
@@ -34,41 +35,66 @@ public class UserServiceImpl extends BasicServiceImpl<UserDTO, User> implements 
 
 	@Override
 	@Transactional
-	public UserDTO add(UserDTO userDto, String groupName) {
+	public UserDTO add(UserDTO userDto, String groupName) throws BusinessException {
+		UserDTO result = null;
+		try {
 		_user = new User();
 		_user = convertToEntity(_user, userDto);
 		_user = userDao.add(_user);
 		if (!stringIsBlank(groupName)) {
-			try {
 				assignGroupToUser(groupName, _user.getEmail());
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
 		}
-		return convertToDTO(_user, userDto);
+		result = convertToDTO(_user, userDto);
+		}catch (RespositoryException e) {
+			e.printStackTrace();
+			throw new BusinessException(ExceptionEnums.REPOSITORY_ERROR);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+			throw new BusinessException(ExceptionEnums.BUSINESS_ERROR);
+		}
+		return result;
 	}
 
 	@Override
 	@Transactional(readOnly = true)
-	public List<UserDTO> listUsers() {
+	public List<UserDTO> listUsers() throws BusinessException {
+		List<UserDTO> result;
+		try {
 		List<User> userListResult = userDao.listUsers();
 		List<UserDTO> userDtoList = userListResult.stream().map(item -> convertToDTO(item, new UserDTO()))
 				.collect(Collectors.toList());
-		return userDtoList;
+		result = userDtoList;
+		}catch (RespositoryException e) {
+			e.printStackTrace();
+			throw new BusinessException(ExceptionEnums.REPOSITORY_ERROR);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+			throw new BusinessException(ExceptionEnums.BUSINESS_ERROR);
+		}
+		return result;
 
 	}
 
 	@Override
 	@Transactional(readOnly = true)
-	public UserDTO login(String email, String password) {
-
+	public UserDTO login(String email, String password) throws BusinessException {
+		UserDTO result = null;
+		try {
 		_user = userDao.login(email, password);
 		if (_user == null) {
 			return new UserDTO(-1L);
 		}
 		UserDTO userDto = new UserDTO();
 		userDto = convertToDTO(_user, userDto);
-		return userDto;
+		result = userDto;
+		}catch (RespositoryException e) {
+			e.printStackTrace();
+			throw new BusinessException(ExceptionEnums.REPOSITORY_ERROR);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+			throw new BusinessException(ExceptionEnums.BUSINESS_ERROR);
+		}
+		return result;
 	}
 
 	@Override
@@ -82,19 +108,31 @@ public class UserServiceImpl extends BasicServiceImpl<UserDTO, User> implements 
 
 	@Override
 	@Transactional(readOnly = true)
-	public UserDTO findByEmail(String email) {
+	public UserDTO findByEmail(String email) throws BusinessException {
+		UserDTO result = null;
+		try {
 		_user = userDao.findByEmail(email);
 		if (_user == null) {
 			return new UserDTO(-1L);
 		}
 		UserDTO userDto = new UserDTO();
 		userDto = convertToDTO(_user, userDto);
-		return userDto;
+		result = userDto;
+		}catch (RespositoryException e) {
+			e.printStackTrace();
+			throw new BusinessException(ExceptionEnums.REPOSITORY_ERROR);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+			throw new BusinessException(ExceptionEnums.BUSINESS_ERROR);
+		}
+		return result;
 	}
 
 	@Override
 	@Transactional
-	public UserDTO assignGroupToUser(String groupName, String email) throws Exception {
+	public UserDTO assignGroupToUser(String groupName, String email) throws BusinessException {
+		UserDTO result = null;
+		try {
 		UserDTO userDto = findByEmail(email);
 
 		// GroupDTO groupDto = groupService.getByEName(groupName);
@@ -115,18 +153,35 @@ public class UserServiceImpl extends BasicServiceImpl<UserDTO, User> implements 
 
 		// _user = userDao.update(_user);
 
-		return convertToDTO(_user, userDto);
+		result = convertToDTO(_user, userDto);
+		}catch (RespositoryException e) {
+			e.printStackTrace();
+			throw new BusinessException(ExceptionEnums.REPOSITORY_ERROR);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+			throw new BusinessException(ExceptionEnums.BUSINESS_ERROR);
+		}
+		return result;
 	}
 
 	@Override
 	@Transactional
-	public UserDTO findById(long userId) {
-				
+	public UserDTO findById(long userId) throws BusinessException {
+		UserDTO result = null;
+		try {
 		_user = userDao.findById(userId);
 		
 		UserDTO userDto = new UserDTO();
 		userDto = convertToDTO(_user, userDto);
-		return userDto;
+		result = userDto;
+		}catch (RespositoryException e) {
+			e.printStackTrace();
+			throw new BusinessException(ExceptionEnums.REPOSITORY_ERROR);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+			throw new BusinessException(ExceptionEnums.BUSINESS_ERROR);
+		}
+		return result;
 	}
 
 }

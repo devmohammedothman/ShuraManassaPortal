@@ -5,8 +5,11 @@ import java.lang.reflect.Type;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
 import org.springframework.transaction.annotation.Transactional;
 
+import com.sbm.shura.commonlib.exceptions.enums.ExceptionEnums.ExceptionEnums;
+import com.sbm.shura.commonlib.exceptions.types.RespositoryException;
 import com.sbm.shura.dao.GenericDao;
 
 @Transactional
@@ -36,10 +39,14 @@ public class GenericDaoImpl<T> implements GenericDao<T>
 	 * @see com.sbm.muras.daos.GenericDao#create(java.lang.Object)
 	 */
 	@Override
-	public T persist(final T t)
+	public T persist(final T t) throws RespositoryException
 	{
+		try {
 		this.entityManager.persist(t);
 		//this.entityManager.refresh(t);
+		}catch(Exception e) {
+			throw new RespositoryException(ExceptionEnums.REPOSITORY_ERROR);
+		}
 		return t;
 	}
 	
@@ -49,11 +56,15 @@ public class GenericDaoImpl<T> implements GenericDao<T>
 	 * @see com.sbm.muras.daos.GenericDao#delete(java.lang.Object)
 	 */
 	@Override
-	public void delete(long id)
+	public void delete(long id) throws RespositoryException
 	{
+		try {
 		T objBean = this.entityManager.find(type, id);
 		if(objBean != null)
 			this.entityManager.remove(objBean);
+		}catch(Exception e) {
+			throw new RespositoryException(ExceptionEnums.REPOSITORY_ERROR);
+		}
 
 	}
 
@@ -63,9 +74,16 @@ public class GenericDaoImpl<T> implements GenericDao<T>
 	 * @see com.sbm.muras.daos.GenericDao#find(java.lang.Object)
 	 */
 	@Override
-	public T findById(final Object id)
+	public T findById(final Object id) throws RespositoryException
 	{
-		return (T) this.entityManager.find(type, id);
+		T result;
+		try {
+		result = (T) this.entityManager.find(type, id);
+		}catch (Exception e) {
+			e.printStackTrace();
+			throw new RespositoryException(ExceptionEnums.REPOSITORY_ERROR);
+		}
+		return result;
 	}
 
 	/*
@@ -74,9 +92,15 @@ public class GenericDaoImpl<T> implements GenericDao<T>
 	 * @see com.sbm.muras.daos.GenericDao#update(java.lang.Object)
 	 */
 	@Override
-	public T update(final T t)
+	public T update(final T t) throws RespositoryException
 	{
-		return this.entityManager.merge(t);
+		T result;
+		try {
+		result = this.entityManager.merge(t);
+		}catch(Exception e) {
+			throw new RespositoryException(ExceptionEnums.REPOSITORY_ERROR);
+		}
+		return result;
 	}
 
 	

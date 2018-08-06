@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.sbm.shura.commonlib.exceptions.types.RespositoryException;
 import com.sbm.shura.dao.UserDao;
 import com.sbm.shura.entity.User;
 
@@ -19,12 +20,17 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = userDao.findByEmail(email);
-
-        if (user != null) {
-            return user;
-        }
-
-        throw new UsernameNotFoundException(email);
+    	User user = null;
+    	try {
+    	user = userDao.findByEmail(email);
+    	}catch(RespositoryException e) {
+			e.printStackTrace();
+			throw new UsernameNotFoundException(e.getMessage());
+		}
+		catch(Exception e1) {
+			e1.printStackTrace();
+			throw new UsernameNotFoundException(e1.getMessage());
+	    	}
+        return user;
     }
 }

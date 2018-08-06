@@ -4,9 +4,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sbm.shura.commonlib.exceptions.enums.ExceptionEnums.ExceptionEnums;
+import com.sbm.shura.commonlib.exceptions.types.BusinessException;
+import com.sbm.shura.commonlib.exceptions.types.RespositoryException;
 import com.sbm.shura.dao.CommitteeDao;
 import com.sbm.shura.dto.CommitteeDTO;
 import com.sbm.shura.entity.Committee;
@@ -33,64 +37,110 @@ public class CommitteeServiceImpl extends BasicServiceImpl<CommitteeDTO, Committ
 	
 	@Override
 	@Transactional
-	public CommitteeDTO addCommittee(CommitteeDTO obj) throws Exception {
-		// TODO Auto-generated method stub
+	public CommitteeDTO addCommittee(CommitteeDTO obj) throws BusinessException {
+		CommitteeDTO committeeDTO = null;
+		try {
 		_committee  = new Committee();
 		_committee = convertToEntity(_committee, obj);
 		_committee =  committeeDao.addCommittee(_committee);
-		return convertToDTO(_committee, obj);
+		committeeDTO = convertToDTO(_committee, obj);
+		}catch (RespositoryException e) {
+			e.printStackTrace();
+			throw new BusinessException(ExceptionEnums.REPOSITORY_ERROR);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+			throw new BusinessException(ExceptionEnums.BUSINESS_ERROR);
+		}
+		return committeeDTO;
 	}
 
 	@Override
 	@Transactional
-	public List<CommitteeDTO> getCommitteeList() throws Exception {
-		// TODO Auto-generated method stub
-		
+	public List<CommitteeDTO> getCommitteeList() throws BusinessException{
+		List<CommitteeDTO> commDtoList;
+		try{
 		List<Committee> commList = committeeDao.listCommitees();
-		List<CommitteeDTO> commDtoList = commList.stream().map
+		commDtoList = commList.stream().map
 				(item -> convertToDTO(item, new CommitteeDTO())).collect(Collectors.toList());
+		}catch (RespositoryException e) {
+			e.printStackTrace();
+			throw new BusinessException(ExceptionEnums.REPOSITORY_ERROR);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+			throw new BusinessException(ExceptionEnums.BUSINESS_ERROR);
+		}
 		return commDtoList;
 	}
 
 	@Override
 	@Transactional
-	public CommitteeDTO getCommitteeById(int id) throws Exception {
-		// TODO Auto-generated method stub
+	public CommitteeDTO getCommitteeById(int id) throws BusinessException {
+		CommitteeDTO committeeDTO = null;
+		try {
 		_committee  = new Committee();
 		_committee = committeeDao.findById(id);
 		CommitteeDTO commDtoObj = new CommitteeDTO();
-		commDtoObj = convertToDTO(_committee, commDtoObj);
-		return commDtoObj;
+		committeeDTO = convertToDTO(_committee, commDtoObj);
+		}catch (RespositoryException e) {
+			e.printStackTrace();
+			throw new BusinessException(ExceptionEnums.REPOSITORY_ERROR);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+			throw new BusinessException(ExceptionEnums.BUSINESS_ERROR);
+		}
+		return committeeDTO;
 	}
 
 	@Override
 	@Transactional
-	public CommitteeDTO updateCommittee(CommitteeDTO obj) throws Exception {
-		// TODO Auto-generated method stub
+	public CommitteeDTO updateCommittee(CommitteeDTO obj) throws BusinessException{
+		CommitteeDTO committeeDTO;
+		try {
 		_committee = convertToEntity(_committee, obj);
 		_committee = committeeDao.findById(obj.getId());
 		_committee =  committeeDao.update(_committee);
+		committeeDTO = convertToDTO(_committee, obj);
+		}catch (RespositoryException e) {
+			e.printStackTrace();
+			throw new BusinessException(ExceptionEnums.REPOSITORY_ERROR);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+			throw new BusinessException(ExceptionEnums.BUSINESS_ERROR);
+		}
+		return committeeDTO;
 		
-		return convertToDTO(_committee, obj);
 	}
 
 	@Override
 	@Transactional
-	public void deleteCommittee(int id)  throws Exception {
-		// TODO Auto-generated method stub
+	public void deleteCommittee(int id) throws BusinessException{
+		try {
 		 committeeDao.delete(id);
-		
+		}catch (RespositoryException e) {
+			e.printStackTrace();
+			throw new BusinessException(ExceptionEnums.REPOSITORY_ERROR);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+			throw new BusinessException(ExceptionEnums.BUSINESS_ERROR);
+		}
 	}
 
 	@Override
 	@Transactional
-	public CommitteeDTO findById(long committeeId) {
-		// TODO Auto-generated method stub
+	public CommitteeDTO findById(long committeeId) throws BusinessException{
+		CommitteeDTO committeeDTO = null;
+		try {
 		_committee = committeeDao.findById(committeeId);
-		
 		CommitteeDTO result = new CommitteeDTO();
-	
-		return convertToDTO(_committee, result);
+		committeeDTO = convertToDTO(_committee, result);
+		}catch (RespositoryException e) {
+			e.printStackTrace();
+			throw new BusinessException(ExceptionEnums.REPOSITORY_ERROR);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+			throw new BusinessException(ExceptionEnums.BUSINESS_ERROR);
+		}
+		return committeeDTO;
 	}
 
 }
