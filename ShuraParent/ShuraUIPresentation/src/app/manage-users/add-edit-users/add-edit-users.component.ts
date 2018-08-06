@@ -28,7 +28,7 @@ export class AddEditUsersComponent implements OnInit {
   email = new FormControl('', [Validators.required, Validators.email]);
   username = new FormControl('', [Validators.required]);
   password = new FormControl('', [Validators.required]);
-  groupselect = new FormControl('', [Validators.required]);
+  groupselect = new FormControl();
   hide = true;
 
   constructor(public dialog: MatDialog,
@@ -56,8 +56,7 @@ export class AddEditUsersComponent implements OnInit {
     this.addUser = this._formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
-      username: ['', Validators.required],
-      groupselect: ['', Validators.required]
+      username: ['', Validators.required]
   });
   }
 
@@ -100,22 +99,23 @@ export class AddEditUsersComponent implements OnInit {
     this.userService.register(this.registerParam)
         .subscribe(user => {
                 const other = []; // your other array...
+        if (user.groups !== null) {
                 user.groups.map(item => {
                     return {
                         group: item.nameEn
                     };
                 }).forEach(item => other.push(item));
+        }
                 this.dialog.closeAll();
                 alert('Done!!');
         },
         error => this.errorMessage = <any>error);
 }
 getErrorMessage(): string {
-    return  this.email.hasError('required') ? 'You must enter a value' :
+    return this.email.hasError('required') ? 'You must enter a value' :
             this.email.hasError('email') ? 'Not a valid email' :
             this.username.hasError('required') ? 'You must enter a value' :
             this.password.hasError('required') ? 'You must enter a value' :
-            this.groupselect.hasError('required') ? 'You must enter a value' :
             '';
   }
 

@@ -11,7 +11,7 @@ import { UserService } from '../services/user.service';
 })
 export class ManageUsersComponent implements OnInit {
 
-  displayedColumns = ['username', 'email', 'password', 'edit'];
+  displayedColumns = ['username', 'email', 'edit'];
   dataSource: MatTableDataSource<User>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
