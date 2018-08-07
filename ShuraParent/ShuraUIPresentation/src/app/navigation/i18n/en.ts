@@ -20,6 +20,7 @@ export const locale = {
             'CALENDAR'    : 'Calendar',
             'ECOMMERCE'   : 'E-Commerce',
             'ACADEMY'     : 'Academy',
+            'NOMINATION-POLL' : 'Nomination Poll',
             'MAIL'        : {
                 'TITLE': 'Mail',
                 'BADGE': '25'
@@ -73,6 +74,20 @@ export const locale = {
             'COMMITTE': {
                 'TITLE': 'اللجان',
                 'SUBTITLE': 'إدارة اللجان',
+            },'NOM': {
+                'TITLE': 'Division the wishes of members',
+                'SUBTITLE-ADMIN': 'Nomination members to specialized committees',
+                'SUBTITLE-USER': 'Nomination of members of specialized committees',  
+                'MEMBER-COUNT': 'Member count',  
+                'NEW-DEVESION': 'New deveision',  
+                'DEVISION-RESULT': 'Devision result',    
+                'DEVISION-SUBMIT': 'Devision submit',
+                'FIRST-WISH': 'First wish',
+                'SECOND-WISH': 'Second wish',
+                'THIRD-WISH': 'Third wish',
+                'SUM': 'Sum',
+                'COMMITTE-NAME': 'Committe name',
+                'VIEW': 'View',
             }
         }
     }
