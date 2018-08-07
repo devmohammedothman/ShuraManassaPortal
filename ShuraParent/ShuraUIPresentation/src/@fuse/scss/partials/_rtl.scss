@@ -53,6 +53,16 @@ html:lang(ar) {
         .material-icons {
             direction: rtl;
         }
+        vertical-layout-1 {
+            #main {
+                > .container {
+                    flex-direction: row-reverse;
+                }
+            }
+        }
+        fuse-sidebar.folded {
+            right: 0;
+        }
         navbar {
             .navbar-vertical {
                 .navbar-header {
