@@ -7,11 +7,11 @@ import org.joda.time.chrono.IslamicChronology;
 
 public class HijriDateConverter {
 
-	public DateTime convertCurrentDateToHijri() {
+	public static DateTime convertCurrentDateToHijri() {
 		return DateTime.now().withChronology(IslamicChronology.getInstance());
 	}
 	
-	public DateTime convertDateToHijri(Date date) {
+	public static DateTime convertDateToHijri(Date date) {
 		DateTime dtISO = new DateTime(date);
 		return dtISO.withChronology(IslamicChronology.getInstance());
 	}
