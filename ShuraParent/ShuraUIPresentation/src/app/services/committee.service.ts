@@ -21,7 +21,7 @@ export class CommitteeService
         'Access-Control': 'Allow-Origin' });
         let options = new RequestOptions({headers : header });
         return this.http.get(this.baseUrl + 'getcommlist', options)
-            .map(data => data.json());
+            .map(data => data.json().data);
     }
 
     //Add CommitteeService
