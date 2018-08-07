@@ -36,6 +36,7 @@ import { MemberWishesModule } from './member-wishes/member-wishes.module';
 import { AdminAssignedWishesModule } from './admin-assigned-wishes/admin-assigned-wishes.module';
 import { NominationService } from 'app/services/nomination.service';
 import { ManagerAssidnedWishesModule } from './manager-assidned-wishes/manager-assidned-wishes.module';
+import { NominationPollModule } from './nomination-poll/nomination-poll.module';
 
 
 const appRoutes: Routes = [
@@ -114,7 +115,8 @@ const appRoutes: Routes = [
 
         MemberWishesModule,
         AdminAssignedWishesModule,
-        ManagerAssidnedWishesModule
+        ManagerAssidnedWishesModule,
+        NominationPollModule
     ],
     bootstrap   : [
         AppComponent

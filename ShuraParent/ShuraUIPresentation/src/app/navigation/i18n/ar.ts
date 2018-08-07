@@ -23,6 +23,7 @@ export const locale = {
             'CALENDAR'    : 'التقويم',
             'ECOMMERCE'   : 'المتجر',
             'ACADEMY'     : 'الأكاديمية',
+            'NOMINATION-POLL' : 'ترشيح الاعضاء',
             'MAIL'        : {
                 'TITLE': 'Posta',
                 'BADGE': '15'
@@ -73,6 +74,20 @@ export const locale = {
             'COMMITTE': {
                 'TITLE': 'اللجان',
                 'SUBTITLE': 'إدارة اللجان',
+            },'NOM': {
+                'TITLE': 'فرز رغبات الأعضاء',
+                'SUBTITLE-ADMIN': 'ترشيح الاعضاء للجان متخصصة',
+                'SUBTITLE-USER': 'ترشيح الاعضاء للجان المتخصصة',
+                'MEMBER-COUNT': 'عدد الاعضاء',    
+                'NEW-DEVESION': 'فرز جديد',  
+                'DEVISION-RESULT': 'نتائج الفرز',    
+                'DEVISION-SUBMIT': 'اعتماد الفرز',
+                'FIRST-WISH': 'الرغبة الأولى',
+                'SECOND-WISH': 'الرغبة الثانية',
+                'THIRD-WISH': 'الرغبة الثالثة',
+                'SUM': 'الإجمالي',
+                'COMMITTE-NAME': 'اسم اللجنة', 
+                'VIEW': 'استعراض',            
             }
         }
     }
