@@ -79,7 +79,10 @@ public class UserWishServiceImpl extends BasicServiceImpl<UserWishDTO, UserWish>
 	public UserWishDTO getUserWishesByUserIdAndCommitte(long userId) throws BusinessException {
 		UserWishDTO result = null;
 		try {
-			result = convertToDTO(_userWishDao.getUserWishesByUserIdAndCommitte(userId), new UserWishDTO());
+			_userWishObj = new UserWish();
+			_userWishObj = _userWishDao.getUserWishesByUserIdAndCommitte(userId);
+			if(_userWishObj != null )
+				result = convertToDTO(_userWishObj, new UserWishDTO());
 		}catch (RespositoryException e) {
 			e.printStackTrace();
 			throw new BusinessException(ExceptionEnums.REPOSITORY_ERROR);
@@ -116,6 +119,25 @@ public class UserWishServiceImpl extends BasicServiceImpl<UserWishDTO, UserWish>
 			e1.printStackTrace();
 			throw new BusinessException(ExceptionEnums.BUSINESS_ERROR);
 		}
+	}
+
+	@Override
+	public List<UserWishDTO> getCurrentHijriiYearUserWishList(String shurianYear) throws BusinessException {
+		List<UserWishDTO> result;
+		try {
+		List<UserWish> userWishList = _userWishDao.getCurrentHijriiYearUserWishList(shurianYear);
+		List<UserWishDTO> userWishDtoList = userWishList.stream().
+														map( item -> convertToDTO(item, new UserWishDTO()))
+															.collect(Collectors.toList());
+		result = userWishDtoList;
+		}catch (RespositoryException e) {
+			e.printStackTrace();
+			throw new BusinessException(ExceptionEnums.REPOSITORY_ERROR);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+			throw new BusinessException(ExceptionEnums.BUSINESS_ERROR);
+		}
+		return result;
 	}
 
 }

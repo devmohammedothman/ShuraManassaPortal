@@ -17,6 +17,10 @@ public class UserWishDTO extends BaseDTO {
 	
 	private int wishOrder;
 	
+	private int shurianYear;
+	
+	private boolean isAssignedBySG ;
+	
 
 	public Integer getId() {
 		return Id;
@@ -56,6 +60,22 @@ public class UserWishDTO extends BaseDTO {
 
 	public void setWishOrder(int wishOrder) {
 		this.wishOrder = wishOrder;
+	}
+
+	public int getShurianYear() {
+		return shurianYear;
+	}
+
+	public void setShurianYear(int shurianYear) {
+		this.shurianYear = shurianYear;
+	}
+
+	public boolean isAssignedBySG() {
+		return isAssignedBySG;
+	}
+
+	public void setAssignedBySG(boolean isAssignedBySG) {
+		this.isAssignedBySG = isAssignedBySG;
 	}
 
 }

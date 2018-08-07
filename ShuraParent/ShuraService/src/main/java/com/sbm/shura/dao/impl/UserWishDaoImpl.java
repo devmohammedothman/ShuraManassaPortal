@@ -20,7 +20,7 @@ public class UserWishDaoImpl extends GenericDaoImpl<UserWish> implements UserWis
 		try {
 		uwResult =  persist(uw);
 		}catch(Exception e) {
-			throw new RespositoryException(ExceptionEnums.REPOSITORY_ERROR);
+			throw new RespositoryException(ExceptionEnums.REPOSITORY_ERROR,e);
 		}
 		return uwResult;
 	}
@@ -42,7 +42,7 @@ public class UserWishDaoImpl extends GenericDaoImpl<UserWish> implements UserWis
 		try {
 			Query q = entityManager.createNamedQuery("userwish.findByUserId", UserWish.class);
 			q.setParameter("userId", userId);
-			userWish = (UserWish) q.getResultList().get(0);
+			userWish = (UserWish) (q.getResultList() != null && q.getResultList().size() > 0 ? q.getResultList().get(0) : null);
 		}catch(Exception e) {
 			throw new RespositoryException(ExceptionEnums.REPOSITORY_ERROR);
 		}
@@ -58,6 +58,19 @@ public class UserWishDaoImpl extends GenericDaoImpl<UserWish> implements UserWis
 		}catch(Exception e) {
 			throw new RespositoryException(ExceptionEnums.REPOSITORY_ERROR);
 		}
+	}
+
+	@Override
+	public List<UserWish> getCurrentHijriiYearUserWishList(String shurianYear) throws RespositoryException {
+		List<UserWish> userWishList;
+		try {
+		Query q =  entityManager.createNamedQuery("userwish.findByshurianYear",UserWish.class);
+		q.setParameter("shurianYear", Integer.parseInt(shurianYear));
+		userWishList =  q.getResultList();
+		}catch(Exception e) {
+			throw new RespositoryException(ExceptionEnums.REPOSITORY_ERROR);
+		}
+		return userWishList;
 	}
 
 }

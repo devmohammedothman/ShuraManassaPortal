@@ -12,6 +12,8 @@ public interface UserWishService {
 		
 	List<UserWishDTO> getUserWishList() throws BusinessException;
 	
+	List<UserWishDTO> getCurrentHijriiYearUserWishList(String shurianYear) throws BusinessException;
+	
 	UserWishDTO getUserWishesByUserIdAndCommitte(long userId) throws BusinessException;
 	
 	List<UserDTO> getCommitteeUserWishes(long committeeId) throws BusinessException;

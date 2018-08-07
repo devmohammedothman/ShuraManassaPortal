@@ -11,6 +11,8 @@ public interface UserWishDao extends GenericDao<UserWish> {
 	
 	public List<UserWish> listUserWish() throws RespositoryException;
 	
+	public List<UserWish> getCurrentHijriiYearUserWishList(String shurianYear) throws RespositoryException;
+		
 	public UserWish getUserWishesByUserIdAndCommitte(long userId) throws RespositoryException;
 	
 	public void deleteWish(long userId) throws RespositoryException;
