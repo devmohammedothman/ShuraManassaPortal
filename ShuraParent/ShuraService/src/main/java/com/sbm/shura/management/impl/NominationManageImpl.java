@@ -14,9 +14,11 @@ import com.sbm.shura.commonlib.exceptions.types.BusinessException;
 import com.sbm.shura.commonlib.exceptions.types.ControllerException;
 import com.sbm.shura.commonlib.utilities.HijriDateConverter;
 import com.sbm.shura.dto.CommitteeDTO;
+import com.sbm.shura.dto.CommitteeMemberDTO;
 import com.sbm.shura.dto.NominationLogDTO;
 import com.sbm.shura.dto.UserWishDTO;
 import com.sbm.shura.management.NominationManage;
+import com.sbm.shura.service.CommitteeMemberService;
 import com.sbm.shura.service.CommitteeService;
 import com.sbm.shura.service.NominationLogService;
 import com.sbm.shura.service.UserWishService;
@@ -32,6 +34,9 @@ public class NominationManageImpl implements NominationManage {
 
 	@Autowired
 	private CommitteeService _committeeService;
+	
+	@Autowired
+	private CommitteeMemberService _commMemberService;
 
 	@Override
 	public ResponseDTO addUserWish(List<UserWishDTO> list) throws ControllerException {
@@ -150,7 +155,7 @@ public class NominationManageImpl implements NominationManage {
 	@Override
 	public ResponseDTO runPollProcess(NominationLogDTO logDtoObj) throws ControllerException {
 		ResponseDTO responseDTO = null;
-		String result;
+		
 		try {
 
 			// first step in selection process algorithm
@@ -159,24 +164,93 @@ public class NominationManageImpl implements NominationManage {
 			List<UserWishDTO> userWishes = _userWishService.getCurrentHijriiYearUserWishList(currentHijriiDate);
 
 			List<CommitteeDTO> commDTOList = _committeeService.getCommitteeList();
-			List<UserWishDTO> filteredUserWishList = new ArrayList<UserWishDTO>();
-			for (CommitteeDTO item : commDTOList) {
-				filteredUserWishList = userWishes.stream().filter(
-						uwitem -> item.getId() == uwitem.getWishedCommitee().getId() && uwitem.getWishOrder() == 1)
-						.collect(Collectors.toList());
-
+			List<CommitteeMemberDTO> commMemberResultList =  new ArrayList<>(); 
+			
+			
+			List<UserWishDTO> firstUserWishList = new ArrayList<UserWishDTO>();
+			List<UserWishDTO> secondUserWishList = new ArrayList<UserWishDTO>();
+			List<UserWishDTO> thirdUserWishList = new ArrayList<UserWishDTO>();
+			
+			
+			int memberCount = logDtoObj.getNoOfMembers();
+			
+			for(CommitteeDTO item : commDTOList)
+			{			
+				List<CommitteeMemberDTO> commTempList = new ArrayList<>();
+				int remainingMembersCount ;
+				
+				firstUserWishList = userWishes.stream().filter(
+						uwitem -> uwitem.getWishOrder() == 1 && uwitem.getWishedCommitee().getId() == item.getId()
+						).collect(Collectors.toList());
+				
 				// call random generation process and add to List
-				if (filteredUserWishList.size() > logDtoObj.getNoOfMembers()) {
+				if (firstUserWishList.size() > memberCount) 
+				{
 					List<Integer> intList = new ArrayList<>();
-					for (int i = 0; i < filteredUserWishList.size(); i++) {
+					for (int i = 0; i < firstUserWishList.size(); i++) {
 						intList.add(i);
 					}
-					filteredUserWishList = selectedUserList(intList, filteredUserWishList);
+					firstUserWishList = selectedUserList(intList, firstUserWishList,memberCount);
 				}
-			}
+				
+				if(firstUserWishList.size() > 0 )
+				{
+					commTempList.addAll(firstUserWishList.stream().map(commMember ->
+					new CommitteeMemberDTO(commMember.getNominatedUser(),commMember.getWishedCommitee(),commMember.getWishOrder()))
+					.collect(Collectors.toList()));
+					
+					if(commTempList.size() < memberCount)
+					{
+						secondUserWishList = userWishes.stream().filter(
+								uwitem -> uwitem.getWishOrder() == 2 && uwitem.getWishedCommitee().getId() == item.getId()
+								).collect(Collectors.toList());
+						
+						remainingMembersCount = memberCount - commMemberResultList.size() ;
+						
+						if(remainingMembersCount > 0 && !secondUserWishList.isEmpty())
+						{
+							List<Integer> intList = new ArrayList<>();
+							for (int i = 0; i < secondUserWishList.size(); i++) {
+								intList.add(i);
+							}
+							secondUserWishList = selectedUserList(intList, secondUserWishList,remainingMembersCount);
+							commTempList.addAll(secondUserWishList.stream().map(commMember ->
+							new CommitteeMemberDTO(commMember.getNominatedUser(),commMember.getWishedCommitee(),commMember.getWishOrder()))
+							.collect(Collectors.toList()));
+						}
 
-			result = "Process Run Successfully";
-			responseDTO = new ResponseDTO("Shura.business.code.1000", "successfully", "successfully", result);
+						
+						remainingMembersCount = memberCount - commMemberResultList.size() ;
+						
+						
+						//////////third
+						thirdUserWishList = userWishes.stream().filter(
+								uwitem -> uwitem.getWishOrder() == 3 && uwitem.getWishedCommitee().getId() == item.getId()
+								).collect(Collectors.toList());
+						if(remainingMembersCount > 0 && !thirdUserWishList.isEmpty())
+						{
+							List<Integer> intList = new ArrayList<>();
+							for (int i = 0; i < secondUserWishList.size(); i++) {
+								intList.add(i);
+							}
+							thirdUserWishList = selectedUserList(intList, thirdUserWishList,remainingMembersCount);
+							commTempList.addAll(thirdUserWishList.stream().map(commMember ->
+							new CommitteeMemberDTO(commMember.getNominatedUser(),commMember.getWishedCommitee(),commMember.getWishOrder()))
+							.collect(Collectors.toList()));
+						}
+						
+						
+						
+						remainingMembersCount = memberCount - commMemberResultList.size() ;
+						
+						commMemberResultList.addAll(commTempList);
+						
+					}
+				
+			}
+		}
+		responseDTO = new ResponseDTO("Shura.business.code.1000", "successfully", "successfully", commMemberResultList);
+			
 		} catch (BusinessException e) {
 			e.printStackTrace();
 			throw new ControllerException(ExceptionEnums.BUSINESS_ERROR);
@@ -187,14 +261,15 @@ public class NominationManageImpl implements NominationManage {
 		return responseDTO;
 	}
 
-	public List<Integer> givenList_w(List<Integer> list) {
+	public List<Integer> givenList_w(List<Integer> list , int noOfMembers) {
 		Collections.shuffle(list);
-		int randomSeriesLength = 5;
-		return list.subList(0, randomSeriesLength);
+		if (noOfMembers > list.size())
+			return list;
+		return list.subList(0, noOfMembers);
 	}
 
-	public List<UserWishDTO> selectedUserList(List<Integer> list, List<UserWishDTO> userList) {
-		List<Integer> selectedUsersIndex = givenList_w(list);
+	public List<UserWishDTO> selectedUserList(List<Integer> list, List<UserWishDTO> userList,int noOfMembers) {
+		List<Integer> selectedUsersIndex = givenList_w(list,noOfMembers);
 		List<UserWishDTO> selectedUserList = new ArrayList<>();
 		for (int i = 0; i < selectedUsersIndex.size(); i++) {
 			selectedUserList.add(userList.get(selectedUsersIndex.get(i)));
