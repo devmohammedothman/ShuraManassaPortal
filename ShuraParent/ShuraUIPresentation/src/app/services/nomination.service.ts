@@ -6,6 +6,9 @@ import { Injectable } from '@angular/core';
 import { MemberAssignedWishes } from "app/models/member-assigned-wishes";
 import { HttpParams } from "@angular/common/http";
 import { UserWish } from "../models/user-wish.model";
+import { NominationPollParam } from "../models/nomination-poll-param.model";
+import { CommitteMembers } from "../models/committe-members.model";
+
 
 @Injectable()
 export class NominationService {
@@ -53,8 +56,20 @@ export class NominationService {
       .map(this.extractData)
       .catch(this.handleErrorObservable);
   }
+
+  runPollProcess(nominationPollParam: NominationPollParam): Observable<CommitteMembers[]> {
+    let headers = new Headers({
+      'Content-Type': 'application/json',
+      'authorization': this.token,
+      'Access-Control': 'Allow-Origin'
+    });
+    let options = new RequestOptions({ headers: headers });
+    return this.http.post(this.baseUrl + 'runpollprocess', nominationPollParam, options)
+      .map(data => data.json().data.committeeMembers)
+      .catch(this.handleErrorObservable);
+  }
   private extractData(res: Response) {
-    let body = res.json();
+    let body = res.json().data;
     return body || {};
   }
 
