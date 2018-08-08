@@ -1,5 +1,9 @@
 package com.sbm.shura.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +48,45 @@ public class CommitteeMemberServiceImpl extends BasicServiceImpl<CommitteeMember
 			throw new BusinessException(ExceptionEnums.BUSINESS_ERROR);
 		}
 		return cmdtoResult;
+	}
+
+	@Override
+	public void deleteCommitteeAssignedMembers(long commId) throws BusinessException {
+		
+		try 
+		{	
+			_comDao.delete(commId);
+		}
+		catch(RespositoryException re)
+		{
+		re.printStackTrace();
+		throw new BusinessException(ExceptionEnums.REPOSITORY_ERROR);
+		}
+		catch (Exception e) {
+		e.printStackTrace();
+		throw new BusinessException(ExceptionEnums.BUSINESS_ERROR);
+		}
+	}
+
+	@Override
+	public List<CommitteeMemberDTO> getCommitteeAssignedMembers(long commId) throws BusinessException {
+		List<CommitteeMemberDTO> resultList = null;
+		try 
+		{
+			List<CommitteeMember> entityResulList = new ArrayList<>();
+			entityResulList = _comDao.getCommitteeAssignedMembers(commId);
+			resultList = entityResulList.stream().map(item -> convertToDTO(item, new CommitteeMemberDTO())).collect(Collectors.toList());
+		}
+		catch(RespositoryException re)
+		{
+			re.printStackTrace();
+			throw new BusinessException(ExceptionEnums.REPOSITORY_ERROR);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new BusinessException(ExceptionEnums.BUSINESS_ERROR);
+		}
+		return resultList;
 	}
 
 }

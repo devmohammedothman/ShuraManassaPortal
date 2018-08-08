@@ -1,5 +1,7 @@
 package com.sbm.shura.dto;
 
+import com.sbm.shura.commonlib.utilities.HijriDateConverter;
+
 public class UserWishDTO extends BaseDTO {
 
 	/**
@@ -10,14 +12,12 @@ public class UserWishDTO extends BaseDTO {
 	private Integer Id;
 	
 	private UserDTO nominatedUser;
-	
-	private WishDTO [] wishesList;
-	
+		
 	private CommitteeDTO wishedCommitee;
 	
 	private int wishOrder;
 	
-	private int shurianYear;
+	private int shurianYear = HijriDateConverter.convertCurrentDateToHijri().getYear();
 	
 	private boolean isAssignedBySG ;
 	
@@ -36,14 +36,6 @@ public class UserWishDTO extends BaseDTO {
 
 	public void setNominatedUser(UserDTO nominatedUser) {
 		this.nominatedUser = nominatedUser;
-	}
-
-	public WishDTO [] getWishesList() {
-		return wishesList;
-	}
-
-	public void setWishesList(WishDTO [] wishesList) {
-		this.wishesList = wishesList;
 	}
 
 	public CommitteeDTO getWishedCommitee() {

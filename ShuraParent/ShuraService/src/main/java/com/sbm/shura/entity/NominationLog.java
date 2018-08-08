@@ -2,6 +2,7 @@ package com.sbm.shura.entity;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -25,7 +26,7 @@ public class NominationLog {
 
 	
 	@Id
-	@Column(insertable = true, nullable = false, unique = true, updatable = false)
+	@Column(nullable = false, unique = true, updatable = false)
 	@SequenceGenerator(name = "nomLog_ID_Generator", sequenceName = "NOMINTATIONLOG_SEQ", initialValue = 1)
 	@GeneratedValue(generator = "nomLog_ID_Generator", strategy = GenerationType.SEQUENCE)
 	private Long Id;
@@ -54,7 +55,7 @@ public class NominationLog {
 	}
 
 	public void setId(Long id) {
-		Id = id;
+		this.Id = id;
 	}
 
 	public int getNoOfMembers() {
@@ -79,6 +80,22 @@ public class NominationLog {
 
 	public void setRunDate(Date runDate) {
 		this.runDate = runDate;
+	}
+
+	public User getActionUser() {
+		return actionUser;
+	}
+
+	public void setActionUser(User actionUser) {
+		this.actionUser = actionUser;
+	}
+
+	public int getActionNo() {
+		return actionNo;
+	}
+
+	public void setActionNo(int actionNo) {
+		this.actionNo = actionNo;
 	}
 
 }

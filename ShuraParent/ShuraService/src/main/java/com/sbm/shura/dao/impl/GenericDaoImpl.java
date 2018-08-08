@@ -45,6 +45,7 @@ public class GenericDaoImpl<T> implements GenericDao<T>
 		this.entityManager.persist(t);
 		//this.entityManager.refresh(t);
 		}catch(Exception e) {
+			e.printStackTrace();
 			throw new RespositoryException(ExceptionEnums.REPOSITORY_ERROR);
 		}
 		return t;

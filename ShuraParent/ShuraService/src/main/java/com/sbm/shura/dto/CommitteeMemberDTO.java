@@ -25,7 +25,7 @@ public class CommitteeMemberDTO extends BaseDTO {
 	private CommitteeDTO committee;
 	
 	private int wishOrder;
-
+	
 	public int getId() {
 		return Id;
 	}

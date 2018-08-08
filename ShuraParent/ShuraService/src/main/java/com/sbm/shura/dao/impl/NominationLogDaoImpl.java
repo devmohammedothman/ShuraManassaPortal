@@ -13,12 +13,12 @@ public class NominationLogDaoImpl extends GenericDaoImpl<NominationLog> implemen
 	@Override
 	public NominationLog addPOllLog(NominationLog obj) throws RespositoryException {
 		
-		NominationLog logObj  = null; 
-		
+	NominationLog logObj  = null; 
+	
 		try 
 		{
-			logObj = persist(logObj);
-			}
+			logObj = persist(obj);
+		}
 		catch (Exception e) 
 		{
 			e.printStackTrace();

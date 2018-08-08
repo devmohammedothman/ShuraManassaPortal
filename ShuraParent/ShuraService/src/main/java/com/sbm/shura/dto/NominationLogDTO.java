@@ -7,7 +7,7 @@ public class NominationLogDTO extends BaseDTO {
 	 */
 	private static final long serialVersionUID = -3692989912096826194L;
 	
-	private long Id;
+	private Long Id;
 	
 	private int noOfMembers;
 	
@@ -17,11 +17,11 @@ public class NominationLogDTO extends BaseDTO {
 	
 	private UserDTO actionUser;
 
-	public long getId() {
+	public Long getId() {
 		return Id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		Id = id;
 	}
 

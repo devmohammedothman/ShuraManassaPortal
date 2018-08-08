@@ -1,6 +1,5 @@
 package com.sbm.shura.shuraIntegrationAPI.restcontroller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.sbm.shura.commonlib.dtoresponsehandler.ResponseDTO;
 import com.sbm.shura.commonlib.exceptions.types.ControllerException;
 import com.sbm.shura.dto.NominationLogDTO;
+import com.sbm.shura.dto.PollProcessResultDto;
 import com.sbm.shura.dto.UserWishDTO;
 import com.sbm.shura.management.NominationManage;
 
@@ -54,6 +54,14 @@ public class NominationRestController {
 	public ResponseDTO runPollProcess(@RequestBody NominationLogDTO logDto) throws ControllerException
 	{
 			return manage.runPollProcess(logDto);
+	}
+	
+	@RequestMapping (value = "confirmpollprocess", method = RequestMethod.POST,
+			consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	public ResponseDTO confirmPollProcess(@RequestBody PollProcessResultDto pollDTO) throws ControllerException
+	{
+			return manage.confirmPollResult(pollDTO);
 	}
 	
 }

@@ -16,6 +16,7 @@ import com.sbm.shura.commonlib.utilities.HijriDateConverter;
 import com.sbm.shura.dto.CommitteeDTO;
 import com.sbm.shura.dto.CommitteeMemberDTO;
 import com.sbm.shura.dto.NominationLogDTO;
+import com.sbm.shura.dto.PollProcessResultDto;
 import com.sbm.shura.dto.UserWishDTO;
 import com.sbm.shura.management.NominationManage;
 import com.sbm.shura.service.CommitteeMemberService;
@@ -68,23 +69,6 @@ public class NominationManageImpl implements NominationManage {
 		return responseDTO;
 	}
 
-	@Override
-	public ResponseDTO getUserWishList() {
-		ResponseDTO responseDTO = null;
-		// try {
-		// responseDTO = new ResponseDTO("Shura.business.code.1000", "successfully",
-		// "successfully",
-		// null);
-		// }catch(BusinessException e) {
-		// e.printStackTrace();
-		// throw new ControllerException(ExceptionEnums.BUSINESS_ERROR);
-		// }
-		// catch(Exception e1) {
-		// e1.printStackTrace();
-		// throw new ControllerException(ExceptionEnums.INVALID_OPERATION,e1);
-		// }
-		return responseDTO;
-	}
 
 	@Override
 	public ResponseDTO getUserWishesByUserIdAndCommitte(long userId) throws ControllerException {
@@ -205,7 +189,7 @@ public class NominationManageImpl implements NominationManage {
 								uwitem -> uwitem.getWishOrder() == 2 && uwitem.getWishedCommitee().getId() == item.getId()
 								).collect(Collectors.toList());
 						
-						remainingMembersCount = memberCount - commMemberResultList.size() ;
+						remainingMembersCount = memberCount - commTempList.size() ;
 						
 						if(remainingMembersCount > 0 && !secondUserWishList.isEmpty())
 						{
@@ -220,7 +204,7 @@ public class NominationManageImpl implements NominationManage {
 						}
 
 						
-						remainingMembersCount = memberCount - commMemberResultList.size() ;
+						remainingMembersCount = memberCount - commTempList.size() ;
 						
 						
 						//////////third
@@ -239,17 +223,22 @@ public class NominationManageImpl implements NominationManage {
 							.collect(Collectors.toList()));
 						}
 						
-						
-						
-						remainingMembersCount = memberCount - commMemberResultList.size() ;
+						remainingMembersCount = memberCount - commTempList.size() ;
 						
 						commMemberResultList.addAll(commTempList);
 						
 					}
-				
+				}
 			}
-		}
-		responseDTO = new ResponseDTO("Shura.business.code.1000", "successfully", "successfully", commMemberResultList);
+			
+		//Add Log to Nomination Log
+		logDtoObj = _nominationService.addPOllLog(logDtoObj);
+		
+		PollProcessResultDto result = new PollProcessResultDto();
+		result.setCommitteeMembers(commMemberResultList);
+		result.setProcessId(logDtoObj.getId());
+			
+		responseDTO = new ResponseDTO("Shura.business.code.1000", "successfully", "successfully", result);
 			
 		} catch (BusinessException e) {
 			e.printStackTrace();
@@ -275,6 +264,36 @@ public class NominationManageImpl implements NominationManage {
 			selectedUserList.add(userList.get(selectedUsersIndex.get(i)));
 		}
 		return selectedUserList;
+	}
+
+
+	@Override
+	public ResponseDTO confirmPollResult(PollProcessResultDto approvedList) throws ControllerException {
+		ResponseDTO responseDTO = null;
+		
+		try 
+		{
+			//assign member to Committee
+			for(CommitteeMemberDTO memDtoItem : approvedList.getCommitteeMembers())
+			{
+
+				//delete assigned members to each committee
+				_commMemberService.deleteCommitteeAssignedMembers(memDtoItem.getCommittee().getId());
+				_commMemberService.assignMemberToCommittee(memDtoItem);
+			}
+			
+		  _nominationService.updatePollLogApprovalStatus(approvedList.getProcessId());
+			
+		responseDTO = new ResponseDTO("Shura.business.code.1000", "successfully", "successfully", approvedList);
+			
+		} catch (BusinessException e) {
+			e.printStackTrace();
+			throw new ControllerException(ExceptionEnums.BUSINESS_ERROR);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+			throw new ControllerException(ExceptionEnums.INVALID_OPERATION, e1);
+		}
+		return responseDTO;
 	}
 
 }

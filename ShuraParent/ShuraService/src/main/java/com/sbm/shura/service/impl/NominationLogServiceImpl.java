@@ -44,4 +44,30 @@ public class NominationLogServiceImpl extends BasicServiceImpl<NominationLogDTO,
 		return logObj;
 	}
 
+	@Override
+	public NominationLogDTO updatePollLogApprovalStatus(long processId) throws BusinessException {
+		
+		NominationLogDTO logObj = null;
+		try {
+			
+			logEntity = new NominationLog();
+			
+			logEntity =  nominationDao.findById(processId);
+			logEntity.setApproved(true);
+			logEntity = nominationDao.update(logEntity);
+			logObj = new NominationLogDTO();
+			logObj = convertToDTO(logEntity, logObj);
+			
+		}
+		catch (RespositoryException e) {
+			e.printStackTrace();
+			throw new BusinessException(ExceptionEnums.REPOSITORY_ERROR);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+			throw new BusinessException(ExceptionEnums.BUSINESS_ERROR);
+		}
+		
+		return logObj;
+	}
+
 }

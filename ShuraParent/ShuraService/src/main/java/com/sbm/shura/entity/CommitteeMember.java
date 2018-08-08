@@ -16,12 +16,14 @@ import javax.persistence.Table;
 @Table (name = "COMMITTEEMEMBER")
 @Entity
 @NamedQueries (value = {
-		@NamedQuery (name = "commMember.findAll" , query = "select cm from CommitteeMember cm")
+		@NamedQuery (name = "commMember.findAll" , query = "select cm from CommitteeMember cm"),
+		@NamedQuery (name = "commMember.getCommAssignedMembers" , query = "select cm from CommitteeMember cm where committee.id =:commId"),
+		@NamedQuery (name = "commMember.deleteCommAssignedMembers" , query = "delete from CommitteeMember cm where committee.id =:commId")
 })
 public class CommitteeMember {
 
 	@Id
-	@Column(insertable = true, nullable = false, unique = true, updatable = false)
+	@Column(nullable = false, unique = true, updatable = false)
 	@SequenceGenerator(name = "commMember_ID_Generator", sequenceName = "COMMITTEEMEMBER_SEQ", initialValue = 1)
 	@GeneratedValue(generator = "commMember_ID_Generator", strategy = GenerationType.SEQUENCE)
 	private Long Id;

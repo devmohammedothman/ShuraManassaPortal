@@ -29,9 +29,6 @@ public class Committee implements java.io.Serializable {
 	@JoinColumn(name = "COMMANAGERID")
 	private User comManager;
 	
-	@OneToMany(fetch = FetchType.LAZY)
-	private List<CommitteeMember> commMembers;
-
 	public Committee(Long id) {
 		super();
 		this.id = id;
@@ -70,14 +67,6 @@ public class Committee implements java.io.Serializable {
 
 	public void setComManager(User comManager) {
 		this.comManager = comManager;
-	}
-
-	public List<CommitteeMember> getCommMembers() {
-		return commMembers;
-	}
-
-	public void setCommMembers(List<CommitteeMember> commMembers) {
-		this.commMembers = commMembers;
 	}
 
 }
