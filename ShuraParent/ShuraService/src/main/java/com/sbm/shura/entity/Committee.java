@@ -29,6 +29,9 @@ public class Committee implements java.io.Serializable {
 	@JoinColumn(name = "COMMANAGERID")
 	private User comManager;
 	
+	@OneToMany(mappedBy="committee", cascade=CascadeType.ALL)
+	private List<CommitteeExperience> committeeExperiences;
+	
 	public Committee(Long id) {
 		super();
 		this.id = id;
@@ -67,6 +70,14 @@ public class Committee implements java.io.Serializable {
 
 	public void setComManager(User comManager) {
 		this.comManager = comManager;
+	}
+	
+	public List<CommitteeExperience> getCommitteeExperiences() {
+		return committeeExperiences;
+	}
+
+	public void setCommitteeExperiences(List<CommitteeExperience> committeeExperiences) {
+		this.committeeExperiences = committeeExperiences;
 	}
 
 }

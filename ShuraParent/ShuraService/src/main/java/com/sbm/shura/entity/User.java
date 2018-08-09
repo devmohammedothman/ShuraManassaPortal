@@ -78,6 +78,9 @@ public class User extends BaseEntity implements  UserDetails,Serializable {
 			}
 		)
 	private List<Permission> permissions;
+	
+	@OneToMany(mappedBy="member", cascade=CascadeType.ALL)
+	private List<MemberExperience> memberExperiences;
 
 	public User() {
 	}
@@ -169,5 +172,13 @@ public class User extends BaseEntity implements  UserDetails,Serializable {
 	public boolean isEnabled() {
 		// TODO Auto-generated method stub
 		return true;
+	}
+	
+	public List<MemberExperience> getMemberExperiences() {
+		return memberExperiences;
+	}
+
+	public void setMemberExperiences(List<MemberExperience> memberExperiences) {
+		this.memberExperiences = memberExperiences;
 	}
 }
