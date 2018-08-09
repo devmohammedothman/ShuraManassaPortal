@@ -36,7 +36,7 @@ public class CommitteeMemberDaoImpl extends GenericDaoImpl<CommitteeMember>  imp
 		List<CommitteeMember> resultList = null;
 		try 
 		{
-			Query q = entityManager.createNamedQuery("cm.getCommAssignedMembers",CommitteeMember.class);
+			Query q = entityManager.createNamedQuery("commMember.getCommAssignedMembers",CommitteeMember.class);
 			q.setParameter("commId", commId);
 			resultList = (q.getResultList() != null && q.getResultList().size() > 0 ? q.getResultList() : null);
 			
@@ -53,12 +53,10 @@ public class CommitteeMemberDaoImpl extends GenericDaoImpl<CommitteeMember>  imp
 	public void deleteCommitteeAssignedMembers(long commId) throws RespositoryException {
 		
 		try {
-				Query q = entityManager.createNamedQuery("cm.deleteCommAssignedMembers",CommitteeMember.class);
+				Query q = entityManager.createNamedQuery("commMember.deleteCommAssignedMembers");
 				q.setParameter("commId", commId);
 			
 				q.executeUpdate();
-				
-				
 			}
 			catch (Exception e) 
 			{

@@ -18,7 +18,7 @@ public class CommitteeMemberDTO extends BaseDTO {
 		this.wishOrder = wishOrder;
 	}
 	
-	private int Id;
+	private Long Id;
 	
 	private UserDTO member;
 	
@@ -26,11 +26,11 @@ public class CommitteeMemberDTO extends BaseDTO {
 	
 	private int wishOrder;
 	
-	public int getId() {
+	public Long getId() {
 		return Id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		Id = id;
 	}
 

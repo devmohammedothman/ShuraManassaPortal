@@ -273,12 +273,19 @@ public class NominationManageImpl implements NominationManage {
 		
 		try 
 		{
-			//assign member to Committee
 			for(CommitteeMemberDTO memDtoItem : approvedList.getCommitteeMembers())
 			{
 
-				//delete assigned members to each committee
-				_commMemberService.deleteCommitteeAssignedMembers(memDtoItem.getCommittee().getId());
+				List<CommitteeMemberDTO> assignedCommList = _commMemberService.getCommitteeAssignedMembers(memDtoItem.getCommittee().getId());
+				if(assignedCommList != null && assignedCommList.size() > 0)
+				{
+					//delete assigned members to each committee
+					_commMemberService.deleteCommitteeAssignedMembers(memDtoItem.getCommittee().getId());
+				}
+			}
+			//assign member to Committee
+			for(CommitteeMemberDTO memDtoItem : approvedList.getCommitteeMembers())
+			{
 				_commMemberService.assignMemberToCommittee(memDtoItem);
 			}
 			

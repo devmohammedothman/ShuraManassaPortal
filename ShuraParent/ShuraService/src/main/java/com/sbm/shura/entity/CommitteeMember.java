@@ -35,13 +35,24 @@ public class CommitteeMember {
 	@ManyToOne (fetch = FetchType.EAGER)
 	@JoinColumn (name = "COMMITTEEID", nullable = false)
 	private Committee committee;
+	
+	public CommitteeMember()
+	{}
+	
+	public CommitteeMember(Long Id)
+	{
+		this.Id = Id;
+	}
 
 	public Long getId() {
 		return Id;
 	}
 
 	public void setId(Long id) {
-		Id = id;
+		if(id == 0 )
+			this.Id = null;
+		else
+			Id = id;
 	}
 
 	public User getMember() {

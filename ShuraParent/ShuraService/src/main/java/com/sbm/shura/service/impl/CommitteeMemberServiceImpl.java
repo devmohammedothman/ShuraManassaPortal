@@ -55,7 +55,7 @@ public class CommitteeMemberServiceImpl extends BasicServiceImpl<CommitteeMember
 		
 		try 
 		{	
-			_comDao.delete(commId);
+			_comDao.deleteCommitteeAssignedMembers(commId);
 		}
 		catch(RespositoryException re)
 		{
@@ -75,7 +75,8 @@ public class CommitteeMemberServiceImpl extends BasicServiceImpl<CommitteeMember
 		{
 			List<CommitteeMember> entityResulList = new ArrayList<>();
 			entityResulList = _comDao.getCommitteeAssignedMembers(commId);
-			resultList = entityResulList.stream().map(item -> convertToDTO(item, new CommitteeMemberDTO())).collect(Collectors.toList());
+			if(entityResulList != null && entityResulList.size() > 0)
+				resultList = entityResulList.stream().map(item -> convertToDTO(item, new CommitteeMemberDTO())).collect(Collectors.toList());
 		}
 		catch(RespositoryException re)
 		{
