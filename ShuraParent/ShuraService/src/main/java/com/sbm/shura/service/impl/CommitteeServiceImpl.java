@@ -42,6 +42,10 @@ public class CommitteeServiceImpl extends BasicServiceImpl<CommitteeDTO, Committ
 		try {
 		_committee  = new Committee();
 		_committee = convertToEntity(_committee, obj);
+		if(!_committee.getCommitteeExperiences().isEmpty()){
+			for(int i=0 ; i < _committee.getCommitteeExperiences().size(); i++)
+			_committee.getCommitteeExperiences().get(i).setCommittee(_committee);
+		}
 		_committee =  committeeDao.addCommittee(_committee);
 		committeeDTO = convertToDTO(_committee, obj);
 		}catch (RespositoryException e) {

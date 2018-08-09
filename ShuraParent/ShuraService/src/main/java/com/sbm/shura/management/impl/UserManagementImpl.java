@@ -1,6 +1,7 @@
 package com.sbm.shura.management.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -9,6 +10,7 @@ import com.sbm.shura.commonlib.dtoresponsehandler.ResponseDTO;
 import com.sbm.shura.commonlib.exceptions.enums.ExceptionEnums.ExceptionEnums;
 import com.sbm.shura.commonlib.exceptions.types.BusinessException;
 import com.sbm.shura.commonlib.exceptions.types.ControllerException;
+import com.sbm.shura.dto.ExperienceDTO;
 import com.sbm.shura.dto.GroupDTO;
 import com.sbm.shura.dto.MenuDTO;
 import com.sbm.shura.dto.PermissionDTO;
@@ -277,6 +279,26 @@ public class UserManagementImpl implements UserManagement {
 			UserDTO userDTO = userService.findById(userId);
 			responseDTO =  new ResponseDTO("Shura.business.code.1000", "successfully", "successfully",
 					userDTO);
+		}catch(BusinessException e) {
+			 e.printStackTrace();
+			 throw new ControllerException(ExceptionEnums.BUSINESS_ERROR);
+			}
+		 catch(Exception e1) {
+			 e1.printStackTrace();
+			 throw new ControllerException(ExceptionEnums.INVALID_OPERATION,e1);
+		 }
+		return responseDTO;
+	}
+	
+	@Override
+	public ResponseDTO assignExperiencesToUsers(Map<String, List<ExperienceDTO>> map) throws ControllerException{
+		ResponseDTO responseDTO = null;
+		try {
+			if(!map.isEmpty()) {
+			List<UserDTO> userDTO = userService.assignExperiencesToUsers(map);
+			responseDTO =  new ResponseDTO("Shura.business.code.1000", "successfully", "successfully",
+					userDTO);
+		}
 		}catch(BusinessException e) {
 			 e.printStackTrace();
 			 throw new ControllerException(ExceptionEnums.BUSINESS_ERROR);

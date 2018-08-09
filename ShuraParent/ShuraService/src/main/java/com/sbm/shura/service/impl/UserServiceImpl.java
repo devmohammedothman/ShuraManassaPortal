@@ -2,6 +2,7 @@ package com.sbm.shura.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.modelmapper.PropertyMap;
@@ -12,10 +13,14 @@ import org.springframework.transaction.annotation.Transactional;
 import com.sbm.shura.commonlib.exceptions.enums.ExceptionEnums.ExceptionEnums;
 import com.sbm.shura.commonlib.exceptions.types.BusinessException;
 import com.sbm.shura.commonlib.exceptions.types.RespositoryException;
+import com.sbm.shura.dao.ExperienceDao;
 import com.sbm.shura.dao.GroupDao;
 import com.sbm.shura.dao.UserDao;
+import com.sbm.shura.dto.ExperienceDTO;
 import com.sbm.shura.dto.UserDTO;
+import com.sbm.shura.entity.Experience;
 import com.sbm.shura.entity.Group;
+import com.sbm.shura.entity.MemberExperience;
 import com.sbm.shura.entity.User;
 import com.sbm.shura.service.UserService;
 
@@ -27,6 +32,9 @@ public class UserServiceImpl extends BasicServiceImpl<UserDTO, User> implements 
 
 	@Autowired
 	private GroupDao groupDao;
+	
+	@Autowired
+	private ExperienceDao experienceDao;
 
 	private User _user = new User();
 
@@ -174,6 +182,41 @@ public class UserServiceImpl extends BasicServiceImpl<UserDTO, User> implements 
 		UserDTO userDto = new UserDTO();
 		userDto = convertToDTO(_user, userDto);
 		result = userDto;
+		}catch (RespositoryException e) {
+			e.printStackTrace();
+			throw new BusinessException(ExceptionEnums.REPOSITORY_ERROR);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+			throw new BusinessException(ExceptionEnums.BUSINESS_ERROR);
+		}
+		return result;
+	}
+	
+	@Override
+	@Transactional
+	public List<UserDTO> assignExperiencesToUsers(Map<String, List<ExperienceDTO>> map) throws BusinessException {
+		List<UserDTO> result = null;
+		List<User> users = new ArrayList<User>();
+		try {
+			Object[] keys = map.keySet().toArray();
+			for(int i=0 ; i < map.size(); i++) {
+				List<MemberExperience> memberExperiences = new ArrayList<MemberExperience>();
+				String key = String.valueOf(keys[i]);
+				List<ExperienceDTO> experienceDTOs = map.get(key);
+				_user = userDao.findById(Long.parseLong(key));
+				users.add(_user);
+				for(int j=0 ; j< experienceDTOs.size(); j++) {
+					Experience experience = experienceDao.findById(experienceDTOs.get(j).getId());
+					MemberExperience memberExperience = new MemberExperience();
+					memberExperience.setExperience(experience);
+					memberExperience.setMember(_user);
+					memberExperiences.add(memberExperience);
+				}
+				_user.setMemberExperiences(memberExperiences);
+			}
+			
+		result = users.stream().map(item -> convertToDTO(item, new UserDTO())).collect(Collectors.toList());
+		
 		}catch (RespositoryException e) {
 			e.printStackTrace();
 			throw new BusinessException(ExceptionEnums.REPOSITORY_ERROR);

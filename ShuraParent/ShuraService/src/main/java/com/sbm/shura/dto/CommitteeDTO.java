@@ -2,8 +2,6 @@ package com.sbm.shura.dto;
 
 import java.util.List;
 
-import com.sbm.shura.entity.User;
-
 public class CommitteeDTO extends BaseDTO {
 
 	/**
@@ -20,6 +18,8 @@ public class CommitteeDTO extends BaseDTO {
 	private UserDTO comManager;
 	
 	private List<CommitteeMemberDTO> commMembers;
+	
+	private List<CommitteeExperienceDTO> committeeExperiences;
 
 	public CommitteeDTO(Long id) {
 		this.id = id;
@@ -66,6 +66,14 @@ public class CommitteeDTO extends BaseDTO {
 
 	public void setCommMembers(List<CommitteeMemberDTO> commMembers) {
 		this.commMembers = commMembers;
+	}
+	
+	public List<CommitteeExperienceDTO> getCommitteeExperiences() {
+		return committeeExperiences;
+	}
+
+	public void setCommitteeExperiences(List<CommitteeExperienceDTO> committeeExperiences) {
+		this.committeeExperiences = committeeExperiences;
 	}
 
 }

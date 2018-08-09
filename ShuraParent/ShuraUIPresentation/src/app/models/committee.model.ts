@@ -7,7 +7,10 @@ export class Committee
      nameAr : string;
      nameEn : string;
      commManager : User;
-    constructor(){}
+     comm?: Committee;
+    constructor(committee: Committee){
+        this.comm = committee;
+    }
     
     // constructor(id : number , nameAr : string , nameEn : string , commManager : User)
     // {

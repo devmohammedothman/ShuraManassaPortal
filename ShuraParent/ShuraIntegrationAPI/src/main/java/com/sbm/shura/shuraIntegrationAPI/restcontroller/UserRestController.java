@@ -1,5 +1,6 @@
 package com.sbm.shura.shuraIntegrationAPI.restcontroller;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sbm.shura.commonlib.dtoresponsehandler.ResponseDTO;
 import com.sbm.shura.commonlib.exceptions.types.ControllerException;
+import com.sbm.shura.dto.ExperienceDTO;
 import com.sbm.shura.dto.GroupDTO;
 import com.sbm.shura.dto.MenuDTO;
 import com.sbm.shura.dto.PermissionDTO;
@@ -107,5 +109,11 @@ public class UserRestController {
 	@ResponseBody
 	public ResponseDTO getPermissionByMenu(@PathVariable("id") long menuId) throws ControllerException{
 		return manage.getPermListByMenu(menuId);
+	}
+	
+	@RequestMapping(value = "/api/user/assignExperience", method = RequestMethod.POST)
+	@ResponseBody
+	public ResponseDTO assignExperienceToUser(@RequestBody Map<String, List<ExperienceDTO>> map) throws ControllerException{
+		return manage.assignExperiencesToUsers(map);
 	}
 }
