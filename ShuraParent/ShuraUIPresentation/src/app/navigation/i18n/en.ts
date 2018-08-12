@@ -59,7 +59,8 @@ export const locale = {
                 'USERNAME': 'Username',               
                 'WISH1': 'First Wish',               
                 'WISH2': 'Second Wish',               
-                'WISH3': 'Third Wish',               
+                'WISH3': 'Third Wish',    
+                'WISHORDER': 'Wish Order',               
                 'NOTES': 'Notes',               
             },
             'GPERM': {

@@ -82,14 +82,6 @@ export const navigation: FuseNavigation[] = [
                         icon     : 'flag',
                         url      : '/maw'
                     },
-                    {
-                        id       : 'NomintaionPoll',
-                        title : 'Nomination Poll',
-                        translate: 'NAV.NOMINATION-POLL',
-                        type     : 'item',
-                        icon     : 'flag',
-                        url      : '/nomination/nomination-poll'
-                    },
                 ]
             },
         ]

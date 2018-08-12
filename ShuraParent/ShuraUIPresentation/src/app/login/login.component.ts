@@ -13,6 +13,7 @@ import { User } from '../models/user.model';
 import { Group } from '../models/group.model';
 import { Auth } from '../models/auth.model';
 import { LoginParam } from '../models/login.model';
+import { FuseNavigationService } from '@fuse/components/navigation/navigation.service';
 
 @Component({
     selector: 'login',
@@ -41,12 +42,14 @@ export class LoginComponent implements OnInit, OnDestroy {
     // param = new User();
     authParam = new Auth();
     userId: string;
+    other: any[] = [];
     constructor(
         private router: Router,
         private userService: UserService,
         private StorageService: StorageService,
         private _fuseConfigService: FuseConfigService,
-        private _formBuilder: FormBuilder
+        private _formBuilder: FormBuilder,
+        private _fuseNavigationService: FuseNavigationService
     ) {
         // Configure the layout
         this._fuseConfigService.config = {
@@ -144,19 +147,39 @@ export class LoginComponent implements OnInit, OnDestroy {
     login(): void {
         this.userService.login(this.logParam)
             .subscribe(user => {
-                const other = []; // your other array...
+                this.other = []; // your other array...
                 user.groups.map(item => {
                     return {
                         group: item.nameEn
                     };
-                }).forEach(item => other.push(item));
+                }).forEach(item => this.other.push(item));
                 user.avatarUrl = '';
                 console.log('b login key : ' + this.authParam.access_token);
                 this.StorageService.saveInLocal('token', this.authParam.access_token);
                 this.StorageService.saveInLocal('user', JSON.stringify(user));
-                this.StorageService.saveInLocal('group', JSON.stringify(other));
+                this.StorageService.saveInLocal('group', JSON.stringify(this.other));
+                let groups = this.other.filter(data => data.group.includes('MANAGER'));
+                console.log('man check'+ JSON.stringify(groups));
+                if(JSON.stringify(groups) !== '[]'){
+                    this.addNavItemWithCustomFunction();
+                }
                 this.router.navigate(['welcome']);
             },
             error => this.errorMessage = <any>error);
     }
+
+    addNavItemWithCustomFunction() {
+        // Prepare the new nav item
+        const newNavItem = {
+            id       : 'NomintaionPoll',
+            title : 'Nomination Poll',
+            translate: 'NAV.NOMINATION-POLL',
+            type     : 'item',
+            icon     : 'flag',
+            url      : '/nomination/nomination-poll'
+        };
+        // Add the new nav item at the beginning of the navigation
+        this._fuseNavigationService.addNavigationItem(newNavItem, 'nominationProgram');
+      }
+    
 }

@@ -38,7 +38,7 @@
           </mat-form-field>
           <button mat-button [ngClass]="'my-24'" (click)="runPollProcess()">{{'CONT.NOM.NEW-DEVESION' | translate }}</button>
           <button mat-button [ngClass]="'my-24'" (click)="getDevisionResult()">{{'CONT.NOM.DEVISION-RESULT' | translate }}</button>
-          <button mat-button [ngClass]="'my-24'">{{'CONT.NOM.DEVISION-SUBMIT' | translate }}</button>
+          <button mat-button [ngClass]="'my-24'" (click)="confirmPollProcess()">{{'CONT.NOM.DEVISION-SUBMIT' | translate }}</button>
 
           <div class="example-container mat-elevation-z8" [hidden]="hideTable">
 
@@ -74,7 +74,7 @@
               <ng-container matColumnDef="Nomination result">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'CONT.NOM.VIEW' | translate }} </th>
                 <td mat-cell *matCellDef="let row">
-                  <button mat-icon-button color="accent">
+                  <button mat-icon-button color="accent" (click)="dialog.openDialog(row.committeId)">
                     <mat-icon aria-label="search">search</mat-icon>
                   </button>
                   <!-- (click)="openDialog()" -->

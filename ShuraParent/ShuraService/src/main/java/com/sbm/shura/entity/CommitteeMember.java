@@ -12,6 +12,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Table (name = "COMMITTEEMEMBER")
 @Entity
@@ -36,6 +37,9 @@ public class CommitteeMember {
 	@JoinColumn (name = "COMMITTEEID", nullable = false)
 	private Committee committee;
 	
+	@Transient
+	private int wishOrder;
+	
 	public CommitteeMember()
 	{}
 	
@@ -48,11 +52,11 @@ public class CommitteeMember {
 		return Id;
 	}
 
-	public void setId(Long id) {
-		if(id == 0 )
-			this.Id = null;
-		else
-			Id = id;
+	protected void setId(Long id) {
+//		if(id == 0 )
+//			this.Id = null;
+//		else
+			this.Id = id;
 	}
 
 	public User getMember() {
@@ -70,5 +74,12 @@ public class CommitteeMember {
 	public void setCommittee(Committee committee) {
 		this.committee = committee;
 	}
-	
+
+	public int getWishOrder() {
+		return wishOrder;
+	}
+
+	public void setWishOrder(int wishOrder) {
+		this.wishOrder = wishOrder;
+	}
 }

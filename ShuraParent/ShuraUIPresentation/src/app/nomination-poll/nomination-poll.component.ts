@@ -10,8 +10,8 @@ import { CommitteMembers } from '../models/committe-members.model';
 import { Committee } from '../models/committee.model';
 import { Observable } from 'rxjs/Rx';
 import { element } from '../../../node_modules/protractor';
-
-
+import { NominationPollResult } from '../models/nomination-poll-result.model';
+import { DialogComponent } from './dialog/dialog.component';
 
 @Component({
   selector: 'app-nomination-poll',
@@ -31,6 +31,7 @@ export class NominationPollComponent implements OnInit {
   committeList: Committee[];
   ssss: CommitteMembers[];
   sumCount: number = 0;
+  nominationPollResult: NominationPollResult;
 
   displayedColumns = ['Committe name', 'First Wish', 'Second wish', 'Third wish',
     'sum', 'Nomination result'];
@@ -39,7 +40,8 @@ export class NominationPollComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(public snackBar: MatSnackBar,
-    private storageService: StorageService, private nominationService: NominationService) {
+    private storageService: StorageService, private nominationService: NominationService,
+    private dialog: DialogComponent) {
     this.dataSource = new MatTableDataSource(this.poolResult);
   }
 
@@ -80,15 +82,32 @@ export class NominationPollComponent implements OnInit {
   }
 
   runPollProcess(): void {
-    this.pollParam = new NominationPollParam('5', '1', false, JSON.parse(this.storageService.getFromLocal('user')));
+    this.pollParam = new NominationPollParam(this.memberCount, '1', false, JSON.parse(this.storageService.getFromLocal('user')));
     this.nominationService.runPollProcess(this.pollParam)
       .subscribe(result => {
-        this.pollData = result;
+        this.nominationPollResult = result;
+        this.pollData = result.committeeMembers;
+        if (this.committeList) {
+          this.committeList.splice(0, this.committeList.length);
+          this.poolResult.splice(0, this.poolResult.length);
+          this.ssss.splice(0, this.ssss.length);
+          this.sumCount = 0;
+        }
         // console.log('before'+ JSON.stringify(this.pollData));
         this.populateTableData();
       },
         // error => this.errorMessage = <any>error);
         error => alert("There is an error "));
+  }
+
+  confirmPollProcess(): void {
+    this.nominationService.confirmPollProcess(this.nominationPollResult)
+      .subscribe(result => {
+        this.openSnackBar('Done!', 'Close');
+      },
+        // error => this.errorMessage = <any>error);
+        this.openSnackBar('There is an error', 'Close')
+      );
   }
 
   populateTableData(): void {
@@ -101,46 +120,46 @@ export class NominationPollComponent implements OnInit {
         filteredData.push(y);
       });
 
-      filteredData.forEach(element => {
+    filteredData.forEach(element => {
       console.log('commID ' + element.comm.id);
-      this.ssss = (this.pollData.filter(data => data.committee.id === element.comm.id 
+      this.ssss = (this.pollData.filter(data => data.committee.id === element.comm.id
         && data.wishOrder === 1));
-          this.poolResultObj = new PollResult(this.ssss[0].committee.id, this.ssss[0].committee.nameEn,
-            this.ssss[0].committee.nameAr, this.ssss.length, 0 , 0,0); 
-            this.poolResult.push(this.poolResultObj);
-            this.sumCount = this.ssss.length;
-    });
-    filteredData.forEach(element => {
+      this.poolResultObj = new PollResult(this.ssss[0].committee.id, this.ssss[0].committee.nameEn,
+        this.ssss[0].committee.nameAr, this.ssss.length, 0, 0, 0);
+      this.poolResult.push(this.poolResultObj);
+      this.sumCount = this.ssss.length;
+
+
       console.log('commID ' + element.comm.id);
-      this.ssss = (this.pollData.filter(data => data.committee.id === element.comm.id 
+      this.ssss = (this.pollData.filter(data => data.committee.id === element.comm.id
         && data.wishOrder === 2));
-        let commId = this.poolResult.find(x => x.committeId == element.comm.id);
-        let itemIndex = this.poolResult.findIndex(x => x.committeId == element.comm.id);
-        if(!commId){
-          this.poolResultObj = new PollResult(this.ssss[0].committee.id, this.ssss[0].committee.nameEn,
-            this.ssss[0].committee.nameAr, this.ssss.length, 0 , 0,0); 
-            this.poolResult.push(this.poolResultObj);
-        } else {
-          commId.wish2Count = this.ssss.length;
-          this.sumCount = this.sumCount + this.ssss.length;
-          this.poolResult[itemIndex] = commId;
-        }
-    });
-    filteredData.forEach(element => {
+      let commId = this.poolResult.find(x => x.committeId == element.comm.id);
+      let itemIndex = this.poolResult.findIndex(x => x.committeId == element.comm.id);
+      if (!commId) {
+        this.poolResultObj = new PollResult(this.ssss[0].committee.id, this.ssss[0].committee.nameEn,
+          this.ssss[0].committee.nameAr, this.ssss.length, 0, 0, 0);
+        this.poolResult.push(this.poolResultObj);
+      } else {
+        commId.wish2Count = this.ssss.length;
+        this.sumCount = this.sumCount + this.ssss.length;
+        this.poolResult[itemIndex] = commId;
+      }
+
+
       console.log('commID ' + element.comm.id);
-      this.ssss = (this.pollData.filter(data => data.committee.id === element.comm.id 
+      this.ssss = (this.pollData.filter(data => data.committee.id === element.comm.id
         && data.wishOrder === 3));
-        let commId = this.poolResult.find(x => x.committeId == element.comm.id);
-        let itemIndex = this.poolResult.findIndex(x => x.committeId == element.comm.id);
-        if(!commId){
-          this.poolResultObj = new PollResult(this.ssss[0].committee.id, this.ssss[0].committee.nameEn,
-            this.ssss[0].committee.nameAr, this.ssss.length, 0 , 0,0); 
-            this.poolResult.push(this.poolResultObj);
-        } else {
-          commId.wish3Count = this.ssss.length;
-          commId.sum = (this.sumCount + this.ssss.length)-1;
-          this.poolResult[itemIndex] = commId;
-        }
+      let commId2 = this.poolResult.find(x => x.committeId == element.comm.id);
+      let itemIndex2 = this.poolResult.findIndex(x => x.committeId == element.comm.id);
+      if (!commId2) {
+        this.poolResultObj = new PollResult(this.ssss[0].committee.id, this.ssss[0].committee.nameEn,
+          this.ssss[0].committee.nameAr, this.ssss.length, 0, 0, 0);
+        this.poolResult.push(this.poolResultObj);
+      } else {
+        commId2.wish3Count = this.ssss.length;
+        commId2.sum = this.sumCount + this.ssss.length;
+        this.poolResult[itemIndex2] = commId;
+      }
     });
     this.dataSource.data = this.poolResult;
     console.log('source------' + JSON.stringify(this.poolResult));

@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -62,6 +63,14 @@ public class NominationRestController {
 	public ResponseDTO confirmPollProcess(@RequestBody PollProcessResultDto pollDTO) throws ControllerException
 	{
 			return manage.confirmPollResult(pollDTO);
+	}
+	
+	@RequestMapping (value = "getcommitteemembers/{commId}", method = RequestMethod.GET,
+			consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	public ResponseDTO getCommitteeAssignedMembers(@PathVariable("commId") long commId) throws ControllerException
+	{
+			return manage.getCommitteeAssignedMembers(commId);
 	}
 	
 }
