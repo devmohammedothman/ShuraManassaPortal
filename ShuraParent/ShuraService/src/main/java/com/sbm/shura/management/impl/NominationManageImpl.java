@@ -320,4 +320,44 @@ public class NominationManageImpl implements NominationManage {
 		return responseDTO;
 	}
 
+
+	@Override
+	public ResponseDTO getAllCommitteeCurrentMember() throws ControllerException {
+		ResponseDTO responseDTO = null;
+		try {
+			responseDTO = new ResponseDTO("Shura.business.code.1000", "successfully", "successfully",
+					_commMemberService.getAllCommitteeCurrentMember());
+		} 
+		catch (BusinessException e) {
+			e.printStackTrace();
+			throw new ControllerException(ExceptionEnums.BUSINESS_ERROR);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+			throw new ControllerException(ExceptionEnums.INVALID_OPERATION, e1);
+		}
+		return responseDTO;
+	}
+
+
+	@Override
+	public ResponseDTO updateMemberAssignedCommittee(CommitteeMemberDTO commMemberDto) throws ControllerException {
+		
+		ResponseDTO responseDTO = null;
+		try 
+		{
+			
+			CommitteeMemberDTO resultObj = _commMemberService.updateMemberAssignedCommittee(commMemberDto);
+			if(resultObj != null)
+				responseDTO = new ResponseDTO("Shura.business.code.1000", "successfully", "successfully", resultObj);
+		}
+		catch (BusinessException e) {
+			e.printStackTrace();
+			throw new ControllerException(ExceptionEnums.BUSINESS_ERROR);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+			throw new ControllerException(ExceptionEnums.INVALID_OPERATION, e1);
+		}
+		return responseDTO;
+	}
+
 }

@@ -14,7 +14,7 @@ public class Committee implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(insertable = true, nullable = false, unique = true, updatable = false)
+	@Column(nullable = false, unique = true, updatable = false)
 	@SequenceGenerator(name = "committ_ID_Generator", sequenceName = "com_seq")
 	@GeneratedValue(generator = "committ_ID_Generator", strategy = GenerationType.SEQUENCE)
 	private Long id;

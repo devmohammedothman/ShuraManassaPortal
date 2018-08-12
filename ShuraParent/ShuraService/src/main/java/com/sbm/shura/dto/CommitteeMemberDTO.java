@@ -31,7 +31,10 @@ public class CommitteeMemberDTO extends BaseDTO {
 	}
 
 	public void setId(Long id) {
-		Id = id;
+		if(id == 0)
+			this.Id = null;
+		else 
+			this.Id = id;
 	}
 
 	public UserDTO getMember() {

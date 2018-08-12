@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sbm.shura.commonlib.dtoresponsehandler.ResponseDTO;
 import com.sbm.shura.commonlib.exceptions.types.ControllerException;
+import com.sbm.shura.dto.CommitteeMemberDTO;
 import com.sbm.shura.dto.NominationLogDTO;
 import com.sbm.shura.dto.PollProcessResultDto;
 import com.sbm.shura.dto.UserWishDTO;
@@ -71,6 +72,22 @@ public class NominationRestController {
 	public ResponseDTO getCommitteeAssignedMembers(@PathVariable("commId") long commId) throws ControllerException
 	{
 			return manage.getCommitteeAssignedMembers(commId);
+	}
+	
+	@RequestMapping (value = "getallcommitteemembers", method = RequestMethod.GET,
+			consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	public ResponseDTO getAllCommitteeCurrentMember() throws ControllerException
+	{
+			return manage.getAllCommitteeCurrentMember();
+	}
+	
+	@RequestMapping (value = "updatememberassignedcommittee", method = RequestMethod.POST,
+			consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	public ResponseDTO updateMemberAssignedCommittee(@RequestBody CommitteeMemberDTO commMemberDto) throws ControllerException
+	{
+		return manage.updateMemberAssignedCommittee(commMemberDto);
 	}
 	
 }

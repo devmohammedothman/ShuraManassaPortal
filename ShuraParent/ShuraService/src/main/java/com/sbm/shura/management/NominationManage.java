@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.sbm.shura.commonlib.dtoresponsehandler.ResponseDTO;
 import com.sbm.shura.commonlib.exceptions.types.ControllerException;
+import com.sbm.shura.dto.CommitteeMemberDTO;
 import com.sbm.shura.dto.NominationLogDTO;
 import com.sbm.shura.dto.PollProcessResultDto;
 import com.sbm.shura.dto.UserWishDTO;
@@ -23,4 +24,8 @@ public interface NominationManage {
 	ResponseDTO confirmPollResult(PollProcessResultDto approvedList) throws ControllerException;
 	
 	ResponseDTO getCommitteeAssignedMembers(long commId) throws ControllerException;
+	
+	ResponseDTO getAllCommitteeCurrentMember() throws ControllerException;
+	
+	ResponseDTO updateMemberAssignedCommittee(CommitteeMemberDTO commMemberDto) throws ControllerException;
 }

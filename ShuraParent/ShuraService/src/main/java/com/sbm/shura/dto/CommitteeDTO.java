@@ -33,7 +33,10 @@ public class CommitteeDTO extends BaseDTO {
 	}
 
 	public void setId(Long id) {
-		this.id = id;
+		if(id == 0)
+			this.id = null;
+		else
+			this.id = id;
 	}
 
 	public String getNameAr() {
