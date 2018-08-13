@@ -21,6 +21,7 @@ export const locale = {
             'ECOMMERCE'   : 'E-Commerce',
             'ACADEMY'     : 'Academy',
             'NOMINATION-POLL' : 'Nomination Poll',
+            'EditMemWish' : 'Edit Member Wishes',
             'MAIL'        : {
                 'TITLE': 'Mail',
                 'BADGE': '25'
@@ -89,6 +90,10 @@ export const locale = {
                 'SUM': 'Sum',
                 'COMMITTE-NAME': 'Committe name',
                 'VIEW': 'View',
+                'MEMBERNAME':'Member Name',
+                'CURRENTCOMMITTEE':'Current Committee',
+                'WISHEDCOMMITTEE' : 'Wished Committee',
+                'EDITMEMBERWISHES' : 'Edit Member Wishes',
             }
         }
     }

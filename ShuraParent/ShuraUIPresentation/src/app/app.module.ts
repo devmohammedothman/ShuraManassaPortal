@@ -37,6 +37,7 @@ import { AdminAssignedWishesModule } from './admin-assigned-wishes/admin-assigne
 import { NominationService } from 'app/services/nomination.service';
 import { ManagerAssidnedWishesModule } from './manager-assidned-wishes/manager-assidned-wishes.module';
 import { NominationPollModule } from './nomination-poll/nomination-poll.module';
+import { EditMemberWishesModule } from './edit-member-wishes/edit-member-wishes.module';
 
 
 const appRoutes: Routes = [
@@ -69,7 +70,7 @@ const appRoutes: Routes = [
 
 @NgModule({
     declarations: [
-        AppComponent
+        AppComponent,
     ],
     imports     : [
         BrowserModule,
@@ -116,7 +117,8 @@ const appRoutes: Routes = [
         MemberWishesModule,
         AdminAssignedWishesModule,
         ManagerAssidnedWishesModule,
-        NominationPollModule
+        NominationPollModule,
+        EditMemberWishesModule
     ],
     bootstrap   : [
         AppComponent

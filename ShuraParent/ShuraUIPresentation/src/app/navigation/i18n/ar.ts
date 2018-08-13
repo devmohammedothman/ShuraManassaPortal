@@ -24,6 +24,7 @@ export const locale = {
             'ECOMMERCE'   : 'المتجر',
             'ACADEMY'     : 'الأكاديمية',
             'NOMINATION-POLL' : 'ترشيح الاعضاء',
+            'EditMemWish' : 'تعديل الرغبات',
             'MAIL'        : {
                 'TITLE': 'Posta',
                 'BADGE': '15'
@@ -88,7 +89,11 @@ export const locale = {
                 'THIRD-WISH': 'الرغبة الثالثة',
                 'SUM': 'الإجمالي',
                 'COMMITTE-NAME': 'اسم اللجنة', 
-                'VIEW': 'استعراض',            
+                'VIEW': 'استعراض', 
+                'MEMBERNAME':'إسم العضو',    
+                'CURRENTCOMMITTEE':'اللجنة الحالية',   
+                'WISHEDCOMMITTEE':'اللجنة المترشح لها',
+                'EDITMEMBERWISHES' : 'تعديل رغبات الأعضاء'    
             }
         }
     }

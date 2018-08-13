@@ -28,10 +28,8 @@ export class CommitteeService
     addCommittee(commObject : Committee)
     {
         const sentCommObjBody :Committee = {
-            id : 0,
             nameAr:commObject.nameAr,
-            nameEn:commObject.nameEn,
-            commManager : null,
+            nameEn:commObject.nameEn
         }
         console.log('call Add Committee BE Service');
         return this.http.post(this.baseUrl + 'addcomm',sentCommObjBody);

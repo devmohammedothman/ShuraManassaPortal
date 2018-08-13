@@ -20,21 +20,7 @@ export class NominationService {
   private baseUrl = ServiceUtils.baseUrl + 'nomination/';
   private token = 'bearer ' + this.storageService.getFromLocal('token');
 
-  // assignUserWishesService(userWishesObject: MemberAssignedWishes) {
-
-  //   let headers = new Headers({
-  //     'Content-Type': 'application/json',
-  //     'authorization': this.token,
-  //     'Access-Control': 'Allow-Origin'
-  //   });
-
-  //   let options = new RequestOptions({ headers: headers });
-
-  //   return this.http.post(this.baseUrl + 'addwish', userWishesObject, options)
-  //     .map(this.extractData)
-  //     .catch(this.handleErrorObservable);
-  // }
-
+  
   assignUserWishesService(userWishList: UserWish[]): Observable<string> {
     let headers = new Headers({
       'Content-Type': 'application/json',
@@ -91,6 +77,28 @@ export class NominationService {
     const options = new RequestOptions({ headers: headers });
     return this.http.get(this.baseUrl + 'getcommitteemembers/'+committeeId, options)
         .map(data => data.json().data);
+}
+
+getCurrentCommitteeMembers():Observable<CommitteMember[]>
+{
+    const headers = new Headers({ 'Content-Type': 'application/json',
+    'authorization': this.token,
+    'Access-Control': 'Allow-Origin' });
+    const options = new RequestOptions({ headers: headers });
+    return this.http.get(this.baseUrl + 'getallcommitteemembers/', options)
+        .map(data => data.json().data);
+}
+
+updateMemberAssignedCommittee(updatedComMember : CommitteMember ):Observable<string>
+{
+  
+    const headers = new Headers({ 'Content-Type': 'application/json',
+    'authorization': this.token,
+    'Access-Control': 'Allow-Origin' });
+    const options = new RequestOptions({ headers: headers });
+     return this.http.post(this.baseUrl + 'updatememberassignedcommittee',updatedComMember, options)
+     .map(this.extractData)
+     .catch(this.handleErrorObservable);;
 }
 
   private extractData(res: Response) {

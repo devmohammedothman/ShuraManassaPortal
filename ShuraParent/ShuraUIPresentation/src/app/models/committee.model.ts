@@ -3,10 +3,10 @@ import { User } from "./user.model";
 export class Committee
 {
     
-     id : number;
+     id? : number;
      nameAr : string;
      nameEn : string;
-     commManager : User;
+     commManager? : User;
      comm?: Committee;
     constructor(committee: Committee){
         this.comm = committee;

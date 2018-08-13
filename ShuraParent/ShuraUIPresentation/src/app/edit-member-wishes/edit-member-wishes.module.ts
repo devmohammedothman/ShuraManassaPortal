@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ManageCommitteeComponent } from './manage-committee.component';
+import { EditMemberWishesComponent } from './edit-member-wishes.component';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
@@ -12,21 +12,20 @@ import { FuseSharedModule } from '@fuse/shared.module';
 import { FuseSidebarModule, FuseThemeOptionsModule } from '@fuse/components';
 import { fuseConfig } from 'app/fuse-config';
 import { AuthGuard } from '../auth.guard';
-import { AddEditCommitteeComponent } from './add-edit-committee/add-edit-committee.component';
 import { TranslateModule } from '@ngx-translate/core';
 
-const routes: Routes = [
+const route:Routes = [
   {
-      path     : 'manage-committee/list',
-       canActivate : [AuthGuard],
-      component: ManageCommitteeComponent
+    path:'nomination/edit-member-wish',
+    //canActivate:[AuthGuard],
+    component:EditMemberWishesComponent
   }
 ];
 
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot(route),
 
     TranslateModule,
 
@@ -43,8 +42,6 @@ const routes: Routes = [
     // material
     MaterialModule,
   ],
-  declarations: [ManageCommitteeComponent, AddEditCommitteeComponent],
-  providers:[AddEditCommitteeComponent],
-  entryComponents : [AddEditCommitteeComponent]
+  declarations: [EditMemberWishesComponent]
 })
-export class ManageCommitteeModule { }
+export class EditMemberWishesModule { }
