@@ -32,14 +32,6 @@ public class Committee implements java.io.Serializable {
 	@OneToMany(mappedBy="committee", cascade=CascadeType.ALL)
 	private List<CommitteeExperience> committeeExperiences;
 	
-	public Committee(Long id) {
-		super();
-		this.id = id;
-	}
-
-	public Committee() {
-	}
-
 	public void setId(Long id) {
 		this.id = id;
 	}

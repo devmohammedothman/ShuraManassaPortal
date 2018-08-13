@@ -21,13 +21,6 @@ public class CommitteeDTO extends BaseDTO {
 	
 	private List<CommitteeExperienceDTO> committeeExperiences;
 
-	public CommitteeDTO(Long id) {
-		this.id = id;
-	}
-	
-	public CommitteeDTO() {
-	}
-
 	public Long getId() {
 		return id;
 	}
