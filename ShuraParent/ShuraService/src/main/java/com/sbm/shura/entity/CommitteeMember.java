@@ -38,7 +38,7 @@ public class CommitteeMember {
 	@JoinColumn (name = "COMMITTEEID", nullable = false)
 	private Committee committee;
 	
-	@Transient
+	@Column(name = "WISHORDER",nullable = false)
 	private int wishOrder;
 	
 	public CommitteeMember()
