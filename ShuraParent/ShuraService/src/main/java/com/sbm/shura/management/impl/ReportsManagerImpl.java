@@ -10,7 +10,7 @@ import com.sbm.shura.commonlib.dtoresponsehandler.ResponseStatusDTO;
 import com.sbm.shura.commonlib.exceptions.enums.ExceptionEnums.ExceptionEnums;
 import com.sbm.shura.commonlib.exceptions.types.BusinessException;
 import com.sbm.shura.commonlib.exceptions.types.ControllerException;
-import com.sbm.shura.dto.ReportCommitteeWishesCountDTO;
+import com.sbm.shura.dto.ReportCommitteeWishesCountPercDTO;
 import com.sbm.shura.dto.ReportUsersNotSubmitWishesDTO;
 import com.sbm.shura.dto.ReportUsersWishesDTO;
 import com.sbm.shura.management.ReportsManager;
@@ -46,11 +46,11 @@ public class ReportsManagerImpl implements ReportsManager{
 	public ResponseDTO getReportCommitteeWishesCount() throws ControllerException {
 		ResponseDTO result = null;
 		try {
-			List<ReportCommitteeWishesCountDTO> reportCommitteeWishesCountDTO = reportsService.getReportCommitteeWishesCount();
+			ReportCommitteeWishesCountPercDTO reportDTO = reportsService.getReportCommitteeWishesCount();
 			ResponseStatusDTO status = new ResponseStatusDTO("Shura.business.code.1000", 
 					"successfully", 
 					"successfully", null);
-			result =  new ResponseDTO(status, reportCommitteeWishesCountDTO);
+			result =  new ResponseDTO(status, reportDTO);
 		}catch(BusinessException e) {
 			 e.printStackTrace();
 			 throw new ControllerException(ExceptionEnums.BUSINESS_ERROR);

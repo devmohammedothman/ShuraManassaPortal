@@ -29,7 +29,8 @@ public class ReportsDaoImpl implements  ReportsDao {
 	public List<ReportUsersWishesDTO> getReportUsersWishes() throws RespositoryException {
 			List<ReportUsersWishesDTO> reportUsersWishesDTO = new ArrayList<ReportUsersWishesDTO>();
 			try {
-				String sql = "SELECT DISTINCT u.USERNAME, (SELECT c.NAME_EN FROM COMMITTEE c join USERWISH uw on uw.COMMITTEEID = c.ID WHERE uw.WISHORDER = 1 and u.ID = uw.NOMINATEDUSERID), " + 
+				String sql = "SELECT DISTINCT u.USERNAME, (SELECT c.NAME_EN FROM COMMITTEE c join COMMITTEEMEMBER cm on cm.COMMITTEEID = c.ID WHERE u.ID = cm.MEMBERID), " +
+						"(SELECT c.NAME_EN FROM COMMITTEE c join USERWISH uw on uw.COMMITTEEID = c.ID WHERE uw.WISHORDER = 1 and u.ID = uw.NOMINATEDUSERID), " + 
 						"(SELECT c.NAME_EN FROM COMMITTEE c join USERWISH uw on uw.COMMITTEEID = c.ID WHERE uw.WISHORDER = 2 and u.ID = uw.NOMINATEDUSERID), " + 
 						"(SELECT c.NAME_EN FROM COMMITTEE c join USERWISH uw on uw.COMMITTEEID = c.ID WHERE uw.WISHORDER = 3 and u.ID = uw.NOMINATEDUSERID) FROM SHURA.\"USER\" u " + 
 						"join USERWISH uwish on u.ID = uwish.NOMINATEDUSERID";
@@ -39,9 +40,10 @@ public class ReportsDaoImpl implements  ReportsDao {
 		    	for (Object[] a : details) {
 		    		ReportUsersWishesDTO uW = new ReportUsersWishesDTO();
 		    		uW.setUserName((String)a[0]);
-		    		uW.setFirstWish((String)a[1]);
-		    		uW.setSecondWish((String)a[2]);
-		    		uW.setThirdWish((String)a[3]);
+		    		uW.setCurrentCommittee((String)a[1]);
+		    		uW.setFirstWish((String)a[2]);
+		    		uW.setSecondWish((String)a[3]);
+		    		uW.setThirdWish((String)a[4]);
 		    		reportUsersWishesDTO.add(uW);
 		    	}
 			}
@@ -90,7 +92,7 @@ public class ReportsDaoImpl implements  ReportsDao {
 	public List<ReportUsersNotSubmitWishesDTO> getReportUsersNotSubmitWishes() throws RespositoryException {
 		List<ReportUsersNotSubmitWishesDTO> reportUsersNotSubmitWishesDTO = new ArrayList<ReportUsersNotSubmitWishesDTO>();
 		try {
-			String sql = "select DISTINCT  u.USERNAME, 'No Current Committee' As CurrentCommittee from SHURA.\"USER\" u FULL OUTER join USERWISH uw on u.ID = uw.NOMINATEDUSERID where uw.NOMINATEDUSERID is null";
+			String sql = "select DISTINCT  u.USERNAME, (SELECT c.NAME_EN FROM COMMITTEE c join COMMITTEEMEMBER cm on cm.COMMITTEEID = c.ID WHERE u.ID = cm.MEMBERID) As CurrentCommittee from SHURA.\"USER\" u FULL OUTER join USERWISH uw on u.ID = uw.NOMINATEDUSERID where uw.NOMINATEDUSERID is null";
 			Query query = entityManager.createNativeQuery(sql);
 	    	List<Object[]> details = query.getResultList();
 	    	System.out.println("IN DAO: " + details.size());
@@ -114,7 +116,8 @@ public class ReportsDaoImpl implements  ReportsDao {
 	public List<ReportUsersWishesDTO> getReportUsersWishesCommittee(long committeeId) throws RespositoryException {
 		List<ReportUsersWishesDTO> reportUsersWishesDTO = new ArrayList<ReportUsersWishesDTO>();
 		try {
-			String sql = "SELECT DISTINCT u.USERNAME, (SELECT c.NAME_EN FROM COMMITTEE c join USERWISH uw on uw.COMMITTEEID = c.ID WHERE uw.WISHORDER = 1 and u.ID = uw.NOMINATEDUSERID) , " + 
+			String sql = "SELECT DISTINCT u.USERNAME, (SELECT c.NAME_EN FROM COMMITTEE c join COMMITTEEMEMBER cm on cm.COMMITTEEID = c.ID WHERE u.ID = cm.MEMBERID), " +
+					"(SELECT c.NAME_EN FROM COMMITTEE c join USERWISH uw on uw.COMMITTEEID = c.ID WHERE uw.WISHORDER = 1 and u.ID = uw.NOMINATEDUSERID), " + 
 					"(SELECT c.NAME_EN FROM COMMITTEE c join USERWISH uw on uw.COMMITTEEID = c.ID WHERE uw.WISHORDER = 2 and u.ID = uw.NOMINATEDUSERID), " + 
 					"(SELECT c.NAME_EN FROM COMMITTEE c join USERWISH uw on uw.COMMITTEEID = c.ID WHERE uw.WISHORDER = 3 and u.ID = uw.NOMINATEDUSERID) FROM SHURA.\"USER\" u " + 
 					"join USERWISH uwish on u.ID = uwish.NOMINATEDUSERID  WHERE uwish.COMMITTEEID = ?";
@@ -125,9 +128,10 @@ public class ReportsDaoImpl implements  ReportsDao {
 	    	for (Object[] a : details) {
 	    		ReportUsersWishesDTO uW = new ReportUsersWishesDTO();
 	    		uW.setUserName((String)a[0]);
-	    		uW.setFirstWish((String)a[1]);
-	    		uW.setSecondWish((String)a[2]);
-	    		uW.setThirdWish((String)a[3]);
+	    		uW.setCurrentCommittee((String)a[1]);
+	    		uW.setFirstWish((String)a[2]);
+	    		uW.setSecondWish((String)a[3]);
+	    		uW.setThirdWish((String)a[4]);
 	    		reportUsersWishesDTO.add(uW);
 	    	}
 		}

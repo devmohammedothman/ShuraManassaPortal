@@ -16,28 +16,28 @@ public class ReportsController {
 	@Resource
 	private ReportsManager reportsManager;
 	
-	@RequestMapping(value = "/reportUsersWishes", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value = "/usersWishes", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	public ResponseDTO getReportUsersWishes() throws ControllerException {
 		
 		return reportsManager.getReportUsersWishes();
 	}
 	
-	@RequestMapping(value = "/reportCommitteeWishesCount", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value = "/committeeWishesCount", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	public ResponseDTO getReportCommitteeWishesCount() throws ControllerException {
 		
 		return reportsManager.getReportCommitteeWishesCount();
 	}
 	
-	@RequestMapping(value = "/reportUsersNotSubmitWishes", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value = "/usersNotSubmitWishes", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	public ResponseDTO getReportUsersNotSubmitWishes() throws ControllerException {
 		
 		return reportsManager.getReportUsersNotSubmitWishes();
 	}
 	
-	@RequestMapping(value = "/reportUsersWishesCommittee", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value = "/usersWishesCommittee", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	public ResponseDTO getReportUsersWishesCommittee(@RequestParam("committeeId") long committeeId) throws ControllerException {
 		

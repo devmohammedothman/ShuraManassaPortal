@@ -3,6 +3,7 @@ package com.sbm.shura.dto;
 public class ReportUsersWishesDTO {
 	
 	private String userName;
+	private String currentCommittee;
 	private String firstWish;
 	private String secondWish;
 	private String thirdWish;
@@ -30,6 +31,12 @@ public class ReportUsersWishesDTO {
 	}
 	public void setThirdWish(String thirdWish) {
 		this.thirdWish = thirdWish;
+	}
+	public String getCurrentCommittee() {
+		return currentCommittee;
+	}
+	public void setCurrentCommittee(String currentCommittee) {
+		this.currentCommittee = currentCommittee;
 	}
 	
 	
