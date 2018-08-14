@@ -22,6 +22,10 @@
             right: 0;
             width: 100%;
         }
+        &.mat-toolbar-row,
+        &.mat-toolbar-single-row {
+            height: auto;
+        }
     }
 
     .logo {
@@ -29,7 +33,7 @@
         align-items: center;
 
         .logo-icon {
-            width: 38px;
+            width: auto;
         }
     }
 

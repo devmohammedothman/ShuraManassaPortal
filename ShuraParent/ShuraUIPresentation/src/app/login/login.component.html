@@ -8,39 +8,39 @@
                 <img src="assets/images/logos/shura.svg">
             </div>
 
-            <div class="title">LOGIN TO YOUR ACCOUNT</div>
+            <div class="title">{{ 'SITE.LOGIN.TITLE' | translate }}</div>
 
             <form name="loginForm" [formGroup]="loginForm" novalidate>
 
                 <mat-form-field>
-                    <input matInput placeholder="Email" formControlName="email" [(ngModel)]="logParam.email">
+                    <input matInput placeholder="{{ 'CONT.FORMS.EMAIL' | translate }}" formControlName="email" [(ngModel)]="logParam.email">
                     <mat-error *ngIf="loginFormErrors.email.required">
-                        Email is required
+                        {{ 'CONT.FORMS.REQERR' | translate }}
                     </mat-error>
                     <mat-error *ngIf="!loginFormErrors.email.required && loginFormErrors.email.email">
-                        Please enter a valid email address
+                        {{ 'CONT.FORMS.EMAILERR' | translate }}
                     </mat-error>
                 </mat-form-field>
 
                 <mat-form-field>
-                    <input matInput type="password" placeholder="Password" formControlName="password" [(ngModel)]="logParam.password">
+                    <input matInput type="password" placeholder="{{ 'CONT.FORMS.PASSWORD' | translate }}" formControlName="password" [(ngModel)]="logParam.password">
                     <mat-error *ngIf="loginFormErrors.password.required">
-                        Password is required
+                        {{ 'CONT.FORMS.REQERR' | translate }}
                     </mat-error>
                 </mat-form-field>
 
                 <div class="remember-forgot-password" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center">
                     <mat-checkbox class="remember-me" aria-label="Remember Me">
-                        Remember Me
+                        {{ 'CONT.FORMS.REMEMBERME' | translate }}
                     </mat-checkbox>
 
                     <a class="forgot-password" [routerLink]="'/pages/auth/forgot-password'">
-                        Forgot Password?
+                        {{ 'CONT.FORMS.FORGOTPASS' | translate }}
                     </a>
                 </div>
 
                 <button mat-raised-button color="accent" class="submit-button" aria-label="LOG IN" [disabled]="loginForm.invalid" (click)="auth()">
-                    LOGIN
+                    {{ 'CONT.FORMS.SUBMIT' | translate }}
                 </button>
 
             </form>
@@ -49,6 +49,13 @@
                 <span class="text">Don't have an account?</span>
                 <a class="link" [routerLink]="'/pages/auth/register'">Create an account</a>
             </div> -->
+
+            <div id="spinner" class="mt-24" style="display: none;">
+                <mat-spinner></mat-spinner>
+            </div>
+            <mat-error id="loginErr" class="mt-24" style="display: none;">
+                {{ 'CONT.FORMS.LOGINERR' | translate }}
+            </mat-error>
 
         </div>
 

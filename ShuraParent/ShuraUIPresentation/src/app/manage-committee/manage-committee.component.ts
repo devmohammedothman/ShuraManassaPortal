@@ -11,42 +11,44 @@ import { AddEditCommitteeComponent } from './add-edit-committee/add-edit-committ
 })
 export class ManageCommitteeComponent implements OnInit {
 
-  committeeColumns = ['id', 'name','edit'];
+  committeeColumns = ['id', 'name', 'edit'];
   dataSource: MatTableDataSource<Committee>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-   committeeList : Committee [] ;
-  constructor( private commService :CommitteeService, public addEditComm:AddEditCommitteeComponent ) { 
+  public committeeList: Committee [] ;
+  public errorMessage;
+
+  constructor( private commService: CommitteeService, public addEditComm: AddEditCommitteeComponent ) { 
 
    this.populateCommitteeList();
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     console.log('init committee list component');
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
 
-  applyFilter(filterValue: string) {
+  applyFilter(filterValue: string): void {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
     this.dataSource.filter = filterValue;
   }
 
-  populateCommitteeList() 
-  {
-    console.log("call get all committee list service");
+  populateCommitteeList(): void {
+    console.log('call get all committee list service');
       this.commService.getAllCommitteeList().subscribe(committeeItem => {
         this.committeeList = committeeItem;
         this.dataSource.data = this.committeeList;
         console.log(JSON.stringify(this.committeeList));
-      });
-
+      },
+      error => this.errorMessage = error
+    );
+      
       // Assign the data to the data source for the table to render
-    this.dataSource = new MatTableDataSource(this.committeeList);
-    
+      this.dataSource = new MatTableDataSource(this.committeeList);
     }
 
 }

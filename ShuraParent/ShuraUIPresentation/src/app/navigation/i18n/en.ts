@@ -6,6 +6,13 @@ export const locale = {
             'PROJ': {
                 'TITLE': 'Al-Manassa'
             },
+            'LOGIN': {
+                'TITLE': 'Login to your account!',
+            },
+            'LOGO': {
+                'TITLE': 'Login to your account!',
+                'SUBTITLE': 'Login to your account!',
+            }
         },
         'NAV': {
             'PERMISSION'     : 'Permission',
@@ -43,13 +50,19 @@ export const locale = {
                 'SUBMIT': 'Submit!',               
                 'RESET': 'Reset!',
                 'SUBMIT-SUCCESS': 'Successfully submitted',
+                'REMEMBERME': 'Remember me!',
+                'FORGOTPASS': 'Forgot your password?',
                 'CLOSE': 'Close!',
                 'REQERR': 'You must enter a value.',
                 'VALIDERR': 'The value you\'ve entered isn\'t valid.',
+                'EMAILERR': 'Please, enter a valid e-mail address!',
+                'LOGINERR': 'Login credintials are not correct. Please, insert correct data!',
                 'CHKALL': 'Check All!',
                 'ADD': 'Add!',
                 'ID': 'ID',
                 'NAME': 'Name',
+                'EMAIL': 'E-Mail',
+                'PASSWORD': 'Password',
                 'FILTER': 'Filter',
             },
             'WISHES': {
@@ -74,7 +87,8 @@ export const locale = {
             'COMMITTE': {
                 'TITLE': 'اللجان',
                 'SUBTITLE': 'إدارة اللجان',
-            },'NOM': {
+            },
+            'NOM': {
                 'TITLE': 'Division the wishes of members',
                 'SUBTITLE-ADMIN': 'Nomination members to specialized committees',
                 'SUBTITLE-USER': 'Nomination of members of specialized committees',  

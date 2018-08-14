@@ -6,6 +6,13 @@ export const locale = {
             'PROJ': {
                 'TITLE': 'المنصة'
             },
+            'LOGIN': {
+                'TITLE': 'سجل الدخول إلى حسابك!',
+            },
+            'LOGO': {
+                'TITLE': 'Login to your account!',
+                'SUBTITLE': 'Login to your account!',
+            }
         },
         'NAV': {
             'PERMISSION'     : 'صلاحيات',
@@ -43,13 +50,19 @@ export const locale = {
                 'SUBMIT': 'إرسال!',               
                 'RESET': 'إخلاء القيم!',
                 'SUBMIT-SUCCESS': 'تم الإرسال بنجاح',
+                'REMEMBERME': 'تذكرني!',
+                'FORGOTPASS': 'نسيت كلمة المرور؟',
                 'CLOSE': 'إغلاق!',
                 'REQERR': 'يرجى إدخال البيانات المطلوبة',
                 'VALIDERR': 'القيمة التي أدخلتها غير صحيحة',
+                'EMAILERR': 'أدخل بريد إلكتروني صحيح!',
+                'LOGINERR': 'بيانات الدخول غير صحيحة. رجاءًا أدخل بيانات صحيحة!',
                 'CHKALL': 'تخصيص الكل!',
                 'ADD': 'إضافة!',
                 'ID': 'رقم التعريف',
                 'NAME': 'الاسم',
+                'EMAIL': 'البريد الإلكتروني',
+                'PASSWORD': 'كلمة المرور',
                 'FILTER': 'تصفية',
             },
             'WISHES': {
@@ -74,7 +87,8 @@ export const locale = {
             'COMMITTE': {
                 'TITLE': 'اللجان',
                 'SUBTITLE': 'إدارة اللجان',
-            },'NOM': {
+            },
+            'NOM': {
                 'TITLE': 'فرز رغبات الأعضاء',
                 'SUBTITLE-ADMIN': 'ترشيح الاعضاء للجان متخصصة',
                 'SUBTITLE-USER': 'ترشيح الاعضاء للجان المتخصصة',

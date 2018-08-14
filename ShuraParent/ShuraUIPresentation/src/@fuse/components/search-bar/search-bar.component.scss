@@ -8,6 +8,7 @@
         min-width: 64px;
         height: 64px;
         font-size: 13px;
+        background-color: transparent;
 
         @include media-breakpoint-down('sm') {
             height: 56px;
@@ -65,6 +66,7 @@
             bottom: 0;
             left: 0;
             z-index: 10;
+            background-color: #fff;
 
             .fuse-search-bar-content {
 

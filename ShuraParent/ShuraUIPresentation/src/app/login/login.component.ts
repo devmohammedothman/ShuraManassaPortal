@@ -128,6 +128,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
 
     auth(): void {
+        document.getElementById('spinner').style.display = 'flex';
         this.authParam.username = this.logParam.email;
         this.authParam.password = this.logParam.password;
         this.authParam.client_id = 'spring-security-oauth2-read-write-client';
@@ -138,7 +139,11 @@ export class LoginComponent implements OnInit, OnDestroy {
                 this.login();
             },
             // error => this.errorMessage = <any>error);
-            error => alert('Email or password incorrect'));
+            error => {
+                // alert('Email or password incorrect');
+                document.getElementById('loginErr').style.display = 'block';
+                document.getElementById('spinner').style.display = 'none';
+        });
     }
 
     login(): void {
@@ -155,7 +160,9 @@ export class LoginComponent implements OnInit, OnDestroy {
                 this.StorageService.saveInLocal('token', this.authParam.access_token);
                 this.StorageService.saveInLocal('user', JSON.stringify(user));
                 this.StorageService.saveInLocal('group', JSON.stringify(other));
-                this.router.navigate(['welcome']);
+                setTimeout(() => {
+                    this.router.navigate(['welcome']);
+                }, 5000);
             },
             error => this.errorMessage = <any>error);
     }

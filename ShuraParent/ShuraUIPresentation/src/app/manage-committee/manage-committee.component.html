@@ -31,6 +31,8 @@
                 <button [ngClass]="'w-5-p'" mat-icon-button color="accent" (click)="addEditComm.openDialog()">
                     <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
                 </button>
+                
+                <h3>{{errorMessage}}</h3>
 
                 <table mat-table [dataSource]="dataSource" width="100%" matSort>
 

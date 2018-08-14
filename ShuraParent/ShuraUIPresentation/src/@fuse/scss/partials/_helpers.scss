@@ -1,4 +1,14 @@
 // ######################
+// DISPLAY HELPERS
+// ######################
+.fxContentJustifyCenter {
+    justify-content: center !important;
+}
+.fxContentJustifyBetween {
+    justify-content: space-between !important;
+}
+
+// ######################
 // POSITION HELPERS
 // ######################
 @each $breakpoint in map-keys($grid-breakpoints) {

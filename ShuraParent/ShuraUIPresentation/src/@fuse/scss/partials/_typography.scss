@@ -1,7 +1,48 @@
+@font-face {
+    font-family: 'CoconNext';
+    src: url('./assets/fonts/Cocon-Next-Arabic-Regular.WOFF') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'CoconNext';
+    src: url('./assets/fonts/Cocon-Next-Arabic-Regular.WOFF') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'CoconNext';
+    src: url('./assets/fonts/Cocon-Next-Arabic-Bold.WOFF') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'CoconNext';
+    src: url('./assets/fonts/Cocon-Next-Arabic-Bold.WOFF') format('truetype');
+    font-weight: bold;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'CoconNext';
+    src: url('./assets/fonts/Cocon-Next-Arabic-Light.WOFF') format('truetype');
+    font-weight: lighter;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'CoconNext';
+    src: url('./assets/fonts/Cocon-Next-Arabic-Light.WOFF') format('truetype');
+    font-weight: lighter;
+    font-style: italic;
+}
+
 html {
-    font-size: 62.5%;
-    // font-family: 'Cairo', 'Helvetica Neue', 'Arial', sans-serif !important;
-    font-family: 'DroidArabicKufiRegular', sans-serif !important;
+    font-size: 62.5%; // font-family: 'Cairo', 'Helvetica Neue', 'Arial', sans-serif !important;
+    font-family: 'CoconNext', sans-serif !important;
     line-height: 1.4 !important;
     letter-spacing: -0.1px !important;
 }
@@ -10,38 +51,55 @@ body {
     font-size: 14px;
 }
 
-html, body {
+html,
+body {
     -webkit-font-smoothing: auto;
     -moz-osx-font-smoothing: auto;
 }
 
 // Headings
-h1, h2, h3, h4, h5, h6,
-.h1, .h2, .h3, .h4, .h5, .h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
     font-weight: normal;
 }
 
-h1, .h1 {
+h1,
+.h1 {
     font-size: 24px;
 }
 
-h2, .h2 {
+h2,
+.h2 {
     font-size: 20px;
 }
 
-h3, .h3 {
+h3,
+.h3 {
     font-size: 16px;
 }
 
-h4, .h4 {
+h4,
+.h4 {
     font-size: 15px;
 }
 
-h5, .h5 {
+h5,
+.h5 {
     font-size: 13px;
 }
 
-h6, .h6 {
+h6,
+.h6 {
     font-size: 12px;
 }
 
@@ -49,10 +107,9 @@ h6, .h6 {
 a {
     color: mat-color($accent);
     text-decoration: none;
-
     &:not(.mat-button):not(.mat-raised-button):not(.mat-icon-button) {
-
-        &:hover, &:active {
+        &:hover,
+        &:active {
             text-decoration: underline;
         }
     }
@@ -70,28 +127,22 @@ blockquote {
     font-style: italic;
     margin: 1em 0;
     padding-left: 16px;
-
     footer {
         font-style: normal;
-
         &:before {
             content: '\2014 \00A0';
         }
     }
-
     &.reverse {
         border-left: none;
         border-right: 3px solid rgba(0, 0, 0, 0.12);
         text-align: right;
         padding-left: 0;
         padding-right: 16px;
-
         footer {
-
             &:before {
                 content: '';
             }
-
             &:after {
                 content: '\2014 \00A0';
             }
@@ -101,8 +152,8 @@ blockquote {
 
 // Code
 code {
-    font-family: 'Monaco', 'Menlo', 'Consolas', 'Ubuntu Mono', monospace;;
-
+    font-family: 'Monaco', 'Menlo', 'Consolas', 'Ubuntu Mono', monospace;
+    ;
     &:not(.highlight) {
         background: rgba(0, 0, 0, 0.065);
         color: #106CC8;
@@ -114,11 +165,9 @@ code {
 
 // Definition lists
 dl {
-
     dt {
         font-weight: bold;
     }
-
     dd {
         margin: 4px 0 16px 0;
     }
@@ -143,11 +192,8 @@ small {
 
 // Table
 table {
-
     thead {
-
         tr {
-
             th {
                 text-align: left;
             }
@@ -208,7 +254,6 @@ strong {
 
 // Font weight helpers
 @for $weight from 1 through 9 {
-
     .font-weight-#{$weight * 100} {
         font-weight: #{$weight * 100};
     }
@@ -216,7 +261,6 @@ strong {
 
 // Font size helpers
 @for $size from 1 through 60 {
-
     .font-size-#{$size * 2} {
         font-size: #{$size * 2}px;
     }
@@ -224,7 +268,6 @@ strong {
 
 // Line height helpers
 @for $lineHeight from 1 through 60 {
-
     .line-height-#{$lineHeight * 2} {
         line-height: #{$lineHeight * 2}px;
     }
@@ -279,39 +322,31 @@ strong {
 
 // Changelog
 .changelog {
-
     .entry {
         background: white;
         margin-bottom: 24px;
         padding: 24px 32px;
         @include mat-elevation(2);
-
-        > .title {
+        >.title {
             display: flex;
             align-items: center;
             margin-bottom: 24px;
-
             .version {
                 font-size: 24px;
             }
-
             .date {
                 margin-left: 8px;
                 font-size: 17px;
                 opacity: 0.54;
             }
         }
-
         .groups {
-
             div {
                 margin-bottom: 32px;
-
                 &:last-child {
                     margin-bottom: 0;
                 }
             }
-
             .title {
                 display: inline-flex;
                 font-size: 13px;
@@ -321,38 +356,28 @@ strong {
                 padding: 5px 8px;
                 border-radius: 2px;
             }
-
             .breaking-changes {
-
                 .title {
                     background: #F44336;
                 }
             }
-
             .new {
-
                 .title {
                     background: #43A047;
                 }
             }
-
             .improved {
-
                 .title {
                     background: #673AB7;
                 }
             }
-
             .fixed {
-
                 .title {
                     background: #2196F3;
                 }
             }
-
             ul {
                 padding-left: 24px;
-
                 li {
                     margin-bottom: 6px;
                     letter-spacing: 0.015em;
@@ -368,23 +393,19 @@ strong {
     background: #607D8B;
     border-left: 6px solid #37474F;
     color: rgba(255, 255, 255, 1);
-
     &.error {
         background: #EF5350;
         border-left-color: #B71C1C;
     }
-
     &.warning {
         background: #FFECB3;
         border-left-color: #FFC107;
         color: rgba(0, 0, 0, 0.87);
     }
-
     &.success {
         background: #4CAF50;
         border-left-color: #2E7D32;
     }
-
     &.info {
         background: #B3E5FC;
         border-left-color: #03A9F4;

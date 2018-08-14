@@ -6,6 +6,7 @@ import { FuseSearchBarModule, FuseShortcutsModule } from '@fuse/components';
 import { FuseSharedModule } from '@fuse/shared.module';
 
 import { ToolbarComponent } from 'app/layout/components/toolbar/toolbar.component';
+import { TranslateModule } from '../../../../../node_modules/@ngx-translate/core';
 
 @NgModule({
     declarations: [
@@ -13,6 +14,9 @@ import { ToolbarComponent } from 'app/layout/components/toolbar/toolbar.componen
     ],
     imports     : [
         RouterModule,
+
+        TranslateModule,
+
         MatButtonModule,
         MatIconModule,
         MatMenuModule,

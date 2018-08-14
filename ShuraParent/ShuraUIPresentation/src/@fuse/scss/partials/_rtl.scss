@@ -32,7 +32,10 @@ html:lang(ar) {
                 }
             }
         }
-    } // ######################
+    }
+    // ######################
+
+    // ######################
     // BORDER HELPERS
     // ######################
     .border-right,
@@ -48,6 +51,8 @@ html:lang(ar) {
         border-right: $border-style;
         border-left: $border-style;
     }
+    // ######################
+
     body {
         direction: rtl;
         .material-icons {
@@ -55,7 +60,7 @@ html:lang(ar) {
         }
         vertical-layout-1 {
             #main {
-                > .container {
+                >.container {
                     flex-direction: row-reverse;
                 }
             }
@@ -100,6 +105,24 @@ html:lang(ar) {
                     }
                 }
             }
+            &.horizontal {
+                .nav-item {
+                    &.nav-collapsable {
+                        .children {
+                            left: auto;
+                            right: 100%;
+                        }
+                    }
+                }
+                >.nav-item {
+                    &.nav-collapsable {
+                        >.children {
+                            left: auto;
+                            right: 0;
+                        }
+                    }
+                }
+            }
         }
         .mat-menu-panel {
             .mat-menu-item {
@@ -112,11 +135,19 @@ html:lang(ar) {
             text-align: right;
         }
         mat-paginator {
-            direction: ltr;
-            // .mat-paginator-range-actions,
+            direction: ltr; // .mat-paginator-range-actions,
             // .mat-paginator-container {
             //     flex-direction: row-reverse;
             // }
         }
+    }
+    // ######################
+    
+    // ######################
+    // FORM HELPERS
+    // ######################
+    .mat-checkbox-inner-container {
+        margin-right: 0;
+        margin-left: 8px;
     }
 }
