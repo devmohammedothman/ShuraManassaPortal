@@ -3,11 +3,14 @@ import { User } from './user.model';
 export class Committee
 {
     
-     id: number;
+     id?: number;
      nameAr: string;
      nameEn: string;
-     commManager: User;
-    constructor(){}
+     commManager?: User;
+     comm?: Committee;
+    constructor(committee: Committee){
+        this.comm = committee;
+    }
     
     // constructor(id : number , nameAr : string , nameEn : string , commManager : User)
     // {
@@ -16,4 +19,5 @@ export class Committee
     //     this.nameEn = nameEn;
     //     this.commManager = commManager;
     // }
+
 }
