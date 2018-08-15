@@ -45,7 +45,7 @@ public class NominationLogServiceImpl extends BasicServiceImpl<NominationLogDTO,
 	}
 
 	@Override
-	public NominationLogDTO updatePollLogApprovalStatus(long processId) throws BusinessException {
+	public NominationLogDTO updatePollLogApprovalStatus(long processId, boolean isApproved) throws BusinessException {
 		
 		NominationLogDTO logObj = null;
 		try {
@@ -53,7 +53,7 @@ public class NominationLogServiceImpl extends BasicServiceImpl<NominationLogDTO,
 			logEntity = new NominationLog();
 			
 			logEntity =  nominationDao.findById(processId);
-			logEntity.setApproved(true);
+			logEntity.setApproved(isApproved);
 			logEntity = nominationDao.update(logEntity);
 			logObj = new NominationLogDTO();
 			logObj = convertToDTO(logEntity, logObj);

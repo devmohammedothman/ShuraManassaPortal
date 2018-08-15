@@ -21,7 +21,7 @@ public interface NominationManage {
 	
 	ResponseDTO runPollProcess(NominationLogDTO logDtoObj) throws ControllerException;
 	
-	ResponseDTO confirmPollResult(PollProcessResultDto approvedList) throws ControllerException;
+	ResponseDTO confirmPollResult(PollProcessResultDto approvedList, boolean isApproved) throws ControllerException;
 	
 	ResponseDTO getCommitteeAssignedMembers(long commId) throws ControllerException;
 	

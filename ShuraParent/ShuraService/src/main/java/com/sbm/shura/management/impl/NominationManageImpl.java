@@ -180,7 +180,7 @@ public class NominationManageImpl implements NominationManage {
 				if(firstUserWishList.size() > 0 )
 				{
 					commTempList.addAll(firstUserWishList.stream().map(commMember ->
-					new CommitteeMemberDTO(commMember.getNominatedUser(),commMember.getWishedCommitee(),commMember.getWishOrder()))
+					new CommitteeMemberDTO(commMember.getNominatedUser(),commMember.getWishedCommitee(),commMember.getWishOrder(), false))
 					.collect(Collectors.toList()));
 					
 					if(commTempList.size() < memberCount)
@@ -199,7 +199,7 @@ public class NominationManageImpl implements NominationManage {
 							}
 							secondUserWishList = selectedUserList(intList, secondUserWishList,remainingMembersCount);
 							commTempList.addAll(secondUserWishList.stream().map(commMember ->
-							new CommitteeMemberDTO(commMember.getNominatedUser(),commMember.getWishedCommitee(),commMember.getWishOrder()))
+							new CommitteeMemberDTO(commMember.getNominatedUser(),commMember.getWishedCommitee(),commMember.getWishOrder(), false))
 							.collect(Collectors.toList()));
 						}
 
@@ -219,7 +219,7 @@ public class NominationManageImpl implements NominationManage {
 							}
 							thirdUserWishList = selectedUserList(intList, thirdUserWishList,remainingMembersCount);
 							commTempList.addAll(thirdUserWishList.stream().map(commMember ->
-							new CommitteeMemberDTO(commMember.getNominatedUser(),commMember.getWishedCommitee(),commMember.getWishOrder()))
+							new CommitteeMemberDTO(commMember.getNominatedUser(),commMember.getWishedCommitee(),commMember.getWishOrder(), false))
 							.collect(Collectors.toList()));
 						}
 						
@@ -235,9 +235,11 @@ public class NominationManageImpl implements NominationManage {
 		logDtoObj = _nominationService.addPOllLog(logDtoObj);
 		
 		PollProcessResultDto result = new PollProcessResultDto();
+		//_nominationService.assignMemberToCommittee
+		
 		result.setCommitteeMembers(commMemberResultList);
 		result.setProcessId(logDtoObj.getId());
-			
+		confirmPollResult(result, false);
 		responseDTO = new ResponseDTO("Shura.business.code.1000", "successfully", "successfully", result);
 			
 		} catch (BusinessException e) {
@@ -268,7 +270,7 @@ public class NominationManageImpl implements NominationManage {
 
 
 	@Override
-	public ResponseDTO confirmPollResult(PollProcessResultDto approvedList) throws ControllerException {
+	public ResponseDTO confirmPollResult(PollProcessResultDto approvedList, boolean isApproved) throws ControllerException {
 		ResponseDTO responseDTO = null;
 		
 		try 
@@ -286,10 +288,11 @@ public class NominationManageImpl implements NominationManage {
 			//assign member to Committee
 			for(CommitteeMemberDTO memDtoItem : approvedList.getCommitteeMembers())
 			{
+				memDtoItem.setApproved(isApproved);
 				_commMemberService.assignMemberToCommittee(memDtoItem);
 			}
 			
-		  _nominationService.updatePollLogApprovalStatus(approvedList.getProcessId());
+		  _nominationService.updatePollLogApprovalStatus(approvedList.getProcessId(), isApproved);
 			
 		responseDTO = new ResponseDTO("Shura.business.code.1000", "successfully", "successfully", approvedList);
 			

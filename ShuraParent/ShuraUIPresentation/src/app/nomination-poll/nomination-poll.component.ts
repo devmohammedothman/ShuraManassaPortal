@@ -12,6 +12,7 @@ import { Observable } from 'rxjs/Rx';
 import { element } from '../../../node_modules/protractor';
 import { NominationPollResult } from '../models/nomination-poll-result.model';
 import { DialogComponent } from './dialog/dialog.component';
+import { CommitteMember } from '../models/commitee-member.model';
 
 @Component({
   selector: 'app-nomination-poll',
@@ -43,6 +44,8 @@ export class NominationPollComponent implements OnInit {
     private storageService: StorageService, private nominationService: NominationService,
     private dialog: DialogComponent) {
     this.dataSource = new MatTableDataSource(this.poolResult);
+
+    this.getLastNominationPoll();
   }
 
   ngOnInit() {
@@ -101,13 +104,16 @@ export class NominationPollComponent implements OnInit {
   }
 
   confirmPollProcess(): void {
+    this.nominationPollResult.isApproved = true;
     this.nominationService.confirmPollProcess(this.nominationPollResult)
       .subscribe(result => {
         this.openSnackBar('Done!', 'Close');
+        
       },
         // error => this.errorMessage = <any>error);
         this.openSnackBar('There is an error', 'Close')
       );
+      console.log('confirm! '+JSON.stringify((this.nominationPollResult)));
   }
 
   populateTableData(): void {
@@ -164,5 +170,29 @@ export class NominationPollComponent implements OnInit {
     this.dataSource.data = this.poolResult;
     console.log('source------' + JSON.stringify(this.poolResult));
     //console.log('source22------' + JSON.stringify(filteredData));
+  }
+
+  openDialog(commId: number): void{
+    this.dialog.openDialog(commId);
+    //this.dialog.openDialog(commId);
+  }
+
+  getLastNominationPoll(): void{
+    this.nominationService.getCurrentCommitteeMembers().subscribe(result =>{
+      this.pollData = result;
+      console.log('first log');
+      if(this.pollData){
+        console.log('poll data is not null');
+        this.populateTableData();
+        this.hideTable = false;
+      }
+      if (this.committeList) {
+        this.committeList.splice(0, this.committeList.length);
+        this.poolResult.splice(0, this.poolResult.length);
+        this.ssss.splice(0, this.ssss.length);
+        this.sumCount = 0;
+      }
+    },
+    error => this.openSnackBar('There is an error', 'Close'));
   }
 }

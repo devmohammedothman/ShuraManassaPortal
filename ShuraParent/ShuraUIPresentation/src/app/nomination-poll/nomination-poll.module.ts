@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -10,9 +10,10 @@ import { FuseSharedModule } from '@fuse/shared.module';
 import { FuseSidebarModule, FuseThemeOptionsModule } from '@fuse/components';
 import { fuseConfig } from 'app/fuse-config';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatSnackBarModule, MatDialogModule } from '../../../node_modules/@angular/material';
+import { MatSnackBarModule, MatDialogModule } from '@angular/material';
 import { NominationPollComponent } from './nomination-poll.component';
 import { DialogComponent } from './dialog/dialog.component';
+import { CommitteMember } from '../models/commitee-member.model';
 
 const routes: Routes = [
   {

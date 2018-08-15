@@ -13,6 +13,8 @@ public class PollProcessResultDto extends BaseDTO{
 	private List<CommitteeMemberDTO> committeeMembers;
 	
 	private long processId;
+	
+	private boolean isApproved;
 
 	public List<CommitteeMemberDTO> getCommitteeMembers() {
 		return committeeMembers;
@@ -29,5 +31,15 @@ public class PollProcessResultDto extends BaseDTO{
 	public void setProcessId(long processId) {
 		this.processId = processId;
 	}
+
+	public boolean isApproved() {
+		return isApproved;
+	}
+
+	public void setApproved(boolean isApproved) {
+		this.isApproved = isApproved;
+	}
+	
+	
 
 }

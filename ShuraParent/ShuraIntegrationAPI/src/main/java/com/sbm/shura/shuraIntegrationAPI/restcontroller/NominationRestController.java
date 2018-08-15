@@ -63,7 +63,7 @@ public class NominationRestController {
 	@ResponseBody
 	public ResponseDTO confirmPollProcess(@RequestBody PollProcessResultDto pollDTO) throws ControllerException
 	{
-			return manage.confirmPollResult(pollDTO);
+			return manage.confirmPollResult(pollDTO, pollDTO.isApproved());
 	}
 	
 	@RequestMapping (value = "getcommitteemembers/{commId}", method = RequestMethod.GET,

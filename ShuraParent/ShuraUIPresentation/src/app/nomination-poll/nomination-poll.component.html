@@ -36,7 +36,14 @@
             <mat-error *ngIf="memberCountSelect.invalid">Please Choose Wish</mat-error>
             <mat-hint>{{'CONT.NOM.SUBTITLE-ADMIN' | translate }}</mat-hint>
           </mat-form-field>
-          <button mat-button [ngClass]="'my-24'" (click)="runPollProcess()">{{'CONT.NOM.NEW-DEVESION' | translate }}</button>
+          <button mat-button [ngClass]="'my-24'" (click)="runPollProcess()">
+              <ng-template [ngIf]="hideTable">
+                {{'CONT.NOM.NEW-DEVESION' | translate}}
+              </ng-template>
+              <ng-template [ngIf]="!hideTable">
+                {{'CONT.NOM.RE-DEVESION' | translate}}
+              </ng-template>
+          </button>
           <button mat-button [ngClass]="'my-24'" (click)="getDevisionResult()">{{'CONT.NOM.DEVISION-RESULT' | translate }}</button>
           <button mat-button [ngClass]="'my-24'" (click)="confirmPollProcess()">{{'CONT.NOM.DEVISION-SUBMIT' | translate }}</button>
 
@@ -74,7 +81,7 @@
               <ng-container matColumnDef="Nomination result">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'CONT.NOM.VIEW' | translate }} </th>
                 <td mat-cell *matCellDef="let row">
-                  <button mat-icon-button color="accent" (click)="dialog.openDialog(row.committeId)">
+                  <button mat-icon-button color="accent" (click)="openDialog(row.committeId)">
                     <mat-icon aria-label="search">search</mat-icon>
                   </button>
                   <!-- (click)="openDialog()" -->
