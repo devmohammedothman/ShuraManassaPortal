@@ -32,7 +32,7 @@ export class NominationPollComponent implements OnInit {
   committeList: Committee[];
   ssss: CommitteMembers[];
   sumCount: number = 0;
-  nominationPollResult: NominationPollResult;
+  nominationPollResult: NominationPollResult = new NominationPollResult();
 
   displayedColumns = ['Committe name', 'First Wish', 'Second wish', 'Third wish',
     'sum', 'Nomination result'];
@@ -90,6 +90,7 @@ export class NominationPollComponent implements OnInit {
       .subscribe(result => {
         this.nominationPollResult = result;
         this.pollData = result.committeeMembers;
+        this.storageService.saveInLocal('processId',result.processId);
         if (this.committeList) {
           this.committeList.splice(0, this.committeList.length);
           this.poolResult.splice(0, this.poolResult.length);
@@ -104,7 +105,8 @@ export class NominationPollComponent implements OnInit {
   }
 
   confirmPollProcess(): void {
-    this.nominationPollResult.isApproved = true;
+    this.nominationPollResult.approved = true;
+    this.nominationPollResult.processId = Number(this.storageService.getFromLocal('processId'));
     this.nominationService.confirmPollProcess(this.nominationPollResult)
       .subscribe(result => {
         this.openSnackBar('Done!', 'Close');
@@ -180,6 +182,7 @@ export class NominationPollComponent implements OnInit {
   getLastNominationPoll(): void{
     this.nominationService.getCurrentCommitteeMembers().subscribe(result =>{
       this.pollData = result;
+      this.nominationPollResult.committeeMembers = result;
       console.log('first log');
       if(this.pollData){
         console.log('poll data is not null');

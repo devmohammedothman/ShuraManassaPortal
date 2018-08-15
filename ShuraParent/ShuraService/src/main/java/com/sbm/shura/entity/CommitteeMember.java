@@ -40,7 +40,7 @@ public class CommitteeMember {
 	private int wishOrder;
 
 	@Column(name = "ISAPPROVED", nullable = false)
-	private boolean isApproved;
+	private boolean approved;
 
 	public CommitteeMember() {
 	}
@@ -81,12 +81,12 @@ public class CommitteeMember {
 		this.wishOrder = wishOrder;
 	}
 
-	public boolean getIsApproved() {
-		return isApproved;
+	public boolean getApproved() {
+		return approved;
 	}
 
-	public void setIsApproved(boolean isApproved) {
-		this.isApproved = isApproved;
+	public void setApproved(boolean approved) {
+		this.approved = approved;
 	}
 
 }

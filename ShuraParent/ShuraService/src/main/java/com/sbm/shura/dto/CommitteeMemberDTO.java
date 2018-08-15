@@ -10,14 +10,14 @@ public class CommitteeMemberDTO extends BaseDTO {
 	public CommitteeMemberDTO() {
 	}
 
-	public CommitteeMemberDTO(UserDTO member, CommitteeDTO committee, int wishOrder, boolean isApproved) {
+	public CommitteeMemberDTO(UserDTO member, CommitteeDTO committee, int wishOrder, boolean approved) {
 		this.member = member;
 
 		this.committee = committee;
 
 		this.wishOrder = wishOrder;
 
-		this.isApproved = isApproved;
+		this.approved = approved;
 	}
 
 	private Long Id;
@@ -28,7 +28,7 @@ public class CommitteeMemberDTO extends BaseDTO {
 
 	private int wishOrder;
 
-	private boolean isApproved;
+	private boolean approved;
 
 	public Long getId() {
 		return Id;
@@ -66,11 +66,11 @@ public class CommitteeMemberDTO extends BaseDTO {
 	}
 
 	public boolean isApproved() {
-		return isApproved;
+		return approved;
 	}
 
-	public void setApproved(boolean isApproved) {
-		this.isApproved = isApproved;
+	public void setApproved(boolean approved) {
+		this.approved = approved;
 	}
 
 }
