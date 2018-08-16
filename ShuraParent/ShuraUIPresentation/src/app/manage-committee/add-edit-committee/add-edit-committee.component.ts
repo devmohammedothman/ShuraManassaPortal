@@ -26,11 +26,7 @@ commObject:Committee = new Committee(null);
   }
 
   OnSubmit(form? :NgForm){
-    this.commService.addCommittee(form.value).subscribe((data:any) => {
-      console.log(data);
-      // if (data != null) {}
-        
-    });
+    this.commService.addCommittee(form.value).subscribe((data:any) => {});
 
       this.dialog.closeAll();
   }

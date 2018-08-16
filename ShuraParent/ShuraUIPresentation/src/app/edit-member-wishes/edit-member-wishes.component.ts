@@ -13,7 +13,6 @@ import { NominationService } from 'app/services/nomination.service';
 export class EditMemberWishesComponent implements OnInit {
 
   @Input()  committeeList : Committee [] = [];
-  @Output() committeeListChange = new EventEmitter<Committee[]>();
 
  
   currentCommitteeMemberList : CommitteMember[];

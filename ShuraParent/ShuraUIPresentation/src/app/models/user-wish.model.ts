@@ -6,10 +6,14 @@ export class UserWish {
     nominatedUser: User;
     wishedCommitee: Committee;
     wishOrder: number;
+    memberNotes? : string;
 
-    constructor(nominatedUser: User, wishedCommitee: Committee, wishOrder: number){
+
+
+    constructor(nominatedUser: User, wishedCommitee: Committee, wishOrder: number,memberNotes : string){
         this.nominatedUser = nominatedUser;
         this.wishedCommitee = wishedCommitee;
         this.wishOrder = wishOrder;
+        this.memberNotes = memberNotes;
     }
 }

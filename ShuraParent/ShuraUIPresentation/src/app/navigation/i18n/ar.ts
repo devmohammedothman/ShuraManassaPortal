@@ -18,6 +18,7 @@ export const locale = {
             'MEMNOMINATION': 'برنامج ترشيح الأعضاء للجان المتخصصة',
             'COMMNAME' : 'اسم اللجنة', 
             'ADDWISHES' : 'إضافة الرغبات',
+            'ADDWISHESSG' : ' إضافة الرغبات بواسطة الأمين العام',
             'APPLICATIONS': 'البرامج',
             'DASHBOARDS'  : 'لوحة التحكم',
             'CALENDAR'    : 'التقويم',
@@ -61,7 +62,8 @@ export const locale = {
                 'WISH1': 'الرغبة الأولى',               
                 'WISH2': 'الرغبة الثانية',               
                 'WISH3': 'الرغبة الثالثة',    
-                'WISHORDER': 'ترتيب الرغبة',                          
+                'WISHORDER': 'ترتيب الرغبة',   
+                'MEMBERNOTES':'الملاحظات',                        
                 'NOTES': 'ملاحظات',               
             },
             'GPERM': {

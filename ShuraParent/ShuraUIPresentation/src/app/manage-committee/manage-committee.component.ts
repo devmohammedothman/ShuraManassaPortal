@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import {MatPaginator, MatSort, MatTableDataSource,MatSnackBar} from '@angular/material';
 import { Committee } from '../models/committee.model';
 import { CommitteeService } from '../services/committee.service';
 import { AddEditCommitteeComponent } from './add-edit-committee/add-edit-committee.component';
@@ -18,9 +18,13 @@ export class ManageCommitteeComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
    committeeList : Committee [] ;
-  constructor( private commService :CommitteeService, public addEditComm:AddEditCommitteeComponent ) { 
-
-   this.populateCommitteeList();
+  constructor( private commService :CommitteeService, public addEditComm:AddEditCommitteeComponent,
+    public snackBar: MatSnackBar ) { 
+    this.addEditComm.dialog.afterAllClosed.subscribe(()=> {
+      this.populateCommitteeList();
+      this.openSnackBar('Added Successfully','Close');
+    });
+    this.populateCommitteeList();
   }
 
   ngOnInit() {
@@ -47,6 +51,14 @@ export class ManageCommitteeComponent implements OnInit {
       // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource(this.committeeList);
     
+    }
+
+    openSnackBar(message: string, action: string): any {
+      this.snackBar.open(message, action, {
+        duration: 5000,
+        horizontalPosition: 'center',
+        verticalPosition: 'top'
+      });
     }
 
 }

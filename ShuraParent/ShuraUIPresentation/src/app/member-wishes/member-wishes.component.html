@@ -9,7 +9,7 @@
 
         <!-- CONTENT HEADER -->
         <div class="header mat-accent-bg p-24" fxLayout="row" fxLayoutAlign="start center">
-            <h2 class="m-0">{{'CONT.WISHES.TITLE' | translate }}</h2>
+            <h2 class="m-0">{{ 'NAV.MEMNOMINATION' | translate }}</h2>
         </div>
         <!-- / CONTENT HEADER -->
 
@@ -18,7 +18,7 @@
 
             <!-- CONTENT TOOLBAR -->
             <div class="toolbar px-24 py-8">
-                <span>{{'CONT.WISHES.SUBTITLE-ADMIN' | translate }}</span>
+                <span>{{'CONT.WISHES.TITLE' | translate }}</span>
             </div>
             <!-- / CONTENT TOOLBAR -->
 
@@ -52,6 +52,10 @@
                         </mat-select>
                         <mat-error *ngIf="thirdWish.invalid">Please Choose Wish</mat-error>
                         <mat-hint>Do this and don't do that</mat-hint>
+                    </mat-form-field>
+                    <mat-form-field appearance="legacy" [ngClass]="'w-50-p mb-24 pr-12'">
+
+                        <input matInput type="text" placeholder="{{'CONT.WISHES.MEMBERNOTES' | translate }}" [formControl]="notesControl" [(ngModel)]="memberNotes">
                     </mat-form-field>
                     <mat-divider></mat-divider>
                     <button mat-button type="submit" [ngClass]="'my-24'" [disabled]='!memberWishFormGroup.valid'>{{'CONT.FORMS.SUBMIT' | translate }}</button>

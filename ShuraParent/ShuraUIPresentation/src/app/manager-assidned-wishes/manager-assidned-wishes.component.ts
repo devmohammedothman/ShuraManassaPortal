@@ -21,7 +21,7 @@ export class ManagerAssidnedWishesComponent implements OnInit {
   firstWish: FormControl;
   secondWish: FormControl;
   thirdWish: FormControl;
-
+  notesControl : FormControl;
   filteredUsers: Observable<string[]>;
 
   //  users = [
@@ -50,6 +50,8 @@ export class ManagerAssidnedWishesComponent implements OnInit {
   wish3: Committee;
   userList: User[];
   user: User;
+  memberNotes : string;
+
   selectedUsername: string;
   constructor(public snackBar: MatSnackBar,
     private storageService: StorageService,
@@ -86,13 +88,15 @@ export class ManagerAssidnedWishesComponent implements OnInit {
     this.firstWish = new FormControl('', Validators.required);
     this.secondWish = new FormControl('', Validators.required);
     this.thirdWish = new FormControl('', Validators.required);
+    this.notesControl = new FormControl('');
   }
   createFrom(): void {
     this.adminAssignWishesForm = new FormGroup({
       username: this.username,
       firstWish: this.firstWish,
       secondWish: this.secondWish,
-      thirdWish: this.thirdWish
+      thirdWish: this.thirdWish,
+      notesControl:this.notesControl
     });
   }
   getErrorMessage(): string {
@@ -156,12 +160,12 @@ export class ManagerAssidnedWishesComponent implements OnInit {
   assignWishes(): void {
     let userWishes: UserWish[] = [];
     let itemIndex = this.userList.findIndex(item => item.username == this.selectedUsername);
-    debugger;
+    //debugger;
     this.user = this.userList[itemIndex];
     console.log('fetchedUser : '+ this.user.username)
-    userWishes.push(new UserWish(this.user, this.wish1, 1));
-    userWishes.push(new UserWish(this.user, this.wish2, 2));
-    userWishes.push(new UserWish(this.user, this.wish3, 3));
+    userWishes.push(new UserWish(this.user, this.wish1, 1,this.memberNotes));
+    userWishes.push(new UserWish(this.user, this.wish2, 2,this.memberNotes));
+    userWishes.push(new UserWish(this.user, this.wish3, 3,this.memberNotes));
     this.nominationService.managerAssignWish(userWishes)
       .subscribe(result => {
         alert(result);

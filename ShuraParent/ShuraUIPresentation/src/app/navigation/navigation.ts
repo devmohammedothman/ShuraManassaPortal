@@ -77,10 +77,10 @@ export const navigation: FuseNavigation[] = [
                     {
                         id       : 'ManagerWishes',
                         title : 'Manager wishes',
-                        translate: 'NAV.ADDWISHES',
+                        translate: 'NAV.ADDWISHESSG',
                         type     : 'item',
                         icon     : 'flag',
-                        url      : '/maw'
+                        url      : '/nomination/addmemberwishbySG'
                     },
                     {
                         id       : 'EditMemberWishes',

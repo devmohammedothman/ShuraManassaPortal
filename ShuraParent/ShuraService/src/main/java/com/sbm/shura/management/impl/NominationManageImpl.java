@@ -141,11 +141,15 @@ public class NominationManageImpl implements NominationManage {
 		ResponseDTO responseDTO = null;
 		
 		try {
-
+			int memberCount = logDtoObj.getNoOfMembers();
+			if(memberCount == 0 || memberCount < 0 )
+				throw new ControllerException(ExceptionEnums.INVALID_OPERATION);
+			
 			// first step in selection process algorithm
 			// get all user wishes in current shurain year
 			String currentHijriiDate = Integer.toString(HijriDateConverter.convertCurrentDateToHijri().getYear());
 			List<UserWishDTO> userWishes = _userWishService.getCurrentHijriiYearUserWishList(currentHijriiDate);
+						
 
 			List<CommitteeDTO> commDTOList = _committeeService.getCommitteeList();
 			List<CommitteeMemberDTO> commMemberResultList =  new ArrayList<>(); 
@@ -155,8 +159,6 @@ public class NominationManageImpl implements NominationManage {
 			List<UserWishDTO> secondUserWishList = new ArrayList<UserWishDTO>();
 			List<UserWishDTO> thirdUserWishList = new ArrayList<UserWishDTO>();
 			
-			
-			int memberCount = logDtoObj.getNoOfMembers();
 			
 			for(CommitteeDTO item : commDTOList)
 			{			
