@@ -64,7 +64,9 @@ export const locale = {
                 'WISH2': 'Second Wish',               
                 'WISH3': 'Third Wish',    
                 'WISHORDER': 'Wish Order',               
-                'NOTES': 'Notes',               
+                'NOTES': 'Notes',  
+                'CHECKMEMEXPERROR':'Member Experience Must Match with At least one Committee Experience',
+                'MEMNOEXPERROR' : 'This Member has no assigned Experiences or Specializations'             
             },
             'GPERM': {
                 'TITLE': 'Group Permissions',

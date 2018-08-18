@@ -1,4 +1,5 @@
 import { User } from "./user.model";
+import { CommitteeExperience } from "./committeeExperience";
 
 export class Committee
 {
@@ -8,6 +9,7 @@ export class Committee
      nameEn : string;
      commManager? : User;
      comm?: Committee;
+     committeeExperiences?:CommitteeExperience[];
     constructor(committee: Committee){
         this.comm = committee;
     }

@@ -1,6 +1,7 @@
 import { Menu } from './menu.model';
 import { Permission } from './permission.model';
 import { Group } from './group.model';
+import { MemberExperience } from './memberExperience';
 export class User {
     userId: number;
     username: string;
@@ -10,6 +11,7 @@ export class User {
     groups: Group[];
     menus: Menu[];
     permissions: Permission[];
+    memberExperiences?:MemberExperience[];
 
     constructor(userId: number, username: string, avatarUrl: string, email: string, password: string,
 

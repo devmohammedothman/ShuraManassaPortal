@@ -17,7 +17,12 @@ import javax.persistence.Table;
 @NamedQueries (value = {
 		@NamedQuery (name = "MemberExperience.findAll" , query = "select me from MemberExperience me")
 })
-public class MemberExperience {
+public class MemberExperience implements java.io.Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -757339533472458370L;
 
 	@Id
 	@Column(insertable = true, nullable = false, unique = true, updatable = false)

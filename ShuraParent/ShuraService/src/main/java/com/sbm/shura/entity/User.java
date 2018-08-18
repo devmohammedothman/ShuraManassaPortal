@@ -79,7 +79,7 @@ public class User extends BaseEntity implements  UserDetails,Serializable {
 		)
 	private List<Permission> permissions;
 	
-	@OneToMany(mappedBy="member", cascade=CascadeType.ALL)
+	@OneToMany(mappedBy="member", cascade=CascadeType.ALL,fetch = FetchType.EAGER)
 	private List<MemberExperience> memberExperiences;
 
 	public User() {

@@ -54,9 +54,10 @@
                         <mat-hint>Do this and don't do that</mat-hint>
                     </mat-form-field>
                     <mat-form-field appearance="legacy" [ngClass]="'w-50-p mb-24 pr-12'">
-
                         <input matInput type="text" placeholder="{{'CONT.WISHES.MEMBERNOTES' | translate }}" [formControl]="notesControl" [(ngModel)]="memberNotes">
                     </mat-form-field>
+                    <mat-error *ngIf="formNotValid">{{'CONT.WISHES.CHECKMEMEXPERROR' | translate }}</mat-error>
+                    <mat-error *ngIf="memberHasNOExp">{{'CONT.WISHES.MEMNOEXPERROR' | translate }}</mat-error>
                     <mat-divider></mat-divider>
                     <button mat-button type="submit" [ngClass]="'my-24'" [disabled]='!memberWishFormGroup.valid'>{{'CONT.FORMS.SUBMIT' | translate }}</button>
                     <button mat-button type="reset" [ngClass]="'my-24'">{{'CONT.FORMS.RESET' | translate }}</button>

@@ -2,7 +2,6 @@ package com.sbm.shura.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,7 +17,12 @@ import javax.persistence.Table;
 @NamedQueries (value = {
 		@NamedQuery (name = "CommitteeExperience.findAll" , query = "select ce from CommitteeExperience ce")
 })
-public class CommitteeExperience {
+public class CommitteeExperience implements java.io.Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8666877128575602425L;
 
 	@Id
 	@Column(insertable = true, nullable = false, unique = true, updatable = false)

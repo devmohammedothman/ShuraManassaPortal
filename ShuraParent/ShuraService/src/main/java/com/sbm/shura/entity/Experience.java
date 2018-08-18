@@ -17,12 +17,16 @@ public class Experience implements java.io.Serializable {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="EXPERIENCE_ID_GENERATOR")
 	private Long id;
 
-	@Column(name = "Name_AR", insertable = true, length = 50, nullable = false, unique = false, updatable = true)
+	@Column(name = "Name_AR", insertable = true, length = 50, nullable = true, unique = false, updatable = true)
 	private String nameAr;
 
-	@Column(name = "NAME_EN", insertable = true, length = 45, nullable = false, unique = false, updatable = true)
+	@Column(name = "NAME_EN", insertable = true, length = 45, nullable = true, unique = false, updatable = true)
 	private String nameEn;
 
+	@Column(name = "TYPEID" , nullable = false)
+	private int exTypeId;
+	
+	
 	public Experience(Long id) {
 		super();
 		this.id = id;
@@ -53,6 +57,14 @@ public class Experience implements java.io.Serializable {
 
 	public String getNameEn() {
 		return this.nameEn;
+	}
+
+	public int getExTypeId() {
+		return exTypeId;
+	}
+
+	public void setExTypeId(int exTypeId) {
+		this.exTypeId = exTypeId;
 	}
 
 }

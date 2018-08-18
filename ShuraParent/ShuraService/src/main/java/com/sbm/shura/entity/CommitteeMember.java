@@ -12,7 +12,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 @Table(name = "COMMITTEEMEMBER")
 @Entity
@@ -20,7 +19,12 @@ import javax.persistence.Transient;
 		@NamedQuery(name = "commMember.findByUserId", query = "select cm from CommitteeMember cm where cm.member.userId =:userid"),
 		@NamedQuery(name = "commMember.getCommAssignedMembers", query = "select cm from CommitteeMember cm where committee.id =:commId"),
 		@NamedQuery(name = "commMember.deleteCommAssignedMembers", query = "delete from CommitteeMember cm where committee.id =:commId") })
-public class CommitteeMember {
+public class CommitteeMember implements java.io.Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1780941928001523223L;
 
 	@Id
 	@Column(nullable = false, unique = true, updatable = false)

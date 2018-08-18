@@ -8,6 +8,8 @@ import { Committee } from '../models/committee.model';
 import { NominationService } from '../services/nomination.service';
 import { UserWish } from '../models/user-wish.model';
 import { User } from '../models/user.model';
+import { MemberExperience } from 'app/models/memberExperience';
+import { ExperienceList } from 'app/models/experienceList';
 
 @Component({
   selector: 'app-manager-assidned-wishes',
@@ -51,8 +53,10 @@ export class ManagerAssidnedWishesComponent implements OnInit {
   userList: User[];
   user: User;
   memberNotes : string;
-
   selectedUsername: string;
+  formNotValid:boolean = false;
+  memberHasNOExp:boolean = false;
+
   constructor(public snackBar: MatSnackBar,
     private storageService: StorageService,
     private nominationService: NominationService) {
@@ -119,12 +123,35 @@ export class ManagerAssidnedWishesComponent implements OnInit {
   }
 
   filter(val: string): string[] {
-    return this.users.filter(user =>
-      user.toLowerCase().includes(val.toLowerCase()));
+    if(val && val.length > 0)
+    {
+      return this.users.filter(user =>
+        user.toLowerCase().includes(val.toLowerCase()));
+    }
+    
   }
 
   // Form Submit Function
   onFormSubmit(): void {
+    //Get Current selected User
+    let itemIndex = this.userList.findIndex(item => item.username == this.selectedUsername);
+    this.user = this.userList[itemIndex];
+    if(this.user.memberExperiences != null &&this.user.memberExperiences.length === 0)
+    {
+      this.memberHasNOExp = true;
+      this.openSnackBar('This Member has no assigned Experiences or Specializations','Close');
+      
+    }else
+    {
+      if(this.validateUserWishWithExperience())
+        {
+          this.assignWishes();
+        }
+        else{
+          this.formNotValid = true;
+          this.openSnackBar('Member Experience Must Match with At least one Committee Experience','Close');
+        }
+    }
   }
 
   openSnackBar(message: string, action: string): any {
@@ -133,45 +160,63 @@ export class ManagerAssidnedWishesComponent implements OnInit {
       horizontalPosition: 'center',
       verticalPosition: 'top'
     });
-    this.assignWishes();
+    
   }
 
   onWishOne(changeEvent) {
     if (changeEvent) {
       this.wishes2 = this.wishes2.filter(wish => wish.id !== this.wish1.id);
       this.wishes3 = this.wishes3.filter(wish => wish.id !== this.wish1.id);
-      console.log('Group Selected is: ' + this.wish1.nameEn);
+      // console.log('Group Selected is: ' + this.wish1.nameEn);
     }
   }
 
   onWishTwo(changeEvent) {
     if (changeEvent) {
       this.wishes3 = this.wishes3.filter(wish => wish.id !== this.wish2.id);
-      console.log('Group Selected is: ' + this.wish2.nameEn);
     }
   }
 
-  onWishThree(changeEvent) {
-    if (changeEvent) {
-      console.log('Group Selected is: ' + this.wish3.nameEn);
-    }
-  }
+  onWishThree(changeEvent) {}
 
   assignWishes(): void {
     let userWishes: UserWish[] = [];
-    let itemIndex = this.userList.findIndex(item => item.username == this.selectedUsername);
-    //debugger;
-    this.user = this.userList[itemIndex];
+    
     console.log('fetchedUser : '+ this.user.username)
     userWishes.push(new UserWish(this.user, this.wish1, 1,this.memberNotes));
     userWishes.push(new UserWish(this.user, this.wish2, 2,this.memberNotes));
     userWishes.push(new UserWish(this.user, this.wish3, 3,this.memberNotes));
     this.nominationService.managerAssignWish(userWishes)
-      .subscribe(result => {
-        alert(result);
+      .subscribe(result => 
+        {
+        this.openSnackBar('Added Successfully','Close');
       },
-        // error => this.errorMessage = <any>error);
-        error => alert("There is an error "));
+        error => this.openSnackBar('Error Happened while Adding','Close')
+      );
+      this.populateCommittes();
+  }
+
+  validateUserWishWithExperience():boolean
+  {
+    let isValid = false;
+    //get User Experience
+    let memberExperience:MemberExperience[] = [];
+    memberExperience = this.user.memberExperiences;
+         
+    //get all wished committees experiences 
+    let committeeExpList:ExperienceList = new ExperienceList();
+
+    this.wish1.committeeExperiences.map(ex => committeeExpList.add(ex.experience));
+    this.wish2.committeeExperiences.map(ex => committeeExpList.add(ex.experience));
+    this.wish3.committeeExperiences.map(ex => committeeExpList.add(ex.experience));
+    
+    //compare member experiences with committee experiences to find at least one matching result
+    let found = memberExperience.map(memEx =>  committeeExpList.exists(memEx.experience));
+    
+    if(found.find(f => f === true))
+      isValid = true;
+
+    return isValid;
   }
 
 }
