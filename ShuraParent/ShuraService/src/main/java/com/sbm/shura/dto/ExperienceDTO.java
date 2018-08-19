@@ -14,6 +14,12 @@ public class ExperienceDTO extends BaseDTO {
 		this.id = id;
 	}
 	
+	public ExperienceDTO(Long id,String nameAr,String nameEn) {
+		this.id = id;
+		this.nameAr = nameAr;
+		this.nameEn = nameEn;
+	}
+	
 	public ExperienceDTO() {
 	}
 

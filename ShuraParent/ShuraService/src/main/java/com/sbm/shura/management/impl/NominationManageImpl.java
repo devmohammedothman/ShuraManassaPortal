@@ -15,6 +15,7 @@ import com.sbm.shura.commonlib.exceptions.types.ControllerException;
 import com.sbm.shura.commonlib.utilities.HijriDateConverter;
 import com.sbm.shura.dto.CommitteeDTO;
 import com.sbm.shura.dto.CommitteeMemberDTO;
+import com.sbm.shura.dto.ExperienceDTO;
 import com.sbm.shura.dto.NominationLogDTO;
 import com.sbm.shura.dto.PollProcessResultDto;
 import com.sbm.shura.dto.UserWishDTO;
@@ -149,7 +150,13 @@ public class NominationManageImpl implements NominationManage {
 			// get all user wishes in current shurain year
 			String currentHijriiDate = Integer.toString(HijriDateConverter.convertCurrentDateToHijri().getYear());
 			List<UserWishDTO> userWishes = _userWishService.getCurrentHijriiYearUserWishList(currentHijriiDate);
-						
+		
+			//check of user wish list is empty to return
+			if(userWishes!= null &&  userWishes.size() == 0)
+			{
+				responseDTO = new ResponseDTO("Shura.business.code.1000", "No User Wishes Found", "لم يتم إضافة رغبات من الأعضاء","");
+				return responseDTO;
+			}
 
 			List<CommitteeDTO> commDTOList = _committeeService.getCommitteeList();
 			List<CommitteeMemberDTO> commMemberResultList =  new ArrayList<>(); 
@@ -159,15 +166,29 @@ public class NominationManageImpl implements NominationManage {
 			List<UserWishDTO> secondUserWishList = new ArrayList<UserWishDTO>();
 			List<UserWishDTO> thirdUserWishList = new ArrayList<UserWishDTO>();
 			
-			
 			for(CommitteeDTO item : commDTOList)
 			{			
+				if(userWishes.size() == 0)
+					break;
+				
 				List<CommitteeMemberDTO> commTempList = new ArrayList<>();
 				int remainingMembersCount ;
-				
+
+				//all members who have current committee as  first wish
 				firstUserWishList = userWishes.stream().filter(
-						uwitem -> uwitem.getWishOrder() == 1 && uwitem.getWishedCommitee().getId() == item.getId()
+						uwitem -> uwitem.getWishOrder() == 1 && uwitem.getWishedCommitee().getId().equals(item.getId())
 						).collect(Collectors.toList());
+				
+				
+				//all members who have current committee as  second wish
+				secondUserWishList = userWishes.stream().filter(
+						uwitem -> uwitem.getWishOrder() == 2 && uwitem.getWishedCommitee().getId().equals(item.getId())
+						).collect(Collectors.toList());
+				
+				//all members who have current committee as  third wish
+								thirdUserWishList = userWishes.stream().filter(
+										uwitem -> uwitem.getWishOrder() == 3 && uwitem.getWishedCommitee().getId().equals(item.getId())
+										).collect(Collectors.toList());
 				
 				// call random generation process and add to List
 				if (firstUserWishList.size() > memberCount) 
@@ -179,21 +200,26 @@ public class NominationManageImpl implements NominationManage {
 					firstUserWishList = selectedUserList(intList, firstUserWishList,memberCount);
 				}
 				
+				//add selected users to main committee members list
 				if(firstUserWishList.size() > 0 )
 				{
 					commTempList.addAll(firstUserWishList.stream().map(commMember ->
 					new CommitteeMemberDTO(commMember.getNominatedUser(),commMember.getWishedCommitee(),commMember.getWishOrder(), false))
 					.collect(Collectors.toList()));
 					
+					//remove selected user from user wish list to not be chosen again
+					for(int index = 0 ; index < firstUserWishList.size();index ++)
+					{
+						UserWishDTO uwDtoRemovedObject = firstUserWishList.get(index);
+						userWishes.removeIf(it -> it.getNominatedUser().getUserId() == uwDtoRemovedObject.getNominatedUser().getUserId());
+					}
+				}
+					//this condition to indicate that i still have places on this committee
 					if(commTempList.size() < memberCount)
 					{
-						secondUserWishList = userWishes.stream().filter(
-								uwitem -> uwitem.getWishOrder() == 2 && uwitem.getWishedCommitee().getId() == item.getId()
-								).collect(Collectors.toList());
-						
 						remainingMembersCount = memberCount - commTempList.size() ;
 						
-						if(remainingMembersCount > 0 && !secondUserWishList.isEmpty())
+						if(remainingMembersCount > 0 && !secondUserWishList.isEmpty() && secondUserWishList.size() > 0)
 						{
 							List<Integer> intList = new ArrayList<>();
 							for (int i = 0; i < secondUserWishList.size(); i++) {
@@ -203,17 +229,18 @@ public class NominationManageImpl implements NominationManage {
 							commTempList.addAll(secondUserWishList.stream().map(commMember ->
 							new CommitteeMemberDTO(commMember.getNominatedUser(),commMember.getWishedCommitee(),commMember.getWishOrder(), false))
 							.collect(Collectors.toList()));
+							
+							//remove selected user from user wish list to not be chosen again
+							for(int index = 0 ; index < secondUserWishList.size();index ++)
+							{
+								UserWishDTO uwDtoRemovedObject = secondUserWishList.get(index);
+								userWishes.removeIf(it -> it.getNominatedUser().getUserId() == uwDtoRemovedObject.getNominatedUser().getUserId());
+							}
 						}
 
-						
 						remainingMembersCount = memberCount - commTempList.size() ;
-						
-						
-						//////////third
-						thirdUserWishList = userWishes.stream().filter(
-								uwitem -> uwitem.getWishOrder() == 3 && uwitem.getWishedCommitee().getId() == item.getId()
-								).collect(Collectors.toList());
-						if(remainingMembersCount > 0 && !thirdUserWishList.isEmpty())
+		
+						if(remainingMembersCount > 0 && !thirdUserWishList.isEmpty() && thirdUserWishList.size() > 0)
 						{
 							List<Integer> intList = new ArrayList<>();
 							for (int i = 0; i < secondUserWishList.size(); i++) {
@@ -223,21 +250,25 @@ public class NominationManageImpl implements NominationManage {
 							commTempList.addAll(thirdUserWishList.stream().map(commMember ->
 							new CommitteeMemberDTO(commMember.getNominatedUser(),commMember.getWishedCommitee(),commMember.getWishOrder(), false))
 							.collect(Collectors.toList()));
+							
+							//remove selected user from user wish list to not be chosen again
+							for(int index = 0 ; index < secondUserWishList.size();index ++)
+							{
+								UserWishDTO uwDtoRemovedObject = secondUserWishList.get(index);
+								userWishes.removeIf(it -> it.getNominatedUser().getUserId() == uwDtoRemovedObject.getNominatedUser().getUserId());
+							}
 						}
 						
-						remainingMembersCount = memberCount - commTempList.size() ;
-						
-						commMemberResultList.addAll(commTempList);
-						
 					}
+					remainingMembersCount = memberCount - commTempList.size() ;
+					
+					commMemberResultList.addAll(commTempList);
 				}
-			}
 			
 		//Add Log to Nomination Log
 		logDtoObj = _nominationService.addPOllLog(logDtoObj);
 		
 		PollProcessResultDto result = new PollProcessResultDto();
-		//_nominationService.assignMemberToCommittee
 		
 		result.setCommitteeMembers(commMemberResultList);
 		result.setProcessId(logDtoObj.getId());

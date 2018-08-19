@@ -26,7 +26,7 @@ public class CommitteeDTO extends BaseDTO {
 	}
 
 	public void setId(Long id) {
-		if(id == 0)
+		if(id == null || id == 0)
 			this.id = null;
 		else
 			this.id = id;
