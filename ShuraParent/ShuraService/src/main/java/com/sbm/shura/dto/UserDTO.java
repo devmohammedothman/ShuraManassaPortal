@@ -1,5 +1,6 @@
 package com.sbm.shura.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserDTO extends BaseDTO {
@@ -19,6 +20,8 @@ public class UserDTO extends BaseDTO {
 	private List<PermissionDTO> permissions;
 	
 	private List<MemberExperienceDTO> memberExperiences;
+	
+	private List<String> expList;
 
 	public UserDTO() {
 	}
@@ -102,6 +105,18 @@ public class UserDTO extends BaseDTO {
 
 	public void setMemberExperiences(List<MemberExperienceDTO> memberExperiences) {
 		this.memberExperiences = memberExperiences;
+	}
+	
+	public List<String> getExpList(){
+		expList = new ArrayList<>();
+		if (!memberExperiences.isEmpty()) {
+			for (MemberExperienceDTO item : memberExperiences) {
+				expList.add(item.getExperience().getNameEn());
+			}
+		}else {
+			expList.add("");	
+		}
+		return expList;
 	}
 
 }

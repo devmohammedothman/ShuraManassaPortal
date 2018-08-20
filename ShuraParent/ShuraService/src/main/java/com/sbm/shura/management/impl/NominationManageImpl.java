@@ -3,6 +3,8 @@ package com.sbm.shura.management.impl;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -166,6 +168,9 @@ public class NominationManageImpl implements NominationManage {
 			List<UserWishDTO> secondUserWishList = new ArrayList<UserWishDTO>();
 			List<UserWishDTO> thirdUserWishList = new ArrayList<UserWishDTO>();
 			
+			//Lists without experience
+			List<UserWishDTO> firstWishList = new ArrayList<UserWishDTO>();
+			
 			for(CommitteeDTO item : commDTOList)
 			{			
 				if(userWishes.size() == 0)
@@ -174,16 +179,28 @@ public class NominationManageImpl implements NominationManage {
 				List<CommitteeMemberDTO> commTempList = new ArrayList<>();
 				int remainingMembersCount ;
 
-				//all members who have current committee as  first wish
+				//all members who have current committee as first wish and experience applicable
 				firstUserWishList = userWishes.stream().filter(
 						uwitem -> uwitem.getWishOrder() == 1 && uwitem.getWishedCommitee().getId().equals(item.getId())
+                        && (!uwitem.getNominatedUser().getExpList().listIterator().next().equals("")
+                        		&& uwitem.getNominatedUser().getExpList().listIterator().next().equals(
+                        				item.getExpList().listIterator().next()))
 						).collect(Collectors.toList());
+				
+				if (firstUserWishList.size() < memberCount) {
+					firstWishList = userWishes.stream().filter(
+							uwitem -> uwitem.getWishOrder() == 1 && uwitem.getWishedCommitee().getId().equals(item.getId())
+							).collect(Collectors.toList());
+					firstWishList.removeAll(firstUserWishList);
+					firstUserWishList.addAll(firstWishList);
+				}
 				
 				
 				//all members who have current committee as  second wish
 				secondUserWishList = userWishes.stream().filter(
 						uwitem -> uwitem.getWishOrder() == 2 && uwitem.getWishedCommitee().getId().equals(item.getId())
 						).collect(Collectors.toList());
+				
 				
 				//all members who have current committee as  third wish
 								thirdUserWishList = userWishes.stream().filter(

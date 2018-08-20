@@ -32,6 +32,7 @@ export class NominationPollComponent implements OnInit {
   committeList: Committee[];
   ssss: CommitteMembers[];
   sumCount: number = 0;
+  errorMessage: string;
   nominationPollResult: NominationPollResult = new NominationPollResult();
 
   displayedColumns = ['Committe name', 'First Wish', 'Second wish', 'Third wish',
@@ -175,8 +176,10 @@ export class NominationPollComponent implements OnInit {
   }
 
   openDialog(commId: number): void{
-    this.dialog.openDialog(commId);
-    //this.dialog.openDialog(commId);
+    this.getCommitteeMembers(commId);
+    this.dialog.openDialog();
+    this.dialog.dialog.closeAll();
+    setTimeout(()=>{ this.dialog.openDialog(); }, 200);
   }
 
   getLastNominationPoll(): void{
@@ -198,4 +201,14 @@ export class NominationPollComponent implements OnInit {
     },
     error => this.openSnackBar('There is an error', 'Close'));
   }
+
+  getCommitteeMembers(committeeId: number): void {
+    this.nominationService.getCommitteeMembers(committeeId)
+      .subscribe(comm => {
+        this.storageService.removeFromLocal('dlgMember');
+        this.storageService.saveInLocal('dlgMember', JSON.stringify(comm));
+      },
+        error => this.errorMessage = <any>error);
+  }
+  
 }
