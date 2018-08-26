@@ -16,5 +16,7 @@ public interface CommitteeMemberService {
 	List<CommitteeMemberDTO> getAllCommitteeCurrentMember() throws BusinessException;
 	
 	CommitteeMemberDTO updateMemberAssignedCommittee(CommitteeMemberDTO commMemberDto) throws BusinessException;
+	
+	void deleteAllCommitteeAssignedMembers() throws BusinessException;
 
 }

@@ -16,4 +16,6 @@ public interface CommitteeMemberDao extends GenericDao<CommitteeMember> {
 	List<CommitteeMember> getAllCommitteeCurrentMember() throws RespositoryException;
 	
 	CommitteeMember getCommitteeMemberByUserId(long userid) throws RespositoryException;
+	
+	void deleteAllCommitteeAssignedMembers() throws RespositoryException;
 }

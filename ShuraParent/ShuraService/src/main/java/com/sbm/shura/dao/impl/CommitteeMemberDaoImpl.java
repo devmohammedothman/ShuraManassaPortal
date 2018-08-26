@@ -99,4 +99,17 @@ public class CommitteeMemberDaoImpl extends GenericDaoImpl<CommitteeMember>  imp
 		return commMemberObjResult;
 	}
 
+	@Override
+	public void deleteAllCommitteeAssignedMembers() throws RespositoryException {
+		try {
+			entityManager.createNamedQuery("commMember.deleteAllCommAssignedMembers").executeUpdate();
+		}
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			throw new RespositoryException(ExceptionEnums.REPOSITORY_ERROR);
+		}
+	
+	}
+
 }

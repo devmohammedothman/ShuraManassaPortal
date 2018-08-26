@@ -18,6 +18,7 @@ import javax.persistence.Table;
 @NamedQueries(value = { @NamedQuery(name = "commMember.findAll", query = "select cm from CommitteeMember cm"),
 		@NamedQuery(name = "commMember.findByUserId", query = "select cm from CommitteeMember cm where cm.member.userId =:userid"),
 		@NamedQuery(name = "commMember.getCommAssignedMembers", query = "select cm from CommitteeMember cm where committee.id =:commId"),
+		@NamedQuery(name = "commMember.deleteAllCommAssignedMembers", query = "delete from CommitteeMember cm"),
 		@NamedQuery(name = "commMember.deleteCommAssignedMembers", query = "delete from CommitteeMember cm where committee.id =:commId") })
 public class CommitteeMember implements java.io.Serializable {
 
