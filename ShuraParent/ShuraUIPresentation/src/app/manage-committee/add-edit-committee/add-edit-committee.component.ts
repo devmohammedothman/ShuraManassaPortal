@@ -12,7 +12,7 @@ import { CommitteeService } from '../../services/committee.service';
 })
 export class AddEditCommitteeComponent implements OnInit {
 
-commObject:Committee = new Committee();
+commObject:Committee = new Committee(null);
 
 
   constructor(public dialog: MatDialog, private commService : CommitteeService) { }

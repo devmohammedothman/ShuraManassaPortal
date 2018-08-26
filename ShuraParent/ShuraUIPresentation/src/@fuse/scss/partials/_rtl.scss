@@ -140,14 +140,24 @@ html:lang(ar) {
             //     flex-direction: row-reverse;
             // }
         }
-    }
-    // ######################
-    
-    // ######################
-    // FORM HELPERS
-    // ######################
-    .mat-checkbox-inner-container {
-        margin-right: 0;
-        margin-left: 8px;
+        // ######################
+        
+        // ######################
+        // FORM HELPERS
+        // ######################
+        .mat-checkbox-inner-container {
+            margin-right: 0;
+            margin-left: 8px;
+        }
+        // ######################
+        
+        // ######################
+        // EXPANSION PANEL HELPERS
+        // ######################
+        .mat-expansion-panel-header-description,
+        .mat-expansion-panel-header-title {
+            margin-right: 0;
+            margin-left: 16px;
+        }
     }
 }

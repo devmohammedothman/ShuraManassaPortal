@@ -5,10 +5,11 @@ import { WelcomeComponent } from './welcome.component';
 import { MaterialModule } from '../main/angular-material-elements/material.module';
 import { AuthGuard } from '../auth.guard';
 import { TranslateModule } from '@ngx-translate/core';
+import { FuseSharedModule } from '@fuse/shared.module';
 
 const routes = [
   {
-      path     : 'welcome',
+      path     : 'home',
       // canActivate: [AuthGuard],
       component: WelcomeComponent
   }
@@ -18,9 +19,11 @@ const routes = [
   imports: [
     CommonModule,
     RouterModule.forRoot(routes),
-//material
+
+    // material
     MaterialModule,
 
+    FuseSharedModule,
     TranslateModule
   ],
   declarations: [WelcomeComponent]

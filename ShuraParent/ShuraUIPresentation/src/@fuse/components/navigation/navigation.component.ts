@@ -57,11 +57,12 @@ export class FuseNavigationComponent implements OnInit
          this.group = JSON.parse(this.storageService.getFromLocal('group'));
          // Set the defaults
          if (this.group) {
-             for (let obj of this.group) {
-                 console.log("group:", obj);
-                 for (let key in obj) {
-                     //console.log('1name in first check: '+this.group);
-                     if (obj[key] === 'ADMIN' || obj[key] === 'ADMIN1') {
+             for (const obj of this.group) {
+                 console.log('group:', obj);
+                 for (const key in obj) {
+                     // console.log('1name in first check: '+this.group);
+                     if (obj[key] === 'ADMIN' || obj[key] === 'ADMIN1' 
+                    || obj[key] === 'MANAGER') {
                          console.log('navigation com group admin : ' + obj[key]);
                          this.storageService.saveInLocal('currentGroup', obj[key]);
                          this.navigation = navigation;

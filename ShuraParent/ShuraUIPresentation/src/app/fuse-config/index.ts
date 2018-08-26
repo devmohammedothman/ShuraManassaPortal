@@ -16,7 +16,7 @@ export const fuseConfig: FuseConfig = {
             hidden    : false,
             position  : 'right',
             folded    : false,
-            background: 'mat-fuse-dark-700-bg'
+            background: '' // mat-fuse-dark-700-bg
         },
         toolbar       : {
             hidden    : false,

@@ -21,17 +21,15 @@ export class CommitteeService
         'Access-Control': 'Allow-Origin' });
         let options = new RequestOptions({headers : header });
         return this.http.get(this.baseUrl + 'getcommlist', options)
-            .map(data => data.json());
+            .map(data => data.json().data);
     }
 
     //Add CommitteeService
     addCommittee(commObject : Committee)
     {
         const sentCommObjBody :Committee = {
-            id : 0,
             nameAr:commObject.nameAr,
-            nameEn:commObject.nameEn,
-            commManager : null,
+            nameEn:commObject.nameEn
         }
         console.log('call Add Committee BE Service');
         return this.http.post(this.baseUrl + 'addcomm',sentCommObjBody);

@@ -8,6 +8,13 @@
     justify-content: space-between !important;
 }
 
+.hidden {
+    display: none;
+    visibility: hidden;
+    height: 0 !important;
+    width: 0 !important;
+}
+
 // ######################
 // POSITION HELPERS
 // ######################

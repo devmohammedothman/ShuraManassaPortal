@@ -105,12 +105,14 @@ h6,
 
 // Links
 a {
-    color: mat-color($accent);
+    // color: mat-color($accent);
+    color: #fff;
     text-decoration: none;
     &:not(.mat-button):not(.mat-raised-button):not(.mat-icon-button) {
         &:hover,
         &:active {
-            text-decoration: underline;
+            // text-decoration: underline;
+            text-decoration: none;
         }
     }
 }

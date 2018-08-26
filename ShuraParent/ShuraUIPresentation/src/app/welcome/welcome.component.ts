@@ -5,6 +5,7 @@ import { User } from '../models/user.model';
 
 import { locale as english } from 'app/main/apps/mail-ngrx/i18n/en';
 import { locale as arabic } from 'app/main/apps/mail-ngrx/i18n/ar';
+import { FuseNavigationService } from '@fuse/components/navigation/navigation.service';
 
 @Component({
     selector: 'welcome',
@@ -21,12 +22,15 @@ export class WelcomeComponent implements OnInit {
     group: any;
     groupstr; string;
     userStr: string;
-    constructor(private _fuseTranslationLoaderService: FuseTranslationLoaderService) {
+    navigation: any;
+    constructor(private _fuseTranslationLoaderService: FuseTranslationLoaderService,
+    private navigationService: FuseNavigationService) {
         this._fuseTranslationLoaderService.loadTranslations(arabic, english);
       //private storageService: StorageService
         /*this.token = this.StorageService.getStorageListValue('token');
         console.log('key:' + this.token );
         alert('key:' + this.token);*/
+        this.navigation = this.navigationService.getCurrentNavigation();
     }
 
     ngOnInit() {

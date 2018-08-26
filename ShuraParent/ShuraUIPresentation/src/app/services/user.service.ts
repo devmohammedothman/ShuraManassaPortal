@@ -78,7 +78,7 @@ export class UserService {
         'Access-Control': 'Allow-Origin' });
         const options = new RequestOptions({ headers: headers });
         return this.http.get(this.baseUrl + 'getgroups', options)
-            .map(data => data.json());
+            .map(data => data.json().data);
     }
 
     getPermissionsByMenu(menuId: string): Observable<any> {
@@ -87,7 +87,7 @@ export class UserService {
         'Access-Control': 'Allow-Origin' });
         const options = new RequestOptions({ headers: headers });
         return this.http.get(this.baseUrl + 'getpermissionsbymenu' + menuId, options)
-            .map(data => data.json());
+            .map(data => data.json().data);
     }
 
     getUsers(): Observable<any> {
@@ -96,7 +96,7 @@ export class UserService {
         'Access-Control': 'Allow-Origin' });
         const options = new RequestOptions({ headers: headers });
         return this.http.get(this.baseUrl + 'getusers', options)
-            .map(data => data.json());
+            .map(data => data.json().data);
     }
 
     assignUserToGroup(param: AssignParam): Observable<User> {
@@ -111,7 +111,7 @@ export class UserService {
     // tttttttttttttttttttttt
 
     private extractData(res: Response): any {
-        const body = res.json();
+        const body = res.json().data;
         return body || {};
     }
     private handleErrorObservable(error: Response | any): any {

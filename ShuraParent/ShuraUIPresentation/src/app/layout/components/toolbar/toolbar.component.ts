@@ -12,6 +12,7 @@ import { navigation } from 'app/navigation/navigation';
 import { StorageService } from 'app/services/storage.service';
 import { User } from '../../../models/user.model';
 import { lang } from '../../../../../node_modules/moment';
+import { FuseNavigationService } from '@fuse/components/navigation/navigation.service';
 
 @Component({
     selector   : 'toolbar',
@@ -21,6 +22,11 @@ import { lang } from '../../../../../node_modules/moment';
 
 export class ToolbarComponent implements OnInit, OnDestroy
 {
+
+    panelOpenState = false;
+    
+    date: Date;
+
     horizontalNavbar: boolean;
     rightNavbar: boolean;
     hiddenNavbar: boolean;
@@ -47,9 +53,12 @@ export class ToolbarComponent implements OnInit, OnDestroy
         private _fuseSidebarService: FuseSidebarService,
         private _router: Router,
         private StorageService: StorageService,
-        private _translateService: TranslateService
+        private _translateService: TranslateService,
+        private _fuseNavigationService: FuseNavigationService
     )
     {
+        this.date = new Date();
+
         // Set the defaults
         this.userStatusOptions = [
             {
@@ -189,9 +198,18 @@ export class ToolbarComponent implements OnInit, OnDestroy
         document.getElementById('generalHTML').lang = langId;
     }
 
+    // -----------------------------------------------------------------------------------------------------
+    // @ Custom methods
+    // -----------------------------------------------------------------------------------------------------
+
+    /**
+     * Logout
+     */
     logout(): void {
         this.StorageService.removeFromLocal('user');
         this.StorageService.removeFromLocal('token');
+        this._fuseNavigationService.removeNavigationItem('NomintaionPoll');
         this._router.navigate(['']);
     }
+
 }

@@ -1,15 +1,21 @@
 <div class="page-layout simple fullwidth">
-
-    <!-- HEADER -->
-    <div class="header p-24" fxLayout="row" fxLayoutAlign="start center">
-        <h2>Full width</h2>
-    </div>
-    <!-- / HEADER -->
-
     <!-- CONTENT -->
-    <div class="content p-24">
+    <div class="content p-24 home-display">
+        <div fxFlex fxFill fxLayout="row wrap" fxLayoutAlign="center start">
+            <ng-container *ngFor="let item of navigation">
+                <a href="{{item.url}}" style="color: #fff; text-decoration: none;">
+                    <div class="item my-24 py-24 mx-32 px-32 text-center" style="width: 200px">
 
+                        <div fxLayoutAlign="center center" class="image mb-24" style="display: flex; height: 70px">
+                            <img src="../../assets/images/{{item.image}}" alt="Item Image" style="max-width: 100px;">
+                        </div>
+                        <div class="title">
+                            <h3>{{item.translate | translate}}</h3>
+                        </div>
+                    </div>
+                </a>
+            </ng-container>
+        </div>
     </div>
     <!-- / CONTENT -->
-
 </div>

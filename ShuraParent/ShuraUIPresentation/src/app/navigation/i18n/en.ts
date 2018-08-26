@@ -10,14 +10,15 @@ export const locale = {
                 'TITLE': 'Login to your account!',
             },
             'LOGO': {
-                'TITLE': 'Login to your account!',
-                'SUBTITLE': 'Login to your account!',
+                'TITLE': 'General Secretariat',
+                'SUBTITLE': 'E-Services',
             }
         },
         'NAV': {
             'PERMISSION'     : 'Permission',
             'DASHBOARD' : 'Dashboard',
             'WELCOME'     : 'Welcome',
+            'HOME'     : 'Home',
             'SETTING': 'Settings',
             'MEMNOMINATION': 'Nomination Program',
             'GroupUserAssign' : 'Assign User To Group',
@@ -28,6 +29,7 @@ export const locale = {
             'ECOMMERCE'   : 'E-Commerce',
             'ACADEMY'     : 'Academy',
             'NOMINATION-POLL' : 'Nomination Poll',
+            'EditMemWish' : 'Edit Member Wishes',
             'MAIL'        : {
                 'TITLE': 'Mail',
                 'BADGE': '25'
@@ -46,6 +48,7 @@ export const locale = {
             'COMMNAME' : 'Committee Name', 
         },
         'CONT': {
+            'WELCOME': 'Welcome',
             'FORMS': {
                 'SUBMIT': 'Submit!',               
                 'RESET': 'Reset!',
@@ -72,7 +75,8 @@ export const locale = {
                 'USERNAME': 'Username',               
                 'WISH1': 'First Wish',               
                 'WISH2': 'Second Wish',               
-                'WISH3': 'Third Wish',               
+                'WISH3': 'Third Wish',    
+                'WISHORDER': 'Wish Order',               
                 'NOTES': 'Notes',               
             },
             'GPERM': {
@@ -102,6 +106,10 @@ export const locale = {
                 'SUM': 'Sum',
                 'COMMITTE-NAME': 'Committe name',
                 'VIEW': 'View',
+                'MEMBERNAME':'Member Name',
+                'CURRENTCOMMITTEE':'Current Committee',
+                'WISHEDCOMMITTEE' : 'Wished Committee',
+                'EDITMEMBERWISHES' : 'Edit Member Wishes',
             }
         }
     }

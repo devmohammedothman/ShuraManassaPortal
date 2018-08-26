@@ -30,6 +30,18 @@ $carded-header-height-without-toolbar-sm: $carded-header-height-sm - $carded-too
             right: 0;
             left: 0;
             height: $carded-header-height;
+            background-color: transparent !important;
+            &::before {
+                content: '';
+                position: absolute;
+                left: 0;
+                right: 0;
+                top: 0;
+                bottom: 0;
+                background-image: url('./assets/images/backgrounds/patterm.png');
+                background-color: #00B159;
+                background-size: cover;
+            }
 
             @include media-breakpoint-down('sm') {
                 height: $carded-header-height-sm;

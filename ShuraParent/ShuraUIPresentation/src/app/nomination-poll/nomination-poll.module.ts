@@ -10,8 +10,9 @@ import { FuseSharedModule } from '@fuse/shared.module';
 import { FuseSidebarModule, FuseThemeOptionsModule } from '@fuse/components';
 import { fuseConfig } from 'app/fuse-config';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatSnackBarModule } from '../../../node_modules/@angular/material';
+import { MatSnackBarModule, MatDialogModule } from '../../../node_modules/@angular/material';
 import { NominationPollComponent } from './nomination-poll.component';
+import { DialogComponent } from './dialog/dialog.component';
 
 const routes: Routes = [
   {
@@ -37,9 +38,11 @@ const routes: Routes = [
     // material
       MaterialModule,
       MatSnackBarModule,
-
-      ReactiveFormsModule 
+      ReactiveFormsModule,
+      MatDialogModule
   ],
-  declarations: [NominationPollComponent]
+  declarations: [NominationPollComponent, DialogComponent],
+  providers: [DialogComponent],
+  entryComponents: [DialogComponent]
 })
 export class NominationPollModule { }

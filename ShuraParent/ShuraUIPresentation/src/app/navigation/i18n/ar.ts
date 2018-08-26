@@ -10,14 +10,15 @@ export const locale = {
                 'TITLE': 'سجل الدخول إلى حسابك!',
             },
             'LOGO': {
-                'TITLE': 'Login to your account!',
-                'SUBTITLE': 'Login to your account!',
+                'TITLE': 'الأمانة العامة',
+                'SUBTITLE': 'الخدمات الإلكترونية',
             }
         },
         'NAV': {
             'PERMISSION'     : 'صلاحيات',
             'DASHBOARD' : 'اللوحة الرئيسية',
             'WELCOME'     : 'مرحبا',
+            'HOME'     : 'الرئيسية',
             'SETTING': 'إعدادات النظام',
             'GroupUserAssign' : 'إضافة مستخدم إلى مجموعة',
             'MANAGEUSER' : 'التحكم في المستخدمين',
@@ -31,6 +32,7 @@ export const locale = {
             'ECOMMERCE'   : 'المتجر',
             'ACADEMY'     : 'الأكاديمية',
             'NOMINATION-POLL' : 'ترشيح الاعضاء',
+            'EditMemWish' : 'تعديل الرغبات',
             'MAIL'        : {
                 'TITLE': 'Posta',
                 'BADGE': '15'
@@ -46,6 +48,7 @@ export const locale = {
             'SCRUMBOARD'  : 'Scrumboard'
         },
         'CONT': {
+            'WELCOME': 'مرحبا',
             'FORMS': {
                 'SUBMIT': 'إرسال!',               
                 'RESET': 'إخلاء القيم!',
@@ -72,7 +75,8 @@ export const locale = {
                 'USERNAME': 'اسم العضو',               
                 'WISH1': 'الرغبة الأولى',               
                 'WISH2': 'الرغبة الثانية',               
-                'WISH3': 'الرغبة الثالثة',               
+                'WISH3': 'الرغبة الثالثة',    
+                'WISHORDER': 'ترتيب الرغبة',                          
                 'NOTES': 'ملاحظات',               
             },
             'GPERM': {
@@ -101,7 +105,11 @@ export const locale = {
                 'THIRD-WISH': 'الرغبة الثالثة',
                 'SUM': 'الإجمالي',
                 'COMMITTE-NAME': 'اسم اللجنة', 
-                'VIEW': 'استعراض',            
+                'VIEW': 'استعراض', 
+                'MEMBERNAME':'إسم العضو',    
+                'CURRENTCOMMITTEE':'اللجنة الحالية',   
+                'WISHEDCOMMITTEE':'اللجنة المترشح لها',
+                'EDITMEMBERWISHES' : 'تعديل رغبات الأعضاء'    
             }
         }
     }
