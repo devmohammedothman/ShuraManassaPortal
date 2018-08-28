@@ -13,4 +13,7 @@ public interface ReportsService {
 	public  ReportCommitteeWishesCountPercDTO getReportCommitteeWishesCount() throws BusinessException;
 	public List<ReportUsersNotSubmitWishesDTO> getReportUsersNotSubmitWishes() throws BusinessException;
 	public List<ReportUsersWishesDTO> getReportUsersWishesCommittee(long committeeId) throws BusinessException;
+	public List<ReportUsersWishesDTO> getReportUsersWishesCommitteeMember(long committeeId)  throws BusinessException;
+	public List<ReportUsersNotSubmitWishesDTO> getReportUsersCommitteeMember(long committeeId) throws BusinessException;
+	public List<ReportUsersWishesDTO> getReportUsersWishesNotTrueReport() throws BusinessException;
 }

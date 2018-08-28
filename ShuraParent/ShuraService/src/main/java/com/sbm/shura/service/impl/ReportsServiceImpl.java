@@ -125,4 +125,52 @@ public class ReportsServiceImpl implements ReportsService {
  		return Math.round(value * (10 * nDigits)) / (double) (10 * nDigits);
  	}
 
+	@Override
+	public List<ReportUsersWishesDTO> getReportUsersWishesCommitteeMember(long committeeId) throws BusinessException {
+		List<ReportUsersWishesDTO> result;
+		try {
+			List<ReportUsersWishesDTO> reportUsersWishesDTO = reportsDao.getReportUsersWishesCommitteeMember(committeeId);
+			result = reportUsersWishesDTO;
+		} catch (RespositoryException e) {
+			e.printStackTrace();
+			throw new BusinessException(ExceptionEnums.REPOSITORY_ERROR);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+			throw new BusinessException(ExceptionEnums.BUSINESS_ERROR);
+		}
+		return result;
+	}
+
+	@Override
+	public List<ReportUsersNotSubmitWishesDTO> getReportUsersCommitteeMember(long committeeId) throws BusinessException {
+		List<ReportUsersNotSubmitWishesDTO> result;
+		try {
+			List<ReportUsersNotSubmitWishesDTO> reportUsersNotSubmitWishesDTO = reportsDao.getReportUsersCommitteeMember(committeeId);
+			result = reportUsersNotSubmitWishesDTO;
+		} catch (RespositoryException e) {
+			e.printStackTrace();
+			throw new BusinessException(ExceptionEnums.REPOSITORY_ERROR);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+			throw new BusinessException(ExceptionEnums.BUSINESS_ERROR);
+		}
+		return result;
+	}
+
+	@Override
+	public List<ReportUsersWishesDTO> getReportUsersWishesNotTrueReport() throws BusinessException {
+		List<ReportUsersWishesDTO> result;
+		try {
+			List<ReportUsersWishesDTO> reportUsersWishesDTO = reportsDao.getReportUsersWishesNotTrueReport();
+			result = reportUsersWishesDTO;
+		} catch (RespositoryException e) {
+			e.printStackTrace();
+			throw new BusinessException(ExceptionEnums.REPOSITORY_ERROR);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+			throw new BusinessException(ExceptionEnums.BUSINESS_ERROR);
+		}
+		return result;
+	}
+
 }

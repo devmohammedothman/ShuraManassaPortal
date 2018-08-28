@@ -13,5 +13,8 @@ public interface ReportsDao {
 	public  List<ReportCommitteeWishesCountDTO> getReportCommitteeWishesCount() throws RespositoryException;
 	public List<ReportUsersNotSubmitWishesDTO> getReportUsersNotSubmitWishes() throws RespositoryException;
 	public List<ReportUsersWishesDTO> getReportUsersWishesCommittee(long committeeId) throws RespositoryException;
+	public List<ReportUsersWishesDTO> getReportUsersWishesCommitteeMember(long committeeId)  throws RespositoryException;
+	public List<ReportUsersNotSubmitWishesDTO> getReportUsersCommitteeMember(long committeeId) throws RespositoryException;
+	public List<ReportUsersWishesDTO> getReportUsersWishesNotTrueReport() throws RespositoryException;
 
 }

@@ -102,4 +102,46 @@ public class ReportsManagerImpl implements ReportsManager{
 		 return result;
 	}
 
+	@Override
+	public void exportReportUsersWishes() throws ControllerException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void exportReportCommitteeWishesCount() throws ControllerException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void exportReportUsersNotSubmitWishes() throws ControllerException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void exportReportUsersWishesCommittee(long committeeId) throws ControllerException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void exportReportUsersWishesCommitteeMember(long committeeId) throws ControllerException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void exportReportUsersCommitteeMember(long committeeId) throws ControllerException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void exportReportUsersWishesNotTrueReport() throws ControllerException {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
