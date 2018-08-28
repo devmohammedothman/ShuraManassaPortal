@@ -14,7 +14,7 @@ export const fuseConfig: FuseConfig = {
         width         : 'fullwidth',
         navbar        : {
             hidden    : false,
-            position  : 'right',
+            position  : 'top',
             folded    : false,
             background: '' // mat-fuse-dark-700-bg
         },
@@ -25,8 +25,8 @@ export const fuseConfig: FuseConfig = {
         },
         footer        : {
             hidden    : false,
-            position  : 'above',
-            background: 'mat-fuse-dark-900-bg'
+            position  : 'above-static',
+            background: '' // mat-fuse-dark-900-bg
         }
     },
     customScrollbars: true

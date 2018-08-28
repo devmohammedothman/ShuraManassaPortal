@@ -92,6 +92,12 @@ export const locale = {
                 'TITLE': 'اللجان',
                 'SUBTITLE': 'إدارة اللجان',
             },
+            'USERNOM': {
+                'TITLE': 'برنامج ترشيح الأعضاء للجان المتخصصة',
+                'TAB1': 'إدخال رغبات اللجان المتخصصة',
+                'TAB2': 'واجهة فرز رغبات الأعضاء',
+                'TAB3': 'واجهة تعديل رغبات الأعضاء',
+            },
             'NOM': {
                 'TITLE': 'فرز رغبات الأعضاء',
                 'SUBTITLE-ADMIN': 'ترشيح الاعضاء للجان متخصصة',
@@ -106,9 +112,9 @@ export const locale = {
                 'SUM': 'الإجمالي',
                 'COMMITTE-NAME': 'اسم اللجنة', 
                 'VIEW': 'استعراض', 
-                'MEMBERNAME':'إسم العضو',    
-                'CURRENTCOMMITTEE':'اللجنة الحالية',   
-                'WISHEDCOMMITTEE':'اللجنة المترشح لها',
+                'MEMBERNAME': 'إسم العضو',    
+                'CURRENTCOMMITTEE': 'اللجنة الحالية',   
+                'WISHEDCOMMITTEE': 'اللجنة المترشح لها',
                 'EDITMEMBERWISHES' : 'تعديل رغبات الأعضاء'    
             }
         }

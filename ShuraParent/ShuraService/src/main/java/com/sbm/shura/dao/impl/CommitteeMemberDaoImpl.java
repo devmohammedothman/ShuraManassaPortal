@@ -36,7 +36,7 @@ public class CommitteeMemberDaoImpl extends GenericDaoImpl<CommitteeMember>  imp
 		List<CommitteeMember> resultList = null;
 		try 
 		{
-			Query q = entityManager.createNamedQuery("cm.getCommAssignedMembers",CommitteeMember.class);
+			Query q = entityManager.createNamedQuery("commMember.getCommAssignedMembers",CommitteeMember.class);
 			q.setParameter("commId", commId);
 			resultList = (q.getResultList() != null && q.getResultList().size() > 0 ? q.getResultList() : null);
 			
@@ -53,12 +53,10 @@ public class CommitteeMemberDaoImpl extends GenericDaoImpl<CommitteeMember>  imp
 	public void deleteCommitteeAssignedMembers(long commId) throws RespositoryException {
 		
 		try {
-				Query q = entityManager.createNamedQuery("cm.deleteCommAssignedMembers",CommitteeMember.class);
+				Query q = entityManager.createNamedQuery("commMember.deleteCommAssignedMembers");
 				q.setParameter("commId", commId);
 			
 				q.executeUpdate();
-				
-				
 			}
 			catch (Exception e) 
 			{
@@ -66,6 +64,52 @@ public class CommitteeMemberDaoImpl extends GenericDaoImpl<CommitteeMember>  imp
 				throw new RespositoryException(ExceptionEnums.REPOSITORY_ERROR);
 			}
 		
+	}
+
+	@Override
+	public List<CommitteeMember> getAllCommitteeCurrentMember() throws RespositoryException {
+		
+		List<CommitteeMember> resultList = null;
+		try 
+		{
+			resultList = entityManager.createNamedQuery("commMember.findAll",CommitteeMember.class).getResultList();
+		}
+		catch(Exception e) 
+		{
+			e.printStackTrace();
+			throw new RespositoryException(ExceptionEnums.REPOSITORY_ERROR);
+		}
+		return resultList;
+	}
+
+	@Override
+	public CommitteeMember getCommitteeMemberByUserId(long userid) throws RespositoryException {
+		CommitteeMember commMemberObjResult = null;
+		try {
+			
+			Query q = entityManager.createNamedQuery("commMember.findByUserId",CommitteeMember.class);
+			q.setParameter("userid", userid);
+			commMemberObjResult = (CommitteeMember)q.getSingleResult();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			throw new RespositoryException(ExceptionEnums.REPOSITORY_ERROR);
+		}
+		return commMemberObjResult;
+	}
+
+	@Override
+	public void deleteAllCommitteeAssignedMembers() throws RespositoryException {
+		try {
+			entityManager.createNamedQuery("commMember.deleteAllCommAssignedMembers").executeUpdate();
+		}
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			throw new RespositoryException(ExceptionEnums.REPOSITORY_ERROR);
+		}
+	
 	}
 
 }

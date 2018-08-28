@@ -13,35 +13,53 @@ import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-@Table (name = "COMMITTEEMEMBER")
+@Table(name = "COMMITTEEMEMBER")
 @Entity
-@NamedQueries (value = {
-		@NamedQuery (name = "commMember.findAll" , query = "select cm from CommitteeMember cm"),
-		@NamedQuery (name = "commMember.getCommAssignedMembers" , query = "select cm from CommitteeMember cm where committee.id =:commId"),
-		@NamedQuery (name = "commMember.deleteCommAssignedMembers" , query = "delete from CommitteeMember cm where committee.id =:commId")
-})
-public class CommitteeMember {
+@NamedQueries(value = { @NamedQuery(name = "commMember.findAll", query = "select cm from CommitteeMember cm"),
+		@NamedQuery(name = "commMember.findByUserId", query = "select cm from CommitteeMember cm where cm.member.userId =:userid"),
+		@NamedQuery(name = "commMember.getCommAssignedMembers", query = "select cm from CommitteeMember cm where committee.id =:commId"),
+		@NamedQuery(name = "commMember.deleteAllCommAssignedMembers", query = "delete from CommitteeMember cm"),
+		@NamedQuery(name = "commMember.deleteCommAssignedMembers", query = "delete from CommitteeMember cm where committee.id =:commId") })
+public class CommitteeMember implements java.io.Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1780941928001523223L;
 
 	@Id
 	@Column(nullable = false, unique = true, updatable = false)
 	@SequenceGenerator(name = "commMember_ID_Generator", sequenceName = "COMMITTEEMEMBER_SEQ", initialValue = 1)
 	@GeneratedValue(generator = "commMember_ID_Generator", strategy = GenerationType.SEQUENCE)
 	private Long Id;
-	
-	@ManyToOne (fetch = FetchType.EAGER)
-	@JoinColumn(name = "MEMBERID" , nullable = false)
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "MEMBERID", nullable = false)
 	private User member;
-	
-	@ManyToOne (fetch = FetchType.EAGER)
-	@JoinColumn (name = "COMMITTEEID", nullable = false)
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "COMMITTEEID", nullable = false)
 	private Committee committee;
+
+	@Column(name = "WISHORDER", nullable = false)
+	private int wishOrder;
+
+	@Column(name = "ISAPPROVED", nullable = false)
+	private boolean approved;
+
+	public CommitteeMember() {
+	}
+
+	public CommitteeMember(Long Id) {
+		this.Id = Id;
+	}
 
 	public Long getId() {
 		return Id;
 	}
 
-	public void setId(Long id) {
-		Id = id;
+	protected void setId(Long id) {
+		this.Id = id;
 	}
 
 	public User getMember() {
@@ -59,5 +77,21 @@ public class CommitteeMember {
 	public void setCommittee(Committee committee) {
 		this.committee = committee;
 	}
-	
+
+	public int getWishOrder() {
+		return wishOrder;
+	}
+
+	public void setWishOrder(int wishOrder) {
+		this.wishOrder = wishOrder;
+	}
+
+	public boolean getApproved() {
+		return approved;
+	}
+
+	public void setApproved(boolean approved) {
+		this.approved = approved;
+	}
+
 }

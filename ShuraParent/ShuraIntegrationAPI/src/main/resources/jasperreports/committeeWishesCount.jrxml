@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="IncomingFollowup_Report" pageWidth="950" pageHeight="600" columnWidth="870" leftMargin="40" rightMargin="40" topMargin="30" bottomMargin="30" uuid="097c3039-08ef-4160-9ebd-487a12332353">
+	<property name="ireport.scriptlethandling" value="0"/>
+	<property name="ireport.encoding" value="UTF-8"/>
+	<property name="ireport.zoom" value="1.0000000000000004"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<import value="net.sf.jasperreports.engine.*"/>
+	<import value="java.util.*"/>
+	<import value="net.sf.jasperreports.engine.data.*"/>
+	<style name="Arial_Normal" isDefault="true" fontName="Arial" fontSize="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<style name="Arial_Bold" fontName="Arial" fontSize="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<style name="Arial_Italic" fontName="Arial" fontSize="12" isBold="false" isItalic="true" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<style name="pageHeader" style="Arial_Bold" forecolor="#FFFFFF" backcolor="#333333"/>
+	<subDataset name="dataset1" uuid="fd98729a-ee4c-467c-ab8f-f49a190d64ba"/>
+	<parameter name="firstWishCountTotal" class="java.lang.String"/>
+	<parameter name="secondWishCountTotal" class="java.lang.String"/>
+	<parameter name="thirdWishCountTotal" class="java.lang.String"/>
+	<parameter name="totalWishCountTotal" class="java.lang.String"/>
+	<parameter name="firstWishCountPerc" class="java.lang.String"/>
+	<parameter name="secondWishCountPerc" class="java.lang.String"/>
+	<parameter name="thirdWishCountPerc" class="java.lang.String"/>
+	<parameter name="totalWishCountPerc" class="java.lang.String"/>
+	<field name="committeeName" class="java.lang.String"/>
+	<field name="firstWishCount" class="java.math.BigDecimal"/>
+	<field name="secondWishCount" class="java.math.BigDecimal"/>
+	<field name="thirdWishCount" class="java.math.BigDecimal"/>
+	<field name="totalWishCount" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<columnHeader>
+		<band height="270" splitType="Stretch">
+			<staticText>
+				<reportElement key="staticText" style="Arial_Bold" mode="Opaque" x="430" y="170" width="140" height="30" forecolor="#FFFFFF" backcolor="#142832" uuid="edb2512c-cb13-4bb1-bd5f-7665f437b0f0"/>
+				<box>
+					<pen lineWidth="1.0" lineStyle="Double" lineColor="#FFFFFF"/>
+					<topPen lineWidth="1.0" lineStyle="Double" lineColor="#FFFFFF"/>
+					<leftPen lineWidth="1.0" lineStyle="Double" lineColor="#FFFFFF"/>
+					<bottomPen lineWidth="1.0" lineStyle="Double" lineColor="#FFFFFF"/>
+					<rightPen lineWidth="1.0" lineStyle="Double" lineColor="#FFFFFF"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="13" pdfFontName="CoconNextArabic-Regular.otf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[الأولى]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText" style="pageHeader" mode="Opaque" x="570" y="150" width="276" height="50" forecolor="#FFFFFF" backcolor="#142832" uuid="701f006c-3c77-4af2-87fa-993870e8ff20"/>
+				<box>
+					<pen lineWidth="1.0" lineStyle="Double" lineColor="#FFFFFF"/>
+					<topPen lineWidth="1.0" lineStyle="Double" lineColor="#FFFFFF"/>
+					<leftPen lineWidth="1.0" lineStyle="Double" lineColor="#FFFFFF"/>
+					<bottomPen lineWidth="1.0" lineStyle="Double" lineColor="#FFFFFF"/>
+					<rightPen lineWidth="1.0" lineStyle="Double" lineColor="#FFFFFF"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="13" pdfFontName="CoconNextArabic-Regular.otf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[اسم اللجنة]]></text>
+			</staticText>
+			<image>
+				<reportElement x="12" y="-28" width="110" height="111" uuid="4bfc8103-0783-4104-946e-d8bcf9b800b7"/>
+				<imageExpression><![CDATA["C:/Users/Ahmed Magdy/Desktop/shura logo.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="600" y="-26" width="290" height="126" uuid="b7822a05-60da-4bc5-b715-05e974c06cb7"/>
+				<textElement textAlignment="Right">
+					<font size="18" isBold="true" pdfFontName="CoconNextArabic-Regular.otf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[مجلس الشورى
+الأمانة العامة
+الأمانة العامة المساعدة لشؤون اللجان
+الادارة العامة لشئون اللجان]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText" style="Arial_Bold" mode="Opaque" x="10" y="150" width="560" height="20" forecolor="#FFFFFF" backcolor="#142832" uuid="559497fd-ca0d-4d04-bd6a-e9f48db56577"/>
+				<box>
+					<pen lineWidth="1.0" lineStyle="Double" lineColor="#FFFFFF"/>
+					<topPen lineWidth="1.0" lineStyle="Double" lineColor="#FFFFFF"/>
+					<leftPen lineWidth="1.0" lineStyle="Double" lineColor="#FFFFFF"/>
+					<bottomPen lineWidth="1.0" lineStyle="Double" lineColor="#FFFFFF"/>
+					<rightPen lineWidth="1.0" lineStyle="Double" lineColor="#FFFFFF"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="13" pdfFontName="CoconNextArabic-Regular.otf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[عدد الأعضاء حسب الرغبات]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText" style="Arial_Bold" mode="Opaque" x="290" y="170" width="140" height="30" forecolor="#FFFFFF" backcolor="#142832" uuid="06b2a883-250a-4a16-b4ce-43f03fcd6469"/>
+				<box topPadding="0" bottomPadding="0">
+					<pen lineWidth="1.0" lineStyle="Double" lineColor="#FFFFFF"/>
+					<topPen lineWidth="1.0" lineStyle="Double" lineColor="#FFFFFF"/>
+					<leftPen lineWidth="1.0" lineStyle="Double" lineColor="#FFFFFF"/>
+					<bottomPen lineWidth="1.0" lineStyle="Double" lineColor="#FFFFFF"/>
+					<rightPen lineWidth="1.0" lineStyle="Double" lineColor="#FFFFFF"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="13" pdfFontName="CoconNextArabic-Regular.otf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[الثانية]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText" style="Arial_Bold" mode="Opaque" x="10" y="170" width="140" height="30" forecolor="#FFFFFF" backcolor="#142832" uuid="9f05f4d1-b41c-4edd-af2a-e893bfc47fe3"/>
+				<box>
+					<pen lineWidth="1.0" lineStyle="Double" lineColor="#FFFFFF"/>
+					<topPen lineWidth="1.0" lineStyle="Double" lineColor="#FFFFFF"/>
+					<leftPen lineWidth="1.0" lineStyle="Double" lineColor="#FFFFFF"/>
+					<bottomPen lineWidth="1.0" lineStyle="Double" lineColor="#FFFFFF"/>
+					<rightPen lineWidth="1.0" lineStyle="Double" lineColor="#FFFFFF"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="13" pdfFontName="CoconNextArabic-Regular.otf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[الاجمالى]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText" style="Arial_Bold" mode="Opaque" x="150" y="170" width="140" height="30" forecolor="#FFFFFF" backcolor="#142832" uuid="1dade112-698c-4019-9eda-a6f9ab68c288"/>
+				<box>
+					<pen lineWidth="1.0" lineStyle="Double" lineColor="#FFFFFF"/>
+					<topPen lineWidth="1.0" lineStyle="Double" lineColor="#FFFFFF"/>
+					<leftPen lineWidth="1.0" lineStyle="Double" lineColor="#FFFFFF"/>
+					<bottomPen lineWidth="1.0" lineStyle="Double" lineColor="#FFFFFF"/>
+					<rightPen lineWidth="1.0" lineStyle="Double" lineColor="#FFFFFF"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="13" pdfFontName="CoconNextArabic-Regular.otf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[الثالثة]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="154" y="99" width="510" height="41" uuid="4a5a2837-cb46-4270-a4eb-5f9b639af910"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Cocon® Next Arabic" size="18" isBold="true" pdfFontName="CoconNextArabic-Regular.otf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[تقرير عن عدد الأعضاء في كل لجنة حسب الرغبات والنسبة المئوية]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="431" y="-70" width="140" height="20" isPrintWhenDetailOverflows="true" uuid="dadf654a-2002-4f25-a132-bc46357e02c7"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" pdfFontName="CoconNextArabic-Regular.otf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{firstWishCount}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="571" y="-70" width="274" height="20" isPrintWhenDetailOverflows="true" uuid="2ab34562-fbf9-4ae7-91f8-313bdd869974"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" pdfFontName="CoconNextArabic-Regular.otf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{committeeName}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="291" y="-70" width="140" height="20" isPrintWhenDetailOverflows="true" uuid="b1374c6b-293f-4ae5-9cb4-2e6638c83c22"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" pdfFontName="CoconNextArabic-Regular.otf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{secondWishCount}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="151" y="-70" width="140" height="20" isPrintWhenDetailOverflows="true" uuid="b0e1480e-155a-4168-afc8-667fa11846af"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" pdfFontName="CoconNextArabic-Regular.otf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{thirdWishCount}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="11" y="-70" width="140" height="20" isPrintWhenDetailOverflows="true" uuid="fb1ef678-9104-4a55-a8e6-940eb547a45e"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" pdfFontName="CoconNextArabic-Regular.otf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{totalWishCount}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement x="430" y="-48" width="140" height="20" isPrintWhenDetailOverflows="true" forecolor="#000000" backcolor="#141E32" uuid="b63dd589-d067-47f6-969a-bc65d10ec290"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" pdfFontName="CoconNextArabic-Regular.otf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{firstWishCountTotal}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="290" y="-48" width="140" height="20" isPrintWhenDetailOverflows="true" forecolor="#000000" backcolor="#141E32" uuid="6117f614-729a-4d8a-8351-2067e33d278d"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" pdfFontName="CoconNextArabic-Regular.otf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{secondWishCountTotal}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="150" y="-48" width="140" height="20" isPrintWhenDetailOverflows="true" forecolor="#000000" backcolor="#141E32" uuid="64839198-c662-4a91-aff1-eeedb25ac2ac"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" pdfFontName="CoconNextArabic-Regular.otf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{thirdWishCountTotal}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="10" y="-48" width="140" height="20" isPrintWhenDetailOverflows="true" forecolor="#000000" backcolor="#141E32" uuid="4a578540-e656-493f-a706-a6bcfe0be16f"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" pdfFontName="CoconNextArabic-Regular.otf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{totalWishCountTotal}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="430" y="-28" width="140" height="20" isPrintWhenDetailOverflows="true" forecolor="#000000" backcolor="#141E32" uuid="e68f5316-30eb-41e1-94d5-f3f48be00fdf"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" pdfFontName="CoconNextArabic-Regular.otf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{firstWishCountPerc}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="290" y="-28" width="140" height="20" isPrintWhenDetailOverflows="true" forecolor="#000000" backcolor="#141E32" uuid="639059b7-b266-472d-8a69-67d34302486a"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" pdfFontName="CoconNextArabic-Regular.otf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{secondWishCountPerc}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="150" y="-28" width="140" height="20" isPrintWhenDetailOverflows="true" forecolor="#000000" backcolor="#141E32" uuid="26c2358e-54d0-4ce6-9e78-1d4c9a31f257"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" pdfFontName="CoconNextArabic-Regular.otf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{thirdWishCountPerc}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="10" y="-28" width="140" height="20" isPrintWhenDetailOverflows="true" forecolor="#000000" backcolor="#141E32" uuid="eb40d4f6-8de0-4665-99a1-b72998c57b94"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" pdfFontName="CoconNextArabic-Regular.otf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{totalWishCountPerc}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText" style="pageHeader" stretchType="RelativeToTallestObject" mode="Opaque" x="569" y="-48" width="276" height="20" forecolor="#FFFFFF" backcolor="#142832" uuid="b21cad9d-6413-44a0-b81a-1d853521e4c3"/>
+				<box>
+					<pen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="13" pdfFontName="CoconNextArabic-Regular.otf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[الاجمالى]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText" style="pageHeader" stretchType="RelativeToTallestObject" mode="Opaque" x="570" y="-28" width="276" height="20" forecolor="#FFFFFF" backcolor="#142832" uuid="a758fd7f-e772-4f61-86a3-0b217d584362"/>
+				<box>
+					<pen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="13" pdfFontName="CoconNextArabic-Regular.otf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[النسبة]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="37" splitType="Stretch">
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="390" y="8" width="86" height="20" uuid="7db9bcbc-4996-4762-8421-f18ac42f02c3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA["  صفحة  "+ $V{PAGE_NUMBER} + "  من  "]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report" isBlankWhenNull="false">
+				<reportElement key="textField" x="361" y="8" width="29" height="20" uuid="4358672c-7be6-445c-86b7-98316dd79fbe"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA["" + $V{PAGE_NUMBER} + ""]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

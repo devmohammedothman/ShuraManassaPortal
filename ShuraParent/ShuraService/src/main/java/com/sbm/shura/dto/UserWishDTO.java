@@ -21,6 +21,8 @@ public class UserWishDTO extends BaseDTO {
 	
 	private boolean isAssignedBySG ;
 	
+	private String memberNotes;
+	
 
 	public Integer getId() {
 		return Id;
@@ -68,6 +70,14 @@ public class UserWishDTO extends BaseDTO {
 
 	public void setAssignedBySG(boolean isAssignedBySG) {
 		this.isAssignedBySG = isAssignedBySG;
+	}
+
+	public String getMemberNotes() {
+		return memberNotes;
+	}
+
+	public void setMemberNotes(String memberNotes) {
+		this.memberNotes = memberNotes;
 	}
 
 }

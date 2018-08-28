@@ -1,7 +1,7 @@
-import { Experience } from "./experience";
+import { Experience } from './experience';
 
 export class CommitteeExperience
 {
-    id?:number;
-    experience?:Experience;
+    id?: number;
+    experience?: Experience;
 }

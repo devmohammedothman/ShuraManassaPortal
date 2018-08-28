@@ -89,8 +89,14 @@ export const locale = {
                 'WRITE': 'Write'
             },
             'COMMITTE': {
-                'TITLE': 'اللجان',
-                'SUBTITLE': 'إدارة اللجان',
+                'TITLE': 'Committee',
+                'SUBTITLE': 'Committee Management',
+            },
+            'USERNOM': {
+                'TITLE': 'Committe User Nomination Application',
+                'TAB1': 'Inserting Committee Wishes',
+                'TAB2': 'Sorting Member Wishes',
+                'TAB3': 'Editing Member Wishes',
             },
             'NOM': {
                 'TITLE': 'Division the wishes of members',

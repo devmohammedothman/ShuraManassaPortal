@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
@@ -22,6 +21,9 @@
 		<cglib.version>2.2.2</cglib.version>
 		<maven.compiler.target>${java.version}</maven.compiler.target>
 		<maven.compiler.source>${java.version}</maven.compiler.source>
+		<jasper.version>5.1.0</jasper.version>
+		<ext.jar.basedir>${project.basedir}/src/main/resources/ext-lib</ext.jar.basedir>
+		<was.scope>compile</was.scope> <!-- compile for tomcat - provided for WAS -->
 	</properties>
 
 	<dependencies>
@@ -136,6 +138,83 @@
 			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
+		<!-- Jasper reports -->
+		<dependency>
+			<groupId>tomcat</groupId>
+			<artifactId>jasper-compiler-jdt</artifactId>
+			<version>5.5.23</version>
+			<scope>${was.scope}</scope>
+		</dependency>
+		<!-- Jasper -->
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports-htmlcomponent</artifactId>
+			<version>4.7.1</version>
+			<scope>${was.scope}</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports</artifactId>
+			<version>${jasper.version}</version>
+		</dependency>
+		<!-- <dependency> -->
+		<!-- <groupId>net.sf.jasperreports</groupId> -->
+		<!-- <artifactId>jasperreports</artifactId> -->
+		<!-- <version>${jasper.version}</version> -->
+		<!-- <scope>system</scope> -->
+		<!-- <systemPath>${ext.jar.basedir}/jasperreports-5.1.0.jar</systemPath> -->
+		<!-- </dependency> -->
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports-exprfunctions</artifactId>
+			<version>0.0.3</version>
+			<scope>${was.scope}</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports-extensions</artifactId>
+			<version>3.5.3</version>
+			<scope>${was.scope}</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports-core-renderer</artifactId>
+			<version>1.0</version>
+			<scope>${was.scope}</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.groovy</groupId>
+			<artifactId>groovy-all</artifactId>
+			<version>2.0.1</version>
+			<scope>${was.scope}</scope>
+		</dependency>
+
+		<!-- barcode -->
+		<dependency>
+			<groupId>net.sourceforge.barbecue</groupId>
+			<artifactId>barbecue</artifactId>
+			<version>1.5-beta1</version>
+			<scope>${was.scope}</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports-fonts</artifactId>
+			<version>6.0.0</version>
+		</dependency>
+		<!-- Dependencies required by Jasper -->
+		<dependency>
+			<groupId>com.itextpdf.tool</groupId>
+			<artifactId>xmlworker</artifactId>
+			<version>5.4.2</version>
+			<scope>${was.scope}</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>JasperCustomExtension</artifactId>
+			<version>1.0</version>
+			<scope>${was.scope}</scope>
+		</dependency>
+		<!-- End of jasper -->
 	</dependencies>
 
 	<repositories>
@@ -143,6 +222,10 @@
 			<id>springsource-milestones</id>
 			<name>SpringSource Milestones Proxy</name>
 			<url>https://oss.sonatype.org/content/repositories/springsource-milestones</url>
+		</repository>
+		<repository>
+			<id>Internal repository</id>
+			<url>file:///${ext.jar.basedir}</url>
 		</repository>
 	</repositories>
 
@@ -255,6 +338,29 @@
 								</resource>
 							</resources>
 						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-install-plugin</artifactId>
+				<version>2.5.2</version>
+				<executions>
+					<execution>
+						<id>install-external-non-maven1-jar</id>
+						<phase>clean</phase>
+						<configuration>
+							<repositoryLayout>default</repositoryLayout>
+							<groupId>net.sf.jasperreports</groupId>
+							<artifactId>jasperreports</artifactId>
+							<version>${jasper.version}</version>
+							<file>${ext.jar.basedir}/jasperreports-5.1.0.jar</file>
+							<packaging>jar</packaging>
+							<generatePom>true</generatePom>
+						</configuration>
+						<goals>
+							<goal>install-file</goal>
+						</goals>
 					</execution>
 				</executions>
 			</plugin>

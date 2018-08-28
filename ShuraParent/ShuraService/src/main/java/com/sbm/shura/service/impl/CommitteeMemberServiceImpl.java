@@ -19,31 +19,29 @@ import com.sbm.shura.service.CommitteeMemberService;
 
 @Service
 @Transactional
-public class CommitteeMemberServiceImpl extends BasicServiceImpl<CommitteeMemberDTO, CommitteeMember> implements CommitteeMemberService{
+public class CommitteeMemberServiceImpl extends BasicServiceImpl<CommitteeMemberDTO, CommitteeMember>
+		implements CommitteeMemberService {
 
 	@Autowired
 	private CommitteeMemberDao _comDao;
-	
+
 	private CommitteeMember _commMember;
-	
+
 	@Override
 	public CommitteeMemberDTO assignMemberToCommittee(CommitteeMemberDTO cmdto) throws BusinessException {
 		CommitteeMemberDTO cmdtoResult = null;
 		try {
 			_commMember = new CommitteeMember();
-			
+
 			_commMember = convertToEntity(_commMember, cmdto);
-			
+
 			_commMember = _comDao.addCommMember(_commMember);
 			cmdtoResult = convertToDTO(_commMember, cmdto);
-			
-		}
-		catch(RespositoryException re)
-		{
+
+		} catch (RespositoryException re) {
 			re.printStackTrace();
 			throw new BusinessException(ExceptionEnums.REPOSITORY_ERROR);
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			throw new BusinessException(ExceptionEnums.BUSINESS_ERROR);
 		}
@@ -52,41 +50,90 @@ public class CommitteeMemberServiceImpl extends BasicServiceImpl<CommitteeMember
 
 	@Override
 	public void deleteCommitteeAssignedMembers(long commId) throws BusinessException {
-		
-		try 
-		{	
-			_comDao.delete(commId);
-		}
-		catch(RespositoryException re)
-		{
-		re.printStackTrace();
-		throw new BusinessException(ExceptionEnums.REPOSITORY_ERROR);
-		}
-		catch (Exception e) {
-		e.printStackTrace();
-		throw new BusinessException(ExceptionEnums.BUSINESS_ERROR);
+
+		try {
+			_comDao.deleteCommitteeAssignedMembers(commId);
+		} catch (RespositoryException re) {
+			re.printStackTrace();
+			throw new BusinessException(ExceptionEnums.REPOSITORY_ERROR);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new BusinessException(ExceptionEnums.BUSINESS_ERROR);
 		}
 	}
 
 	@Override
 	public List<CommitteeMemberDTO> getCommitteeAssignedMembers(long commId) throws BusinessException {
 		List<CommitteeMemberDTO> resultList = null;
-		try 
-		{
+		try {
 			List<CommitteeMember> entityResulList = new ArrayList<>();
 			entityResulList = _comDao.getCommitteeAssignedMembers(commId);
-			resultList = entityResulList.stream().map(item -> convertToDTO(item, new CommitteeMemberDTO())).collect(Collectors.toList());
-		}
-		catch(RespositoryException re)
-		{
+			if (entityResulList != null && entityResulList.size() > 0)
+				resultList = entityResulList.stream().map(item -> convertToDTO(item, new CommitteeMemberDTO()))
+						.collect(Collectors.toList());
+		} catch (RespositoryException re) {
 			re.printStackTrace();
 			throw new BusinessException(ExceptionEnums.REPOSITORY_ERROR);
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			throw new BusinessException(ExceptionEnums.BUSINESS_ERROR);
 		}
 		return resultList;
+	}
+
+	@Override
+	public List<CommitteeMemberDTO> getAllCommitteeCurrentMember() throws BusinessException {
+		List<CommitteeMemberDTO> resultList = null;
+		try {
+			List<CommitteeMember> entityResulList = new ArrayList<>();
+			entityResulList = _comDao.getAllCommitteeCurrentMember();
+			if (entityResulList != null && entityResulList.size() > 0)
+				resultList = entityResulList.stream().map(item -> convertToDTO(item, new CommitteeMemberDTO()))
+						.collect(Collectors.toList());
+
+		} catch (RespositoryException re) {
+			throw new BusinessException(ExceptionEnums.REPOSITORY_ERROR);
+		} catch (Exception e) {
+			throw new BusinessException(ExceptionEnums.BUSINESS_ERROR);
+		}
+		return resultList;
+	}
+
+	@Override
+	public CommitteeMemberDTO updateMemberAssignedCommittee(CommitteeMemberDTO commMemberDto) throws BusinessException {
+
+		CommitteeMemberDTO updatedCommMemberDto = null;
+		try {
+
+			_commMember = _comDao.getCommitteeMemberByUserId(commMemberDto.getMember().getUserId());
+
+			if (_commMember != null) {
+				CommitteeMember convertedCommMember = convertToEntity(_commMember, commMemberDto);
+
+				_commMember.setCommittee(convertedCommMember.getCommittee());
+
+				_comDao.update(_commMember);
+
+				updatedCommMemberDto = convertToDTO(_commMember, commMemberDto);
+			}
+		} catch (RespositoryException re) {
+			throw new BusinessException(ExceptionEnums.REPOSITORY_ERROR);
+		} catch (Exception e) {
+			throw new BusinessException(ExceptionEnums.BUSINESS_ERROR);
+		}
+		return updatedCommMemberDto;
+
+	}
+
+	@Override
+	public void deleteAllCommitteeAssignedMembers() throws BusinessException {
+		try {
+            _comDao.deleteAllCommitteeAssignedMembers();
+		} catch (RespositoryException re) {
+			throw new BusinessException(ExceptionEnums.REPOSITORY_ERROR);
+		} catch (Exception e) {
+			throw new BusinessException(ExceptionEnums.BUSINESS_ERROR);
+		}
 	}
 
 }

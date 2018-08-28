@@ -19,27 +19,23 @@ import com.sbm.shura.management.CommitteeManager;
 @RequestMapping("/api/comm/")
 @CrossOrigin("*")
 public class CommitteeController {
-	
+
 	@Resource
 	private CommitteeManager commManager;
-	
+
 	@Resource
 	private RestDTOProvider dtoProvider;
-	
-	@RequestMapping(value = "/getcommlist", method = RequestMethod.GET,
-			consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+
+	@RequestMapping(value = "/getcommlist", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
-	public ResponseDTO getAllCommittees() throws ControllerException
-	{
+	public ResponseDTO getAllCommittees() throws ControllerException {
 		return commManager.getCommitteeList();
 	}
-	
-	@RequestMapping (value = "/addcomm", method = RequestMethod.POST,
-			consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+
+	@RequestMapping(value = "/addcomm", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
-	public ResponseDTO addCommittee(@RequestBody CommitteeDTO commDtoObj) throws ControllerException
-	{
+	public ResponseDTO addCommittee(@RequestBody CommitteeDTO commDtoObj) throws ControllerException {
 		return commManager.addCommittee(commDtoObj);
 	}
-	
+
 }

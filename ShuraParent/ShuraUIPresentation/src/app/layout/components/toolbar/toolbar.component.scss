@@ -43,17 +43,49 @@
             background-color: #00B159;
             border-radius: 0 0 12px 12px;
             &.date {
-                right: 130px;
+                right: 0;
                 height: 40px;
             }
             &.user-menu {
-                left: 130px;
+                > div:last-child {
+                    width: 100%;
+                }
+                left: 0;
+                .nav {
+                    padding-top: 12px;
+                    padding-bottom: 12px;
+                    .nav-item {
+                        width: 100%;
+                        & + .nav-item {
+                            margin-top: 12px;
+                        }
+                        .nav-link {
+                            height: 32px;
+                            padding: 0;
+                        }
+                        &:hover {
+                            .nav-link::after {
+                                content: '';
+                                height: 2px;
+                                background-color: #FFFFFF;
+                                position: absolute;
+                                bottom: 0;
+                                left: 0;
+                                right: 0;
+                            }
+                        }
+                    }
+                }
             }
 
             .mat-button {
                 min-width: auto;
                 height: auto;
                 padding: 0;
+            }
+
+            a {
+                cursor: pointer;
             }
         }
         .mat-expansion-panel {

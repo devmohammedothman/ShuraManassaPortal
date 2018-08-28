@@ -39,6 +39,9 @@ public class UserWish {
 	//default is false = 0
 	@Column (name = "ISASSIGNEDBYSG" , nullable = true , columnDefinition="number(1) default 0" )
 	private boolean isAssignedBySG ;
+	
+	@Column (name = "MEMBERNOTES" , nullable = true)
+	private String memberNotes;
 
 	public UserWish(Long id) {
 		Id = id;
@@ -93,6 +96,14 @@ public class UserWish {
 
 	public void setInsertionDate(Date insertionDate) {
 		this.insertionDate = insertionDate;
+	}
+
+	public String getMemberNotes() {
+		return memberNotes;
+	}
+
+	public void setMemberNotes(String memberNotes) {
+		this.memberNotes = memberNotes;
 	}
 
 }

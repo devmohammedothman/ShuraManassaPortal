@@ -169,7 +169,7 @@ export class LoginComponent implements OnInit, OnDestroy {
                     this.addNavItemWithCustomFunction();
                 }
                 setTimeout(() => {
-                    this.router.navigate(['welcome']);
+                    this.router.navigate(['home']);
                 }, 5000);
             },
             error => this.errorMessage = <any>error);
