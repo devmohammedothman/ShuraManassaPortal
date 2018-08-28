@@ -8,6 +8,7 @@ export class Committee
      nameEn: string;
      commManager?: User;
      comm?: Committee;
+     expList?: string[];
     constructor(committee: Committee){
         this.comm = committee;
     }

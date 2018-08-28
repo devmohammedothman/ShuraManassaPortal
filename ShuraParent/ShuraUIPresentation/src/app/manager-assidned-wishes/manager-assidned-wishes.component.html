@@ -67,7 +67,7 @@
                         <mat-hint>Do this and don't do that</mat-hint>
                     </mat-form-field>
                     <mat-divider></mat-divider>
-                    <button mat-button type="submit" [ngClass]="'my-24'" [disabled]='!adminAssignWishesForm.valid' (click)="openSnackBar('Submitted succefully!', 'Close')">{{'CONT.FORMS.SUBMIT' | translate }}</button>
+                    <button mat-button type="submit" [ngClass]="'my-24'" [disabled]='!adminAssignWishesForm.valid' (click)="assignWishes()">{{'CONT.FORMS.SUBMIT' | translate }}</button>
                     <button (click)="populateCommittes()" mat-button type="reset" [ngClass]="'my-24'">{{'CONT.FORMS.RESET' | translate }}</button>
                 </form>
             </div>
