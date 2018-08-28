@@ -1,8 +1,7 @@
 package com.sbm.shura.dto;
 
+import java.util.ArrayList;
 import java.util.List;
-
-import com.sbm.shura.entity.User;
 
 public class CommitteeDTO extends BaseDTO {
 
@@ -18,22 +17,22 @@ public class CommitteeDTO extends BaseDTO {
 	private String nameEn;
 
 	private UserDTO comManager;
-	
+
 	private List<CommitteeMemberDTO> commMembers;
 
-	public CommitteeDTO(Long id) {
-		this.id = id;
-	}
-	
-	public CommitteeDTO() {
-	}
+	private List<CommitteeExperienceDTO> committeeExperiences;
+
+	private List<String> expList;
 
 	public Long getId() {
 		return id;
 	}
 
 	public void setId(Long id) {
-		this.id = id;
+		if (id == null || id == 0)
+			this.id = null;
+		else
+			this.id = id;
 	}
 
 	public String getNameAr() {
@@ -66,6 +65,26 @@ public class CommitteeDTO extends BaseDTO {
 
 	public void setCommMembers(List<CommitteeMemberDTO> commMembers) {
 		this.commMembers = commMembers;
+	}
+
+	public List<CommitteeExperienceDTO> getCommitteeExperiences() {
+		return committeeExperiences;
+	}
+
+	public void setCommitteeExperiences(List<CommitteeExperienceDTO> committeeExperiences) {
+		this.committeeExperiences = committeeExperiences;
+	}
+
+	public List<String> getExpList() {
+		expList = new ArrayList<>();
+		if (!committeeExperiences.isEmpty()) {
+			for (CommitteeExperienceDTO item : committeeExperiences) {
+				expList.add(item.getExperience().getNameEn());
+			}
+		} else {
+			expList.add("");
+		}
+		return expList;
 	}
 
 }

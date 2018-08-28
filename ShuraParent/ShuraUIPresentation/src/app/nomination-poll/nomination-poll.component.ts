@@ -12,6 +12,7 @@ import { Observable } from 'rxjs/Rx';
 import { element } from '../../../node_modules/protractor';
 import { NominationPollResult } from '../models/nomination-poll-result.model';
 import { DialogComponent } from './dialog/dialog.component';
+import { CommitteMember } from '../models/commitee-member.model';
 
 @Component({
   selector: 'app-nomination-poll',
@@ -31,7 +32,8 @@ export class NominationPollComponent implements OnInit {
   committeList: Committee[];
   ssss: CommitteMembers[];
   sumCount: number = 0;
-  nominationPollResult: NominationPollResult;
+  errorMessage: string;
+  nominationPollResult: NominationPollResult = new NominationPollResult();
 
   displayedColumns = ['Committe name', 'First Wish', 'Second wish', 'Third wish',
     'sum', 'Nomination result'];
@@ -43,6 +45,8 @@ export class NominationPollComponent implements OnInit {
     private storageService: StorageService, private nominationService: NominationService,
     private dialog: DialogComponent) {
     this.dataSource = new MatTableDataSource(this.poolResult);
+
+    this.getLastNominationPoll();
   }
 
   ngOnInit() {
@@ -87,6 +91,7 @@ export class NominationPollComponent implements OnInit {
       .subscribe(result => {
         this.nominationPollResult = result;
         this.pollData = result.committeeMembers;
+        this.storageService.saveInLocal('processId',result.processId);
         if (this.committeList) {
           this.committeList.splice(0, this.committeList.length);
           this.poolResult.splice(0, this.poolResult.length);
@@ -101,13 +106,17 @@ export class NominationPollComponent implements OnInit {
   }
 
   confirmPollProcess(): void {
+    this.nominationPollResult.approved = true;
+    this.nominationPollResult.processId = Number(this.storageService.getFromLocal('processId'));
     this.nominationService.confirmPollProcess(this.nominationPollResult)
       .subscribe(result => {
         this.openSnackBar('Done!', 'Close');
+        
       },
         // error => this.errorMessage = <any>error);
         this.openSnackBar('There is an error', 'Close')
       );
+      console.log('confirm! '+JSON.stringify((this.nominationPollResult)));
   }
 
   populateTableData(): void {
@@ -165,4 +174,41 @@ export class NominationPollComponent implements OnInit {
     console.log('source------' + JSON.stringify(this.poolResult));
     //console.log('source22------' + JSON.stringify(filteredData));
   }
+
+  openDialog(commId: number): void{
+    this.getCommitteeMembers(commId);
+    this.dialog.openDialog();
+    this.dialog.dialog.closeAll();
+    setTimeout(()=>{ this.dialog.openDialog(); }, 200);
+  }
+
+  getLastNominationPoll(): void{
+    this.nominationService.getCurrentCommitteeMembers().subscribe(result =>{
+      this.pollData = result;
+      this.nominationPollResult.committeeMembers = result;
+      console.log('first log');
+      if(this.pollData){
+        console.log('poll data is not null');
+        this.populateTableData();
+        this.hideTable = false;
+      }
+      if (this.committeList) {
+        this.committeList.splice(0, this.committeList.length);
+        this.poolResult.splice(0, this.poolResult.length);
+        this.ssss.splice(0, this.ssss.length);
+        this.sumCount = 0;
+      }
+    },
+    error => this.openSnackBar('There is an error', 'Close'));
+  }
+
+  getCommitteeMembers(committeeId: number): void {
+    this.nominationService.getCommitteeMembers(committeeId)
+      .subscribe(comm => {
+        this.storageService.removeFromLocal('dlgMember');
+        this.storageService.saveInLocal('dlgMember', JSON.stringify(comm));
+      },
+        error => this.errorMessage = <any>error);
+  }
+  
 }

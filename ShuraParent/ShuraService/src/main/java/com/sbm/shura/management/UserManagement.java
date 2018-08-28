@@ -1,8 +1,12 @@
 package com.sbm.shura.management;
 
 
+import java.util.List;
+import java.util.Map;
+
 import com.sbm.shura.commonlib.dtoresponsehandler.ResponseDTO;
 import com.sbm.shura.commonlib.exceptions.types.ControllerException;
+import com.sbm.shura.dto.ExperienceDTO;
 import com.sbm.shura.dto.GroupDTO;
 import com.sbm.shura.dto.MenuDTO;
 import com.sbm.shura.dto.PermissionDTO;
@@ -37,5 +41,7 @@ public interface UserManagement {
 	ResponseDTO assignGroupToUser(String groupName, String email)  throws ControllerException;
 	
 	ResponseDTO findById(long userId)  throws ControllerException;
+	
+	ResponseDTO assignExperiencesToUsers(Map<String, List<ExperienceDTO>> map)  throws ControllerException;
 
 }

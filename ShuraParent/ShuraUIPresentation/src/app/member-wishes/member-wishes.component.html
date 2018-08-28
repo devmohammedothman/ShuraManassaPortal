@@ -29,7 +29,7 @@
                     <mat-form-field appearance="legacy" [ngClass]="'w-50-p mb-24 pr-12'">
                         <mat-select (selectionChange)="onWishOne($event)" placeholder="First wish:" [formControl]="firstWish" [(ngModel)]="wish1" required>
                             <mat-option *ngFor="let wish of wishes" [value]="wish">
-                                {{ wish.nameEn }}
+                                {{ wish.nameAr }}
                             </mat-option>
                         </mat-select>
                         <mat-error *ngIf="firstWish.invalid">Please Choose Wish</mat-error>
@@ -38,7 +38,7 @@
                     <mat-form-field appearance="legacy" [ngClass]="'w-50-p mb-24 pl-12'">
                         <mat-select (selectionChange)="onWishTwo($event)" placeholder="Second wish:" [formControl]="secondWish" [(ngModel)]="wish2" required [disabled]='!firstWish.valid'>
                             <mat-option *ngFor="let wish of wishes2" [value]="wish">
-                                {{ wish.nameEn }}
+                                {{ wish.nameAr }}
                             </mat-option>
                         </mat-select>
                         <mat-error *ngIf="secondWish.invalid">Please Choose Wish</mat-error>
@@ -47,7 +47,7 @@
                     <mat-form-field appearance="legacy" [ngClass]="'w-50-p mb-24 pr-12'">
                         <mat-select (selectionChange)="onWishThree($event)" placeholder="Third wish:" [formControl]="thirdWish" [(ngModel)]="wish3" required [disabled]='!secondWish.valid'>
                             <mat-option *ngFor="let wish of wishes3" [value]="wish">
-                                {{ wish.nameEn }}
+                                {{ wish.nameAr }}
                             </mat-option>
                         </mat-select>
                         <mat-error *ngIf="thirdWish.invalid">Please Choose Wish</mat-error>

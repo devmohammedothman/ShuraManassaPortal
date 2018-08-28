@@ -10,7 +10,9 @@ import com.sbm.shura.commonlib.exceptions.enums.ExceptionEnums.ExceptionEnums;
 import com.sbm.shura.commonlib.exceptions.types.BusinessException;
 import com.sbm.shura.commonlib.exceptions.types.ControllerException;
 import com.sbm.shura.dto.CommitteeDTO;
+import com.sbm.shura.dto.CommitteeMemberDTO;
 import com.sbm.shura.management.CommitteeManager;
+import com.sbm.shura.service.CommitteeMemberService;
 import com.sbm.shura.service.CommitteeService;
 
 @Component
@@ -18,6 +20,8 @@ public class CommitteeManagerImpl implements CommitteeManager {
 	
 	@Autowired
 	private CommitteeService commService; 
+	@Autowired
+	private CommitteeMemberService commMemService; 
 
 	@Override
 	public ResponseDTO addCommittee(CommitteeDTO obj) throws ControllerException  {

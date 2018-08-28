@@ -1,8 +1,10 @@
 package com.sbm.shura.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.sbm.shura.commonlib.exceptions.types.BusinessException;
+import com.sbm.shura.dto.ExperienceDTO;
 import com.sbm.shura.dto.UserDTO;
 
 public interface UserService {
@@ -18,4 +20,6 @@ public interface UserService {
 	UserDTO assignGroupToUser(String groupName, String email)  throws BusinessException;
 	
 	UserDTO findById(long userId) throws BusinessException;
+	
+	List<UserDTO> assignExperiencesToUsers(Map<String, List<ExperienceDTO>> map) throws BusinessException;
 }

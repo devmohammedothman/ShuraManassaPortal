@@ -4,5 +4,7 @@ import { CommitteMembers } from "./committe-members.model";
 export class NominationPollResult {
     committeeMembers: CommitteMembers[];
     processId: number;
+    approved: boolean;
     constructor(){}
+
 }

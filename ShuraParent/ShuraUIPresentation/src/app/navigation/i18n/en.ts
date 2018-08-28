@@ -8,7 +8,7 @@ export const locale = {
             },
             'LOGIN': {
                 'TITLE': 'Login to your account!',
-            },
+        },
             'LOGO': {
                 'TITLE': 'General Secretariat',
                 'SUBTITLE': 'E-Services',
@@ -72,12 +72,12 @@ export const locale = {
                 'TITLE': 'Wishes Assigning',
                 'SUBTITLE-ADMIN': 'Admin view',
                 'SUBTITLE-USER': 'User view',
-                'USERNAME': 'Username',               
+                'USERNAME': 'Username',  
                 'WISH1': 'First Wish',               
                 'WISH2': 'Second Wish',               
                 'WISH3': 'Third Wish',    
                 'WISHORDER': 'Wish Order',               
-                'NOTES': 'Notes',               
+                'NOTES': 'Notes',  
             },
             'GPERM': {
                 'TITLE': 'Group Permissions',
@@ -89,15 +89,16 @@ export const locale = {
                 'WRITE': 'Write'
             },
             'COMMITTE': {
-                'TITLE': 'اللجان',
-                'SUBTITLE': 'إدارة اللجان',
+                'TITLE': 'Committee',
+                'SUBTITLE': 'Committee Management',
             },
             'NOM': {
                 'TITLE': 'Division the wishes of members',
                 'SUBTITLE-ADMIN': 'Nomination members to specialized committees',
                 'SUBTITLE-USER': 'Nomination of members of specialized committees',  
                 'MEMBER-COUNT': 'Member count',  
-                'NEW-DEVESION': 'New deveision',  
+                'NEW-DEVESION': 'New deveision', 
+                'RE-DEVESION': 'Redeveision',  
                 'DEVISION-RESULT': 'Devision result',    
                 'DEVISION-SUBMIT': 'Devision submit',
                 'FIRST-WISH': 'First wish',

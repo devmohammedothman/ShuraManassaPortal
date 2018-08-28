@@ -43,7 +43,7 @@
             <button mat-button><mat-icon class="white-600-fg">star</mat-icon></button>
             <div fxFlex="0 1 auto" fxFill fxLayout="column" fxLayoutAlign="center center" style="line-height: 16px;">
                 <span>{{ 'CONT.WELCOME' | translate}}</span>
-                <span>Mahmoud Hegazy</span>
+                <span *ngIf="user != null">{{user.username}}</span>
             </div>
             <button mat-button (click)="toggle = !toggle" ><mat-icon class="white-600-fg">menu</mat-icon></button>
         </div>

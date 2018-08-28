@@ -7,6 +7,7 @@ export const userNavigation: FuseNavigation[] = [
         translate: 'NAV.HOME',
         type     : 'item',
         icon     : 'home',
+        image    : 'logos/shura.svg',
         url      : '/home',
     }
 

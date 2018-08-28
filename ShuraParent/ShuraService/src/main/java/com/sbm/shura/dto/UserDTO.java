@@ -1,5 +1,6 @@
 package com.sbm.shura.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserDTO extends BaseDTO {
@@ -14,9 +15,13 @@ public class UserDTO extends BaseDTO {
 	private String password;
 	private String username;
 
-//	private List<GroupDTO> groups;
-//	private List<MenuDTO> menus;
-//	private List<PermissionDTO> permissions;
+	private List<GroupDTO> groups;
+	private List<MenuDTO> menus;
+	private List<PermissionDTO> permissions;
+	
+	private List<MemberExperienceDTO> memberExperiences;
+	
+	private List<String> expList;
 
 	public UserDTO() {
 	}
@@ -70,28 +75,48 @@ public class UserDTO extends BaseDTO {
 		this.userId = userId;
 	}
 
-//	public List<GroupDTO> getGroups() {
-//		return groups;
-//	}
-//
-//	public void setGroups(List<GroupDTO> groups) {
-//		this.groups = groups;
-//	}
-//
-//	public List<MenuDTO> getMenus() {
-//		return menus;
-//	}
-//
-//	public void setMenus(List<MenuDTO> menus) {
-//		this.menus = menus;
-//	}
-//
-//	public List<PermissionDTO> getPermissions() {
-//		return permissions;
-//	}
-//
-//	public void setPermissions(List<PermissionDTO> permissions) {
-//		this.permissions = permissions;
-//	}
+	public List<GroupDTO> getGroups() {
+		return groups;
+	}
+
+	public void setGroups(List<GroupDTO> groups) {
+		this.groups = groups;
+	}
+
+	public List<MenuDTO> getMenus() {
+		return menus;
+	}
+
+	public void setMenus(List<MenuDTO> menus) {
+		this.menus = menus;
+	}
+
+	public List<PermissionDTO> getPermissions() {
+		return permissions;
+	}
+
+	public void setPermissions(List<PermissionDTO> permissions) {
+		this.permissions = permissions;
+	}
+	
+	public List<MemberExperienceDTO> getMemberExperiences() {
+		return memberExperiences;
+	}
+
+	public void setMemberExperiences(List<MemberExperienceDTO> memberExperiences) {
+		this.memberExperiences = memberExperiences;
+	}
+	
+	public List<String> getExpList(){
+		expList = new ArrayList<>();
+		if (!memberExperiences.isEmpty()) {
+			for (MemberExperienceDTO item : memberExperiences) {
+				expList.add(item.getExperience().getNameEn());
+			}
+		}else {
+			expList.add("");	
+		}
+		return expList;
+	}
 
 }

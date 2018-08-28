@@ -15,5 +15,5 @@ public interface CommitteeManager {
 	ResponseDTO updateCommittee(CommitteeDTO obj)  throws ControllerException;
 	
 	ResponseDTO deleteCommittee(int id)  throws ControllerException;
-
+	
 }

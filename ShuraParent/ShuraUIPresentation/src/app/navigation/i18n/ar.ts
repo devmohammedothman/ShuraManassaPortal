@@ -8,7 +8,7 @@ export const locale = {
             },
             'LOGIN': {
                 'TITLE': 'سجل الدخول إلى حسابك!',
-            },
+        },
             'LOGO': {
                 'TITLE': 'الأمانة العامة',
                 'SUBTITLE': 'الخدمات الإلكترونية',
@@ -76,8 +76,8 @@ export const locale = {
                 'WISH1': 'الرغبة الأولى',               
                 'WISH2': 'الرغبة الثانية',               
                 'WISH3': 'الرغبة الثالثة',    
-                'WISHORDER': 'ترتيب الرغبة',                          
-                'NOTES': 'ملاحظات',               
+                'WISHORDER': 'ترتيب الرغبة',   
+                'NOTES': 'ملاحظات',  
             },
             'GPERM': {
                 'TITLE': 'صلاحيات المجموعات',
@@ -98,6 +98,7 @@ export const locale = {
                 'SUBTITLE-USER': 'ترشيح الاعضاء للجان المتخصصة',
                 'MEMBER-COUNT': 'عدد الاعضاء',    
                 'NEW-DEVESION': 'فرز جديد',  
+                'RE-DEVESION': 'إعادة فرز', 
                 'DEVISION-RESULT': 'نتائج الفرز',    
                 'DEVISION-SUBMIT': 'اعتماد الفرز',
                 'FIRST-WISH': 'الرغبة الأولى',

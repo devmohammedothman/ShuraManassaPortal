@@ -64,6 +64,7 @@ public class GenericDaoImpl<T> implements GenericDao<T>
 		if(objBean != null)
 			this.entityManager.remove(objBean);
 		}catch(Exception e) {
+			e.printStackTrace();
 			throw new RespositoryException(ExceptionEnums.REPOSITORY_ERROR);
 		}
 
@@ -99,6 +100,7 @@ public class GenericDaoImpl<T> implements GenericDao<T>
 		try {
 		result = this.entityManager.merge(t);
 		}catch(Exception e) {
+			e.printStackTrace();
 			throw new RespositoryException(ExceptionEnums.REPOSITORY_ERROR);
 		}
 		return result;
