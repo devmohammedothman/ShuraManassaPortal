@@ -37,7 +37,7 @@
                     </mat-form-field>
                     <mat-form-field appearance="legacy" [ngClass]="'w-50-p mb-24 pl-12'">
                         <mat-select (selectionChange)="onWishTwo($event)" placeholder="Second wish:" [formControl]="secondWish" [(ngModel)]="wish2" required [disabled]='!firstWish.valid'>
-                            <mat-option *ngFor="let wish of wishes2" [value]="wish">
+                            <mat-option *ngFor="let wish of wishes2Temp" [value]="wish">
                                 {{ wish.nameAr }}
                             </mat-option>
                         </mat-select>
@@ -46,7 +46,7 @@
                     </mat-form-field>
                     <mat-form-field appearance="legacy" [ngClass]="'w-50-p mb-24 pr-12'">
                         <mat-select (selectionChange)="onWishThree($event)" placeholder="Third wish:" [formControl]="thirdWish" [(ngModel)]="wish3" required [disabled]='!secondWish.valid'>
-                            <mat-option *ngFor="let wish of wishes3" [value]="wish">
+                            <mat-option *ngFor="let wish of wishes3Temp" [value]="wish">
                                 {{ wish.nameAr }}
                             </mat-option>
                         </mat-select>

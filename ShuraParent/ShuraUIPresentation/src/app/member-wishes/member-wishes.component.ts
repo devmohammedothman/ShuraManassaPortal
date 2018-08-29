@@ -27,6 +27,8 @@ export class MemberWishesComponent implements OnInit {
   wishes: Committee[] = [];
   wishes2: Committee[] = [];
   wishes3: Committee[] = [];
+  wishes2Temp: Committee[] = [];
+  wishes3Temp: Committee[] = [];
   wish1: Committee;
   wish2: Committee;
   wish3: Committee;
@@ -83,6 +85,18 @@ export class MemberWishesComponent implements OnInit {
     userWishes.push(new UserWish(this.user, this.wish1, 1));
     userWishes.push(new UserWish(this.user, this.wish2, 2));
     userWishes.push(new UserWish(this.user, this.wish3, 3));
+    this.wish1.expList.forEach(exp => {
+      console.log('first exp : '+ exp);
+      this.selectedWishesExp.push(exp);
+    });
+    this.wish2.expList.forEach(exp => {
+      console.log('first exp : '+ exp);
+      this.selectedWishesExp.push(exp);
+    });
+    this.wish3.expList.forEach(exp => {
+      console.log('first exp : '+ exp);
+      this.selectedWishesExp.push(exp);
+    });
     let result: any[] = [];
     if (this.userExpList.length > 0) {
       //console.log('User Exp List : '+JSON.stringify(this.userExpList));
@@ -102,6 +116,7 @@ export class MemberWishesComponent implements OnInit {
       this.openSnackBar('يجب اختيار لجنة واحدة على الاقل متوافقة مع خبراتك', 'Close');
     }
     this.memberWishFormGroup.reset;
+    this.selectedWishesExp = [];
   }
 
   openSnackBar(message: string, action: string): any {
@@ -114,13 +129,8 @@ export class MemberWishesComponent implements OnInit {
 
   onWishOne(changeEvent) {
     if (changeEvent) {
-
-      this.wishes2 = this.wishes2.filter(wish => wish.id !== this.wish1.id);
-      this.wishes3 = this.wishes3.filter(wish => wish.id !== this.wish1.id);
-      this.wish1.expList.forEach(exp => {
-        console.log('first exp : '+ exp);
-        this.selectedWishesExp.push(exp);
-      });
+      this.wishes2Temp = this.wishes2.filter(wish => wish.id !== this.wish1.id);
+      this.wishes3Temp = this.wishes3.filter(wish => wish.id !== this.wish1.id);
       //debugger;
       //  const firstwishSentObj = new Wish();
       // firstwishSentObj.wishedCommitee = this.wish1;
@@ -132,24 +142,16 @@ export class MemberWishesComponent implements OnInit {
 
   onWishTwo(changeEvent) {
     if (changeEvent) {
-      this.wishes3 = this.wishes3.filter(wish => wish.id !== this.wish2.id);
-      this.wish2.expList.forEach(exp => {
-        console.log('second exp : '+ exp);
-        this.selectedWishesExp.push(exp);
-      });
+      this.wishes3Temp = this.wishes3.filter(wish => wish.id !== this.wish1.id && wish.id !== this.wish2.id);
+      //this.wishes3Temp = this.wishes3.filter(wish => wish.id !== this.wish2.id);
       // const secondwishSentObj = new Wish();
       // secondwishSentObj.wishedCommitee = this.wish2;
       // secondwishSentObj.wishOrder = 2;
       // this.userWishesObject.wishesList.push(secondwishSentObj);
-
     }
   }
 
   onWishThree(changeEvent) {
-    this.wish3.expList.forEach(exp => {
-      console.log('Third exp : '+ exp);
-      this.selectedWishesExp.push(exp);
-    });
     // if (changeEvent) {
     //   const thirdwishSentObj = new Wish();
     //   thirdwishSentObj.wishedCommitee = this.wish3;
