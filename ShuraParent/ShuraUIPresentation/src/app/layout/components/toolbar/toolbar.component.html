@@ -48,15 +48,19 @@
             <a [ngClass]="'user-dropdown'" (click)="toggle = !toggle"><mat-icon class="white-600-fg">menu</mat-icon></a>
         </div>
 
-        <div [ngClass]="{'hidden' : !toggle }" fxFlex="1 0 auto" fxFill fxLayout="column" fxLayoutAlign="center center" >
-            <a [ngClass]="'user-Profile'">
-                <mat-icon>account_circle</mat-icon>
-                <span>My Profile</span>
-            </a>
-            <a [ngClass]="'user-Logout'" (click)="logout()">
-                <mat-icon>exit_to_app</mat-icon>
-                <span>Logout</span>
-            </a>
+        <div [ngClass]="{'hidden' : !toggle }">
+            <div class="nav" fxFlex="0 1 100%" fxFill fxLayout="column" fxLayoutAlign="center center">
+                <div class="nav-item">
+                    <a [ngClass]="'user-Profile nav-link mat-ripple'">
+                        <mat-icon>account_circle</mat-icon> <span class="ml-12">My Profile</span>
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a [ngClass]="'user-Logout nav-link mat-ripple'" (click)="logout()">
+                        <mat-icon>exit_to_app</mat-icon> <span class="ml-12">Logout</span>
+                    </a>
+                </div>
+            </div>
         </div>
     </mat-list>
 

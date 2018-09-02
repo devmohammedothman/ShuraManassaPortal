@@ -1,13 +1,20 @@
-// #main {
-//     width: 1170px;
-//     margin-left: auto;
-//     margin-right: auto;
-//     padding-left: 130px;
-//     padding-right: 130px;
-// }
+toolbar.above,
+navbar.top-navbar,
+.narrow {
+    width: 1170px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 130px;
+    padding-right: 130px;
+}
 
-.page-layout {
-    overflow-y: scroll;
+content {
+    min-height: 640px;
+    margin-bottom: 10px;
+}
+
+footer {
+    background-color: #00B159;
 }
 
 .mat-button,
@@ -143,7 +150,7 @@ mat-tab-group {
 }
 
 .component-title {
-    width: 25%;
+    width: 35%;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
