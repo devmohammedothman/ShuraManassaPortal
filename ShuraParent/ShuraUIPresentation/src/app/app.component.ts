@@ -19,18 +19,18 @@ import { StorageService } from './services/storage.service';
 import { CommitteeService } from './services/committee.service';
 
 @Component({
-    selector: 'app',
+    selector   : 'app',
     templateUrl: './app.component.html',
-    styleUrls: ['./app.component.scss']
+    styleUrls  : ['./app.component.scss']
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent implements OnInit, OnDestroy
+{
     navigation: any;
     fuseConfig: any;
     users: User[];
     groups: Group[];
     committes: any;
     errorMessage: string;
-    currentUser: User;
 
     // Private
     private _unsubscribeAll: Subject<any>;
@@ -55,7 +55,8 @@ export class AppComponent implements OnInit, OnDestroy {
         public userService: UserService,
         private committeeService: CommitteeService,
         private storageService: StorageService
-    ) {
+    )
+    {
         // Get default navigation
         this.navigation = navigation;
 
@@ -71,11 +72,11 @@ export class AppComponent implements OnInit, OnDestroy {
         // Set the default language
         this._translateService.setDefaultLang('ar');
         setTimeout(() => {
-            //this._translateService.setDefaultLang('en');
+            this._translateService.setDefaultLang('en');
             this._translateService.setDefaultLang('ar');
         }, 1000);
         document.getElementById('generalHTML').lang = 'ar';
-
+        
 
         // Set the navigation translations
         this._fuseTranslationLoaderService.loadTranslations(navigationEnglish, navigationArabic);
@@ -85,30 +86,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
         // Set the private defaults
         this._unsubscribeAll = new Subject();
-        // add manager menus
-        this.currentUser = JSON.parse(storageService.getFromLocal('user'));
-        if (this.currentUser) {
-            let userGroups = [];
-            this.currentUser.groups.map(item => {
-                return {
-                    group: item.nameEn
-                };
-            }).forEach(item => userGroups.push(item));
-            let groups = userGroups.filter(data => data.group.includes('MANAGER'));
-            if (JSON.stringify(groups) !== '[]') {
-                const newNavItem = {
-                    id: 'NomintaionPoll',
-                    title: 'Nomination Poll',
-                    translate: 'NAV.NOMINATION-POLL',
-                    type: 'item',
-                    icon: 'flag',
-                    url: '/nomination/nomination-poll'
-                };
-                // Add the new nav item at the beginning of the navigation
-                this._fuseNavigationService.addNavigationItem(newNavItem, 'nominationProgram');
-            }
-        }
-
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -118,22 +95,24 @@ export class AppComponent implements OnInit, OnDestroy {
     /**
      * On init
      */
-    ngOnInit(): void {
+    ngOnInit(): void
+    {
         // Subscribe to config changes
         this._fuseConfigService.config
             .pipe(takeUntil(this._unsubscribeAll))
             .subscribe((config) => {
                 this.fuseConfig = config;
             });
-        this.getGroups();
-        this.getUsers();
-        this.getCommittes();
+            this.getGroups();
+            this.getUsers();
+            this.getCommittes();
     }
 
     /**
      * On destroy
      */
-    ngOnDestroy(): void {
+    ngOnDestroy(): void
+    {
         // Unsubscribe from all subscriptions
         this._unsubscribeAll.next();
         this._unsubscribeAll.complete();
@@ -148,7 +127,8 @@ export class AppComponent implements OnInit, OnDestroy {
      *
      * @param key
      */
-    toggleSidebarOpen(key): void {
+    toggleSidebarOpen(key): void
+    {
         this._fuseSidebarService.getSidebar(key).toggleOpen();
     }
 
@@ -160,7 +140,7 @@ export class AppComponent implements OnInit, OnDestroy {
                 console.log(JSON.stringify(this.groups));
                 this.storageService.saveInLocal('groupsList', JSON.stringify(this.groups));
             },
-                error => this.errorMessage = <any>error);
+            error => this.errorMessage = <any>error);
     }
 
     getUsers(): void {
@@ -170,7 +150,7 @@ export class AppComponent implements OnInit, OnDestroy {
                 console.log(JSON.stringify(this.users));
                 this.storageService.saveInLocal('usersList', JSON.stringify(this.users));
             },
-                error => this.errorMessage = <any>error);
+            error => this.errorMessage = <any>error);
     }
 
     getCommittes(): void {
@@ -179,6 +159,6 @@ export class AppComponent implements OnInit, OnDestroy {
                 this.committes = comm;
                 this.storageService.saveInLocal('committesList', JSON.stringify(this.committes));
             },
-                error => this.errorMessage = <any>error);
+            error => this.errorMessage = <any>error);
     }
 }

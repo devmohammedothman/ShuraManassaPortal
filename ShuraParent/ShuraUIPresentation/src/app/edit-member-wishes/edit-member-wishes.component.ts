@@ -12,31 +12,33 @@ import { NominationService } from 'app/services/nomination.service';
 })
 export class EditMemberWishesComponent implements OnInit {
 
-  @Input() committeeList: Committee[] = [];
+  @Input()  committeeList : Committee [] = [];
   @Output() committeeListChange = new EventEmitter<Committee[]>();
 
-
-  currentCommitteeMemberList: CommitteMember[] = [];
-  committeeMemberTableCoulmns = ['id', 'memberName', 'currentCommittee', 'wishedCommittee', 'edit'];
+ 
+  currentCommitteeMemberList : CommitteMember[];
+  committeeMemberTableCoulmns = ['id', 'memberName','currentCommittee','wishedCommittee','edit'];
   dataSource: MatTableDataSource<CommitteMember>;
-  isEditable: boolean = false;
+  isEditable:boolean = false;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
 
-
-  constructor(private nominationService: NominationService, private storageService: StorageService,
-    public snackBar: MatSnackBar) {
-    this.dataSource = new MatTableDataSource(this.currentCommitteeMemberList);
-    this.populateCommitteeList();
-    this.populateCommitteeMemberList();
+  
+  constructor( private nominationService:NominationService, private storageService: StorageService,
+    public snackBar: MatSnackBar) { 
+   
+   this.populateCommitteeList();
+   this.populateCommitteeMemberList();
+   
   }
 
   ngOnInit() {
+
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-
+    
   }
 
   applyFilter(filterValue: string) {
@@ -45,39 +47,42 @@ export class EditMemberWishesComponent implements OnInit {
     this.dataSource.filter = filterValue;
   }
 
-  populateCommitteeList() {
+  populateCommitteeList() 
+  {
     //get List of Committee from storage service
     for (let results of JSON.parse(this.storageService.getFromLocal('committesList'))) {
       this.committeeList.push(results);
     }
   }
 
-  populateCommitteeMemberList() {
+  populateCommitteeMemberList()
+  {
     //call service of get current Committee Member List
     this.nominationService.getCurrentCommitteeMembers().subscribe(
       comMemberItem => {
-        console.log('List : '+JSON.stringify(comMemberItem));
-        this.dataSource.data = comMemberItem;
+        this.currentCommitteeMemberList = comMemberItem;
+        this.dataSource.data = this.currentCommitteeMemberList;
       }
     );
+    this.dataSource = new MatTableDataSource(this.currentCommitteeMemberList);
   }
 
-  updateRow(row) {
-    let updatedValue: CommitteMember;
-    updatedValue = row;
-    console.log('Row clicked: ', updatedValue);
-    this.nominationService.updateMemberAssignedCommittee(updatedValue).subscribe((data: any) => {
-      this.openSnackBar('Added Successfully', 'Close');
+    updateRow(row) {
+      let updatedValue:CommitteMember ;
+      updatedValue = row;
+      console.log('Row clicked: ', updatedValue);
+      this.nominationService.updateMemberAssignedCommittee(updatedValue).subscribe((data:any) => { 
+        this.openSnackBar('Added Successfully','Close');
+      },
+      error => this.openSnackBar('Error Happened while Adding','Close')
+       );
+      this.isEditable = false;
       this.populateCommitteeMemberList();
-    },
-      error => this.openSnackBar('Error Happened while Adding', 'Close')
-    );
-    this.isEditable = false;
-    
-
+      
   }
 
-  enableEditMode() {
+  enableEditMode()
+  {
     this.isEditable = true;
   }
 

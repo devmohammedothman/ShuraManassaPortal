@@ -38,6 +38,7 @@ import { NominationService } from 'app/services/nomination.service';
 import { ManagerAssidnedWishesModule } from './manager-assidned-wishes/manager-assidned-wishes.module';
 import { NominationPollModule } from './nomination-poll/nomination-poll.module';
 import { EditMemberWishesModule } from './edit-member-wishes/edit-member-wishes.module';
+import { MemberNominationsModule } from './member-nominations/member-nominations.module';
 
 
 const appRoutes: Routes = [
@@ -111,6 +112,7 @@ const appRoutes: Routes = [
         LoginModule,
         ManageUsersModule,
         ManageCommitteeModule,
+        MemberNominationsModule,
 
         StorageServiceModule,
 

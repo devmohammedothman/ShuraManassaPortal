@@ -1,108 +1,72 @@
-<div class="page-layout carded fullwidth">
+<form [formGroup]="nominationPollForm">
+    <div class="mat-tab-body-inner" fxFlex fxFill fxLayout="row" fxLayoutAlign="start">
 
-  <!-- TOP BACKGROUND -->
-  <div class="top-bg mat-accent-bg"></div>
-  <!-- / TOP BACKGROUND -->
+        <div fxFlex="0 1 25%" fxFill fxLayout="column" fxLayoutAlign="start" [ngClass]="'py-32'">
+            <mat-form-field appearance="legacy" [ngClass]="'w-100-p mb-24'">
+                <mat-select (selectionChange)="onMemberCountEve($event)" placeholder="{{'CONT.NOM.MEMBER-COUNT' | translate }}" [formControl]="memberCountSelect"
+                    [(ngModel)]="memberCount" required>
+                    <mat-option value="10">10</mat-option>
+                    <mat-option value="11">11</mat-option>
+                    <mat-option value="12">12</mat-option>
+                </mat-select>
+                <mat-error *ngIf="memberCountSelect.invalid">Please Choose Wish</mat-error>
+                <mat-hint>{{'CONT.NOM.SUBTITLE-ADMIN' | translate }}</mat-hint>
+            </mat-form-field>
 
-  <!-- CENTER -->
-  <div class="center">
+            <div fxFlex="1 0 auto" fxLayout="row wrap" fxLayoutAlign="center end">
+                <button mat-button [ngClass]="'mb-12 mx-12'" (click)="runPollProcess()">{{'CONT.NOM.NEW-DEVESION' | translate }}</button>
+                <button mat-button [ngClass]="'mb-12 mx-12'" (click)="getDevisionResult()">{{'CONT.NOM.DEVISION-RESULT' | translate }}</button>
+            </div>
+        </div>
 
-    <!-- CONTENT HEADER -->
-    <div class="header mat-accent-bg p-24" fxLayout="row" fxLayoutAlign="start center">
-      <h2 class="m-0">{{'CONT.NOM.TITLE' | translate }}</h2>
+        <div fxFlex="1 1 100%" fxLayout="column" fxLayoutAlign="start" [ngClass]="'py-32 ml-24 pl-24'" style="border-right: 4px solid #00B159; border-radius: 7px;">
+            <table mat-table [dataSource]="dataSource" width="100%" matSort> <!-- [hidden]="hideTable" -->
+                <!-- ID Column -->
+                <ng-container matColumnDef="Committe name">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'CONT.NOM.COMMITTE-NAME' | translate }} </th>
+                    <td mat-cell *matCellDef="let row"> {{row.committeNameEn}} </td>
+                </ng-container>
+
+                <!-- Progress Column -->
+                <ng-container matColumnDef="First Wish">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'CONT.NOM.FIRST-WISH' | translate }} </th>
+                    <td mat-cell *matCellDef="let row"> {{row.wish1Count}} </td>
+                </ng-container>
+                <!-- ID Column -->
+                <ng-container matColumnDef="Second wish">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'CONT.NOM.SECOND-WISH' | translate }} </th>
+                    <td mat-cell *matCellDef="let row"> {{row.wish2Count}} </td>
+                </ng-container>
+
+                <!-- Progress Column -->
+                <ng-container matColumnDef="Third wish">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'CONT.NOM.THIRD-WISH' | translate }} </th>
+                    <td mat-cell *matCellDef="let row"> {{row.wish3Count}} </td>
+                </ng-container>
+                <!-- ID Column -->
+                <ng-container matColumnDef="sum">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'CONT.NOM.SUM' | translate }} </th>
+                    <td mat-cell *matCellDef="let row"> {{row.sum}} </td>
+                </ng-container>
+                <!-- Color Column -->
+                <ng-container matColumnDef="Nomination result">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'CONT.NOM.VIEW' | translate }} </th>
+                    <td mat-cell *matCellDef="let row">
+                        <button mat-icon-button color="accent" (click)="dialog.openDialog(row.committeId)">
+                            <mat-icon aria-label="search">search</mat-icon>
+                        </button>
+                        <!-- (click)="openDialog()" -->
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+                </tr>
+            </table>			
+			<div fxFlex="1 0 auto" fxLayout="row wrap" fxLayoutAlign="space-between end">
+				<button mat-button [ngClass]="'mb-12'" (click)="confirmPollProcess()">{{'CONT.NOM.DEVISION-SUBMIT' | translate }}</button>
+				<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+			</div>
+        </div>
     </div>
-    <!-- / CONTENT HEADER -->
-
-    <!-- CONTENT CARD -->
-    <div class="content-card mat-white-bg">
-
-      <!-- CONTENT TOOLBAR -->
-      <div class="toolbar px-24 py-8">
-        <span>{{'CONT.NOM.SUBTITLE-ADMIN' | translate }}</span>
-      </div>
-      <!-- / CONTENT TOOLBAR -->
-
-      <!-- CONTENT -->
-      <div class="content p-24">
-        <form [formGroup]="nominationPollForm">
-
-          <mat-form-field appearance="legacy" [ngClass]="'w-50-p mb-24 pr-12'">
-            <mat-select (selectionChange)="onMemberCountEve($event)" placeholder="{{'CONT.NOM.MEMBER-COUNT' | translate }}" [formControl]="memberCountSelect"
-              [(ngModel)]="memberCount" required>
-              <mat-option value="10">10</mat-option>
-              <mat-option value="11">11</mat-option>
-              <mat-option value="12">12</mat-option>
-            </mat-select>
-            <mat-error *ngIf="memberCountSelect.invalid">Please Choose Wish</mat-error>
-            <mat-hint>{{'CONT.NOM.SUBTITLE-ADMIN' | translate }}</mat-hint>
-          </mat-form-field>
-          <button mat-button [ngClass]="'my-24'" (click)="runPollProcess()">
-              <ng-template [ngIf]="hideTable">
-                {{'CONT.NOM.NEW-DEVESION' | translate}}
-              </ng-template>
-              <ng-template [ngIf]="!hideTable">
-                {{'CONT.NOM.RE-DEVESION' | translate}}
-              </ng-template>
-          </button>
-          <button mat-button [ngClass]="'my-24'" (click)="getDevisionResult()">{{'CONT.NOM.DEVISION-RESULT' | translate }}</button>
-          <button mat-button [ngClass]="'my-24'" (click)="confirmPollProcess()">{{'CONT.NOM.DEVISION-SUBMIT' | translate }}</button>
-
-          <div class="example-container mat-elevation-z8" [hidden]="hideTable">
-
-            <table mat-table [dataSource]="dataSource" width="100%" matSort>
-              <!-- ID Column -->
-              <ng-container matColumnDef="Committe name">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'CONT.NOM.COMMITTE-NAME' | translate }} </th>
-                <td mat-cell *matCellDef="let row"> {{row.committeNameEn}} </td>
-              </ng-container>
-
-              <!-- Progress Column -->
-              <ng-container matColumnDef="First Wish">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'CONT.NOM.FIRST-WISH' | translate }} </th>
-                <td mat-cell *matCellDef="let row"> {{row.wish1Count}} </td>
-              </ng-container>
-              <!-- ID Column -->
-              <ng-container matColumnDef="Second wish">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'CONT.NOM.SECOND-WISH' | translate }} </th>
-                <td mat-cell *matCellDef="let row"> {{row.wish2Count}} </td>
-              </ng-container>
-
-              <!-- Progress Column -->
-              <ng-container matColumnDef="Third wish">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'CONT.NOM.THIRD-WISH' | translate }} </th>
-                <td mat-cell *matCellDef="let row"> {{row.wish3Count}} </td>
-              </ng-container>
-              <!-- ID Column -->
-              <ng-container matColumnDef="sum">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'CONT.NOM.SUM' | translate }} </th>
-                <td mat-cell *matCellDef="let row"> {{row.sum}} </td>
-              </ng-container>
-              <!-- Color Column -->
-              <ng-container matColumnDef="Nomination result">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'CONT.NOM.VIEW' | translate }} </th>
-                <td mat-cell *matCellDef="let row">
-                  <button mat-icon-button color="accent" (click)="openDialog(row.committeId)">
-                    <mat-icon aria-label="search">search</mat-icon>
-                  </button>
-                  <!-- (click)="openDialog()" -->
-                </td>
-              </ng-container>
-
-              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-              <tr mat-row *matRowDef="let row; columns: displayedColumns;">
-              </tr>
-            </table>
-
-            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
-          </div>
-        </form>
-      </div>
-      <!-- / CONTENT -->
-
-    </div>
-    <!-- / CONTENT CARD -->
-
-  </div>
-  <!-- / CENTER -->
-
-</div>
+</form>

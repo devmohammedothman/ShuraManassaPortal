@@ -23,8 +23,6 @@ export class ManagerAssidnedWishesComponent implements OnInit {
   thirdWish: FormControl;
 
   filteredUsers: Observable<string[]>;
-  selectedWishesExp: string[] = [];
-  userExpList: string[] = [];
 
   //  users = [
   //   'Abdullah Abolwafa',
@@ -47,8 +45,6 @@ export class ManagerAssidnedWishesComponent implements OnInit {
   wishes: Committee[] = [];
   wishes2: Committee[] = [];
   wishes3: Committee[] = [];
-  wishes2Temp: Committee[] = [];
-  wishes3Temp: Committee[] = [];
   wish1: Committee;
   wish2: Committee;
   wish3: Committee;
@@ -133,19 +129,20 @@ export class ManagerAssidnedWishesComponent implements OnInit {
       horizontalPosition: 'center',
       verticalPosition: 'top'
     });
+    this.assignWishes();
   }
 
   onWishOne(changeEvent) {
     if (changeEvent) {
-      this.wishes2Temp = this.wishes2.filter(wish => wish.id !== this.wish1.id);
-      this.wishes3Temp = this.wishes3.filter(wish => wish.id !== this.wish1.id);
+      this.wishes2 = this.wishes2.filter(wish => wish.id !== this.wish1.id);
+      this.wishes3 = this.wishes3.filter(wish => wish.id !== this.wish1.id);
       console.log('Group Selected is: ' + this.wish1.nameEn);
     }
   }
 
   onWishTwo(changeEvent) {
     if (changeEvent) {
-      this.wishes3Temp = this.wishes3.filter(wish => wish.id !== this.wish1.id && wish.id !== this.wish2.id);
+      this.wishes3 = this.wishes3.filter(wish => wish.id !== this.wish2.id);
       console.log('Group Selected is: ' + this.wish2.nameEn);
     }
   }
@@ -159,52 +156,18 @@ export class ManagerAssidnedWishesComponent implements OnInit {
   assignWishes(): void {
     let userWishes: UserWish[] = [];
     let itemIndex = this.userList.findIndex(item => item.username == this.selectedUsername);
-    //debugger;
+    debugger;
     this.user = this.userList[itemIndex];
-    console.log('fetchedUser : ' + this.user.username)
-    this.user.memberExperiences.forEach(exp => {
-      console.log('User Exp : ' + exp.experience.nameEn);
-      this.userExpList.push(exp.experience.nameEn);
-    });
+    console.log('fetchedUser : '+ this.user.username)
     userWishes.push(new UserWish(this.user, this.wish1, 1));
     userWishes.push(new UserWish(this.user, this.wish2, 2));
     userWishes.push(new UserWish(this.user, this.wish3, 3));
-
-    this.wish1.expList.forEach(exp => {
-      console.log('first exp : ' + exp);
-      this.selectedWishesExp.push(exp);
-    });
-
-    this.wish2.expList.forEach(exp => {
-      console.log('first exp : ' + exp);
-      this.selectedWishesExp.push(exp);
-    });
-
-    this.wish3.expList.forEach(exp => {
-      console.log('first exp : ' + exp);
-      this.selectedWishesExp.push(exp);
-    });
-
-    let result: any[] = [];
-    if (this.userExpList.length > 0) {
-      //console.log('User Exp List : '+JSON.stringify(this.userExpList));
-      this.userExpList.forEach(uExp => {
-        console.log('User Exp List : ' + uExp);
-        result = this.selectedWishesExp.filter(e => e === uExp);
-      });
-    }
-    if (result.length > 0) {
-      console.log('result List : ' + JSON.stringify(this.userExpList));
-      this.nominationService.managerAssignWish(userWishes)
-        .subscribe(result => {
-          this.openSnackBar('Added Successfully', 'Close');
-        },
-          // error => this.errorMessage = <any>error);
-          error => alert("There is an error "));
-    } else {
-      this.openSnackBar('يجب اختيار لجنة واحدة على الاقل متوافقة مع خبرات العضو', 'Close');
-    }
-    this.selectedWishesExp = [];
+    this.nominationService.managerAssignWish(userWishes)
+      .subscribe(result => {
+        alert(result);
+      },
+        // error => this.errorMessage = <any>error);
+        error => alert("There is an error "));
   }
 
 }

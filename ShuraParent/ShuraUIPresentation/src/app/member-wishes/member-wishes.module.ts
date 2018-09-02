@@ -40,6 +40,7 @@ const routes: Routes = [
 
       ReactiveFormsModule 
   ],
+  exports: [MemberWishesComponent],
   declarations: [MemberWishesComponent]
 })
 export class MemberWishesModule { }

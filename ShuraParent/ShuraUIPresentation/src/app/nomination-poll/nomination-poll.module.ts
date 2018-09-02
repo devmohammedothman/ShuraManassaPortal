@@ -41,6 +41,7 @@ const routes: Routes = [
       ReactiveFormsModule,
       MatDialogModule
   ],
+  exports: [NominationPollComponent],
   declarations: [NominationPollComponent, DialogComponent],
   providers: [DialogComponent],
   entryComponents: [DialogComponent]

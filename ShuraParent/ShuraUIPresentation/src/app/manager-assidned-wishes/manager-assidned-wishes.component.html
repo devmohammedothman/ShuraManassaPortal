@@ -37,37 +37,34 @@
                     </mat-form-field>
 
                     <mat-form-field appearance="legacy" [ngClass]="'w-50-p mb-24 pr-12'">
-                        <mat-select (selectionChange)="onWishOne($event)" placeholder="First wish:" [formControl]="firstWish" [(ngModel)]="wish1"
+                        <mat-select (selectionChange)="onWishOne($event)" placeholder="{{ 'CONT.WISHES.WISH1' | translate }}" [formControl]="firstWish" [(ngModel)]="wish1"
                             required>
                             <mat-option *ngFor="let wish of wishes" [value]="wish">
-                                {{ wish.nameAr }}
+                                {{ wish.nameEn }}
                             </mat-option>
                         </mat-select>
                         <mat-error *ngIf="firstWish.invalid">{{getErrorMessage()}}</mat-error>
-                        <mat-hint>Do this and don't do that</mat-hint>
                     </mat-form-field>
                     <mat-form-field appearance="legacy" [ngClass]="'w-50-p mb-24 pl-12'">
-                        <mat-select (selectionChange)="onWishTwo($event)" placeholder="Second wish:" [formControl]="secondWish" [(ngModel)]="wish2"
+                        <mat-select (selectionChange)="onWishTwo($event)" placeholder="{{ 'CONT.WISHES.WISH2' | translate }}" [formControl]="secondWish" [(ngModel)]="wish2"
                             required [disabled]='!firstWish.valid'>
-                            <mat-option *ngFor="let wish of wishes2Temp" [value]="wish">
-                                {{ wish.nameAr }}
+                            <mat-option *ngFor="let wish of wishes2" [value]="wish">
+                                {{ wish.nameEn }}
                             </mat-option>
                         </mat-select>
                         <mat-error *ngIf="secondWish.invalid">{{getErrorMessage()}}</mat-error>
-                        <mat-hint>Do this and don't do that</mat-hint>
                     </mat-form-field>
                     <mat-form-field appearance="legacy" [ngClass]="'w-50-p mb-24 pr-12'">
-                        <mat-select (selectionChange)="onWishThree($event)" placeholder="Third wish:" [formControl]="thirdWish" [(ngModel)]="wish3"
+                        <mat-select (selectionChange)="onWishThree($event)" placeholder="{{ 'CONT.WISHES.WISH3' | translate }}" [formControl]="thirdWish" [(ngModel)]="wish3"
                             required [disabled]='!secondWish.valid'>
-                            <mat-option *ngFor="let wish of wishes3Temp" [value]="wish">
-                                {{ wish.nameAr }}
+                            <mat-option *ngFor="let wish of wishes3" [value]="wish">
+                                {{ wish.nameEn }}
                             </mat-option>
                         </mat-select>
                         <mat-error *ngIf="thirdWish.invalid">Please Choose Wish</mat-error>
-                        <mat-hint>Do this and don't do that</mat-hint>
                     </mat-form-field>
                     <mat-divider></mat-divider>
-                    <button mat-button type="submit" [ngClass]="'my-24'" [disabled]='!adminAssignWishesForm.valid' (click)="assignWishes()">{{'CONT.FORMS.SUBMIT' | translate }}</button>
+                    <button mat-button type="submit" [ngClass]="'my-24'" [disabled]='!adminAssignWishesForm.valid' (click)="openSnackBar('Submitted succefully!', 'Close')">{{'CONT.FORMS.SUBMIT' | translate }}</button>
                     <button (click)="populateCommittes()" mat-button type="reset" [ngClass]="'my-24'">{{'CONT.FORMS.RESET' | translate }}</button>
                 </form>
             </div>

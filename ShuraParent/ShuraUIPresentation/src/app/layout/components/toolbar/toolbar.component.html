@@ -39,24 +39,24 @@
     </div>
 
     <mat-list class="user-menu">
-        <div fxFlex="0 1 auto" fxFill fxLayout="row" fxLayoutAlign="space-between center">
-            <button mat-button><mat-icon class="white-600-fg">star</mat-icon></button>
-            <div fxFlex="0 1 auto" fxFill fxLayout="column" fxLayoutAlign="center center" style="line-height: 16px;">
+        <div fxFlex="1 0 auto" fxFill fxLayout="row" fxLayoutAlign="space-between center">
+            <a [ngClass]="'favourite'"><mat-icon class="white-600-fg">star</mat-icon></a>
+            <div fxFlex fxLayout="column" fxLayoutAlign="center center" style="line-height: 16px;">
                 <span>{{ 'CONT.WELCOME' | translate}}</span>
-                <span *ngIf="user != null">{{user.username}}</span>
+                <span>Mahmoud Hegazy</span>
             </div>
-            <button mat-button (click)="toggle = !toggle" ><mat-icon class="white-600-fg">menu</mat-icon></button>
+            <a [ngClass]="'user-dropdown'" (click)="toggle = !toggle"><mat-icon class="white-600-fg">menu</mat-icon></a>
         </div>
 
-        <div [ngClass]="{'hidden' : !toggle }" fxFlex="0 1 auto" fxFill fxLayout="column" fxLayoutAlign="center center" >
-            <button mat-button>
+        <div [ngClass]="{'hidden' : !toggle }" fxFlex="1 0 auto" fxFill fxLayout="column" fxLayoutAlign="center center" >
+            <a [ngClass]="'user-Profile'">
                 <mat-icon>account_circle</mat-icon>
                 <span>My Profile</span>
-            </button>
-            <button mat-button (click)="logout()">
+            </a>
+            <a [ngClass]="'user-Logout'" (click)="logout()">
                 <mat-icon>exit_to_app</mat-icon>
                 <span>Logout</span>
-            </button>
+            </a>
         </div>
     </mat-list>
 
