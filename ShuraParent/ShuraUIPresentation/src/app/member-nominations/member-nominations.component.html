@@ -1,0 +1,20 @@
+<div class="page-layout simple fullwidth">
+    <!-- CONTENT -->
+    <div class="content nomination-display" fxFlex fxFill fxLayout="column" fxLayoutAlign="center">
+        <h3 class="component-title">{{'CONT.USERNOM.TITLE' | translate}}</h3>
+        <div fxFlex fxFill fxLayout="row wrap" fxLayoutAlign="center start">
+            <mat-tab-group>
+                <mat-tab label="{{'CONT.USERNOM.TAB1' | translate}}">
+                    <app-member-wishes></app-member-wishes>
+                </mat-tab>
+                <mat-tab label="{{'CONT.USERNOM.TAB2' | translate}}">
+                    <app-nomination-poll></app-nomination-poll>
+                </mat-tab>
+                <mat-tab label="{{'CONT.USERNOM.TAB3' | translate}}">
+                    <app-edit-member-wishes></app-edit-member-wishes>
+                </mat-tab>
+            </mat-tab-group>
+        </div>
+    </div>
+    <!-- / CONTENT -->
+</div>
