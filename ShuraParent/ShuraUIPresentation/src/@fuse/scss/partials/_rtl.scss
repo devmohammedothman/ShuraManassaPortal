@@ -137,10 +137,14 @@ html:lang(ar) {
             text-align: right;
         }
         mat-paginator {
-            direction: ltr; // .mat-paginator-range-actions,
+            direction: ltr;
+            // .mat-paginator-range-actions,
             // .mat-paginator-container {
             //     flex-direction: row-reverse;
             // }
+            .mat-paginator-icon {
+                transform: rotate(0deg) !important;
+            }
         }
         // ######################
         

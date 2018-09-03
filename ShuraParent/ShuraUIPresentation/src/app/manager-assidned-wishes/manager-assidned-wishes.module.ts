@@ -40,6 +40,7 @@ const routes: Routes = [
 
       ReactiveFormsModule 
   ],
+  exports: [ManagerAssidnedWishesComponent],
   declarations: [ManagerAssidnedWishesComponent]
 })
 export class ManagerAssidnedWishesModule { }

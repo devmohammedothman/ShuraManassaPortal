@@ -9,6 +9,7 @@ import { MatTabsModule } from '@angular/material';
 import { MemberWishesModule } from '../member-wishes/member-wishes.module';
 import { NominationPollModule } from '../nomination-poll/nomination-poll.module';
 import { EditMemberWishesModule } from '../edit-member-wishes/edit-member-wishes.module';
+import { ManagerAssidnedWishesModule } from '../manager-assidned-wishes/manager-assidned-wishes.module';
 
 const routes = [
   {
@@ -34,7 +35,8 @@ const routes = [
     // Included Modules
     MemberWishesModule,
     NominationPollModule,
-    EditMemberWishesModule
+    EditMemberWishesModule,
+    ManagerAssidnedWishesModule
 
   ],
   declarations: [MemberNominationsComponent]

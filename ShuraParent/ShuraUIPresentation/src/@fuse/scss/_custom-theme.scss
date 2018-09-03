@@ -1,3 +1,23 @@
+html {
+    &.cdk-global-scrollblock {
+        left: 0 !important;
+        right: 0 !important;
+        overflow-y: auto !important;
+    }
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-image: url('./assets/images/backgrounds/patterm.png');
+    background-color: #033C4A;
+    background-size: cover;
+}
+
 toolbar.above,
 navbar.top-navbar,
 .content,
@@ -114,7 +134,7 @@ mat-tab-group {
         }
     }
     mat-tab-body {
-        padding: 0 45px;
+        padding: 0 24px;
         border: 4px #00B159 solid;
         border-radius: 7px 0 7px 7px;
         background: rgba(0, 0, 0, 0.19);
@@ -153,6 +173,11 @@ mat-tab-group {
 }
 .mat-paginator, .mat-paginator-page-size .mat-select-trigger {
     color: #fff;
+}
+
+.mat-dialog-container {
+    background-color: #028041;
+    color: rgba(255, 255, 255, 0.87);
 }
 
 .component-title {

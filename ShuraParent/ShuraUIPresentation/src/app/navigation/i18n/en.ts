@@ -95,8 +95,9 @@ export const locale = {
             'USERNOM': {
                 'TITLE': 'Committe User Nomination Application',
                 'TAB1': 'Inserting Committee Wishes',
-                'TAB2': 'Sorting Member Wishes',
-                'TAB3': 'Editing Member Wishes',
+                'TAB2': 'Asigning Wishes',
+                'TAB3': 'Sorting Member Wishes',
+                'TAB4': 'Editing Member Wishes',
             },
             'NOM': {
                 'TITLE': 'Division the wishes of members',
