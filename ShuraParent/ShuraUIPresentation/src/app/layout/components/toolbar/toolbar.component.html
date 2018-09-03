@@ -43,7 +43,7 @@
             <a [ngClass]="'favourite'"><mat-icon class="white-600-fg">star</mat-icon></a>
             <div fxFlex fxLayout="column" fxLayoutAlign="center center" style="line-height: 16px;">
                 <span>{{ 'CONT.WELCOME' | translate}}</span>
-                <span>Mahmoud Hegazy</span>
+                <span *ngIf="user != null">{{user.username}}</span>
             </div>
             <a [ngClass]="'user-dropdown'" (click)="toggle = !toggle"><mat-icon class="white-600-fg">menu</mat-icon></a>
         </div>

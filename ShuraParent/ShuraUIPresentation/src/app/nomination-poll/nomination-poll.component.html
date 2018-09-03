@@ -1,7 +1,7 @@
 <form [formGroup]="nominationPollForm">
     <div class="mat-tab-body-inner" fxFlex fxFill fxLayout="row" fxLayoutAlign="start">
 
-        <div fxFlex="0 1 25%" fxFill fxLayout="column" fxLayoutAlign="start" [ngClass]="'py-32'">
+        <div fxFlex="0 1 30%" fxFill fxLayout="column" fxLayoutAlign="start" [ngClass]="'py-32'">
             <mat-form-field appearance="legacy" [ngClass]="'w-100-p mb-24'">
                 <mat-select (selectionChange)="onMemberCountEve($event)" placeholder="{{'CONT.NOM.MEMBER-COUNT' | translate }}" [formControl]="memberCountSelect"
                     [(ngModel)]="memberCount" required>

@@ -29,12 +29,10 @@
         <div id="container-2" class="container">
 
             <div id="container-3" class="container" fusePerfectScrollbar
-                 [fusePerfectScrollbarOptions]="{suppressScrollX: true, updateOnRouteChange : true}">
-                 <div class="narrow">
-                    <!-- CONTENT -->
-                    <content></content>
-                    <!-- / CONTENT -->
-                </div>
+                [fusePerfectScrollbarOptions]="{suppressScrollX: true, updateOnRouteChange : true}">
+                <!-- CONTENT -->
+                <content></content>
+                <!-- / CONTENT -->
                 <!-- FOOTER: Below -->
                 <ng-container *ngIf="fuseConfig.layout.footer.position === 'above-static'">
                     <ng-container *ngTemplateOutlet="footer"></ng-container>
