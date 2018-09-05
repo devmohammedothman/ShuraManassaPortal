@@ -144,4 +144,10 @@ public class ReportsManagerImpl implements ReportsManager{
 		
 	}
 
+	@Override
+	public void exportReportUsersAddedNote() throws ControllerException {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
