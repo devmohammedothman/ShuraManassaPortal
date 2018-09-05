@@ -25,6 +25,7 @@ import com.sbm.shura.commonlib.exceptions.enums.ExceptionEnums.ExceptionEnums;
 import com.sbm.shura.commonlib.exceptions.types.ControllerException;
 import com.sbm.shura.dto.CommitteeDTO;
 import com.sbm.shura.dto.ReportCommitteeWishesCountPercDTO;
+import com.sbm.shura.dto.ReportUsersAddedNoteDTO;
 import com.sbm.shura.dto.ReportUsersNotSubmitWishesDTO;
 import com.sbm.shura.dto.ReportUsersWishesDTO;
 import com.sbm.shura.management.ReportsManager;
@@ -240,7 +241,7 @@ public class ReportsController {
 	public ResponseDTO usersWishesNotTrueReport(HttpServletResponse response) throws ControllerException {
 		ResponseDTO result = null;
 		try {
-			List<ReportUsersWishesDTO> searchList = reportsService.getReportUsersWishesNotTrueReport();
+			List<ReportUsersWishesDTO> searchList = reportsService.getReportUsersWishesNotTrue();
 			Map<String, Object> parameterMap = new HashMap<>();
 			
 			InputStream reportStream
@@ -250,6 +251,27 @@ public class ReportsController {
 			
 			JasperPrint jasperPrint= JasperFillManager.fillReport(jasperReport, parameterMap, new JRBeanCollectionDataSource(searchList));
 			result = exportPdfAndDownload(jasperPrint, "usersWishesNotTrue.pdf", response);
+			}catch(Exception e) {
+				throw new ControllerException(ExceptionEnums.INVALID_OPERATION,e);
+			}
+			return result;
+	}
+	
+	@RequestMapping(value = "/usersAddedNoteReport", method = RequestMethod.POST, produces = "application/pdf")
+	@ResponseBody
+	public ResponseDTO usersAddedNoteReport(HttpServletResponse response) throws ControllerException {
+		ResponseDTO result = null;
+		try {
+			List<ReportUsersAddedNoteDTO> searchList = reportsService.getReportUsersAddedNote();
+			Map<String, Object> parameterMap = new HashMap<>();
+			
+			InputStream reportStream
+			  = getClass().getResourceAsStream("/jasperreports/usersAddedNote.jrxml");
+			JasperReport jasperReport
+			  = JasperCompileManager.compileReport(reportStream);
+			
+			JasperPrint jasperPrint= JasperFillManager.fillReport(jasperReport, parameterMap, new JRBeanCollectionDataSource(searchList));
+			result = exportPdfAndDownload(jasperPrint, "usersAddedNote.pdf", response);
 			}catch(Exception e) {
 				throw new ControllerException(ExceptionEnums.INVALID_OPERATION,e);
 			}
