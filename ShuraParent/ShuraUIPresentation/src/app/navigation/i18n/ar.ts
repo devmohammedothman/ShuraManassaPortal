@@ -105,6 +105,7 @@ export const locale = {
                 'SUBTITLE-USER': 'ترشيح الاعضاء للجان المتخصصة',
                 'MEMBER-COUNT': 'عدد الاعضاء',    
                 'NEW-DEVESION': 'فرز جديد',  
+                'RE-DEVESION': 'إعادة فرز',
                 'DEVISION-RESULT': 'نتائج الفرز',    
                 'DEVISION-SUBMIT': 'اعتماد الفرز',
                 'FIRST-WISH': 'الرغبة الأولى',

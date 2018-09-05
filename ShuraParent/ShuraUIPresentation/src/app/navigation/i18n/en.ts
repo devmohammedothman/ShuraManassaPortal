@@ -105,6 +105,7 @@ export const locale = {
                 'SUBTITLE-USER': 'Nomination of members of specialized committees',  
                 'MEMBER-COUNT': 'Member count',  
                 'NEW-DEVESION': 'New deveision',  
+                'RE-DEVESION': 'RE-DEVESION',
                 'DEVISION-RESULT': 'Devision result',    
                 'DEVISION-SUBMIT': 'Devision submit',
                 'FIRST-WISH': 'First wish',
