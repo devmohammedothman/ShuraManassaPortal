@@ -15,6 +15,7 @@ import com.sbm.shura.commonlib.exceptions.enums.ExceptionEnums.ExceptionEnums;
 import com.sbm.shura.commonlib.exceptions.types.RespositoryException;
 import com.sbm.shura.dao.ReportsDao;
 import com.sbm.shura.dto.ReportCommitteeWishesCountDTO;
+import com.sbm.shura.dto.ReportUsersAddedNoteDTO;
 import com.sbm.shura.dto.ReportUsersNotSubmitWishesDTO;
 import com.sbm.shura.dto.ReportUsersWishesDTO;
 
@@ -234,4 +235,29 @@ public class ReportsDaoImpl implements  ReportsDao {
 			   }
 			return reportUsersWishesDTO;
 		}
+	
+	@Override
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public List<ReportUsersAddedNoteDTO> getReportUsersAddedNote() throws RespositoryException {
+		List<ReportUsersAddedNoteDTO> reportUsersAddedNoteDTO = new ArrayList<ReportUsersAddedNoteDTO>();
+		try {
+			String sql = "SELECT DISTINCT u.USERNAME, (SELECT c.NAME_EN FROM COMMITTEE c join COMMITTEEMEMBER cm on cm.COMMITTEEID = c.ID WHERE u.ID = cm.MEMBERID) , uw.MEMBERNOTES FROM SHURA.\"USER\" u join userwish uw on uw.NOMINATEDUSERID = u.ID WHERE uw.MEMBERNOTES IS NOT NULL";
+			Query query = entityManager.createNativeQuery(sql);
+	    	List<Object[]> details = query.getResultList();
+	    	System.out.println("IN DAO: " + details.size());
+	    	for (Object[] a : details) {
+	    		ReportUsersAddedNoteDTO uA = new ReportUsersAddedNoteDTO();
+	    		uA.setUserName((String)a[0]);
+	    		uA.setCurrentCommittee((String)a[1]);
+	    		uA.setNote((String)a[2]);
+	    		reportUsersAddedNoteDTO.add(uA);
+	    	}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			throw new RespositoryException(ExceptionEnums.REPOSITORY_ERROR);
+		   }
+		return reportUsersAddedNoteDTO;
+	}
 }

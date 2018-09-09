@@ -17,5 +17,6 @@ public interface ReportsManager {
 	public void exportReportUsersWishesCommitteeMember(long committeeId) throws ControllerException;
 	public void exportReportUsersCommitteeMember(long committeeId) throws ControllerException;
 	public void exportReportUsersWishesNotTrueReport() throws ControllerException;
+	public void exportReportUsersAddedNote() throws ControllerException;
 
 }

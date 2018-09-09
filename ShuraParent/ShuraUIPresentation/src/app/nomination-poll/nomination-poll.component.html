@@ -14,7 +14,15 @@
             </mat-form-field>
 
             <div fxFlex="1 0 auto" fxLayout="row wrap" fxLayoutAlign="center end">
-                <button mat-button [ngClass]="'mb-12 mx-12'" (click)="runPollProcess()">{{'CONT.NOM.NEW-DEVESION' | translate }}</button>
+                <!-- <button mat-button [ngClass]="'mb-12 mx-12'" (click)="runPollProcess()">{{'CONT.NOM.NEW-DEVESION' | translate }}</button> -->
+                <button mat-button [ngClass]="'mb-12 mx-12'" (click)="runPollProcess()">
+                    <ng-template [ngIf]="hideTable">
+                      {{'CONT.NOM.NEW-DEVESION' | translate}}
+                    </ng-template>
+                    <ng-template [ngIf]="!hideTable">
+                      {{'CONT.NOM.RE-DEVESION' | translate}}
+                    </ng-template>
+                </button>
                 <button mat-button [ngClass]="'mb-12 mx-12'" (click)="getDevisionResult()">{{'CONT.NOM.DEVISION-RESULT' | translate }}</button>
             </div>
         </div>

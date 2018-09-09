@@ -17,6 +17,7 @@
 	<subDataset name="dataset1" uuid="fd98729a-ee4c-467c-ab8f-f49a190d64ba"/>
 	<field name="userName" class="java.lang.String"/>
 	<field name="currentCommittee" class="java.lang.String"/>
+	<field name="note" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -26,7 +27,21 @@
 	<columnHeader>
 		<band height="268" splitType="Stretch">
 			<staticText>
-				<reportElement key="staticText" style="Arial_Bold" mode="Opaque" x="10" y="150" width="425" height="32" forecolor="#FFFFFF" backcolor="#142832" uuid="edb2512c-cb13-4bb1-bd5f-7665f437b0f0"/>
+				<reportElement key="staticText" style="Arial_Bold" mode="Opaque" x="-20" y="150" width="315" height="32" forecolor="#FFFFFF" backcolor="#142832" uuid="edb2512c-cb13-4bb1-bd5f-7665f437b0f0"/>
+				<box>
+					<pen lineWidth="1.0" lineStyle="Solid" lineColor="#0F0E0E"/>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Cocon® Next Arabic" size="13" pdfFontName="CoconNextArabic-Regular.otf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[الملاحظات]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText" style="Arial_Bold" mode="Opaque" x="295" y="150" width="225" height="32" forecolor="#FFFFFF" backcolor="#142832" uuid="edb2512c-cb13-4bb1-bd5f-7665f437b0f0"/>
 				<box>
 					<pen lineWidth="1.0" lineStyle="Solid" lineColor="#0F0E0E"/>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -40,7 +55,7 @@
 				<text><![CDATA[اللجنة الحالية]]></text>
 			</staticText>
 			<staticText>
-				<reportElement key="staticText" style="pageHeader" mode="Opaque" x="435" y="150" width="411" height="32" forecolor="#FFFFFF" backcolor="#142832" uuid="701f006c-3c77-4af2-87fa-993870e8ff20"/>
+				<reportElement key="staticText" style="pageHeader" mode="Opaque" x="520" y="150" width="326" height="32" forecolor="#FFFFFF" backcolor="#142832" uuid="701f006c-3c77-4af2-87fa-993870e8ff20"/>
 				<box>
 					<pen lineColor="#0F0E0E"/>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -58,11 +73,11 @@
 				<imageExpression><![CDATA["logos/shura logo.jpg"]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement x="225" y="99" width="390" height="41" uuid="4a5a2837-cb46-4270-a4eb-5f9b639af910"/>
+				<reportElement x="115" y="99" width="505" height="41" uuid="4a5a2837-cb46-4270-a4eb-5f9b639af910"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Cocon® Next Arabic" size="18" isBold="true" pdfFontName="CoconNextArabic-Regular.otf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
-				<text><![CDATA[تقرير عن أعضاء المجلس الذين لم يسجلو رغباتهم]]></text>
+				<text><![CDATA[تقرير عن أعضاء المجلس الذين ابدو ملاحظلت عند ادخال رغباتهم]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="590" y="-26" width="290" height="125" uuid="b7822a05-60da-4bc5-b715-05e974c06cb7"/>
@@ -79,7 +94,7 @@
 	<detail>
 		<band height="20" splitType="Stretch">
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" x="435" y="-86" width="411" height="20" isPrintWhenDetailOverflows="true" uuid="2ab34562-fbf9-4ae7-91f8-313bdd869974"/>
+				<reportElement stretchType="RelativeToTallestObject" x="520" y="-86" width="326" height="20" isPrintWhenDetailOverflows="true" uuid="2ab34562-fbf9-4ae7-91f8-313bdd869974"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -93,7 +108,7 @@
 				<textFieldExpression><![CDATA[$F{userName}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" x="10" y="-86" width="425" height="20" isPrintWhenDetailOverflows="true" uuid="dadf654a-2002-4f25-a132-bc46357e02c7"/>
+				<reportElement stretchType="RelativeToTallestObject" x="295" y="-86" width="226" height="20" isPrintWhenDetailOverflows="true" uuid="dadf654a-2002-4f25-a132-bc46357e02c7"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -105,6 +120,20 @@
 					<font fontName="CoconNextArabic-Regular.otf" size="12" pdfFontName="CoconNextArabic-Regular.otf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{currentCommittee}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="-20" y="-86" width="315" height="20" isPrintWhenDetailOverflows="true" uuid="dadf654a-2002-4f25-a132-bc46357e02c7"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="CoconNextArabic-Regular.otf" size="12" pdfFontName="CoconNextArabic-Regular.otf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{note}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

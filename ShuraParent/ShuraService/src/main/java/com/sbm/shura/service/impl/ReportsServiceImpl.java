@@ -12,6 +12,7 @@ import com.sbm.shura.commonlib.exceptions.types.RespositoryException;
 import com.sbm.shura.dao.ReportsDao;
 import com.sbm.shura.dto.ReportCommitteeWishesCountDTO;
 import com.sbm.shura.dto.ReportCommitteeWishesCountPercDTO;
+import com.sbm.shura.dto.ReportUsersAddedNoteDTO;
 import com.sbm.shura.dto.ReportUsersNotSubmitWishesDTO;
 import com.sbm.shura.dto.ReportUsersWishesDTO;
 import com.sbm.shura.service.ReportsService;
@@ -158,11 +159,27 @@ public class ReportsServiceImpl implements ReportsService {
 	}
 
 	@Override
-	public List<ReportUsersWishesDTO> getReportUsersWishesNotTrueReport() throws BusinessException {
+	public List<ReportUsersWishesDTO> getReportUsersWishesNotTrue() throws BusinessException {
 		List<ReportUsersWishesDTO> result;
 		try {
 			List<ReportUsersWishesDTO> reportUsersWishesDTO = reportsDao.getReportUsersWishesNotTrueReport();
 			result = reportUsersWishesDTO;
+		} catch (RespositoryException e) {
+			e.printStackTrace();
+			throw new BusinessException(ExceptionEnums.REPOSITORY_ERROR);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+			throw new BusinessException(ExceptionEnums.BUSINESS_ERROR);
+		}
+		return result;
+	}
+	
+	@Override
+	public List<ReportUsersAddedNoteDTO> getReportUsersAddedNote() throws BusinessException {
+		List<ReportUsersAddedNoteDTO> result;
+		try {
+			List<ReportUsersAddedNoteDTO> reportUsersAddedNoteDTO = reportsDao.getReportUsersAddedNote();
+			result = reportUsersAddedNoteDTO;
 		} catch (RespositoryException e) {
 			e.printStackTrace();
 			throw new BusinessException(ExceptionEnums.REPOSITORY_ERROR);

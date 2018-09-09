@@ -59,7 +59,7 @@
 			</staticText>
 			<image>
 				<reportElement x="12" y="-28" width="110" height="111" uuid="4bfc8103-0783-4104-946e-d8bcf9b800b7"/>
-				<imageExpression><![CDATA["C:/Users/Ahmed Magdy/Desktop/shura logo.jpg"]]></imageExpression>
+				<imageExpression><![CDATA["logos/shura logo.jpg"]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement x="608" y="-26" width="290" height="96" uuid="b7822a05-60da-4bc5-b715-05e974c06cb7"/>
