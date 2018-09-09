@@ -25,15 +25,16 @@ navbar.top-navbar,
     width: 1170px !important;
     margin-left: auto !important;
     margin-right: auto !important;
-    padding-left: 130px !important;
-    padding-right: 130px !important;
+    padding-left: 24px !important;
+    padding-right: 24px !important;
 }
 
 content {
-    min-height: 640px;
+    min-height: 660px;
 }
 
 footer {
+    margin-top: 24px;
     background-color: #00B159;
 }
 
@@ -59,6 +60,9 @@ footer {
 }
 
 .mat-form-field {
+    .mat-form-field-wrapper {
+        font-size: 11px;
+    }
     .mat-select {
         .mat-select-value,
         .mat-select-arrow {
@@ -154,7 +158,26 @@ mat-tab-group {
     .mat-input-element {
         color: #fff;
     }
-    tr.mat-row:nth-child(even) {
+    .mat-cell, .mat-footer-cell {
+        font-size: 11px;
+        .mat-icon-button {
+            width: 32px;
+            height: 32px;
+            line-height: 38px;
+            .mat-icon,
+            i {
+                line-height: 24px;
+            }
+            .material-icons {
+                font-size: 21px;
+            }
+        }
+    }
+    tr.mat-row {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+    tr.mat-row:nth-child(odd) {
         background-color: rgba(255, 255, 255, 0.15);
     }
 }
@@ -182,12 +205,11 @@ mat-tab-group {
 
 .component-title {
     width: 35%;
-    margin-left: auto;
-    margin-right: auto;
     text-align: center;
     background-color: #028041;
     border-radius: 13px;
-    padding: 5px 15px;
+    padding: 8px 24px;
+    margin: 32px auto;
 }
 
 #login {
