@@ -313,9 +313,6 @@
 							<resources>
 								<resource>
 									<directory>../ShuraUIPresentation/dist</directory>
-									<excludes>
-										<exclude>../ShuraUIPresentation/dist/assets/*</exclude>
-									</excludes>
 								</resource>
 							</resources>
 						</configuration>
@@ -332,9 +329,6 @@
 							<resources>
 								<resource>
 									<directory>../ShuraUIPresentation/dist</directory>
-									<excludes>
-										<exclude>../ShuraUIPresentation/dist/assets/*</exclude>
-									</excludes>
 								</resource>
 							</resources>
 						</configuration>
