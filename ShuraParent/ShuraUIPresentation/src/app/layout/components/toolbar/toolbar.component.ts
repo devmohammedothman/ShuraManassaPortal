@@ -26,6 +26,7 @@ export class ToolbarComponent implements OnInit, OnDestroy
     panelOpenState = false;
     
     date: Date;
+    toggle:any;
 
     horizontalNavbar: boolean;
     rightNavbar: boolean;
@@ -188,15 +189,16 @@ export class ToolbarComponent implements OnInit, OnDestroy
      *
      * @param langId
      */
-    setLanguage(langId): void
-    {
-        // Set the selected language for toolbar
-        this.selectedLanguage = _.find(this.languages, {'id': langId});
+    //commented before deploy to resolve can not find land property
+    // setLanguage(langId): void
+    // {
+    //     // Set the selected language for toolbar
+    //     this.selectedLanguage = _.find(this.languages, {'id': langId});
 
-        // Use the selected language for translations
-        this._translateService.use(langId);
-        document.getElementById('generalHTML').lang = langId;
-    }
+    //     // Use the selected language for translations
+    //     this._translateService.use(langId);
+    //     document.getElementById('generalHTML').lang = langId;
+    // }
 
     // -----------------------------------------------------------------------------------------------------
     // @ Custom methods

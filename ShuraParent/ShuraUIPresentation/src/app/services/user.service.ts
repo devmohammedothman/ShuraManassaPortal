@@ -22,8 +22,8 @@ export class UserService {
         private storageService: StorageService) { }
 
     private baseUrl = ServiceUtils.baseUrl+'user/';
-    private authUrl = 'http://192.168.2.51:8080/ShuraIntegrationAPI/api/oauth/token';
-    private loginUrl = 'http://192.168.2.51:8080/ShuraIntegrationAPI/api/user/login';
+    private authUrl = ServiceUtils.baseUrl+'/oauth/token';
+    private loginUrl = ServiceUtils.baseUrl+'/user/login';
     private token = 'bearer ' + this.storageService.getFromLocal('token');
     authValue;
     loginValue;

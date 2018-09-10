@@ -10,15 +10,15 @@ export const navigation: FuseNavigation[] = [
         image    : 'logos/shura.svg',
         url      : '/home'
     },
-    {
-        id       : 'dashboard',
-        title    : 'Dashboard',
-        translate: 'NAV.DASHBOARD',
-        type     : 'item',
-        icon     : 'face',
-        image    : 'nav-items/stats.png',
-        url      : '/apps/dashboards/project'
-    },
+    // {
+    //     id       : 'dashboard',
+    //     title    : 'Dashboard',
+    //     translate: 'NAV.DASHBOARD',
+    //     type     : 'item',
+    //     icon     : 'face',
+    //     image    : 'nav-items/stats.png',
+    //     url      : '/apps/dashboards/project'
+    // },
     {
         id       : 'settings',
         title    : 'Settings',
@@ -70,38 +70,39 @@ export const navigation: FuseNavigation[] = [
         id       : 'nominationProgram',
         title    : 'Member Nomination Program',
         translate: 'NAV.MEMNOMINATION',
-        type     : 'group',
+        type     : 'item',
         icon     : '',
         image    : 'nav-items/comm-board.png',
-        children : [
-            {
-                id       : 'AddWishes',
-                title : 'add wishes',
-                translate: 'NAV.ADDWISHES',
-                type     : 'item',
-                icon     : 'flag',
-                image    : 'nav-items/adv-search.png',
-                url      : '/nomination/addmemberwish'
-            },
-            {
-                id       : 'ManagerWishes',
-                title : 'Manager wishes',
-                translate: 'NAV.ADDWISHES',
-                type     : 'item',
-                icon     : 'flag',
-                image    : 'nav-items/adv-search.png',
-                url      : '/maw'
-            },
-            {
-                id       : 'EditMemberWishes',
-                title : 'Edit Member Wishes',
-                translate: 'NAV.EditMemWish',
-                type     : 'item',
-                icon     : 'flag',
-                image    : 'nav-items/adv-search.png',
-                url      : '/nomination/edit-member-wish'
-            },
-        ]
+        url      : '/nomination/member-nominations',
+        // children : [
+        //     {
+        //         id       : 'AddWishes',
+        //         title : 'add wishes',
+        //         translate: 'NAV.ADDWISHES',
+        //         type     : 'item',
+        //         icon     : 'flag',
+        //         image    : 'nav-items/adv-search.png',
+        //         url      : '/nomination/addmemberwish'
+        //     },
+        //     {
+        //         id       : 'ManagerWishes',
+        //         title : 'Manager wishes',
+        //         translate: 'NAV.ADDWISHES',
+        //         type     : 'item',
+        //         icon     : 'flag',
+        //         image    : 'nav-items/adv-search.png',
+        //         url      : '/maw'
+        //     },
+        //     {
+        //         id       : 'EditMemberWishes',
+        //         title : 'Edit Member Wishes',
+        //         translate: 'NAV.EditMemWish',
+        //         type     : 'item',
+        //         icon     : 'flag',
+        //         image    : 'nav-items/adv-search.png',
+        //         url      : '/nomination/edit-member-wish'
+        //     },
+        // ]
     },
 
 ];

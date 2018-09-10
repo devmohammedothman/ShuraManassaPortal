@@ -10,10 +10,13 @@ import { MemberWishesModule } from '../member-wishes/member-wishes.module';
 import { NominationPollModule } from '../nomination-poll/nomination-poll.module';
 import { EditMemberWishesModule } from '../edit-member-wishes/edit-member-wishes.module';
 import { ManagerAssidnedWishesModule } from '../manager-assidned-wishes/manager-assidned-wishes.module';
+import { AuthGuard } from '../auth.guard';
+
 
 const routes = [
   {
-      path     : 'member-nominations',
+      path     : 'nomination/member-nominations',
+      canActivate: [AuthGuard],
       component: MemberNominationsComponent
   }
 ];

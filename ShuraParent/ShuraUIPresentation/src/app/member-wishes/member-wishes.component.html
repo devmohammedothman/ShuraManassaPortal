@@ -2,17 +2,15 @@
     <div fxFlex fxFill fxLayout="column" fxLayoutAlign="start" class="mat-tab-body-inner py-32">
         <div fxFlex="1 0 auto" fxLayout="column" fxLayoutAlign="start">
             <mat-form-field appearance="legacy" [ngClass]="'w-50-p mb-24'">
-                <mat-select (selectionChange)="onWishOne($event)" placeholder="{{ 'CONT.WISHES.WISH1' | translate }}" [formControl]="firstWish"
-                    [(ngModel)]="wish1" required>
-                    <option *ngFor="let wish of wishes" [value]="wish">
+                <mat-select (selectionChange)="onWishOne($event)" placeholder="{{ 'CONT.WISHES.WISH1' | translate }}" [formControl]="firstWish" [(ngModel)]="wish1" required>
+                    <mat-option *ngFor="let wish of wishes" [value]="wish">
                         {{ wish.nameAr }}
-                    </option>
+                    </mat-option>
                 </mat-select>
                 <mat-error *ngIf="firstWish.invalid">{{ 'CONT.FORMS.REQERR' | translate }}</mat-error>
             </mat-form-field>
             <mat-form-field appearance="legacy" [ngClass]="'w-50-p mb-24'">
-                <mat-select (selectionChange)="onWishTwo($event)" placeholder="{{ 'CONT.WISHES.WISH2' | translate }}" [formControl]="secondWish"
-                    [(ngModel)]="wish2" required [disabled]='!firstWish.valid'>
+                <mat-select (selectionChange)="onWishTwo($event)" placeholder="{{ 'CONT.WISHES.WISH2' | translate }}" [formControl]="secondWish" [(ngModel)]="wish2" required [disabled]='!firstWish.valid'>
                     <mat-option *ngFor="let wish of wishes2Temp" [value]="wish">
                         {{ wish.nameAr }}
                     </mat-option>
@@ -20,8 +18,7 @@
                 <mat-error *ngIf="secondWish.invalid">{{ 'CONT.FORMS.REQERR' | translate }}</mat-error>
             </mat-form-field>
             <mat-form-field appearance="legacy" [ngClass]="'w-50-p mb-24'">
-                <mat-select (selectionChange)="onWishThree($event)" placeholder="{{ 'CONT.WISHES.WISH3' | translate }}" [formControl]="thirdWish"
-                    [(ngModel)]="wish3" required [disabled]='!secondWish.valid'>
+                <mat-select (selectionChange)="onWishThree($event)" placeholder="{{ 'CONT.WISHES.WISH3' | translate }}" [formControl]="thirdWish" [(ngModel)]="wish3" required [disabled]='!secondWish.valid'>
                     <mat-option *ngFor="let wish of wishes3Temp" [value]="wish">
                         {{ wish.nameAr }}
                     </mat-option>

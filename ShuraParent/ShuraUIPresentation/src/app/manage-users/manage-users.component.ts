@@ -19,7 +19,7 @@ export class ManageUsersComponent implements OnInit {
   users: User[];
   errorMessage: string;
 
-  constructor(private addEditUsersComponent: AddEditUsersComponent,
+  constructor(public addEditUsersComponent: AddEditUsersComponent,
   private userService: UserService) { 
     addEditUsersComponent.dialog.afterAllClosed
     .subscribe(() => {

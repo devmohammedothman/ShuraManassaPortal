@@ -20,7 +20,7 @@ export class ManageCommitteeComponent implements OnInit {
   public committeeList: Committee [] ;
   public errorMessage;
 
-  constructor( private commService: CommitteeService, private addEditComm: AddEditCommitteeComponent ) { 
+  constructor( private commService: CommitteeService, public addEditComm: AddEditCommitteeComponent ) { 
 
    this.populateCommitteeList();
   }
