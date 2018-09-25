@@ -1,7 +1,7 @@
 package com.sbm.shura.shuraIntegrationAPI.config.server;
 
 import javax.sql.DataSource;
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

@@ -17,7 +17,7 @@ export class NominationService {
 
   constructor(private http: Http, private storageService: StorageService) { }
 
-  private baseUrl = ServiceUtils.baseUrl + 'nomination/';
+  private baseUrl = ServiceUtils.baseUrl + '/nomination/';
   private token = 'bearer ' + this.storageService.getFromLocal('token');
 
   

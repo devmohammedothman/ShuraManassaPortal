@@ -21,7 +21,7 @@ export class UserService {
     constructor(private http: Http,
         private storageService: StorageService) { }
 
-    private baseUrl = ServiceUtils.baseUrl+'user/';
+    private baseUrl = ServiceUtils.baseUrl+'/user/';
     private authUrl = ServiceUtils.baseUrl+'/oauth/token';
     private loginUrl = ServiceUtils.baseUrl+'/user/login';
     private token = 'bearer ' + this.storageService.getFromLocal('token');

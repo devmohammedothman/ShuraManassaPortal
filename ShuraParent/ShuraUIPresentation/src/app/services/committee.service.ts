@@ -11,7 +11,7 @@ export class CommitteeService
 
     constructor (private http:Http,private storageService: StorageService) {}
 
-    private baseUrl = ServiceUtils.baseUrl+'comm/';
+    private baseUrl = ServiceUtils.baseUrl+'/comm/';
     private token = 'bearer '+this.storageService.getFromLocal('token');
 
     getAllCommitteeList():Observable<any>
