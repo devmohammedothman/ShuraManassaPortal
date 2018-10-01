@@ -31,51 +31,51 @@ public class HijriDateConverter {
 		switch(monthOrder)
 		{
 		case 1:
-			result = HiriMonthNames.MOHARAM.getKey();
+			result = HijriMonthNames.MOHARAM.getKey();
 			break;
 
 		case 2:
-			result = HiriMonthNames.SAFAR.getKey();
+			result = HijriMonthNames.SAFAR.getKey();
 			break;
 
 		case 3:
-			result = HiriMonthNames.RABEEFST.getKey();
+			result = HijriMonthNames.RABEEFST.getKey();
 			break;
 
 		case 4:
-			result = HiriMonthNames.RABEELST.getKey();
+			result = HijriMonthNames.RABEELST.getKey();
 			break;
 
 		case 5:
-			result = HiriMonthNames.GOMADAFST.getKey();
+			result = HijriMonthNames.GOMADAFST.getKey();
 			break;
 
 		case 6:
-			result = HiriMonthNames.GOMADALST.getKey();
+			result = HijriMonthNames.GOMADALST.getKey();
 			break;
 
 		case 7:
-			result = HiriMonthNames.RAGAB.getKey();
+			result = HijriMonthNames.RAGAB.getKey();
 			break;
 
 		case 8:
-			result = HiriMonthNames.SHAABAN.getKey();
+			result = HijriMonthNames.SHAABAN.getKey();
 			break;
 
 		case 9:
-			result = HiriMonthNames.RAMADAN.getKey();
+			result = HijriMonthNames.RAMADAN.getKey();
 			break;
 
 		case 10:
-			result = HiriMonthNames.SHWAL.getKey();
+			result = HijriMonthNames.SHWAL.getKey();
 			break;
 
 		case 11:
-			result = HiriMonthNames.ZOELKEEDA.getKey();
+			result = HijriMonthNames.ZOELKEEDA.getKey();
 			break;
 
 		case 12:
-			result = HiriMonthNames.ZOELHEGGA.getKey();
+			result = HijriMonthNames.ZOELHEGGA.getKey();
 			break;
 		}
 		return result;
