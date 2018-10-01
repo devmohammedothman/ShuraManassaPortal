@@ -16,12 +16,12 @@
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 <link rel="icon" type="image/x-icon" href="favicon.ico">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-	rel="stylesheet">
+
+<link href="ShuraIntegrationAPI/resources/assets/icons/materialicons/MaterialIcon.css?family=Material+Icons" rel="stylesheet">
 <link href="ShuraIntegrationAPI/resources/assets/icons/meteocons/style.css" rel="stylesheet">
-<!-- <link href="https://fonts.googleapis.com/css?family=Cairo:300,400,500" rel="stylesheet"> -->
-<link rel="stylesheet" media="screen"
-	href="https://fontlibrary.org/face/droid-arabic-kufi" type="text/css" />
+    
+<link href="ShuraIntegrationAPI/resources/assets/icons/meteocons/style.css" rel="stylesheet">
+
 
 <!-- FUSE Splash Screen CSS -->
 <style type="text/css">
