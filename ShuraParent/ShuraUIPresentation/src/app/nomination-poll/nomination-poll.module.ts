@@ -17,7 +17,7 @@ import { DialogComponent } from './dialog/dialog.component';
 const routes: Routes = [
   {
       path: 'nomination/nomination-poll',
-      // canActivate: [AuthGuard],
+      canActivate: [AuthGuard],
       component: NominationPollComponent
   }
 ];

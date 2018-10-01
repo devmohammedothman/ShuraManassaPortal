@@ -25,7 +25,8 @@ export class ToolbarComponent implements OnInit, OnDestroy
 
     panelOpenState = false;
     
-    date: Date;
+   // date: Date;
+    currentHijriiDate : string;
     toggle:any;
 
     horizontalNavbar: boolean;
@@ -58,7 +59,7 @@ export class ToolbarComponent implements OnInit, OnDestroy
         private _fuseNavigationService: FuseNavigationService
     )
     {
-        this.date = new Date();
+       // this.date = new Date();
 
         // Set the defaults
         this.userStatusOptions = [
@@ -147,6 +148,7 @@ export class ToolbarComponent implements OnInit, OnDestroy
 
         // Set the selected language from default languages
         this.selectedLanguage = _.find(this.languages, {'id': this._translateService.currentLang});
+        this.currentHijriiDate = JSON.parse(this.StorageService.getFromLocal('currentHijriiDate'))
     }
 
     /**

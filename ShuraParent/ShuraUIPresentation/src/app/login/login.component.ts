@@ -131,7 +131,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
 
     auth(): void {
-        // document.getElementById('spinner').style.display = 'flex';
+        document.getElementById('spinner').style.display = 'flex';
         // this.authParam.username = this.logParam.email;
         // this.authParam.password = this.logParam.password;
         // this.authParam.client_id = 'spring-security-oauth2-read-write-client';
@@ -147,35 +147,34 @@ export class LoginComponent implements OnInit, OnDestroy {
         //         document.getElementById('loginErr').style.display = 'block';
         //         document.getElementById('spinner').style.display = 'none';
         // });
-        //work around to disable authrization now
         this.login();
     }
 
     login(): void {
-        // this.userService.login(this.logParam)
-        //     .subscribe(user => {
-        //         this.other = []; // your other array...
-        //         user.groups.map(item => {
-        //             return {
-        //                 group: item.nameEn
-        //             };
-        //         }).forEach(item => this.other.push(item));
-        //         user.avatarUrl = '';
-        //         console.log('b login key : ' + this.authParam.access_token);
-        //         this.StorageService.saveInLocal('token', this.authParam.access_token);
-        //         this.StorageService.saveInLocal('user', JSON.stringify(user));
-        //         this.StorageService.saveInLocal('group', JSON.stringify(this.other));
-        //         let groups = this.other.filter(data => data.group.includes('MANAGER'));
-        //         console.log('man check'+ JSON.stringify(groups));
-        //         if(JSON.stringify(groups) !== '[]'){
-        //             this.addNavItemWithCustomFunction();
-        //         }
-        //         setTimeout(() => {
-        //             this.router.navigate(['home']);
-        //         }, 5000);
-        //     },
-        //     error => this.errorMessage = <any>error);
-        this.router.navigate(['home']);
+        this.userService.login(this.logParam)
+            .subscribe(user => {
+                this.other = []; // your other array...
+                user.groups.map(item => {
+                    return {
+                        group: item.nameEn
+                    };
+                }).forEach(item => this.other.push(item));
+                user.avatarUrl = '';
+                // console.log('b login key : ' + this.authParam.access_token);
+               // this.StorageService.saveInLocal('token', this.authParam.access_token);
+                this.StorageService.saveInLocal('user', JSON.stringify(user));
+                this.StorageService.saveInLocal('group', JSON.stringify(this.other));
+                let groups = this.other.filter(data => data.group.includes('MANAGER'));
+                console.log('man check'+ JSON.stringify(groups));
+                // if(JSON.stringify(groups) !== '[]'){
+                //     this.addNavItemWithCustomFunction();
+                // }
+                setTimeout(() => {
+                    this.router.navigate(['home']);
+                }, 5000);
+            },
+            error => this.errorMessage = <any>error);
+        
     }
 
     addNavItemWithCustomFunction() {

@@ -15,7 +15,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 const routes: Routes = [
   {
       path        : 'perm',
-      // canActivate: [AuthGuard],
+      canActivate: [AuthGuard],
       component   : GroupPermComponent
   }
 ];

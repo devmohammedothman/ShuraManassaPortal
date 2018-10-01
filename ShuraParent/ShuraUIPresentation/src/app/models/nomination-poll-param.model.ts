@@ -2,11 +2,11 @@ import { User } from "./user.model";
 
 export class NominationPollParam {
     noOfMembers: number;
-    actionNo: string;
+    actionNo: number;
     isApproved: boolean;
     actionUser: User;
     
-    constructor(noOfMembers: number, actionNo: string, isApproved: boolean, actionUser: User) { 
+    constructor(noOfMembers: number, actionNo: number, isApproved: boolean, actionUser: User) { 
         this.noOfMembers = noOfMembers;
         this.actionNo = actionNo;
         this.isApproved = isApproved;

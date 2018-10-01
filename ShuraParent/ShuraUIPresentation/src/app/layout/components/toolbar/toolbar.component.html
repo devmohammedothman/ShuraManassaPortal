@@ -6,15 +6,15 @@
 
     <mat-list class="date" cdkFocusRegionStart>
         <div class="date-text">
-            {{date | date:'EEEE d MMMM y'}}
+            <!-- {{date | date:'EEEE d MMMM y'}} -->
+            {{currentHijriiDate}}
         </div>
     </mat-list>
 
     <div fxFlex fxFill fxLayout="row" fxLayoutAlign="center center" class="my-36">
 
         <div class="">
-            <button mat-icon-button class="navbar-toggle-button" *ngIf="!hiddenNavbar && !rightNavbar" (click)="toggleSidebarOpen('navbar')"
-                fxHide.gt-md>
+            <button mat-icon-button class="navbar-toggle-button" *ngIf="!hiddenNavbar && !rightNavbar" (click)="toggleSidebarOpen('navbar')" fxHide.gt-md>
                 <mat-icon class="secondary-text">menu</mat-icon>
             </button>
             <div class="toolbar-separator" *ngIf="!hiddenNavbar && !rightNavbar" fxHide.gt-md></div>
@@ -40,12 +40,16 @@
 
     <mat-list class="user-menu">
         <div fxFlex="1 0 auto" fxFill fxLayout="row" fxLayoutAlign="space-between center">
-            <a [ngClass]="'favourite'"><mat-icon class="white-600-fg">star</mat-icon></a>
+            <a [ngClass]="'favourite'">
+                <mat-icon class="white-600-fg">star</mat-icon>
+            </a>
             <div fxFlex fxLayout="column" fxLayoutAlign="center center" style="line-height: 16px;">
                 <span>{{ 'CONT.WELCOME' | translate}}</span>
                 <span *ngIf="user != null">{{user.username}}</span>
             </div>
-            <a [ngClass]="'user-dropdown'" (click)="toggle = !toggle"><mat-icon class="white-600-fg">menu</mat-icon></a>
+            <a [ngClass]="'user-dropdown'" (click)="toggle = !toggle">
+                <mat-icon class="white-600-fg">menu</mat-icon>
+            </a>
         </div>
 
         <div [ngClass]="{'hidden' : !toggle }">

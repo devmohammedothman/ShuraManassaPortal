@@ -16,8 +16,10 @@ import com.sbm.shura.commonlib.exceptions.types.BusinessException;
 import com.sbm.shura.commonlib.exceptions.types.ControllerException;
 import com.sbm.shura.commonlib.utilities.HijriDateConverter;
 import com.sbm.shura.dto.CommitteeDTO;
+import com.sbm.shura.dto.CommitteeExperienceDTO;
 import com.sbm.shura.dto.CommitteeMemberDTO;
 import com.sbm.shura.dto.ExperienceDTO;
+import com.sbm.shura.dto.MemberExperienceDTO;
 import com.sbm.shura.dto.NominationLogDTO;
 import com.sbm.shura.dto.PollProcessResultDto;
 import com.sbm.shura.dto.UserWishDTO;
@@ -162,10 +164,14 @@ public class NominationManageImpl implements NominationManage {
 			List<CommitteeDTO> commDTOList = _committeeService.getCommitteeList();
 			List<CommitteeMemberDTO> commMemberResultList = new ArrayList<>();
 
-			List<UserWishDTO> firstUserWishList = new ArrayList<UserWishDTO>();
-			List<UserWishDTO> secondUserWishList = new ArrayList<UserWishDTO>();
-			List<UserWishDTO> thirdUserWishList = new ArrayList<UserWishDTO>();
+			
+			List<UserWishDTO> firstUserWishListExpMatch = new ArrayList<UserWishDTO>();
+			List<UserWishDTO> secondUserWishListExpMatch = new ArrayList<UserWishDTO>();
+			List<UserWishDTO> thirdUserWishListExpMatch = new ArrayList<UserWishDTO>();
 
+			//Random Sort Committee list
+			Collections.shuffle(commDTOList);
+			
 			for (CommitteeDTO item : commDTOList) {
 				if (userWishes.size() == 0)
 					break;
@@ -173,107 +179,97 @@ public class NominationManageImpl implements NominationManage {
 				List<CommitteeMemberDTO> commTempList = new ArrayList<>();
 				int remainingMembersCount;
 
-				// all members who have current committee as first wish and experience
-				// applicable
-				firstUserWishList = userWishes.stream()
+				// all members who have current committee as first wish
+				firstUserWishListExpMatch = userWishes.stream()
 						.filter(uwitem -> uwitem.getWishOrder() == 1
-								&& uwitem.getWishedCommitee().getId().equals(item.getId())
-								&& (!uwitem.getNominatedUser().getExpList().listIterator().next().equals("")
-										&& uwitem.getNominatedUser().getExpList().listIterator().next()
-												.equals(item.getExpList().listIterator().next())))
+								&& uwitem.getWishedCommitee().getId().equals(item.getId()))
 						.collect(Collectors.toList());
+				
+				//update first user wish list to have only member wished match with their experience
+				firstUserWishListExpMatch = checkCommitteeExperienceWithMemberEx(firstUserWishListExpMatch,item.getCommitteeExperiences());
 
 				// all members who have current committee as second wish
-				secondUserWishList = userWishes.stream()
+				secondUserWishListExpMatch = userWishes.stream()
 						.filter(uwitem -> uwitem.getWishOrder() == 2
-								&& uwitem.getWishedCommitee().getId().equals(item.getId())
-								&& (!uwitem.getNominatedUser().getExpList().listIterator().next().equals("")
-										&& uwitem.getNominatedUser().getExpList().listIterator().next()
-												.equals(item.getExpList().listIterator().next())))
+								&& uwitem.getWishedCommitee().getId().equals(item.getId()))
 						.collect(Collectors.toList());
+				
+				//updatesecondUserWishList to have only member wished match with their experience
+				secondUserWishListExpMatch = checkCommitteeExperienceWithMemberEx(secondUserWishListExpMatch,item.getCommitteeExperiences());
 
 				// all members who have current committee as third wish
-				thirdUserWishList = userWishes.stream()
+				thirdUserWishListExpMatch = userWishes.stream()
 						.filter(uwitem -> uwitem.getWishOrder() == 3
-								&& uwitem.getWishedCommitee().getId().equals(item.getId())
-								&& (!uwitem.getNominatedUser().getExpList().listIterator().next().equals("")
-										&& uwitem.getNominatedUser().getExpList().listIterator().next()
-												.equals(item.getExpList().listIterator().next())))
+								&& uwitem.getWishedCommitee().getId().equals(item.getId()))
 						.collect(Collectors.toList());
-
+				//update thirdUserWishList to have only member wished match with their experience
+				thirdUserWishListExpMatch = checkCommitteeExperienceWithMemberEx(thirdUserWishListExpMatch,item.getCommitteeExperiences());
+				
 				// call random generation process and add to List
-				if (firstUserWishList.size() > memberCount) {
-					List<Integer> intList = new ArrayList<>();
-					for (int i = 0; i < firstUserWishList.size(); i++) {
-						intList.add(i);
-					}
-					firstUserWishList = selectedUserList(intList, firstUserWishList, memberCount);
+				if (firstUserWishListExpMatch.size() > memberCount) 
+				{
+					firstUserWishListExpMatch = randomSelection(firstUserWishListExpMatch,memberCount);
 				}
 
 				// add selected users to main committee members list
-				if (firstUserWishList.size() > 0) {
-					commTempList.addAll(firstUserWishList.stream()
+				if (firstUserWishListExpMatch.size() > 0) 
+				{
+					commTempList.addAll(firstUserWishListExpMatch.stream()
 							.map(commMember -> new CommitteeMemberDTO(commMember.getNominatedUser(),
 									commMember.getWishedCommitee(), commMember.getWishOrder(), false))
 							.collect(Collectors.toList()));
 
 					// remove selected user from user wish list to not be chosen again
-					for (int index = 0; index < firstUserWishList.size(); index++) {
-						UserWishDTO uwDtoRemovedObject = firstUserWishList.get(index);
-						userWishes.removeIf(it -> it.getNominatedUser().getUserId() == uwDtoRemovedObject
-								.getNominatedUser().getUserId());
-					}
+					userWishes = removeSelectedUserWishes(firstUserWishListExpMatch,userWishes);
 				}
 				// this condition to indicate that i still have places on this committee
 				if (commTempList.size() < memberCount) {
 					remainingMembersCount = memberCount - commTempList.size();
-
-					if (remainingMembersCount > 0 && !secondUserWishList.isEmpty() && secondUserWishList.size() > 0) {
-						List<Integer> intList = new ArrayList<>();
-						for (int i = 0; i < secondUserWishList.size(); i++) {
-							intList.add(i);
-						}
-						secondUserWishList = selectedUserList(intList, secondUserWishList, remainingMembersCount);
-						commTempList.addAll(secondUserWishList.stream()
+					//Take second User wishes to assign it to committees 
+					if (remainingMembersCount > 0 && !secondUserWishListExpMatch.isEmpty() && secondUserWishListExpMatch.size() > 0)
+					{
+						if(secondUserWishListExpMatch.size() > remainingMembersCount)
+							secondUserWishListExpMatch = randomSelection(secondUserWishListExpMatch,remainingMembersCount);
+						
+						commTempList.addAll(secondUserWishListExpMatch.stream()
 								.map(commMember -> new CommitteeMemberDTO(commMember.getNominatedUser(),
 										commMember.getWishedCommitee(), commMember.getWishOrder(), false))
 								.collect(Collectors.toList()));
 
 						// remove selected user from user wish list to not be chosen again
-						for (int index = 0; index < secondUserWishList.size(); index++) {
-							UserWishDTO uwDtoRemovedObject = secondUserWishList.get(index);
-							userWishes.removeIf(it -> it.getNominatedUser().getUserId() == uwDtoRemovedObject
-									.getNominatedUser().getUserId());
-						}
+						userWishes = removeSelectedUserWishes(secondUserWishListExpMatch,userWishes);
 					}
 
 					remainingMembersCount = memberCount - commTempList.size();
-
-					if (remainingMembersCount > 0 && !thirdUserWishList.isEmpty() && thirdUserWishList.size() > 0) {
-						List<Integer> intList = new ArrayList<>();
-						for (int i = 0; i < secondUserWishList.size(); i++) {
-							intList.add(i);
-						}
-						thirdUserWishList = selectedUserList(intList, thirdUserWishList, remainingMembersCount);
-						commTempList.addAll(thirdUserWishList.stream()
+					//Still have places and take Third User wishes to assign it to committees
+					if (remainingMembersCount > 0 && !thirdUserWishListExpMatch.isEmpty() && thirdUserWishListExpMatch.size() > 0)
+					{
+						if(thirdUserWishListExpMatch.size() > remainingMembersCount)
+							thirdUserWishListExpMatch = randomSelection(thirdUserWishListExpMatch,remainingMembersCount);
+						
+						commTempList.addAll(thirdUserWishListExpMatch.stream()
 								.map(commMember -> new CommitteeMemberDTO(commMember.getNominatedUser(),
 										commMember.getWishedCommitee(), commMember.getWishOrder(), false))
 								.collect(Collectors.toList()));
 
 						// remove selected user from user wish list to not be chosen again
-						for (int index = 0; index < secondUserWishList.size(); index++) {
-							UserWishDTO uwDtoRemovedObject = secondUserWishList.get(index);
-							userWishes.removeIf(it -> it.getNominatedUser().getUserId() == uwDtoRemovedObject
-									.getNominatedUser().getUserId());
-						}
+						userWishes = removeSelectedUserWishes(thirdUserWishListExpMatch,userWishes);
 					}
 
 				}
-				remainingMembersCount = memberCount - commTempList.size();
-
+												
 				commMemberResultList.addAll(commTempList);
 			}
+			
+			//Direct Assign Members based only on wishes not Experience if still have places
+			//Still there are places in current committee so assign members who have it in wishes but not match with their experience
+			if(userWishes.size() > 0)
+			{
+				List<CommitteeMemberDTO> assignedMembers =  assignMembersToCommitteesNoExp(userWishes,commMemberResultList,commDTOList,memberCount);
+				if(assignedMembers.size() > 0)
+					commMemberResultList.addAll(assignedMembers);
 
+			}
 			// Add Log to Nomination Log
 			logDtoObj = _nominationService.addPOllLog(logDtoObj);
 
@@ -293,7 +289,143 @@ public class NominationManageImpl implements NominationManage {
 		}
 		return responseDTO;
 	}
+	
+	public List<CommitteeMemberDTO> assignMembersToCommitteesNoExp(List<UserWishDTO> sourceWishes, 
+			List<CommitteeMemberDTO> assignedCommittee,List<CommitteeDTO> commList , int memberCount)
+	{
+		List<CommitteeMemberDTO> resultList = new ArrayList<CommitteeMemberDTO>();
+		
+		if(sourceWishes.size() > 0 && assignedCommittee.size() > 0)
+		{
+			List<UserWishDTO> firstUserWishList = new ArrayList<UserWishDTO>();
+			List<UserWishDTO> secondUserWishList = new ArrayList<UserWishDTO>();
+			List<UserWishDTO> thirdUserWishList = new ArrayList<UserWishDTO>();
+					
+			for(CommitteeDTO item : commList)
+			{
+				//calculate remaining for each committee
+				int remainingMembersCount =  assignedCommittee.stream().filter(comem -> comem.getCommittee().getId().equals(item.getId()))
+				.collect(Collectors.toList()).size();
+				
+				if(remainingMembersCount < memberCount) 
+				{
+					firstUserWishList = sourceWishes.stream()
+							.filter(uwitem -> uwitem.getWishOrder() == 1
+									&& uwitem.getWishedCommitee().getId().equals(item.getId()))
+							.collect(Collectors.toList());
+					
+					secondUserWishList =  sourceWishes.stream()
+							.filter(uwitem -> uwitem.getWishOrder() == 2
+							&& uwitem.getWishedCommitee().getId().equals(item.getId()))
+					.collect(Collectors.toList());
+					
+					thirdUserWishList =  sourceWishes.stream()
+							.filter(uwitem -> uwitem.getWishOrder() == 3
+							&& uwitem.getWishedCommitee().getId().equals(item.getId()))
+					.collect(Collectors.toList());
+					
+					if(firstUserWishList.size() > 0) 
+					{
+						// call random generation process and add to List
+						if(firstUserWishList.size() > remainingMembersCount)
+							firstUserWishList = randomSelection(firstUserWishList,remainingMembersCount);
+						
+						resultList.addAll(firstUserWishList.stream()
+								.map(commMember -> new CommitteeMemberDTO(commMember.getNominatedUser(),
+										commMember.getWishedCommitee(), commMember.getWishOrder(), false))
+								.collect(Collectors.toList()));
+						//update remaining count
+						remainingMembersCount = remainingMembersCount - resultList.size();
+					}
+					
+					if(remainingMembersCount > 0 && secondUserWishList.size() > 0) 
+					{
+						// call random generation process and add to List
+						if(secondUserWishList.size() > remainingMembersCount)
+							secondUserWishList = randomSelection(secondUserWishList,remainingMembersCount);
+						
+						resultList.addAll(secondUserWishList.stream()
+								.map(commMember -> new CommitteeMemberDTO(commMember.getNominatedUser(),
+										commMember.getWishedCommitee(), commMember.getWishOrder(), false))
+								.collect(Collectors.toList()));
+						//update remaining count
+						remainingMembersCount = remainingMembersCount - resultList.size();
+					}
+					if(remainingMembersCount > 0 && thirdUserWishList.size() > 0) 
+					{
+						// call random generation process and add to List
+						if(thirdUserWishList.size() > remainingMembersCount)
+							thirdUserWishList = randomSelection(thirdUserWishList,remainingMembersCount);
+						
+						resultList.addAll(thirdUserWishList.stream()
+								.map(commMember -> new CommitteeMemberDTO(commMember.getNominatedUser(),
+										commMember.getWishedCommitee(), commMember.getWishOrder(), false))
+								.collect(Collectors.toList()));
+						//update remaining count
+						remainingMembersCount = remainingMembersCount - resultList.size();
+					}
 
+				}
+				
+			}
+			
+		}
+		return resultList;
+	}
+	public List<UserWishDTO> checkCommitteeExperienceWithMemberEx(List<UserWishDTO> source,
+			List<CommitteeExperienceDTO> comExList)
+	{
+		List<UserWishDTO> resultList = new ArrayList<UserWishDTO>();
+		
+		if(source != null && source.size() > 0 && comExList != null && comExList.size() > 0)
+		{
+			for(UserWishDTO uwItem : source)
+			{
+				List<MemberExperienceDTO> memberExList = uwItem.getNominatedUser().getMemberExperiences();
+				//check if member experience match with committee experience
+
+				memberExList = memberExList.stream()
+			    .filter(memEx -> comExList.stream()
+			    	.anyMatch(comEx -> accept(comEx, memEx))
+			    )
+			    .collect(Collectors.toList());
+				
+				if(memberExList.size() > 0)
+					resultList.add(uwItem);
+				
+			}
+		}
+		return resultList;
+		
+	}
+	
+	static boolean accept(CommitteeExperienceDTO comEx,MemberExperienceDTO memEx)
+	{
+		return comEx.getExperience().getId() == memEx.getExperience().getId();
+	}
+	
+	List<UserWishDTO> randomSelection(List<UserWishDTO> source,int memberCount)
+	{
+		List<UserWishDTO> resultList = new ArrayList<UserWishDTO>();
+		List<Integer> intList = new ArrayList<>();
+		for (int i = 0; i < source.size(); i++) {
+			intList.add(i);
+		}
+		resultList = selectedUserList(intList, source, memberCount);
+		return resultList;
+	}
+	List<UserWishDTO> removeSelectedUserWishes(List<UserWishDTO> listToRemove,List<UserWishDTO> source)
+	{
+				
+		// remove selected user from user wish list to not be chosen again
+		for (int index = 0; index < listToRemove.size(); index++) {
+			UserWishDTO uwDtoRemovedObject = listToRemove.get(index);
+			source.removeIf(it -> it.getNominatedUser().getUserId() == uwDtoRemovedObject
+					.getNominatedUser().getUserId());
+		}
+		
+		return source;
+	}
 	public List<Integer> givenList_w(List<Integer> list, int noOfMembers) {
 		Collections.shuffle(list);
 		if (noOfMembers > list.size())

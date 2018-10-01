@@ -94,8 +94,8 @@ export const locale = {
             },
             'USERNOM': {
                 'TITLE': 'Committe User Nomination Application',
-                'TAB1': 'Inserting Committee Wishes',
-                'TAB2': 'Asigning Wishes',
+                'TAB1': 'Insert Member Wishes',
+                'TAB2': 'Insert Member Wishes by General Secretary Office',
                 'TAB3': 'Sorting Member Wishes',
                 'TAB4': 'Editing Member Wishes',
             },

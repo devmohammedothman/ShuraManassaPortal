@@ -38,6 +38,7 @@ import { ManagerAssidnedWishesModule } from './manager-assidned-wishes/manager-a
 import { NominationPollModule } from './nomination-poll/nomination-poll.module';
 import { EditMemberWishesModule } from './edit-member-wishes/edit-member-wishes.module';
 import { MemberNominationsModule } from './member-nominations/member-nominations.module';
+import { HelperServices } from './services/helperServices';
 
 
 const appRoutes: Routes = [
@@ -123,7 +124,7 @@ const appRoutes: Routes = [
     bootstrap   : [
         AppComponent
     ],
-    providers : [UserService,StorageService,CommitteeService,NominationService]
+    providers : [UserService,StorageService,CommitteeService,NominationService,HelperServices]
 })
 export class AppModule
 {

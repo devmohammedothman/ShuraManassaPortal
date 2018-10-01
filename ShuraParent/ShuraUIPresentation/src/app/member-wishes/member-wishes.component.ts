@@ -33,8 +33,8 @@ export class MemberWishesComponent implements OnInit {
   wish2: Committee;
   wish3: Committee;
   user: User;
-  selectedWishesExp: string[] = [];
-  userExpList: string[] = [];
+  selectedWishesExp: number[] = [];
+  userExpList: number[] = [];
 
   constructor(public snackBar: MatSnackBar, private commServiceObj: CommitteeService, private nominateServiceObj: NominationService,
     private storageService: StorageService) {
@@ -77,8 +77,7 @@ export class MemberWishesComponent implements OnInit {
     console.log('Current User : '+ this.storageService.getFromLocal('user'));
     
     this.user.memberExperiences.forEach(exp => {
-      console.log('User Exp : '+exp.experience.nameEn);
-      this.userExpList.push(exp.experience.nameEn);
+      this.userExpList.push(exp.experience.id);
     });
 
     let userWishes: UserWish[] = [];
@@ -86,27 +85,22 @@ export class MemberWishesComponent implements OnInit {
     userWishes.push(new UserWish(this.user, this.wish2, 2));
     userWishes.push(new UserWish(this.user, this.wish3, 3));
     this.wish1.expList.forEach(exp => {
-      console.log('first exp : '+ exp);
       this.selectedWishesExp.push(exp);
     });
     this.wish2.expList.forEach(exp => {
-      console.log('first exp : '+ exp);
       this.selectedWishesExp.push(exp);
     });
     this.wish3.expList.forEach(exp => {
-      console.log('first exp : '+ exp);
       this.selectedWishesExp.push(exp);
     });
     let result: any[] = [];
     if (this.userExpList.length > 0) {
       //console.log('User Exp List : '+JSON.stringify(this.userExpList));
       this.userExpList.forEach(uExp => {
-        console.log('User Exp List : '+uExp);
         result = this.selectedWishesExp.filter(e => e === uExp);
       });
     }
     if (result.length > 0) {
-      console.log('result List : '+JSON.stringify(this.userExpList));
       this.nominateServiceObj.assignUserWishesService(userWishes).subscribe((data: any) => {
         this.openSnackBar('Added Successfully', 'Close');
       },

@@ -16,7 +16,7 @@ import { MatSnackBarModule } from '../../../node_modules/@angular/material';
 const routes: Routes = [
   {
       path: 'nomination/addmemberwish',
-      // canActivate: [AuthGuard],
+      canActivate: [AuthGuard],
       component: MemberWishesComponent
   }
 ];

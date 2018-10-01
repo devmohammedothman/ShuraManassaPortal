@@ -22,7 +22,7 @@ public class CommitteeDTO extends BaseDTO {
 
 	private List<CommitteeExperienceDTO> committeeExperiences;
 
-	private List<String> expList;
+	private List<Long> expList;
 
 	public Long getId() {
 		return id;
@@ -75,14 +75,14 @@ public class CommitteeDTO extends BaseDTO {
 		this.committeeExperiences = committeeExperiences;
 	}
 
-	public List<String> getExpList() {
-		expList = new ArrayList<>();
+	public List<Long> getExpList() {
+		expList = new ArrayList<Long>();
 		if (!committeeExperiences.isEmpty()) {
 			for (CommitteeExperienceDTO item : committeeExperiences) {
-				expList.add(item.getExperience().getNameEn());
+				expList.add(item.getExperience().getId());
 			}
 		} else {
-			expList.add("");
+			expList.add(null);
 		}
 		return expList;
 	}

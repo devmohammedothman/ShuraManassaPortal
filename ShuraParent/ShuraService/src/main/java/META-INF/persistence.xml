@@ -11,11 +11,11 @@
     <properties>
       <property name="javax.persistence.jdbc.driver" value="oracle.jdbc.OracleDriver" />
             <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@shufndevdb.shura.gov.sa:1521:FNDEV12c" />
-           <!--  <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@localhost:1521:XE" /> -->
+            <!-- <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@localhost:1521:XE" /> -->
             <property name="javax.persistence.jdbc.user" value="newportal" />
             <property name="javax.persistence.jdbc.password" value="newportal" />
             <property name="hibernate.dialect" value="org.hibernate.dialect.OracleDialect" />
-            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <!-- <property name="hibernate.hbm2ddl.auto" value="update"/> -->
             <property name="hibernate.id.new_generator_mappings" value="false"/>
       <property name="hibernate.show_sql" value="true" />
     </properties>

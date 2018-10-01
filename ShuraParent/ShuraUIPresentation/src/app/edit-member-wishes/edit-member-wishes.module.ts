@@ -17,7 +17,7 @@ import { TranslateModule } from '@ngx-translate/core';
 const route:Routes = [
   {
     path:'nomination/edit-member-wish',
-    // canActivate:[AuthGuard],
+     canActivate:[AuthGuard],
     component:EditMemberWishesComponent
   }
 ];

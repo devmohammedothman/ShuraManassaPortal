@@ -16,7 +16,7 @@ import { ManagerAssidnedWishesComponent } from './manager-assidned-wishes.compon
 const routes: Routes = [
   {
       path: 'maw',
-      // canActivate: [AuthGuard],
+      canActivate: [AuthGuard],
       component: ManagerAssidnedWishesComponent
   }
 ];

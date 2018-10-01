@@ -16,7 +16,7 @@ import { AuthGuard } from '../auth.guard';
 const routes = [
   {
       path     : 'nomination/member-nominations',
-      //canActivate: [AuthGuard],
+      canActivate: [AuthGuard],
       component: MemberNominationsComponent
   }
 ];

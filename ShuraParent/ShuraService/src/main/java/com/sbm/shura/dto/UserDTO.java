@@ -21,7 +21,7 @@ public class UserDTO extends BaseDTO {
 	
 	private List<MemberExperienceDTO> memberExperiences;
 	
-	private List<String> expList;
+	private List<Long> expList;
 
 	public UserDTO() {
 	}
@@ -107,14 +107,14 @@ public class UserDTO extends BaseDTO {
 		this.memberExperiences = memberExperiences;
 	}
 	
-	public List<String> getExpList(){
+	public List<Long> getExpList(){
 		expList = new ArrayList<>();
 		if (!memberExperiences.isEmpty()) {
 			for (MemberExperienceDTO item : memberExperiences) {
-				expList.add(item.getExperience().getNameEn());
+				expList.add(item.getExperience().getId());
 			}
 		}else {
-			expList.add("");	
+			expList.add(null);	
 		}
 		return expList;
 	}

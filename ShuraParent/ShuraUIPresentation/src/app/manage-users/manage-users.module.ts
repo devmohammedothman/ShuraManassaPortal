@@ -9,7 +9,7 @@ import { FuseSharedModule } from '@fuse/shared.module';
 import { ManageUsersComponent } from './manage-users.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { AuthGuard } from '../auth.guard';
 import { AddEditUsersComponent, addEditUsersFormComponent } from './add-edit-users/add-edit-users.component';
 
 
@@ -17,6 +17,7 @@ import { AddEditUsersComponent, addEditUsersFormComponent } from './add-edit-use
 const routes = [
   {
       path     : 'manage-users',
+      canActivate : [AuthGuard],
       component: ManageUsersComponent
   }
 ];

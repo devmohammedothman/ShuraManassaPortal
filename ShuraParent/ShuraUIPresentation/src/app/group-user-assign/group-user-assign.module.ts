@@ -15,7 +15,7 @@ import { ReactiveFormsModule } from '../../../node_modules/@angular/forms';
 const routes: Routes = [
   {
       path        : 'gua',
-      // canActivate: [AuthGuard],
+      canActivate: [AuthGuard],
       component   : GroupUserAssignComponent
   }
 ];

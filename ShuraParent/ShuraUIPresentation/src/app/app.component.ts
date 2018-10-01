@@ -17,6 +17,7 @@ import { Group } from './models/group.model';
 import { User } from './models/user.model';
 import { StorageService } from './services/storage.service';
 import { CommitteeService } from './services/committee.service';
+import { HelperServices } from './services/helperServices';
 
 @Component({
     selector: 'app',
@@ -27,6 +28,7 @@ export class AppComponent implements OnInit, OnDestroy {
     navigation: any;
     fuseConfig: any;
     users: User[];
+    currentHijriiDate : string;
     groups: Group[];
     committes: any;
     errorMessage: string;
@@ -53,6 +55,7 @@ export class AppComponent implements OnInit, OnDestroy {
         private _fuseTranslationLoaderService: FuseTranslationLoaderService,
         private _translateService: TranslateService,
         public userService: UserService,
+        public helperService:HelperServices,
         private committeeService: CommitteeService,
         private storageService: StorageService
     ) {
@@ -94,19 +97,19 @@ export class AppComponent implements OnInit, OnDestroy {
                     group: item.nameEn
                 };
             }).forEach(item => userGroups.push(item));
-            let groups = userGroups.filter(data => data.group.includes('MANAGER'));
-            if (JSON.stringify(groups) !== '[]') {
-                const newNavItem = {
-                    id: 'NomintaionPoll',
-                    title: 'Nomination Poll',
-                    translate: 'NAV.NOMINATION-POLL',
-                    type: 'item',
-                    icon: 'flag',
-                    url: '/nomination/nomination-poll'
-                };
-                // Add the new nav item at the beginning of the navigation
-                this._fuseNavigationService.addNavigationItem(newNavItem, 'nominationProgram');
-            }
+            // let groups = userGroups.filter(data => data.group.includes('MANAGER'));
+            // if (JSON.stringify(groups) !== '[]') {
+            //     const newNavItem = {
+            //         id: 'NomintaionPoll',
+            //         title: 'Nomination Poll',
+            //         translate: 'NAV.NOMINATION-POLL',
+            //         type: 'item',
+            //         icon: 'flag',
+            //         url: '/nomination/nomination-poll'
+            //     };
+            //     // Add the new nav item at the beginning of the navigation
+            //     this._fuseNavigationService.addNavigationItem(newNavItem, 'nominationProgram');
+            // }
         }
 
     }
@@ -128,6 +131,7 @@ export class AppComponent implements OnInit, OnDestroy {
         this.getGroups();
         this.getUsers();
         this.getCommittes();
+        this.getCurrentHijriiDate();
     }
 
     /**
@@ -157,7 +161,7 @@ export class AppComponent implements OnInit, OnDestroy {
         this.userService.getGroups()
             .subscribe(group => {
                 this.groups = group;
-                console.log(JSON.stringify(this.groups));
+                // console.log(JSON.stringify(this.groups));
                 this.storageService.saveInLocal('groupsList', JSON.stringify(this.groups));
             },
                 error => this.errorMessage = <any>error);
@@ -167,10 +171,20 @@ export class AppComponent implements OnInit, OnDestroy {
         this.userService.getUsers()
             .subscribe(user => {
                 this.users = user;
-                console.log(JSON.stringify(this.users));
+                // console.log(JSON.stringify(this.users));
                 this.storageService.saveInLocal('usersList', JSON.stringify(this.users));
             },
                 error => this.errorMessage = <any>error);
+    }
+    getCurrentHijriiDate(): void
+    {
+        this.helperService.getCurrentHijriiDate()
+        .subscribe(data => {
+            this.currentHijriiDate = data;
+            // console.log(JSON.stringify(this.users));
+            this.storageService.saveInLocal('currentHijriiDate', JSON.stringify(this.currentHijriiDate));
+        },
+            error => this.errorMessage = <any>error);
     }
 
     getCommittes(): void {

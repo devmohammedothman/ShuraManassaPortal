@@ -61,21 +61,21 @@ export class FuseNavigationComponent implements OnInit
                  console.log('group:', obj);
                  for (const key in obj) {
                      // console.log('1name in first check: '+this.group);
-                     if (obj[key] === 'ADMIN' || obj[key] === 'ADMIN1' 
-                    || obj[key] === 'MANAGER') {
-                         console.log('navigation com group admin : ' + obj[key]);
+                    //  if (obj[key] === 'ADMIN' || obj[key] === 'ADMIN1' 
+                    // || obj[key] === 'MANAGER') {
+                    //      console.log('navigation com group admin : ' + obj[key]);
                          this.storageService.saveInLocal('currentGroup', obj[key]);
                          this.navigation = navigation;
-                     } else {
-                         console.log('navigation com group key : ' + key);
-                         console.log('navigation com group user : ' + obj[key]);
-                         this.storageService.saveInLocal('currentGroup', obj[key]);
-                         this.navigation = userNavigation;
-                     }
+                    //  } else {
+                    //      console.log('navigation com group key : ' + key);
+                    //      console.log('navigation com group user : ' + obj[key]);
+                    //      this.storageService.saveInLocal('currentGroup', obj[key]);
+                    //      this.navigation = userNavigation;
+                    //  }
                  }
              }
          } else {
-             console.log('4name in first check: ' + this.group.group);
+            //  console.log('4name in first check: ' + this.group.group);
              this.navigation = navigation;
          }
         // Load the navigation either from the input or from the service

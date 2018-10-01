@@ -23,8 +23,8 @@ export class ManagerAssidnedWishesComponent implements OnInit {
   thirdWish: FormControl;
 
   filteredUsers: Observable<string[]>;
-  selectedWishesExp: string[] = [];
-  userExpList: string[] = [];
+  selectedWishesExp: number[] = [];
+  userExpList: number[] = [];
 
   //  users = [
   //   'Abdullah Abolwafa',
@@ -164,8 +164,7 @@ export class ManagerAssidnedWishesComponent implements OnInit {
     this.user = this.userList[itemIndex];
     console.log('fetchedUser : ' + this.user.username)
     this.user.memberExperiences.forEach(exp => {
-      console.log('User Exp : ' + exp.experience.nameEn);
-      this.userExpList.push(exp.experience.nameEn);
+      this.userExpList.push(exp.experience.id);
     });
     userWishes.push(new UserWish(this.user, this.wish1, 1));
     userWishes.push(new UserWish(this.user, this.wish2, 2));

@@ -3,8 +3,7 @@
 
         <div fxFlex="0 1 30%" fxFill fxLayout="column" fxLayoutAlign="start" [ngClass]="'py-32'">
             <mat-form-field appearance="legacy" [ngClass]="'w-100-p mb-24'">
-                <mat-select (selectionChange)="onMemberCountEve($event)" placeholder="{{'CONT.NOM.MEMBER-COUNT' | translate }}" [formControl]="memberCountSelect"
-                    [(ngModel)]="memberCount" required>
+                <mat-select (selectionChange)="onMemberCountEve($event)" placeholder="{{'CONT.NOM.MEMBER-COUNT' | translate }}" [formControl]="memberCountSelect" [(ngModel)]="memberCount" required>
                     <mat-option value="10">10</mat-option>
                     <mat-option value="11">11</mat-option>
                     <mat-option value="12">12</mat-option>
@@ -28,7 +27,8 @@
         </div>
 
         <div fxFlex="1 1 100%" fxLayout="column" fxLayoutAlign="start" [ngClass]="'py-32 ml-24 pl-24'" style="border-right: 4px solid #00B159;">
-            <table mat-table [dataSource]="dataSource" width="100%" matSort> <!-- [hidden]="hideTable" -->
+            <table mat-table [dataSource]="dataSource" width="100%" matSort>
+                <!-- [hidden]="hideTable" -->
                 <!-- ID Column -->
                 <ng-container matColumnDef="Committe name">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'CONT.NOM.COMMITTE-NAME' | translate }} </th>
@@ -70,11 +70,11 @@
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;">
                 </tr>
-            </table>			
-			<div fxFlex="1 0 auto" fxLayout="row wrap" fxLayoutAlign="space-between end">
-				<button mat-button [ngClass]="'mb-12'" (click)="confirmPollProcess()">{{'CONT.NOM.DEVISION-SUBMIT' | translate }}</button>
-				<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
-			</div>
+            </table>
+            <div fxFlex="1 0 auto" fxLayout="row wrap" fxLayoutAlign="space-between end">
+                <button mat-button [ngClass]="'mb-12'" (click)="confirmPollProcess()">{{'CONT.NOM.DEVISION-SUBMIT' | translate }}</button>
+                <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+            </div>
         </div>
     </div>
 </form>
